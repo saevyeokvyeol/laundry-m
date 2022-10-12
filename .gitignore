@@ -94,7 +94,7 @@ hs_err_pid*
 replay_pid*
 
 ### SVN ###
-.svn/
+.svn/**
 
 ### Windows ###
 # Windows thumbnail cache files
