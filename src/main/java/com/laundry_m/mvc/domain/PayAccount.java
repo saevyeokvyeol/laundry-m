@@ -28,6 +28,7 @@ public class PayAccount {
 	private Bank bank;
 	
 	private String payAccountNumber;
+	private String payAccountQuitState;
 
 	@Builder
 	public PayAccount(Long payAccountId, Metapay metapay, Bank bank, String payAccountNumber) {
