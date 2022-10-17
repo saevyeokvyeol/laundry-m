@@ -9,16 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Fee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "fee_id_seq")
@@ -31,9 +24,16 @@ public class Fee {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "clothes_id")
-	private Clothes  clothes;
+	private Clothes clothes;
 	
 	private int clothesFee;
 	
-	
+	@Builder
+	public Fee(Long feeId, Laundry laundry, Clothes clothes, int clothesFee) {
+		super();
+		this.feeId = feeId;
+		this.laundry = laundry;
+		this.clothes = clothes;
+		this.clothesFee = clothesFee;
+	}
 }

@@ -1,6 +1,7 @@
 package com.laundry_m.mvc.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,20 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Book {
 	
 	@Id
@@ -45,11 +41,37 @@ public class Book {
 	private int bookCount;
 	
 	@CreationTimestamp
-	private LocalDateTime bookDate;
+	private LocalDateTime bookInsertDate;
+	
+	@UpdateTimestamp
+	private LocalDateTime bookUpdateDate;
 	
 	private String bookMemo;
 	
 	private String bookMethod;
 	
+	@OneToMany(mappedBy = "book")
+	private List<BookLine> bookLine;
+	
+	@OneToMany(mappedBy = "book")
+	private List<Review> review;
+	
+	@OneToMany(mappedBy = "book")
+	private List<Adjust> adjust;
+	
+	@Builder
+	public Book(Long bookId, Laundry laundry, User user, Book book, int bookCount, LocalDateTime bookInsertDate
+			, LocalDateTime bookUpdateDate, String bookMemo, String bookMethod) {
+		super();
+		this.bookId = bookId;
+		this.laundry = laundry;
+		this.user = user;
+		this.book = book;
+		this.bookCount = bookCount;
+		this.bookInsertDate = bookInsertDate;
+		this.bookUpdateDate = bookUpdateDate;
+		this.bookMemo = bookMemo;
+		this.bookMethod = bookMethod;
+	}
 	
 }

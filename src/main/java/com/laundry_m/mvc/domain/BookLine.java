@@ -15,10 +15,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class BookLine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "book_line_id_seq")
@@ -40,5 +36,18 @@ public class BookLine {
 	private String clothesFabric;
 	
 	private int bookLineFee;
+	
+
+	@Builder
+	public BookLine(Long bookLineId, Book book, Clothes clothes, Fabric fabric, String clothesFabric, int bookLineFee) {
+		super();
+		this.bookLineId = bookLineId;
+		this.book = book;
+		this.clothes = clothes;
+		this.fabric = fabric;
+		this.clothesFabric = clothesFabric;
+		this.bookLineFee = bookLineFee;
+	}
+	
 	
 }
