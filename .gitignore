@@ -13,7 +13,6 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-target/
 
 # External tool builders
 .externalToolBuilders/
@@ -124,3 +123,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse,svn
+target/
