@@ -1,5 +1,7 @@
 package com.laundry_m.mvc.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Builder;
 
@@ -25,6 +30,12 @@ public class Metapay {
 	
 	private String metapayBalance;
 	private String metapayPassword;
+	
+	@CreationTimestamp
+	private LocalDateTime metapayDate;
+	
+	@UpdateTimestamp
+	private LocalDateTime metapayUpdateDate;
 	
 	@Builder
 	public Metapay(Long metapayId, User user, String metapayBalance, String metapayPassword) {
