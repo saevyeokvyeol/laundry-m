@@ -22,15 +22,15 @@ public class Review {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "review_id_seq")
 	@SequenceGenerator(name = "review_id_seq", allocationSize = 1, sequenceName = "review_id_seq")
-	private int reviewId;
+	private Long reviewId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	private int bookId;
+	private Long bookId;
 	private String reviewContent;
-	private int reviewRate;
+	private Long reviewRate;
 	
 	@CreationTimestamp
 	private LocalDateTime reviewInsertDate;
@@ -39,7 +39,7 @@ public class Review {
 	private LocalDateTime reviewUpdateDate;
 
 	@Builder
-	public Review(int reviewId, User user, int bookId, String reviewContent, int reviewRate,
+	public Review(Long reviewId, User user, Long bookId, String reviewContent, Long reviewRate,
 			LocalDateTime reviewInsertDate, LocalDateTime reviewUpdateDate) {
 		super();
 		this.reviewId = reviewId;

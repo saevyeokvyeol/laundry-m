@@ -17,7 +17,7 @@ public class PayAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pay_account_id_seq")
 	@SequenceGenerator(name = "pay_account_id_seq", allocationSize = 1, sequenceName = "pay_account_id_seq" )
-	private int payAccountId;
+	private Long payAccountId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "metapay_id")
@@ -28,9 +28,10 @@ public class PayAccount {
 	private Bank bank;
 	
 	private String payAccountNumber;
+	private String payAccountQuitState;
 
 	@Builder
-	public PayAccount(int payAccountId, Metapay metapay, Bank bank, String payAccountNumber) {
+	public PayAccount(Long payAccountId, Metapay metapay, Bank bank, String payAccountNumber) {
 		this.payAccountId = payAccountId;
 		this.metapay = metapay;
 		this.bank = bank;

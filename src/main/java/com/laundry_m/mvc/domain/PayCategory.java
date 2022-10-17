@@ -14,12 +14,12 @@ public class PayCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pay_category_id_seq")
 	@SequenceGenerator(name = "pay_category_id_seq", allocationSize = 1, sequenceName = "pay_category_id_seq" )
-	private int payCategoryId;
+	private Long payCategoryId;
 	
 	private String payCategoryName;
 
 	@Builder
-	public PayCategory(int payCategoryId, String payCategoryName) {
+	public PayCategory(Long payCategoryId, String payCategoryName) {
 		super();
 		this.payCategoryId = payCategoryId;
 		this.payCategoryName = payCategoryName;

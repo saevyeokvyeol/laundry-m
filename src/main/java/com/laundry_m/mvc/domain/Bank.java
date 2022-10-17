@@ -15,12 +15,12 @@ public class Bank {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bank_id_seq")
 	@SequenceGenerator(name = "bank_id_seq", allocationSize = 1, sequenceName = "bank_id_seq" )
-	private int bankId;
+	private Long bankId;
 	
 	private String bankName;
 
 	@Builder
-	public Bank(int bankId, String bankName) {
+	public Bank(Long bankId, String bankName) {
 		super();
 		this.bankId = bankId;
 		this.bankName = bankName;

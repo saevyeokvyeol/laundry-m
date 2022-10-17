@@ -17,7 +17,7 @@ public class Metapay {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "metapay_id_seq")
 	@SequenceGenerator(name = "metapay_id_seq", allocationSize = 1, sequenceName = "metapay_id_seq" )
-	private int metapayId;
+	private Long metapayId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
@@ -27,7 +27,7 @@ public class Metapay {
 	private String metapayPassword;
 	
 	@Builder
-	public Metapay(int metapayId, User user, String metapayBalance, String metapayPassword) {
+	public Metapay(Long metapayId, User user, String metapayBalance, String metapayPassword) {
 		super();
 		this.metapayId = metapayId;
 		this.user = user;

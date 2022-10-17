@@ -17,17 +17,17 @@ public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "report_no_seq")
 	@SequenceGenerator(name = "report_no_seq", allocationSize = 1, sequenceName = "report_no_seq" )
-	private int reportNo;
+	private Long reportNo;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
 	//laundary 추가시 변경
-	private int laundaryId;
+	private Long laundaryId;
 
 	@Builder
-	public Report(int reportNo, User user, int laundaryId) {
+	public Report(Long reportNo, User user, Long laundaryId) {
 		super();
 		this.reportNo = reportNo;
 		this.user = user;
