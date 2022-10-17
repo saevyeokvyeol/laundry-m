@@ -1,5 +1,8 @@
 package com.laundry_m.mvc.laundry_m.exception;
 
+/**
+ * 로그인하지 않았을 시 발생하는 오류
+ * */
 public class NotLoginException extends Exception {
 	public NotLoginException() {}
 
