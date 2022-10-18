@@ -10,90 +10,102 @@ import com.laundry_m.mvc.domain.Fee;
 import com.laundry_m.mvc.domain.Laundry;
 import com.laundry_m.mvc.laundry_m.exception.DuplicationException;
 import com.laundry_m.mvc.laundry_m.exception.NotExistException;
+import com.laundry_m.mvc.laundry_m.exception.NotFilledInException;
 import com.laundry_m.mvc.laundry_m.exception.NotLoginException;
 
 public interface laundryService {
 	/**
-	 *  세탁소 등록: laundry 테이블 레코드 insert
-	 * @param : Laundry laundry(세탁소 점포아이디, 아이디, 점포 이름, 점포 번호, 수거비용)
-	 * @return : Laundry laundry
+	 *  세탁소 등록
+ 	 * 1. 세탁소 레코드 인서트 한다.
+ 	 * 2. 세탁소 상세 리스트를 인서트 한다.
+ 	 * 3. 회원이 세탁소를 즐겨찾기를 한다면 즐겨찾기를 인서트한다.
+ 	 * 
+	 * @param : Laundry laundry(세탁소 점포아이디, 아이디, 점포 이름, 점포 번호, 점포 주소, 수거비, 점주 계좌번호)
 	 * @exception : DuplicationException(세탁소 id가 이미 존재할 경우 오류)
 	 * 				NotLoginException(로그인 하지 않고 세탁소 가입할 경우 오류)
 	 * 				NotExistException(점주 로그인 id, 세탁소 id DB에 존재하지 않을 경우 오류)
+	 * 				NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */
-	Laundry insertLaundry(Laundry laundry) throws SQLException, NotLoginException, DuplicationException, NotExistException;
+	void insertLaundry(Laundry laundry) throws SQLException, NotLoginException, DuplicationException, NotExistException, NotFilledInException;
 	
 	/**
-	 *  세탁소 수정: laundry 테이블 레코드 update
-	 *  @param : Laundry laundry(세탁소 이름, 전화번호, 세탁소 주소)
-	 *  @return : Laundry laundry
+	 *  세탁소 수정
+	 *  @param : Laundry laundry(점포 이름, 점포 번호, 수거비, 점주 계좌번호)
 	 *  @exception : NotloginException(로그인 하지 않고 세탁소 수정할 경우 오류)
 	 *  			 NotExistException(세탁소 DB에 존재하지 않을 경우 오류)
+	 *  			 NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */
-	Laundry updateLaundry(Laundry laundry) throws SQLException, NotLoginException, NotExistException;
+	void updateLaundry(Laundry laundry) throws SQLException, NotLoginException, NotExistException, NotFilledInException;
 	
 	/**
-	 *  가격 추가: fee 테이블 레코드 insert
-	 *  @param : Fee fee(가격 번호, 세탁소아이디, 옷 아이디, 가격)
-	 *  @return : Fee fee
-	 */	
-	Fee insertFee(Fee fee) throws SQLException;
-	
-	/**
-	 *  가격 수정: fee 테이블 레코드 update
-	 *  @param : Fee fee(세탁소 아이디, 옷 아이디, 가격)
-	 *  @return : Fee fee
-	 *  @exception : NotExistException(세탁소 DB에 존재하지 않을 경우 오류)
-	 */	
-	Fee updateFee(Fee fee) throws SQLException, NotExistException;
-	
-	/**
-	 *  옷 추가: clothes 테이블 레코드 insert
+	 *  옷 추가
+	 *	1. 옷 테이블 레코드 인서트
+	 * 	2. 세탁소 점포에서 가격표에 옷을 사용하면 가격레코드 인서트 
 	 *  @param : Clothes clothes(옷 아이디, 옷 이름)
 	 */	
-	Clothes insertClothes(Clothes clothes) throws SQLException;
+	void insertClothes(Clothes clothes) throws SQLException;
 	
 	/**
-	 *  천 추가: fabric 테이블 레코드 insert
+	 *  점포 가격 추가 
+	 *  @param : Fee fee(가격 번호, 세탁소아이디, 옷 아이디, 가격)
+	 *  @exception: NotLoginException(로그인하지 않고 점포가격 추가를 시도할 경우 오류)
+	 * 			    NotExistException(점포 아이디나 회원 아이디 등이 DB에 존재하지 않을 경우 오류)
+	 * 			    NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
+	 */	
+	void insertFee(Fee fee) throws SQLException, NotExistException, NotFilledInException;
+	
+	/**
+	 *  점포 가격 갱신
+	 *  @param : Fee fee(세탁소 아이디, 옷 아이디, 가격)
+	 *  @exception : NotExistException(세탁소 DB에 존재하지 않을 경우 오류)
+	 *  			 NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
+	 */	
+	void updateFee(Fee fee) throws SQLException, NotExistException, NotFilledInException;
+	
+	/**
+	 *  천 추가
 	 *  @param : Fabric fabric(천 아이디, 천이름, 세탁방법)
-	 *  @exception : 
 	 */
-	Fabric insertFabric(Fabric fabric) throws SQLException;
+	void insertFabric(Fabric fabric) throws SQLException;
 	
 	/**
-	 *  추가가격 추가: extra_fee 테이블 레코드 insert
+	 *  추가가격 추가
 	 *  @param : ExtraFee extraFee(추가가격 아이디, 천아이디, 점포 아이디, 가격)
+	 *  @exception : NotLoginException(로그인하지 않고 점포가격 추가를 시도할 경우 오류)
 	 */
-	ExtraFee insertExtraFee(ExtraFee extrafee) throws SQLException;
+	void insertExtraFee(ExtraFee extraFee) throws SQLException, NotLoginException;
 	
 	/**
 	 *  추가가격 수정: extra_fee 테이블 레코드 update
 	 *  @param : ExtraFee extraFee(천아이디, 점포 아이디, 가격)
 	 *  @exception : NotExistException(세탁소 DB에 존재하지 않을 경우 오류)
+	 *   			 NotLoginException(로그인하지 않고 점포가격 추가를 시도할 경우 오류)
 	 */
-	ExtraFee updateFee(ExtraFee extrafee) throws SQLException, NotExistException;
+	void updateFee(ExtraFee extraFee) throws SQLException, NotExistException, NotLoginException;
 	
 	/**
 	 *  추가가격 삭제: extra_fee 테이블 레코드 delete
+	 *  @return : ExtraFee extraFee
 	 *  @exception : NotExistException(세탁소 DB에 존재하지 않을 경우 오류)
+	 *    			 NotLoginException(로그인하지 않고 점포가격 추가를 시도할 경우 오류)
 	 */
-	ExtraFee deleteFee(ExtraFee extrafee) throws SQLException, NotExistException;
+	void deleteFee(ExtraFee extraFee) throws SQLException, NotExistException, NotLoginException;
 
-	/* 
+	/**
 	 *  세탁소 이름으로 찾기
 	 *  @param : keyword(검색어), keyfield(컬럼명)
 	 *  @return : List<Laundry>
 	 *  @exception : NotExistException(아아디 DB에 존재하지 않을 경우 오류)
 	 * */
-	List<Laundry> selectByNameLaundry(String Laundry_name) throws SQLException, NotExistException;
+	List<Laundry> selectByNameLaundry(String LaundryName) throws SQLException, NotExistException;
 	
-	/* 
+	/**
 	 *  세탁소 주소로 찾기
 	 *  @param : keyword(검색어), keyfield(컬럼명)
 	 *  @return : List<Laundry>
 	 *  @exception : NotExistException(아아디 DB에 존재하지 않을 경우 오류)
 	 * */
-	List<Laundry> selectByAddressLaundry(String Laundry_address) throws SQLException;
+	List<Laundry> selectByAddressLaundry(String LaundryAddress) throws SQLException;
 	
 	
 	
