@@ -2,25 +2,15 @@ package com.laundry_m.mvc.domain;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 import lombok.Builder;
+import lombok.Getter;
 
-@Entity
+@Getter
 public class Fabric {
-	@Id
 	private int fabricId;
-	
 	private String fabricName;
-	
 	private String  fabricWashMethod;
-	
-	@OneToMany(mappedBy = "fabric")
 	private List<ExtraFee> extraFee;
-	
-	@OneToMany(mappedBy = "fabric")
 	private List<BookLine> bookLine;
 	
 	@Builder

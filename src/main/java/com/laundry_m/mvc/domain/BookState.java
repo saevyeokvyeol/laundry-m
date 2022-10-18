@@ -2,20 +2,13 @@ package com.laundry_m.mvc.domain;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 import lombok.Builder;
+import lombok.Getter;
 
-@Entity
+@Getter
 public class BookState {
-	@Id
 	private int bookStateId;
-	
 	private String bookStateName;
-	
-	@OneToMany(mappedBy = "bookState")
 	private List<Book> book;
 	
 	@Builder
