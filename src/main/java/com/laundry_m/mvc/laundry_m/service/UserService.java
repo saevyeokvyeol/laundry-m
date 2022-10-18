@@ -1,13 +1,11 @@
-package service;
+package com.laundry_m.mvc.laundry_m.service;
 
 import java.sql.SQLException;
 import java.util.List;
-
-import org.springframework.data.domain.Pageable;
-
 import com.laundry_m.mvc.domain.User;
 import com.laundry_m.mvc.laundry_m.exception.DuplicationException;
 import com.laundry_m.mvc.laundry_m.exception.NotExistException;
+import com.laundry_m.mvc.laundry_m.exception.NotLoginException;
 
 public interface UserService {
 	/* 
@@ -35,7 +33,7 @@ public interface UserService {
 	 * @exception : NotLoginException(로그인 하지 않았을 경우 오류)
 	 * 
 	 * */
-	User updateUser(User user) throws SQLException;
+	User updateUser(User user) throws SQLException, NotLoginException;
 	
 	/*
 	 * 전체 유저 검색
@@ -65,5 +63,5 @@ public interface UserService {
 	 * @param Search search, Pageable pageable, Long flag
 	 * @return List<User>
 	 * */
-	List<User> selectByFilter(String userId, Pageable pageable, Long flag);
+	//List<User> selectByFilter(String userId, Pageable pageable, Long flag);
 }

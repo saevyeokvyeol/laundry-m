@@ -1,4 +1,4 @@
-package service;
+package com.laundry_m.mvc.laundry_m.service;
 
 import java.sql.SQLException;
 import java.util.List;
