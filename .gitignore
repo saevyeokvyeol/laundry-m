@@ -125,3 +125,6 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse,svn
 target/
+src/main/java/META-INF/persistence.xml
+src/main/resources/Wallet_laundrymDatabase/
+src/main/java/config/dbInfo.properties

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+
+<configuration>
+	
+	<!-- 외부 ~.properties 파일 위치 설정 -->
+	<properties resource="config/dbInfo.properties"/>
+	
+	<settings>
+		<!-- 자바의 camel 표기법과 db의 snake 표기법을 매핑해주는 설정 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!-- 필드값이 null일 때 DB 필드에 null값이 들어가는 설정 -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- 객체 별칭 만들기 -->
+	<typeAliases>
+		<typeAlias type="com.laundry_m.mvc.vo.vo이름" alias="vo이름"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="${driverName}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${userName}"/>
+				<property name="password" value="${userPass}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="mapper/*Mapper.xml"/>
+	</mappers>
+	
+</configuration>
