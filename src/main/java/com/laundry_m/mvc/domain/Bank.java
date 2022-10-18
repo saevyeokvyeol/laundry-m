@@ -1,13 +1,11 @@
 package com.laundry_m.mvc.domain;
 
-import javax.persistence.Entity;
 
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Entity
 public class Bank {
 	
 	private Long bankId;
