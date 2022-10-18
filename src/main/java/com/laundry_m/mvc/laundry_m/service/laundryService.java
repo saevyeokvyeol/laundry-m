@@ -15,7 +15,7 @@ import com.laundry_m.mvc.laundry_m.exception.NotLoginException;
 public interface laundryService {
 	/**
 	 *  세탁소 등록: laundry 테이블 레코드 insert
-	 * @param : Laundry laundry(세탁소 점포아이디, 아이디, 점포 이름, 점포 번호)
+	 * @param : Laundry laundry(세탁소 점포아이디, 아이디, 점포 이름, 점포 번호, 수거비용)
 	 * @return : Laundry laundry
 	 * @exception : DuplicationException(세탁소 id가 이미 존재할 경우 오류)
 	 * 				NotLoginException(로그인 하지 않고 세탁소 가입할 경우 오류)

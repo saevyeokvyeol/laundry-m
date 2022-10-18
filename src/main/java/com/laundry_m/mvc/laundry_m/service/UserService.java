@@ -57,11 +57,4 @@ public interface UserService {
 	 *  @exception : NotExistException(아아디 DB에 존재하지 않을 경우 오류)
 	 * */
 	List<User> selectByUserType(String userType) throws SQLException, NotExistException;
-	
-	/**
-	 * 유저 아이디별 필터링 - 진행중
-	 * @param Search search, Pageable pageable, Long flag
-	 * @return List<User>
-	 * */
-	//List<User> selectByFilter(String userId, Pageable pageable, Long flag);
 }
