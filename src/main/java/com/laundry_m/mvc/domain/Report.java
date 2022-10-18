@@ -1,29 +1,18 @@
 package com.laundry_m.mvc.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class Report {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "report_no_seq")
-	@SequenceGenerator(name = "report_no_seq", allocationSize = 1, sequenceName = "report_no_seq" )
 	private Long reportNo;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
 	private User user;
 	
-	//laundary 추가시 변경
 	private Long laundaryId;
 
 	@Builder
