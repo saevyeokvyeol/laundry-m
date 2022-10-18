@@ -1,9 +1,9 @@
 package service;
 
+import java.awt.print.Pageable;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 
 import com.laundry_m.mvc.domain.User;
 import com.laundry_m.mvc.laundry_m.exception.DuplicationException;
