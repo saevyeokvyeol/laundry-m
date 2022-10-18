@@ -1,14 +1,15 @@
 package com.laundry_m.mvc.domain;
 
+
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class User {
 	
-	@Id
 	private String userId;
 	
 	private String userPwd;
@@ -25,7 +26,4 @@ public class User {
 		this.userType = userType;
 		this.userAddress = userAddress;
 	}
-	
-	
-
 }
