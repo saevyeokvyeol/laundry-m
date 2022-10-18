@@ -23,7 +23,7 @@ public class DbUtil {
 			 * 환경 설정 문서 위치 저장
 			 * 환경 설정한 xml 파일과 이름이 같으면 네이밍은 마음대로 해도 무관
 			 * */
-			String resource = "config/SqlMapConfig.xml";
+			String resource = "config/myBatisConfig.xml";
 			
 			/**
 			 * 환경 설정 문서를 Reader로 읽어옴

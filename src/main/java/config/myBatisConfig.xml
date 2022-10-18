@@ -15,7 +15,7 @@
 	
 	<!-- 객체 별칭 만들기 -->
 	<typeAliases>
-		<typeAlias type="com.laundry_m.mvc.vo.vo이름" alias="vo이름"/>
+		<!-- <typeAlias type="com.laundry_m.mvc.vo.vo이름" alias="vo이름"/> -->
 	</typeAliases>
 	
 	<environments default="development">
@@ -31,7 +31,7 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="mapper/*Mapper.xml"/>
+		<mapper resource="mapper/ProductMapper.xml"/>
 	</mappers>
 	
 </configuration>
