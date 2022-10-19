@@ -17,8 +17,7 @@ public interface BookService {
 	 * 2. 예약 상세 리스트를 인서트한다.
 	 * 3. 만일 메타페이를 사용한다면 메타페이 거래 내역을 추가한다.
 	 * 
-	 * @param: Book book(점포 아이디, 회원 아이디, 옷 수량, 예약 참고 사항(선택), 결제 방법, 총 가격,
-	 * 					예약 상세 리스트(옷 아이디, 천 아이디, 가격))
+	 * @param: Book book(점포 아이디, 회원 아이디, 옷 수량, 예약 참고 사항(선택), 결제 방법, 총 가격, 예약 상세 리스트(옷 아이디, 천 아이디, 가격))
 	 * @exception: NotLoginException(로그인하지 않고 예약을 시도할 경우 오류)
 	 * 			   NotExistException(점포 아이디나 회원 아이디 등이 DB에 존재하지 않을 경우 오류)
 	 * 			   InsufficientBalanceException(메타페이 사용 시 잔액이 거래 금액보다 클 경우 경우 오류)
@@ -60,8 +59,10 @@ public interface BookService {
 	/**
 	 * 전체 예약 검색
 	 * @return: List<Book>
+	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
+	 * 			   InvalidUserException(관리자가 아닐 경우 오류)
 	 * */
-	List<Book> searchBookAll() throws SQLException;
+	List<Book> searchBookAll() throws SQLException, NotLoginException, InvalidUserException;
 	
 	/**
 	 * 유저 아이디로 예약 검색
@@ -69,7 +70,8 @@ public interface BookService {
 	 * @return: List<Book>
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * 			   NotExistException(회원이 DB에 존재하지 않을 경우 오류)
-	 * 			   InvalidUserException(해당 회원이 아닐 경우 오류)
+	 * 			   InvalidUserException(관리자나 해당 회원이 아닐 경우 오류)
+	 * 			   NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * */
 	List<Book> searchBookByUserId(Book book) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
 	
@@ -79,7 +81,18 @@ public interface BookService {
 	 * @return: List<Book>
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * 			   NotExistException(점포가 DB에 존재하지 않을 경우 오류)
-	 * 			   InvalidUserException(해당 점포를 소유하지 않을 경우 오류)
+	 * 			   InvalidUserException(관리자가 아니거나 해당 점포를 소유하지 않을 경우 오류)
+	 * 			   NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * */
 	List<Book> searchBookByLaundryId(Book book) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
+	
+	/**
+	 * 예약 아이디로 예약 검색
+	 * @param: Long bookId
+	 * @return: List<Book>
+	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
+	 * 			   NotExistException(예약이 DB에 존재하지 않을 경우 오류)
+	 * 			   InvalidUserException(관리자나 해당 회원이 아니거나 해당 점포를 소유하지 않을 경우 오류)
+	 * */
+	List<Book> searchBookByBookId(Long bookId) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
 }

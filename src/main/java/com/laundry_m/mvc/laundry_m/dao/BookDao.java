@@ -5,6 +5,9 @@ import java.util.List;
 
 import com.laundry_m.mvc.domain.Book;
 import com.laundry_m.mvc.domain.BookLine;
+import com.laundry_m.mvc.laundry_m.exception.InvalidUserException;
+import com.laundry_m.mvc.laundry_m.exception.NotExistException;
+import com.laundry_m.mvc.laundry_m.exception.NotLoginException;
 
 public interface BookDao {
 	/**
@@ -59,4 +62,11 @@ public interface BookDao {
 	 * @return: List<Book>
 	 * */
 	List<Book> searchBookByLaundryId(Book book) throws SQLException;
+	
+	/**
+	 * 예약 아이디로 예약 검색
+	 * @param: Long bookId
+	 * @return: List<Book>
+	 * */
+	List<Book> searchBookByBookId(Long bookId) throws SQLException;
 }
