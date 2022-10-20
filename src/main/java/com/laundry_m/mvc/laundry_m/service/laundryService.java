@@ -18,8 +18,7 @@ public interface laundryService {
 	/**
 	 *  세탁소 등록
  	 * 1. 세탁소 레코드 인서트 한다.
- 	 * 2. 세탁소 상세 리스트를 인서트 한다.
- 	 * 3. 회원이 세탁소를 즐겨찾기를 한다면 즐겨찾기를 인서트한다.
+ 	 * 2. 회원이 세탁소를 즐겨찾기를 한다면 즐겨찾기를 인서트한다.
  	 * 
 	 * @param : Laundry laundry(세탁소 점포아이디, 아이디, 점포 이름, 점포 번호, 점포 주소, 수거비, 점주 계좌번호)
 	 * @exception : DuplicationException(세탁소 id가 이미 존재할 경우 오류)
