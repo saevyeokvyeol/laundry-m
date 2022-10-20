@@ -1,3 +1,4 @@
+
 CREATE TABLE users (
 	user_id	varchar2(20)		NOT NULL,
 	user_pwd	varchar2(20)		NULL,
@@ -209,3 +210,5 @@ ALTER TABLE adjust ADD CONSTRAINT PK_ADJUST PRIMARY KEY (
 ALTER TABLE favorite ADD CONSTRAINT PK_FAVORITE PRIMARY KEY (
 	favorite_id
 );
+
+

@@ -14,6 +14,10 @@ public interface MetapayService {
 	/**
 	 * 메타페이 가입
 	 * @param: Metapay metapay(사용자 ID, 메타페이 비밀번호, 메타페이 계좌(메타페이 번호, 은행 id, 계좌번호))
+<<<<<<< HEAD
+=======
+	 * @return: Metapay metapay
+>>>>>>> a18f6a1f28a2cdc6c23bda9ee6f9e9da1856c5ac
 	 * @exception: DuplicationException(아이디에 해당하는 메타페이가 이미 존재할 경우 오류)
 	 * 			   NotLoginException(로그인하지 않고 메타페이에 가입할 경우 오류)
 	 * 			   NotExistException(로그인한 아이디나 은행 아이디가 DB에 존재하지 않을 경우 오류)
