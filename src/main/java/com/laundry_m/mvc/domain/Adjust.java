@@ -5,8 +5,16 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 
+<<<<<<< .mine
 @Getter
 public class Adjust {
+||||||| .r391
+@Entity
+public class Adjust {
+=======
+@Getter
+public class Adjust { 
+>>>>>>> .r460
 	
 	private Long adjustId;
 	private LocalDateTime adjust_insert_date;
