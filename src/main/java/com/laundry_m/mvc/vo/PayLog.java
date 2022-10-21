@@ -17,13 +17,13 @@ public class PayLog {
 	private Long payAccountId;
 	private Long payLogAmount;
 	private LocalDateTime payLogInsertDate;
-	
+	private Long laundryId;
 	private Metapay metapay;
 	private PayCategory payCategory;
 	private PayAccount payAccount;
 	
 	@Builder
-	public PayLog(Long payLogId, Long metapayId, int payCategoryId, Long payAccountId, 
+	public PayLog(Long payLogId, Long metapayId, int payCategoryId, Long payAccountId, Long laundryId,
 			Long payLogAmount, LocalDateTime payLogInsertDate, Metapay metapay, PayCategory payCategory,
 			PayAccount payAccount) {
 		super();
@@ -32,6 +32,7 @@ public class PayLog {
 		this.payCategoryId = payCategoryId;
 		this.payAccountId = payAccountId;
 		this.payLogAmount = payLogAmount;
+		this.laundryId = laundryId;
 		this.payLogInsertDate = payLogInsertDate;
 		this.metapay = metapay;
 		this.payCategory = payCategory;

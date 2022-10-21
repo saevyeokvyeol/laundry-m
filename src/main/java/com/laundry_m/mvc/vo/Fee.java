@@ -4,10 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 @NoArgsConstructor
 @Setter
 @Getter

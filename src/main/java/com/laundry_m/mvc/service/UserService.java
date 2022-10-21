@@ -7,7 +7,7 @@ import com.laundry_m.mvc.exception.DuplicationException;
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
-import com.laundry_m.mvc.vo.User;
+import com.laundry_m.mvc.vo.Users;
 
 public interface UserService {
 	/**
@@ -19,7 +19,7 @@ public interface UserService {
 	 * 				NotExistException(아아디 DB에 존재하지 않을 경우 오류)
 	 * 				NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */
-	void makeUser(User user) throws SQLException, DuplicationException, NotExistException, NotFilledInException;
+	void makeUser(Users users) throws SQLException, DuplicationException, NotExistException, NotFilledInException;
 	
 	/**
 	 * 로그인
@@ -36,13 +36,13 @@ public interface UserService {
 	 * 				NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * 
 	 * */
-	void updateUserInfo(User user) throws SQLException, NotLoginException, NotFilledInException;
+	void updateUserInfo(Users users) throws SQLException, NotLoginException, NotFilledInException;
 	
 	/**
 	 * 전체 유저 검색
 	 * @return : List<User>
 	 */
-	List<User> selectAllUser() throws SQLException;
+	List<Users> selectAllUser() throws SQLException;
 	
 	/**
 	 *  회원 아이디로 검색
@@ -51,7 +51,7 @@ public interface UserService {
 	 *  @exception : NotExistException(회원 아이디 DB에 존재하지 않을 경우 오류)
 	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * */
-	List<User> selectByUserId(User user) throws SQLException, NotExistException, NotLoginException;
+	List<Users> selectByUserId(Users users) throws SQLException, NotExistException, NotLoginException;
 	
 	/**
 	 *  회원 타입으로 검색
@@ -60,5 +60,5 @@ public interface UserService {
 	 *  @exception : NotExistException(회원 타입 DB에 존재하지 않을 경우 오류)
 	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * */
-	List<User> selectByUserType(User user) throws SQLException, NotExistException, NotLoginException;
+	List<Users> selectByUserType(Users users) throws SQLException, NotExistException, NotLoginException;
 }

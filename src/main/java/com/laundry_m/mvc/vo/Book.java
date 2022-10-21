@@ -52,4 +52,6 @@ public class Book {
 		this.review = review;
 		this.adjust = adjust;
 	}
+
+
 }

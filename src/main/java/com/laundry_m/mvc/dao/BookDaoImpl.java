@@ -41,7 +41,7 @@ public class BookDaoImpl implements BookDao {
 				throw new SQLException("예약에 오류가 발생했습니다.");
 			}
 			
-			if (book.getBookMethod() == 2) {
+			if (book.getBookMethodId() == 2) {
 				PayLog payLog = PayLog.builder().laundryId(book.getLaundryId()).build();
 				int re = metapayDao.payMetapay(session, book.getUserId(), payLog);
 				throw new SQLException("메타페이 결제에 오류가 발생했습니다.");
