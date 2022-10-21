@@ -1,4 +1,4 @@
-package com.laundry_m.mvc.laundry_m.dao;
+package com.laundry_m.mvc.dao;
 
 import java.sql.SQLException;
 import java.util.List;

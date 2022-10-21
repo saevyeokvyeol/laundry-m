@@ -1,4 +1,4 @@
-package com.laundry_m.mvc.laundry_m.exception;
+package com.laundry_m.mvc.exception;
 
 /**
  * 입력이 필요한 필드가 비어있을 경우 발생하는 오류

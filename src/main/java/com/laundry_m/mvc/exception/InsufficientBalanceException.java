@@ -1,4 +1,4 @@
-package com.laundry_m.mvc.laundry_m.exception;
+package com.laundry_m.mvc.exception;
 
 /**
  * 잔액이 부족할 시 발생하는 오류

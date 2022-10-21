@@ -1,4 +1,4 @@
-package com.laundry_m.mvc.laundry_m.service;
+package com.laundry_m.mvc.service;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,11 +8,11 @@ import com.laundry_m.mvc.domain.ExtraFee;
 import com.laundry_m.mvc.domain.Fabric;
 import com.laundry_m.mvc.domain.Fee;
 import com.laundry_m.mvc.domain.Laundry;
-import com.laundry_m.mvc.laundry_m.exception.DuplicationException;
-import com.laundry_m.mvc.laundry_m.exception.InvalidUserException;
-import com.laundry_m.mvc.laundry_m.exception.NotExistException;
-import com.laundry_m.mvc.laundry_m.exception.NotFilledInException;
-import com.laundry_m.mvc.laundry_m.exception.NotLoginException;
+import com.laundry_m.mvc.exception.DuplicationException;
+import com.laundry_m.mvc.exception.InvalidUserException;
+import com.laundry_m.mvc.exception.NotExistException;
+import com.laundry_m.mvc.exception.NotFilledInException;
+import com.laundry_m.mvc.exception.NotLoginException;
 
 public interface laundryService {
 	/**

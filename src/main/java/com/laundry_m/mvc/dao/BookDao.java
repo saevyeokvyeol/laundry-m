@@ -1,13 +1,10 @@
-package com.laundry_m.mvc.laundry_m.dao;
+package com.laundry_m.mvc.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.laundry_m.mvc.domain.Book;
 import com.laundry_m.mvc.domain.BookLine;
-import com.laundry_m.mvc.laundry_m.exception.InvalidUserException;
-import com.laundry_m.mvc.laundry_m.exception.NotExistException;
-import com.laundry_m.mvc.laundry_m.exception.NotLoginException;
 
 public interface BookDao {
 	/**

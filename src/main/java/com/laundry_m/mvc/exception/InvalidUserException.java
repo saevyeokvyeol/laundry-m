@@ -1,4 +1,4 @@
-package com.laundry_m.mvc.laundry_m.exception;
+package com.laundry_m.mvc.exception;
 
 /**
  * 유효하지 않은 사용자가 접근했을 때 발생하는 오류

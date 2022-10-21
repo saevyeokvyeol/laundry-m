@@ -1,4 +1,4 @@
-package com.laundry_m.mvc.laundry_m.exception;
+package com.laundry_m.mvc.exception;
 
 /**
  * DB에 해당하는 정보가 없을 때 발생하는 오류
