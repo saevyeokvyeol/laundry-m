@@ -48,7 +48,7 @@ public interface ReviewService {
 	List<Review> searchReviewAll() throws SQLException, NotLoginException, InvalidUserException;
 	
 	/**
-	 * 유저 아이디로 리뷰 검색
+	 * 유저 아이디로 리뷰 검색 / 회원이 작성한 리뷰 보기
 	 * @param: String userId
 	 * @return: List<Review>
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)

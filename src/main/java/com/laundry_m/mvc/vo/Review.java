@@ -10,7 +10,7 @@ import lombok.Getter;
 public class Review {
 	
 	private Long reviewId;
-	
+	private String userId;
 	private User user;
 	
 	private Long bookId;
@@ -22,10 +22,11 @@ public class Review {
 	private LocalDateTime reviewUpdateDate;
 
 	@Builder
-	public Review(Long reviewId, User user, Long bookId, String reviewContent, Long reviewRate,
+	public Review(Long reviewId, String userId, User user, Long bookId, String reviewContent, Long reviewRate,
 			LocalDateTime reviewInsertDate, LocalDateTime reviewUpdateDate) {
 		super();
 		this.reviewId = reviewId;
+		this.userId = userId;
 		this.user = user;
 		this.bookId = bookId;
 		this.reviewContent = reviewContent;
@@ -33,7 +34,8 @@ public class Review {
 		this.reviewInsertDate = reviewInsertDate;
 		this.reviewUpdateDate = reviewUpdateDate;
 	}
-	
+
+
 	
 	
 	

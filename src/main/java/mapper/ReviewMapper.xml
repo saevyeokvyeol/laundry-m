@@ -5,38 +5,47 @@
 <mapper namespace="reviewMapper">
 
 	<!-- 리뷰 작성 -->
-	<insert id ="createReview" parameterType="member">
-		INSERT INTO REVIEW VALUES(review_seq.nextval , #{userId}, LAUNDRY_SEQ.currval, #{reviewRate}, #{reviewContent}, systimestamp ,systimestamp)
+	<insert id ="createReview" parameterType="review">
+		insert into review values(#{review_seq.nextval} , #{userId}, LAUNDRY_SEQ.currval, #{reviewRate}, #{reviewContent}, systimestamp ,systimestamp)
 	</insert> 
+	
+	<!-- 리뷰 수정 -->
+	<update id = "modifyReview" parameterType="review">
+		update review set <!-- 수정 요소 : 리뷰내용 , 별점, 수정일-->
+		review_content = #{reviewContent}, review_Rate = #{reviewRate}, review_update_date = systimestamp
+		where review_id = #{review_seq.nextval}
+	</update>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id = "deleteReview" parameterType="review">
+		delete from review where #{review_seq.nextval}
+	</delete>
 		
 	<!-- 전체 리뷰 보기 -->
-	<select id = "listAllReviewList" resultType="Long">
+	<select id = "searchReviewAll" resultType="Long">
 		select * from review
 	</select>
 	
-	<!-- 회원이 작성한 리뷰 보기 -->
-	<select id = "listUserReviewList" resultType="Long">
+	<!-- 유저 아이디로 리뷰 검색 /회원이 작성한 리뷰 보기 -->
+	<select id = "searchReviewByUserId" resultType="Long">
 		select * from review where user_id=#{userId}
 	</select>
 	
-	<!-- 아이디로 리뷰 검색 -->
-	<select id="searchReviewByUserId" parameterType="Long">
-		select * from review where user_id = #{_parameter}
-	</select>
-	
 	<!-- 점포 아이디로 리뷰 검색 -->
-	<select id="searchReviewByLaundryId" parameterType="Long">
-		select * from review where laundry_id = #{_parameter}
+	<select id = "searchReviewByLaundryId" resultType="Long">
+		select * from review where laundry_id=#{laundryId}
 	</select>
 	
 	<!-- 예약 번호로 리뷰 검색 -->
-	<select id ="searchReviewByBookId" parameterType="Long">
-		select * from review where book_id = #{_parameter}
+	<select id = "searchReviewByBookId" resultType="Long">
+		select * from review where book_id=#{bookId}
 	</select>
 	
 	<!-- 리뷰 번호로 리뷰 검색 -->
-	<select id="searchReviewByReviewId">
-		select * from review where review_id = #{_parameter}
+	<select id = "searchReviewByReviewId" resultType="Long">
+		select * from review where review_id=#{reviewId}
 	</select>
-
+	
+	
+	
 </mapper>

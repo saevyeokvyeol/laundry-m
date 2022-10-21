@@ -58,7 +58,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public void deleteReview(Long reviewId)
 			throws SQLException, NotLoginException, NotExistException, InvalidUserException, NotFilledInException {
-		// TODO Auto-generated method stub
+		int result = reviewDao.deleteReview(reviewId);
 
 	}
 
@@ -74,7 +74,7 @@ public class ReviewServiceImpl implements ReviewService {
 		List<Review> reviews = null;
 		try {
 			session = DbUtil.getSession();
-			reviews = session.selectList("reviewMapper.listAllReviewList");
+			reviews = session.selectList("reviewMapper.searchReviewAll");
 		} finally {
 			DbUtil.sessionClose(session);
 		}
