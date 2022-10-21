@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="laundryMapper">
+	
+	<!-- 세탁소 등록 -->
+	<insert id="insertLaundry" parameterType="laundry">
+		insert into laundry
+		values(#{laundryId}, #{userId}, #{laundryName}, #{laundryTel}, #{laundryAddress}, #{laundryDeliveryFee}, #{laundryAccountNumber}, #{laundryLatitude}, #{laundryLongitude})
+		<!-- sysdate 대신 systimestamp! -->
+	</insert>
+	
+	<!-- 세탁소 수정 -->
+	<update id="updateLaundry" parameterType="laundry">
+		update laundry 
+		set 
+		<!-- 수정 요소 : 세탁소 이름, 전화번호, 세탁소 주소 (위도 경도 포함) -->
+		laundry_Name = #{laundryName},
+		laundry_Tel = #{laundryTel},
+		laundry_Address = #{laundryAddress}
+		laundry_Latitude = #{laundryLatitude}
+		laundry_Longitude = #{laundryLongitude}
+		where user_id = #{userId}
+	</update>
+	
+	<!-- 세탁소 요금 추가 -->
+	<insert id="insertFee" parameterType="fee">
+		insert into fee
+		values (#{feeSeq}, #{laundryId}, #{clothesId}, ${clothesFee})
+	</insert>
+	
+	<!-- 세탁소 요금 수정 -->
+	<update id="updateFee" parameterType="fee">
+		update fee
+		set
+		<!-- 세탁소 아이디, 옷 아이디, 가격 -->
+		clothes_fee = #{clothesFee}
+		where laundry_id = #{laundryId} and fee_id = #{feeId}
+	</update>
+
+	<!-- 세탁소 취급 옷 종류 추가 -->
+	<insert id="insertClothes" parameterType="clothes">
+		insert into clothes
+		values (#{clothesSeq} , #{clothesName})
+	</insert>
+
+	<!-- 세탁소 취급 천 종류 추가 -->
+	<insert id="insertFabric" parameterType="fabric">
+		insert into Fabric
+		values (#{fabricSeq} , #{fabricName}, #{fabricWashMethod})
+	</insert>
+
+	<!-- 세탁소 추가 가격 추가 -->
+	<insert id="insertExtraFee" parameterType="extraFee">
+		insert into ExtraFee
+		values (#{extraFeeSeq} , #{fabricId}, #{laundryId}, #{fabricFee}, #{extraFeeOperation} )
+	</insert>
+
+</mapper>

@@ -14,7 +14,7 @@ import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
 
-public interface laundryService {
+public interface LaundryService {
 	/**
 	 *  세탁소 등록
  	 * 1. 세탁소 레코드 인서트 한다.
@@ -26,7 +26,7 @@ public interface laundryService {
 	 * 				NotExistException(점주 로그인 id, 세탁소 id DB에 존재하지 않을 경우 오류)
 	 * 				NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */
-	void createLaundry(Laundry laundry) throws SQLException, NotLoginException, DuplicationException, NotExistException, NotFilledInException;
+	void insertLaundry(Laundry laundry) throws SQLException, NotLoginException, DuplicationException, NotExistException, NotFilledInException;
 	
 	/**
 	 *  세탁소 수정
@@ -35,7 +35,7 @@ public interface laundryService {
 	 *  			 NotExistException(세탁소 DB에 존재하지 않을 경우 오류)
 	 *  			 NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */
-	void modifyLaundry(Laundry laundry) throws SQLException, NotLoginException, NotExistException, NotFilledInException;
+	void updateLaundry(Laundry laundry) throws SQLException, NotLoginException, NotExistException, NotFilledInException;
 	
 	/**
 	 *  옷 추가 -- 옷 DB 기본으로 등록 필요한 과정??
@@ -45,7 +45,7 @@ public interface laundryService {
 	 * 			    NotExistException(점포 아이디가 DB에 존재하지 않을 경우 오류)
 	 * 			    NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */	
-	void createClothes(Clothes clothes) throws SQLException, NotLoginException, NotExistException, NotFilledInException;
+	void insertClothes(Clothes clothes) throws SQLException, NotLoginException, NotExistException, NotFilledInException;
 	
 	/**
 	 *  점포 가격 추가 
@@ -54,7 +54,7 @@ public interface laundryService {
 	 * 			    NotExistException(점포 아이디나 회원 아이디 등이 DB에 존재하지 않을 경우 오류)
 	 * 			    NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */	
-	void createFee(Fee fee) throws SQLException, NotExistException, NotFilledInException;
+	void insertFee(Fee fee) throws SQLException, NotExistException, NotFilledInException;
 	
 	/**
 	 *  점포 가격 갱신
@@ -63,13 +63,13 @@ public interface laundryService {
 	 *  			 NotLoginException(로그인하지 않고 점포가격 추가를 시도할 경우 오류)
 	 *  			 NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */	
-	void modifyFee(Fee fee) throws SQLException, NotExistException, NotFilledInException;
+	void updateFee(Fee fee) throws SQLException, NotExistException, NotFilledInException;
 	
 	/**
 	 *  천 추가 -- 천 DB 기본으로 등록 필요한 과정??
 	 *  @param : Fabric fabric(천 아이디, 천이름, 세탁방법)
 	 */
-	void createFabric(Fabric fabric) throws SQLException;
+	void insertFabric(Fabric fabric) throws SQLException;
 	
 	/**
 	 *  추가가격 추가
@@ -78,7 +78,7 @@ public interface laundryService {
 	 *  			 NotLoginException(로그인하지 않고 점포가격 추가를 시도할 경우 오류)
 	 *  			 NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */
-	void createExtraFee(ExtraFee extraFee) throws SQLException, NotLoginException, NotFilledInException;
+	void insertExtraFee(ExtraFee extraFee) throws SQLException, NotLoginException, NotFilledInException;
 	
 	/**
 	 *  추가가격 수정: extra_fee 테이블 레코드 update
