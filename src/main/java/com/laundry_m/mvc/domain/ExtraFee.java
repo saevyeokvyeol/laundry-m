@@ -6,19 +6,27 @@ import lombok.Getter;
 @Getter
 public class ExtraFee {
 	private Long extraFeeId;
-	private Fabric fabric;
-	private Laundry laundry;
+	private Long fabricId;
+	private Long laundryId;
 	private int fabricFee;
 	private char extraFeeOperation;
 	
+	private Fabric fabric;
+	private Laundry laundry;
+	
 	@Builder
-	public ExtraFee(Long extraFeeId, Fabric fabric, Laundry laundry, int fabricFee, char extraFeeOperation) {
+	public ExtraFee(Long extraFeeId, Long fabricId, Long laundryId, int fabricFee, char extraFeeOperation,
+			Fabric fabric, Laundry laundry) {
 		super();
 		this.extraFeeId = extraFeeId;
-		this.fabric = fabric;
-		this.laundry = laundry;
+		this.fabricId = fabricId;
+		this.laundryId = laundryId;
 		this.fabricFee = fabricFee;
 		this.extraFeeOperation = extraFeeOperation;
+		this.fabric = fabric;
+		this.laundry = laundry;
 	}
+	
+	
 	
 }

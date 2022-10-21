@@ -26,4 +26,6 @@ public class Adjust {
 		this.laundry = laundry;
 		this.book = book;
 	}
+	
+	
 }
