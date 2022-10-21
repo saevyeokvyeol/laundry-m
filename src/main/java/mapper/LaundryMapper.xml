@@ -27,7 +27,7 @@
 	<!-- 세탁소 요금 추가 -->
 	<insert id="insertFee" parameterType="fee">
 		insert into fee
-		values (#{feeSeq}, #{laundryId}, #{clothesId}, ${clothesFee})
+		values (#{fee_id_Seq.nextval}, #{laundryId}, #{clothesId}, ${clothesFee})
 	</insert>
 	
 	<!-- 세탁소 요금 수정 -->
@@ -42,19 +42,19 @@
 	<!-- 세탁소 취급 옷 종류 추가 -->
 	<insert id="insertClothes" parameterType="clothes">
 		insert into clothes
-		values (#{clothesSeq} , #{clothesName})
+		values (#{clothes_id_Seq.nextval} , #{clothesName})
 	</insert>
 
 	<!-- 세탁소 취급 천 종류 추가 -->
 	<insert id="insertFabric" parameterType="fabric">
 		insert into Fabric
-		values (#{fabricSeq} , #{fabricName}, #{fabricWashMethod})
+		values (#{fabric_id_Seq.nextval} , #{fabricName}, #{fabricWashMethod})
 	</insert>
 
 	<!-- 세탁소 추가 가격 추가 -->
 	<insert id="insertExtraFee" parameterType="extraFee">
 		insert into ExtraFee
-		values (#{extraFeeSeq} , #{fabricId}, #{laundryId}, #{fabricFee}, #{extraFeeOperation} )
+		values (#{extra_Fee_id_Seq.nextval} , #{fabricId}, #{laundryId}, #{fabricFee}, #{extraFeeOperation} )
 	</insert>
 
 </mapper>
