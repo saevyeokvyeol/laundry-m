@@ -33,5 +33,4 @@
 	<mappers>
 		<mapper resource="mapper/ProductMapper.xml"/>
 	</mappers>
-	
 </configuration>

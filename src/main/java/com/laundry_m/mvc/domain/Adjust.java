@@ -7,18 +7,22 @@ import lombok.Getter;
 
 @Getter
 public class Adjust {
-
-	
 	private Long adjustId;
-	private LocalDateTime adjust_insert_date;
+	private Long laundryId;
+	private Long bookId;
+	private LocalDateTime adjustInsertDate;
+	
 	private Laundry laundry;
 	private Book book;
 	
 	@Builder
-	public Adjust(Long adjustId, LocalDateTime adjust_insert_date, Laundry laundry, Book book) {
+	public Adjust(Long adjustId, Long laundryId, Long bookId, LocalDateTime adjustInsertDate, Laundry laundry,
+			Book book) {
 		super();
 		this.adjustId = adjustId;
-		this.adjust_insert_date = adjust_insert_date;
+		this.laundryId = laundryId;
+		this.bookId = bookId;
+		this.adjustInsertDate = adjustInsertDate;
 		this.laundry = laundry;
 		this.book = book;
 	}

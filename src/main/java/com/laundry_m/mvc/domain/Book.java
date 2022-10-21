@@ -10,31 +10,40 @@ import lombok.Getter;
 public class Book {
 	
 	private Long bookId;
-	private Laundry laundry;
-	private User user;
-	private Book book;
+	private Long laundryId;
+	private String userId;
 	private int bookCount;
 	private LocalDateTime bookInsertDate;
 	private LocalDateTime bookUpdateDate;
 	private String bookMemo;
-	private String bookMethod;
+	private int bookMethod;
+	private Long bookTotalFee;
+	
+	private User user;
+	private Laundry laundry;
+	
 	private List<BookLine> bookLine;
 	private List<Review> review;
 	private List<Adjust> adjust;
 	
 	@Builder
-	public Book(Long bookId, Laundry laundry, User user, Book book, int bookCount, LocalDateTime bookInsertDate
-			, LocalDateTime bookUpdateDate, String bookMemo, String bookMethod) {
+	public Book(Long bookId, Long laundryId, String userId, int bookCount, LocalDateTime bookInsertDate,
+			LocalDateTime bookUpdateDate, String bookMemo, int bookMethod, Long bookTotalFee, User user,
+			Laundry laundry, List<BookLine> bookLine, List<Review> review, List<Adjust> adjust) {
 		super();
 		this.bookId = bookId;
-		this.laundry = laundry;
-		this.user = user;
-		this.book = book;
+		this.laundryId = laundryId;
+		this.userId = userId;
 		this.bookCount = bookCount;
 		this.bookInsertDate = bookInsertDate;
 		this.bookUpdateDate = bookUpdateDate;
 		this.bookMemo = bookMemo;
 		this.bookMethod = bookMethod;
+		this.bookTotalFee = bookTotalFee;
+		this.user = user;
+		this.laundry = laundry;
+		this.bookLine = bookLine;
+		this.review = review;
+		this.adjust = adjust;
 	}
-	
 }

@@ -10,26 +10,25 @@ import lombok.Getter;
 public class Metapay {
 	
 	private Long metapayId;
-	
-	private User user;
-	
+	private String userId;
 	private String metapayBalance;
 	private String metapayPassword;
 	
-	private LocalDateTime metapayDate;
-	
+	private LocalDateTime metapayInsertDate;
 	private LocalDateTime metapayUpdateDate;
 	
+	private User user;
+	
 	@Builder
-	public Metapay(Long metapayId, User user, String metapayBalance, String metapayPassword) {
+	public Metapay(Long metapayId, String userId, String metapayBalance, String metapayPassword,
+			LocalDateTime metapayInsertDate, LocalDateTime metapayUpdateDate, User user) {
 		super();
 		this.metapayId = metapayId;
-		this.user = user;
+		this.userId = userId;
 		this.metapayBalance = metapayBalance;
 		this.metapayPassword = metapayPassword;
+		this.metapayInsertDate = metapayInsertDate;
+		this.metapayUpdateDate = metapayUpdateDate;
+		this.user = user;
 	}
-	
-	
-	
-
 }

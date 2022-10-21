@@ -3,6 +3,9 @@ package com.laundry_m.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.laundry_m.mvc.domain.Adjust;
 import com.laundry_m.mvc.domain.Book;
 import com.laundry_m.mvc.domain.BookLine;
 
@@ -19,7 +22,7 @@ public interface BookDao {
 	 * @param: BookLine bookLine(옷 아이디, 천 아이디, 가격))
 	 * @return: int(등록한 레코드 수)
 	 * */
-	int insertBook(BookLine bookLine) throws SQLException;
+	int insertBookLine(SqlSession session, BookLine bookLine) throws SQLException;
 	
 	/**
 	 * 예약 상태 갱신
@@ -33,6 +36,12 @@ public interface BookDao {
 	 * @param: Long bookId
 	 * */
 	int updateBookComplete(Long bookId) throws SQLException;
+	
+	/**
+	 * 예약 완료: 정산 테이블 인서트
+	 * @param: Long bookId
+	 * */
+	int insertAdjust(Adjust adjust) throws SQLException;
 	
 	/**
 	 * 예약 취소
@@ -63,7 +72,7 @@ public interface BookDao {
 	/**
 	 * 예약 아이디로 예약 검색
 	 * @param: Long bookId
-	 * @return: List<Book>
+	 * @return: Book
 	 * */
-	List<Book> searchBookByBookId(Long bookId) throws SQLException;
+	Book searchBookByBookId(Long bookId) throws SQLException;
 }

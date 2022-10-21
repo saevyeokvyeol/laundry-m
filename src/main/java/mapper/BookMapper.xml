@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="bookMapper">
+	<insert id="insertBook" parameterType="book">
+		insert
+		into book
+		values(book_id_seq.nextval, #{laundryId}, #{userId}, systimestamp, #{bookMemo}, #{bookMethod}, #{bookTotalFee}, systimestamp)
+	</insert>
+	
+	<insert id="insertBookLine" parameterType="bookLine">
+		insert
+		into book_line
+		values(book_line_id_seq.nextval, #{bookId}, #{clothesId}, #{fabricId}, #{bookLineFee})
+	</insert>
+	
+	<update id="updateBookComplete" parameterType="long">
+		update book
+		set book_state_id = 10
+		where book_id = #{_parameter}
+	</update>
+	
+	<insert id="insertAdjust" parameterType="adjust">
+		insert
+		into adjust
+		values(adjust_id_seq.nextval, #{laundryId}, #{bookId}, systimestamp)
+	</insert>
+	
+	<select id="searchBookByBookId" parameterType="long">
+		select *
+		from book
+		where book_id = #{_parameter}
+	</select>
+</mapper>
