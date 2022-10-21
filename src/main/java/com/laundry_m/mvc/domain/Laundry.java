@@ -8,12 +8,17 @@ import lombok.Getter;
 @Getter
 public class Laundry {
 	private Long laundryId;
-	private User user;
-	private String  laundryName;
+	private String userId;
+	
+	private String laundryName;
 	private String laundryTel;
 	private String laundryAddress;
 	private int laundryDeliveryFee;
 	private String laundryAccountNumber;
+	private Long laundryLatitude;
+	private Long laundryLongitude;
+	
+	private User user;
 	private List<Book> book;
 	private List<Fee> fee;
 	private List<ExtraFee> extraFee;
@@ -21,15 +26,27 @@ public class Laundry {
 	private List<Favorite> favorite;
 	
 	@Builder
-	public Laundry(Long laundryId, User user, String laundryName, String laundryTel, String laundryAddress, int laundryDeliveryFee
-			, String laundryAccountNumber) {
+	public Laundry(Long laundryId, String userId, String laundryName, String laundryTel, String laundryAddress,
+			int laundryDeliveryFee, String laundryAccountNumber, Long laundryLatitude, Long laundryLongitude, User user,
+			List<Book> book, List<Fee> fee, List<ExtraFee> extraFee, List<Adjust> adjust, List<Favorite> favorite) {
 		super();
 		this.laundryId = laundryId;
-		this.user = user;
+		this.userId = userId;
 		this.laundryName = laundryName;
 		this.laundryTel = laundryTel;
 		this.laundryAddress = laundryAddress;
 		this.laundryDeliveryFee = laundryDeliveryFee;
 		this.laundryAccountNumber = laundryAccountNumber;
+		this.laundryLatitude = laundryLatitude;
+		this.laundryLongitude = laundryLongitude;
+		this.user = user;
+		this.book = book;
+		this.fee = fee;
+		this.extraFee = extraFee;
+		this.adjust = adjust;
+		this.favorite = favorite;
 	}
+	
+	
+	
 }
