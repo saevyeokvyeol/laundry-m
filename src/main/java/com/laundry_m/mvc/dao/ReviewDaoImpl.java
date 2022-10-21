@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.laundry_m.mvc.domain.Review;
+import com.laundry_m.mvc.vo.Review;
 
 import util.DbUtil;
 

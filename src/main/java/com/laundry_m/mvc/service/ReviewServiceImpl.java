@@ -7,11 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.laundry_m.mvc.dao.ReviewDao;
 import com.laundry_m.mvc.dao.ReviewDaoImpl;
-import com.laundry_m.mvc.domain.Review;
 import com.laundry_m.mvc.exception.InvalidUserException;
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
+import com.laundry_m.mvc.vo.Review;
 
 import util.DbUtil;
 
