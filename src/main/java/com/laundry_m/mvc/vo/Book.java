@@ -1,12 +1,16 @@
-package com.laundry_m.mvc.domain;
+package com.laundry_m.mvc.vo;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
+@NoArgsConstructor
 public class Book {
 	
 	private Long bookId;

@@ -3,7 +3,7 @@ package com.laundry_m.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.laundry_m.mvc.domain.User;
+import com.laundry_m.mvc.vo.User;
 
 public interface UserDao {
 

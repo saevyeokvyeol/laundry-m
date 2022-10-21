@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.laundry_m.mvc.domain.Adjust;
-import com.laundry_m.mvc.domain.Book;
-import com.laundry_m.mvc.domain.BookLine;
+import com.laundry_m.mvc.vo.Adjust;
+import com.laundry_m.mvc.vo.Book;
+import com.laundry_m.mvc.vo.BookLine;
 
 public interface BookDao {
 	/**
@@ -34,20 +34,23 @@ public interface BookDao {
 	/**
 	 * 예약 완료: 예약 상태 업데이트
 	 * @param: Long bookId
+	 * @return: int(수정한 레코드 수)
 	 * */
 	int updateBookComplete(Long bookId) throws SQLException;
 	
 	/**
 	 * 예약 완료: 정산 테이블 인서트
 	 * @param: Long bookId
+	 * @return: int(등록한 레코드 수)
 	 * */
-	int insertAdjust(Adjust adjust) throws SQLException;
+	int insertAdjust(SqlSession session, Adjust adjust) throws SQLException;
 	
 	/**
 	 * 예약 취소
 	 * @param: Long bookId
+	 * @return: int(수정한 레코드 수)
 	 * */
-	int updateBookCanceled(Book book) throws SQLException;
+	int updateBookCanceled(Long bookId) throws SQLException;
 	
 	/**
 	 * 전체 예약 검색

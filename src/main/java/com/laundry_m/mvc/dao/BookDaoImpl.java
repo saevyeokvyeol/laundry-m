@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.laundry_m.mvc.domain.Adjust;
-import com.laundry_m.mvc.domain.Book;
-import com.laundry_m.mvc.domain.BookLine;
-import com.laundry_m.mvc.domain.PayLog;
+import com.laundry_m.mvc.vo.Adjust;
+import com.laundry_m.mvc.vo.Book;
+import com.laundry_m.mvc.vo.BookLine;
+import com.laundry_m.mvc.vo.PayLog;
 
 import util.DbUtil;
 
@@ -63,12 +63,7 @@ public class BookDaoImpl implements BookDao {
 	 * */
 	@Override
 	public int insertBookLine(SqlSession session, BookLine bookLine) throws SQLException {
-		// 세션을 생성합니다.
-		int result = 0;
-		
-		session = DbUtil.getSession();
-		result = session.insert("bookMapper.insertBook");
-		
+		int result = session.insert("bookMapper.insertBook");
 		return result;
 	}
 	
@@ -79,13 +74,24 @@ public class BookDaoImpl implements BookDao {
 	 * */
 	@Override
 	public int updateBookState(Book book) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession session = null;
+		int result = 0;
+		boolean state = false;
+		
+		try {
+			session = DbUtil.getSession();
+			result = session.update("bookMapper.updateBookState", book);
+			if (result == 1) state = true;
+		} finally {
+			DbUtil.sessionClose(session, state);
+		}
+		return result;
 	}
 	
 	/**
 	 * 예약 완료: 예약 상태 업데이트
 	 * @param: Long bookId
+	 * @return: int(수정한 레코드 수)
 	 * */
 	@Override
 	public int updateBookComplete(Long bookId) throws SQLException {
@@ -96,12 +102,13 @@ public class BookDaoImpl implements BookDao {
 		try {
 			session = DbUtil.getSession();
 			result = session.update("bookMapper.updateBookComplete", bookId);
-			if (result == 1) state = true;
 			
 			Book book = this.searchBookByBookId(bookId);
 			Adjust adjust = Adjust.builder().bookId(bookId)
 					.laundryId(book.getLaundryId()).build();
-			int re = this.insertAdjust(adjust);
+			int re = this.insertAdjust(session, adjust);
+
+			if (result == 1) state = true;
 			if (re != 1) state = false;
 		} finally {
 			DbUtil.sessionClose(session, state);
@@ -112,20 +119,33 @@ public class BookDaoImpl implements BookDao {
 	/**
 	 * 예약 완료: 정산 테이블 인서트
 	 * @param: Long bookId
+	 * @return: int(등록한 레코드 수)
 	 * */
 	@Override
-	public int insertAdjust(Adjust adjust) throws SQLException{
-		return 0;
+	public int insertAdjust(SqlSession session, Adjust adjust) throws SQLException{
+		int result = session.insert("bookMapper.insertAdjust", adjust);
+		return result;
 	}
 	
 	/**
 	 * 예약 취소
 	 * @param: Long bookId
+	 * @return: int(수정한 레코드 수)
 	 * */
 	@Override
-	public int updateBookCanceled(Book book) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateBookCanceled(Long bookId) throws SQLException {
+		SqlSession session = null;
+		int result = 0;
+		boolean state = false;
+		
+		try {
+			session = DbUtil.getSession();
+			result = session.update("bookMapper.updateBookCanceled", bookId);
+			if (result == 1) state = true;
+		} finally {
+			DbUtil.sessionClose(session, state);
+		}
+		return result;
 	}
 	
 	/**

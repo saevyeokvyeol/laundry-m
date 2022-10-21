@@ -3,11 +3,11 @@ package com.laundry_m.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.laundry_m.mvc.domain.User;
 import com.laundry_m.mvc.exception.DuplicationException;
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
+import com.laundry_m.mvc.vo.User;
 
 public interface UserService {
 	/**

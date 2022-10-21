@@ -24,10 +24,10 @@
 	<insert id="insertAdjust" parameterType="adjust">
 		insert
 		into adjust
-		values(adjust_id_seq.nextval, #{laundryId}, #{bookId}, systimestamp)
+		values(adjust_seq.nextval, #{laundryId}, #{bookId}, systimestamp)
 	</insert>
 	
-	<select id="searchBookByBookId" parameterType="long">
+	<select id="searchBookByBookId" parameterType="long" resultType="book">
 		select *
 		from book
 		where book_id = #{_parameter}

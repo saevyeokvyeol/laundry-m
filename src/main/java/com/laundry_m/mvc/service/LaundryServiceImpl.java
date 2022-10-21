@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.laundry_m.mvc.dao.LaundryDao;
 import com.laundry_m.mvc.dao.LaundryDaoImpl;
-import com.laundry_m.mvc.domain.Clothes;
-import com.laundry_m.mvc.domain.ExtraFee;
-import com.laundry_m.mvc.domain.Fabric;
-import com.laundry_m.mvc.domain.Fee;
-import com.laundry_m.mvc.domain.Laundry;
 import com.laundry_m.mvc.exception.DuplicationException;
 import com.laundry_m.mvc.exception.InvalidUserException;
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
+import com.laundry_m.mvc.vo.Clothes;
+import com.laundry_m.mvc.vo.ExtraFee;
+import com.laundry_m.mvc.vo.Fabric;
+import com.laundry_m.mvc.vo.Fee;
+import com.laundry_m.mvc.vo.Laundry;
 
 @Service
 public class LaundryServiceImpl implements LaundryService {

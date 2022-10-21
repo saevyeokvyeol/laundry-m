@@ -15,7 +15,19 @@
 	
 	<!-- 객체 별칭 만들기 -->
 	<typeAliases>
-		<!-- <typeAlias type="com.laundry_m.mvc.vo.vo이름" alias="vo이름"/> -->
+		<typeAlias type="com.laundry_m.mvc.vo.Adjust" alias="adjust"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Bank" alias="bank"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Book" alias="book"/>
+		<typeAlias type="com.laundry_m.mvc.vo.BookLine" alias="bookLine"/>
+		<typeAlias type="com.laundry_m.mvc.vo.BookState" alias="bookState"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Clothes" alias="clothes"/>
+		<typeAlias type="com.laundry_m.mvc.vo.ExtraFee" alias="extraFee"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Fabric" alias="fabric"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Favorite" alias="favorite"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Fee" alias="fee"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Laundry" alias="laundry"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Metapay" alias="metapay"/>
+		<typeAlias type="com.laundry_m.mvc.vo.PayAccount" alias="payAccount"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -31,6 +43,7 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource="mapper/ProductMapper.xml"/>
+		<mapper resource="mapper/BookMapper.xml"/>
+<!-- 		<mapper resource="mapper/MetapayMapper.xml"/> -->
 	</mappers>
 </configuration>

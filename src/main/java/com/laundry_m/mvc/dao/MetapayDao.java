@@ -4,9 +4,9 @@ import java.sql.SQLException;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.laundry_m.mvc.domain.Metapay;
-import com.laundry_m.mvc.domain.PayAccount;
-import com.laundry_m.mvc.domain.PayLog;
+import com.laundry_m.mvc.vo.Metapay;
+import com.laundry_m.mvc.vo.PayAccount;
+import com.laundry_m.mvc.vo.PayLog;
 
 public interface MetapayDao {
 	/**

@@ -3,7 +3,7 @@ package com.laundry_m.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.laundry_m.mvc.domain.Review;
+import com.laundry_m.mvc.vo.Review;
 
 public interface ReviewDao {
 	/**

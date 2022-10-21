@@ -3,12 +3,12 @@ package com.laundry_m.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.laundry_m.mvc.domain.Book;
 import com.laundry_m.mvc.exception.InsufficientBalanceException;
 import com.laundry_m.mvc.exception.InvalidUserException;
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
+import com.laundry_m.mvc.vo.Book;
 
 public interface BookService {
 	/**
@@ -54,7 +54,7 @@ public interface BookService {
 	 * 			   NotExistException(예약이 DB에 존재하지 않을 경우 오류)
 	 * 			   InvalidUserException(해당 예약이나 세탁소를 소유하지 않은 회원이 변경을 시도할 경우 오류)
 	 * */
-	void updateBookCanceled(Book book) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
+	void updateBookCanceled(Long bookId) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
 	
 	/**
 	 * 전체 예약 검색

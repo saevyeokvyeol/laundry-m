@@ -7,12 +7,12 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.laundry_m.mvc.dao.BookDao;
 import com.laundry_m.mvc.dao.BookDaoImpl;
-import com.laundry_m.mvc.domain.Book;
 import com.laundry_m.mvc.exception.InsufficientBalanceException;
 import com.laundry_m.mvc.exception.InvalidUserException;
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
+import com.laundry_m.mvc.vo.Book;
 
 import util.DbUtil;
 
@@ -78,10 +78,9 @@ public class BookServiceImpl implements BookService {
 	 * 			   InvalidUserException(해당 예약이나 세탁소를 소유하지 않은 회원이 변경을 시도할 경우 오류)
 	 * */
 	@Override
-	public void updateBookCanceled(Book book)
+	public void updateBookCanceled(Long bookId)
 			throws SQLException, NotLoginException, NotExistException, InvalidUserException {
-		// TODO Auto-generated method stub
-
+		int result = bookDao.updateBookCanceled(bookId);
 	}
 	
 	/**

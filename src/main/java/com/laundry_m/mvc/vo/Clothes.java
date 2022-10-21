@@ -1,4 +1,4 @@
-package com.laundry_m.mvc.domain;
+package com.laundry_m.mvc.vo;
 
 import java.util.List;
 

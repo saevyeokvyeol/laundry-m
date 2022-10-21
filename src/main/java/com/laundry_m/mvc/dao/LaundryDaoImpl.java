@@ -3,11 +3,11 @@ package com.laundry_m.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.laundry_m.mvc.domain.Clothes;
-import com.laundry_m.mvc.domain.ExtraFee;
-import com.laundry_m.mvc.domain.Fabric;
-import com.laundry_m.mvc.domain.Fee;
-import com.laundry_m.mvc.domain.Laundry;
+import com.laundry_m.mvc.vo.Clothes;
+import com.laundry_m.mvc.vo.ExtraFee;
+import com.laundry_m.mvc.vo.Fabric;
+import com.laundry_m.mvc.vo.Fee;
+import com.laundry_m.mvc.vo.Laundry;
 
 public class LaundryDaoImpl implements LaundryDao {
 

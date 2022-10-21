@@ -3,14 +3,14 @@ package com.laundry_m.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.laundry_m.mvc.domain.Metapay;
-import com.laundry_m.mvc.domain.PayAccount;
-import com.laundry_m.mvc.domain.PayLog;
 import com.laundry_m.mvc.exception.DuplicationException;
 import com.laundry_m.mvc.exception.InsufficientBalanceException;
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
+import com.laundry_m.mvc.vo.Metapay;
+import com.laundry_m.mvc.vo.PayAccount;
+import com.laundry_m.mvc.vo.PayLog;
 
 public interface MetapayService {
 	/**
