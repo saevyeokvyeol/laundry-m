@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class User {
+public class Users {
 	
 	private String userId;
 	private String userPwd;
@@ -19,7 +19,7 @@ public class User {
 	private Long userLongitude;
 	
 	@Builder
-	public User(String userId, String userPwd, String userName, String userPhone, String userType, String userAddress,
+	public Users(String userId, String userPwd, String userName, String userPhone, String userType, String userAddress,
 			String userState, Long userLatitude, Long userLongitude) {
 		super();
 		this.userId = userId;

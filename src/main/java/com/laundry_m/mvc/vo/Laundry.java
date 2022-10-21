@@ -6,14 +6,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 @NoArgsConstructor
 @Setter
 @Getter
 public class Laundry {
 	private Long laundryId;
 	private String userId;
-	
 	private String laundryName;
 	private String laundryTel;
 	private String laundryAddress;
@@ -22,7 +24,7 @@ public class Laundry {
 	private Long laundryLatitude;
 	private Long laundryLongitude;
 	
-	private User user;
+	private Users user;
 	private List<Book> book;
 	private List<Fee> fee;
 	private List<ExtraFee> extraFee;
@@ -31,7 +33,7 @@ public class Laundry {
 	
 	@Builder
 	public Laundry(Long laundryId, String userId, String laundryName, String laundryTel, String laundryAddress,
-			int laundryDeliveryFee, String laundryAccountNumber, Long laundryLatitude, Long laundryLongitude, User user,
+			int laundryDeliveryFee, String laundryAccountNumber, Long laundryLatitude, Long laundryLongitude, Users user,
 			List<Book> book, List<Fee> fee, List<ExtraFee> extraFee, List<Adjust> adjust, List<Favorite> favorite) {
 		super();
 		this.laundryId = laundryId;

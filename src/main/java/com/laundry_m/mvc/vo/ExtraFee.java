@@ -2,7 +2,10 @@ package com.laundry_m.mvc.vo;
 
 import lombok.Builder;
 import lombok.Getter;
-
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@NoArgsConstructor
+@Setter
 @Getter
 public class ExtraFee {
 	private Long extraFeeId;

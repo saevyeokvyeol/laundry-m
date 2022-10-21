@@ -5,7 +5,10 @@ import java.time.LocalDateTime;
 
 import lombok.Builder;
 import lombok.Getter;
-
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@NoArgsConstructor
+@Setter
 @Getter
 public class Metapay {
 	
@@ -13,21 +16,20 @@ public class Metapay {
 	private String userId;
 	private String metapayBalance;
 	private String metapayPassword;
-	
-	private LocalDateTime metapayInsertDate;
+	private LocalDateTime metapayDate;
 	private LocalDateTime metapayUpdateDate;
 	
-	private User user;
+	private Users user;
 	
 	@Builder
 	public Metapay(Long metapayId, String userId, String metapayBalance, String metapayPassword,
-			LocalDateTime metapayInsertDate, LocalDateTime metapayUpdateDate, User user) {
+			LocalDateTime metapayDate, LocalDateTime metapayUpdateDate, Users user) {
 		super();
 		this.metapayId = metapayId;
 		this.userId = userId;
 		this.metapayBalance = metapayBalance;
 		this.metapayPassword = metapayPassword;
-		this.metapayInsertDate = metapayInsertDate;
+		this.metapayDate = metapayDate;
 		this.metapayUpdateDate = metapayUpdateDate;
 		this.user = user;
 	}
