@@ -1,16 +1,12 @@
 package com.laundry_m.mvc.controller;
 
-import org.springframework.stereotype.Controller;
-
 import com.laundry_m.mvc.service.LaundryService;
 import com.laundry_m.mvc.service.LaundryServiceImpl;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
 import com.laundry_m.mvc.vo.Laundry;
 
-@Controller
 public class LaundryController {
-	
 	
 	private LaundryService laundryService = new LaundryServiceImpl();
 	

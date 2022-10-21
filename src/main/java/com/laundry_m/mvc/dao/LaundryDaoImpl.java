@@ -231,4 +231,32 @@ public class LaundryDaoImpl implements LaundryDao {
 		return laundries;
 	}
 
+	@Override
+	public int clothesfabricFee(Long laundryId, Long clothesId, Long fabricId) throws SQLException {
+		SqlSession session = null;
+		Laundry laundry = null;
+		int totalFee = 0;
+		
+		try {
+			session = DbUtil.getSession();
+			//세탁소 고유번호로 세탁소를 구해온다 - 세탁소별 옷 가격
+			laundry = session.selectOne("laundryMapper.selectByLaundryId", laundryId);
+			
+			//세탁소 고유번호 + 옷 고유번호로 옷 종류 별 가격 구한다.
+			Fee fee = Fee.builder().laundryId(laundryId).clothesId(clothesId).build();
+			int resultClothesFee = fee.getClothesFee();
+			
+			//옷감 고유번호 + 세탁소 고유번호로 추가 가격 구한다.
+			ExtraFee extraFee = ExtraFee.builder().laundryId(laundryId).fabricId(fabricId).build();
+			int resultExtraFee = extraFee.getFabricFee();
+			
+			totalFee = resultClothesFee + resultExtraFee;
+			
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		
+		return totalFee;
+	}
+
 }

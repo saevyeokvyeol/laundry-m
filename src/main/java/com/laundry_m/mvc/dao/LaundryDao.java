@@ -94,4 +94,10 @@ public interface LaundryDao {
 	 *  @return : Laundry
 	 * */
 	List<Laundry> selectByLowestByLaundry(Long feeId, Long FabricId) throws SQLException;
+	
+	/**
+	 * 특정 세탁소에서 옷 + 재질 가격 더하는 메소드
+	 * */
+	int clothesfabricFee(Long laundryId,Long clothesId, Long fabricId) throws SQLException;
+	
 }
