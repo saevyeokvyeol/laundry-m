@@ -6,17 +6,25 @@ import lombok.Getter;
 @Getter
 public class Fee {
 	private Long feeId;
+	private Long laundryId;
+	private Long clothesId;
+	private int clothesFee;
+	
 	private Laundry laundry;
 	private Clothes clothes;
 	
-	private int clothesFee;
 	
 	@Builder
-	public Fee(Long feeId, Laundry laundry, Clothes clothes, int clothesFee) {
+	public Fee(Long feeId, Long laundryId, Long clothesId, int clothesFee, Laundry laundry, Clothes clothes) {
 		super();
 		this.feeId = feeId;
+		this.laundryId = laundryId;
+		this.clothesId = clothesId;
+		this.clothesFee = clothesFee;
 		this.laundry = laundry;
 		this.clothes = clothes;
-		this.clothesFee = clothesFee;
 	}
+	
+	
+	
 }
