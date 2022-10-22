@@ -6,14 +6,14 @@
 
 	<!-- 리뷰 작성 -->
 	<insert id ="createReview" parameterType="review">
-		insert into review values(#{review_seq.nextval} , #{userId}, LAUNDRY_SEQ.currval, #{reviewRate}, #{reviewContent}, systimestamp ,systimestamp)
+		insert into review values(review_seq.nextval , #{userId}, #{laundryId}, #{bookId}, #{reviewContent}, #{reviewRate}, systimestamp ,systimestamp)
 	</insert> 
 	
 	<!-- 리뷰 수정 -->
 	<update id = "modifyReview" parameterType="review">
 		update review set <!-- 수정 요소 : 리뷰내용 , 별점, 수정일-->
 		review_content = #{reviewContent}, review_Rate = #{reviewRate}, review_update_date = systimestamp
-		where review_id = #{review_seq.nextval}
+		where review_id = #{reviewId}
 	</update>
 	
 	<!-- 리뷰 삭제 -->
