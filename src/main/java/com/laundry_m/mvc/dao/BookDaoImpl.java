@@ -14,6 +14,7 @@ import util.DbUtil;
 
 public class BookDaoImpl implements BookDao {
 	private MetapayDao metapayDao = new MetapayDaoImpl();
+	private LaundryDao laundryDao = new LaundryDaoImpl();
 	
 	/**
 	 * 예약 등록: 예약 인서트
@@ -36,7 +37,7 @@ public class BookDaoImpl implements BookDao {
 			if (result == 1) state = true;
 			
 			// 트랜잭션이 필요한 경우 트랜잭션 메소드를 호출합니다.
-			for (BookLine bookLine : book.getBookLine()) {
+			for (BookLine bookLine : book.getBookLines()) {
 				int re = this.insertBookLine(session, bookLine);
 				throw new SQLException("예약에 오류가 발생했습니다.");
 			}
@@ -63,7 +64,7 @@ public class BookDaoImpl implements BookDao {
 	 * */
 	@Override
 	public int insertBookLine(SqlSession session, BookLine bookLine) throws SQLException {
-		int result = session.insert("bookMapper.insertBook");
+		int result = session.insert("bookMapper.insertBook", bookLine);
 		return result;
 	}
 	

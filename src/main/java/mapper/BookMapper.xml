@@ -12,7 +12,7 @@
 	<insert id="insertBookLine" parameterType="bookLine">
 		insert
 		into book_line
-		values(book_line_id_seq.nextval, #{bookId}, #{clothesId}, #{fabricId}, #{bookLineFee})
+		values(book_line_id_seq.nextval, book_id_seq.currval, #{clothesId}, #{fabricId}, #{bookLineFee})
 	</insert>
 	
 	<update id="updateBookComplete" parameterType="long">

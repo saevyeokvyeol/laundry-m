@@ -127,3 +127,4 @@ target/
 src/main/java/META-INF/persistence.xml
 src/main/resources/Wallet_laundrymDatabase/
 src/main/java/config/dbInfo.properties
+src/main/java/com/laundry_m/mvc/view/Test.java

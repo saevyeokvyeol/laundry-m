@@ -20,7 +20,7 @@ public class MenuView {
 					
 					break;
 				case 2 :
-					
+					customerMenu(); // 로그인 메소드 구현 후에는 지우고 로그인으로 대체해주세요.
 					break;
 				case 0 : 
 					MenuView.exit();

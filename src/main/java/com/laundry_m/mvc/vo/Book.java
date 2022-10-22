@@ -27,20 +27,21 @@ public class Book {
 	private Users users;
 	private Laundry laundry;
 	
-	private List<BookLine> bookLine;
+	private List<BookLine> bookLines;
 	private List<Review> review;
 	private List<Adjust> adjust;
 	
 	@Builder
-	public Book(Long bookId, Long laundryId, String userId, Long bookStateId, int bookCount, LocalDateTime bookInsertDate,
-			LocalDateTime bookUpdateDate, String bookMemo, int bookMethodId, Long bookTotalFee, Users users,
-			Laundry laundry, List<BookLine> bookLine, List<Review> review, List<Adjust> adjust) {
+	public Book(Long bookId, Long laundryId, String userId, Long bookStateId, int bookCount,
+			LocalDateTime bookInsertDate, LocalDateTime bookUpdateDate, String bookMemo, int bookMethodId,
+			Long bookTotalFee, Users users, Laundry laundry, List<BookLine> bookLines, List<Review> review,
+			List<Adjust> adjust) {
 		super();
 		this.bookId = bookId;
 		this.laundryId = laundryId;
 		this.userId = userId;
-		this.bookCount = bookCount;
 		this.bookStateId = bookStateId;
+		this.bookCount = bookCount;
 		this.bookInsertDate = bookInsertDate;
 		this.bookUpdateDate = bookUpdateDate;
 		this.bookMemo = bookMemo;
@@ -48,10 +49,9 @@ public class Book {
 		this.bookTotalFee = bookTotalFee;
 		this.users = users;
 		this.laundry = laundry;
-		this.bookLine = bookLine;
+		this.bookLines = bookLines;
 		this.review = review;
 		this.adjust = adjust;
 	}
-
-
+	
 }
