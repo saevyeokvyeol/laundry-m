@@ -1,6 +1,6 @@
 package com.laundry_m.mvc.vo;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.Builder;
@@ -18,24 +18,27 @@ public class Book {
 	private String userId;
 	private Long bookStateId;
 	private int bookCount;
-	private LocalDateTime bookInsertDate;
-	private LocalDateTime bookUpdateDate;
+	private Timestamp bookInsertDate;
+	private Timestamp bookUpdateDate;
 	private String bookMemo;
 	private int bookMethodId;
 	private Long bookTotalFee;
 	
 	private Users users;
 	private Laundry laundry;
+	private BookState bookState;
+	private Review review;
+	private Adjust adjust;
+	private BookMethod bookMethod;
 	
-	private List<BookLine> bookLines;
-	private List<Review> review;
-	private List<Adjust> adjust;
+	private List<BookLine> bookLine;
+
 	
 	@Builder
-	public Book(Long bookId, Long laundryId, String userId, Long bookStateId, int bookCount,
-			LocalDateTime bookInsertDate, LocalDateTime bookUpdateDate, String bookMemo, int bookMethodId,
-			Long bookTotalFee, Users users, Laundry laundry, List<BookLine> bookLines, List<Review> review,
-			List<Adjust> adjust) {
+	public Book(Long bookId, Long laundryId, String userId, Long bookStateId, int bookCount, Timestamp bookInsertDate,
+			Timestamp bookUpdateDate, String bookMemo, int bookMethodId, Long bookTotalFee, Users users,
+			Laundry laundry, BookState bookState, Review review, Adjust adjust, BookMethod bookMethod,
+			List<BookLine> bookLine) {
 		super();
 		this.bookId = bookId;
 		this.laundryId = laundryId;
@@ -49,9 +52,11 @@ public class Book {
 		this.bookTotalFee = bookTotalFee;
 		this.users = users;
 		this.laundry = laundry;
-		this.bookLines = bookLines;
+		this.bookState = bookState;
 		this.review = review;
 		this.adjust = adjust;
+		this.bookMethod = bookMethod;
+		this.bookLine = bookLine;
 	}
 	
 }

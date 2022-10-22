@@ -1,5 +1,7 @@
 package com.laundry_m.mvc.controller;
 
+import java.util.List;
+
 import com.laundry_m.mvc.service.BookService;
 import com.laundry_m.mvc.service.BookServiceImpl;
 import com.laundry_m.mvc.session.Session;
@@ -35,6 +37,22 @@ public class BookController {
 	public void updateBookComplete(Long bookId) {
 		try {
 			bookService.updateBookComplete(bookId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 유저 아이디로 예약 검색
+	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호 이상만 검색))
+	 * */
+	public void searchBookByUserId(Long bookStateId) {
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Book book = Book.builder().userId(users.getUserId()).bookStateId(bookStateId).build();
+			List<Book> books = bookService.searchBookByUserId(book);
+			SuccessView.printUserBook(books);
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

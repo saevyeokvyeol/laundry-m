@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.laundry_m.mvc.controller.BookController;
+import com.laundry_m.mvc.controller.MetapayController;
+import com.laundry_m.mvc.service.BookService;
 import com.laundry_m.mvc.vo.Book;
 import com.laundry_m.mvc.vo.BookLine;
 
 public class BookMenuView {
 	private static Scanner sc = new Scanner(System.in);
 	private static BookController bookController = new BookController();
+	private static MetapayController metapayController = new MetapayController();
 	
 	/**
 	 * 예약 폼 메뉴
@@ -45,15 +48,21 @@ public class BookMenuView {
 					bookTotalFee += bookLineFee;
 				}
 				System.out.println("\n" + bookCount + "벌 세탁 가격: " + bookCount + "원");
-				System.out.println("\n결제 수단을 선택해주세요.");
-				System.out.println("[ 1. 카드 | 2. 메타페이 | 3. 직접 결제 ]");
-				System.out.print("▶ ");
-				int bookMethodId = Integer.parseInt(sc.nextLine());
-				// 메타페이 가입자인지 검색
+				boolean pay = true;
+				int bookMethodId = 0;
+				while (pay) {
+					System.out.println("\n결제 수단을 선택해주세요.");
+					System.out.println("[ 1. 카드 | 2. 메타페이 | 3. 직접 결제 ]");
+					System.out.print("▶ ");
+					bookMethodId = Integer.parseInt(sc.nextLine());
+					// 메타페이 가입자인지 검색
+					if (bookMethodId == 2 && !metapayController.MetapayApplicable()) {
+						System.out.println("메타페이 가입자가 아닙니다.\n다른 결제 수단을 선택해주세요.");
+					} else {
+						pay = false;
+					}
+				}
 				
-				// 메타페이 가입자가 아니라면 메타페이 가입 Y/N
-				
-				// 
 				System.out.println("\n참고 사항이 있다면 입력해주세요.");
 				System.out.print("▶ ");
 				String bookMemo = sc.nextLine();

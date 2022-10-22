@@ -20,6 +20,7 @@
 		<typeAlias type="com.laundry_m.mvc.vo.Book" alias="book"/>
 		<typeAlias type="com.laundry_m.mvc.vo.BookLine" alias="bookLine"/>
 		<typeAlias type="com.laundry_m.mvc.vo.BookState" alias="bookState"/>
+		<typeAlias type="com.laundry_m.mvc.vo.BookMethod" alias="bookMethod"/>
 		<typeAlias type="com.laundry_m.mvc.vo.Clothes" alias="clothes"/>
 		<typeAlias type="com.laundry_m.mvc.vo.ExtraFee" alias="extraFee"/>
 		<typeAlias type="com.laundry_m.mvc.vo.Fabric" alias="fabric"/>
@@ -28,6 +29,10 @@
 		<typeAlias type="com.laundry_m.mvc.vo.Laundry" alias="laundry"/>
 		<typeAlias type="com.laundry_m.mvc.vo.Metapay" alias="metapay"/>
 		<typeAlias type="com.laundry_m.mvc.vo.PayAccount" alias="payAccount"/>
+		<typeAlias type="com.laundry_m.mvc.vo.PayCategory" alias="payCategory"/>
+		<typeAlias type="com.laundry_m.mvc.vo.PayLog" alias="PayLog"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Review" alias="review"/>
+		<typeAlias type="com.laundry_m.mvc.vo.Users" alias="users"/>
 	</typeAliases>
 	
 	<environments default="development">

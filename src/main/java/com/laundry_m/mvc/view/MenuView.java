@@ -2,8 +2,11 @@ package com.laundry_m.mvc.view;
 
 import java.util.Scanner;
 
+import com.laundry_m.mvc.controller.BookController;
+
 public class MenuView {
 	private static Scanner sc = new Scanner(System.in);
+	private static BookController bookController = new BookController();
 	
 	/**
 	 * 시작 메뉴
@@ -112,7 +115,50 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 진행 중인 예약 내역 | 2. 지난 이용 내역 | 3. 내 리뷰 관리 | 4. 내 정보 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 진행 중인 예약 내역 | 2. 지난 이용 내역 | 3. 내 리뷰 관리 | 4. 내 정보 수정 | 5. 메타페이 관리 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.print("▶ ");
+				int menu = Integer.parseInt(sc.nextLine());
+				switch(menu) {
+				case 1 :
+					bookController.searchBookByUserId(7L);
+					break;
+				case 2 :
+					bookController.searchBookByUserId(null);
+					break;
+				case 3 :
+					
+					break;
+				case 4 :
+					
+					break;
+				case 5 :
+					
+					break;
+				case 8 :
+					run = false;
+					break;
+				case 9 : 
+					
+					break;
+				case 0 : 
+					MenuView.exit();
+				default:
+					System.out.println("메뉴를 잘못 선택하셨습니다.");
+				}
+			} catch (Exception e) {
+				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+			}
+		}
+	}
+	
+	/**
+	 * 일반 회원 메타페이 메뉴
+	 * */
+	public static void customerMetapayMenu() {
+		boolean run = true;
+		while (run) {
+			try {
+				System.out.println("\n" + "[ 1. 내 메타페이 정보 보기 | 2. 최근 거래 내역 보기 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -120,6 +166,9 @@ public class MenuView {
 					
 					break;
 				case 2 :
+					
+					break;
+				case 3 :
 					
 					break;
 				case 8 :

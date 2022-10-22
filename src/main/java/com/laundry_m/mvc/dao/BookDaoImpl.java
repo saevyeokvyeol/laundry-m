@@ -37,7 +37,7 @@ public class BookDaoImpl implements BookDao {
 			if (result == 1) state = true;
 			
 			// 트랜잭션이 필요한 경우 트랜잭션 메소드를 호출합니다.
-			for (BookLine bookLine : book.getBookLines()) {
+			for (BookLine bookLine : book.getBookLine()) {
 				int re = this.insertBookLine(session, bookLine);
 				throw new SQLException("예약에 오류가 발생했습니다.");
 			}

@@ -3,10 +3,46 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="bookMapper">
+	<resultMap type="book" id="bookMap">
+		<id column="book_Id" property="bookId"/>
+		<result column="user_id" property="userId"/>
+		<result column="laundry_Id" property="laundryId"/>
+		<result column="book_State_Id" property="bookStateId"/>
+		<result column="book_Count" property="bookCount"/>
+		<result column="book_Insert_Date" property="bookInsertDate"/>
+		<result column="book_Update_Date" property="bookUpdateDate"/>
+		<result column="book_Memo" property="bookMemo"/>
+		<result column="book_Method_Id" property="bookMethodId"/>
+		<result column="book_Total_Fee" property="bookTotalFee"/>
+		
+		<association property="bookState" javaType="bookState">
+			<id column="book_state_id" property="bookStateId"/>
+			<result column="book_state_name" property="bookStateName"/>
+		</association>
+		
+		<association property="bookMethod" javaType="bookMethod">
+			<id column="book_method_id" property="bookMethodId"/>
+			<result column="book_method_name" property="bookMethodName"/>
+		</association>
+		
+		<association property="laundry" javaType="laundry">
+			<id column="laundry_id" property="laundryId"/>
+			<result column="laundry_name" property="laundryName"/>
+		</association>
+		
+		<collection property="bookLine" ofType="bookLine">
+			<id column="book_Line_Id" property="bookLineId"/>
+			<result column="book_Id" property="bookId"/>
+			<result column="clothes_Id" property="clothesId"/>
+			<result column="fabric_Id" property="fabricId"/>
+			<result column="book_Line_Fee" property="bookLineFee"/>
+		</collection>
+	</resultMap>
+
 	<insert id="insertBook" parameterType="book">
 		insert
 		into book
-		values(book_id_seq.nextval, #{laundryId}, #{userId}, systimestamp, #{bookMemo}, #{bookMethod}, #{bookTotalFee}, systimestamp)
+		values(book_id_seq.nextval, #{laundryId}, #{userId}, systimestamp, #{bookMemo}, #{bookMethodId}, #{bookTotalFee}, systimestamp)
 	</insert>
 	
 	<insert id="insertBookLine" parameterType="bookLine">
@@ -27,9 +63,37 @@
 		values(adjust_seq.nextval, #{laundryId}, #{bookId}, systimestamp)
 	</insert>
 	
-	<select id="searchBookByBookId" parameterType="long" resultType="book">
-		select *
-		from book
+	<select id="searchBookByUserId" parameterType="book" resultMap="bookMap">
+		select b.book_Id, b.user_id, b.book_Count, b.book_Insert_Date, b.book_Update_Date, b.book_Memo, b.book_Total_Fee,
+		    bs.book_state_id, bs.book_state_name,
+		    bm.book_method_id, bm.book_method_name,
+		    l.laundry_id, l.laundry_name,
+		    bl.book_line_id, bl.book_line_fee, bl.clothes_Id, bl.fabric_Id
+		from book b join book_state bs
+		on b.book_state_id = bs.book_state_id
+		join book_method bm
+		on bm.book_method_id = b.book_method_id
+		join laundry l
+		on l.laundry_id = b.laundry_id
+		join book_line bl
+		on b.book_id = bl.book_id
+		where b.user_id = #{userId}
+		<trim prefix="and">
+			<if test="bookStateId != null">
+				bs.book_state_id <![CDATA[<=]]> #{bookStateId}
+			</if>
+		</trim>
+		order by book_insert_date desc, book_line_id
+	</select>
+	
+	<select id="searchBookByBookId" parameterType="long" resultMap="bookMap">
+		select b.*, bs.book_state_name, bl.book_line_id, bl.book_line_fee, bl.clothes_id, bl.fabric_id, l.laundry_name
+		from book b join book_state bs
+		on b.book_state_id = bs.book_state_id
+		join book_line bl
+		on b.book_id = bl.book_id
+		join laundry l
+		on l.laundry_id = b.laundry_id
 		where book_id = #{_parameter}
 	</select>
 </mapper>
