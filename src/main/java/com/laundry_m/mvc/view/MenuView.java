@@ -132,7 +132,7 @@ public class MenuView {
 					
 					break;
 				case 5 :
-					
+					customerMetapayMenu();
 					break;
 				case 8 :
 					run = false;
@@ -413,12 +413,25 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 날짜로 예약 검색 | 2. 날짜별 예약 통계 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 전체 예약 검색 | 2. 날짜로 예약 검색 | 3. 날짜별 예약 통계 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					bookController.searchBookAll();
+					break;
+				case 2 :
+					System.out.println("\n" + "검색할 날짜를 입력해주세요. (ex.20221021)");
+					while (true) {
+						System.out.print("▶ ");
+						String date = sc.nextLine();
+						if (date.length() == 8 && Integer.parseInt(date) > 0) {
+							bookController.searchBookByDate(date);
+							break;
+						} else {
+							System.out.println("날짜는 YYYYMMDD 형식으로 입력해주세요.");
+						}
+					}
 					break;
 				case 8 :
 					run = false;

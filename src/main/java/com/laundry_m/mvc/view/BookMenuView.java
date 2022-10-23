@@ -72,7 +72,7 @@ public class BookMenuView {
 						.bookMemo(bookMemo)
 						.bookMethodId(bookMethodId)
 						.bookTotalFee(bookTotalFee)
-						.bookLines(bookLines).build();
+						.bookLine(bookLines).build();
 				
 				bookController.updateBookComplete(bookTotalFee);
 			} catch (Exception e) {

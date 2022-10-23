@@ -65,6 +65,13 @@ public interface BookService {
 	List<Book> searchBookAll() throws SQLException, NotLoginException, InvalidUserException;
 	
 	/**
+	 * 날짜로 예약 검색
+	 * @param: String date
+	 * @return: List<Book>
+	 * */
+	public List<Book> searchBookByDate(String date) throws SQLException;
+	
+	/**
 	 * 유저 아이디로 예약 검색
 	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
 	 * @return: List<Book>
@@ -77,7 +84,7 @@ public interface BookService {
 	
 	/**
 	 * 점포 아이디로 예약 검색
-	 * @param: Book book(점포 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
+	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
 	 * @return: List<Book>
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * 			   NotExistException(점포가 DB에 존재하지 않을 경우 오류)

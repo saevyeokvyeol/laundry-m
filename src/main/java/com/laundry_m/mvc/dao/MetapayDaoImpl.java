@@ -21,8 +21,19 @@ public class MetapayDaoImpl implements MetapayDao {
 	 * */
 	@Override
 	public int joinMetapay(Metapay metapay) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession session = null;
+		boolean state = false;
+		int result = 0;
+		try {
+			session = DbUtil.getSession();
+			result = session.insert("metapayMapper.joinMetapay", metapay);
+			int re = this.addMetapayAccount(session, metapay.getPayAccounts().get(0));
+			
+			if (result == 1 && re == 1) state = true;
+		} finally {
+			DbUtil.sessionClose(session, state);
+		}
+		return result;
 	}
 
 	/**
@@ -34,7 +45,7 @@ public class MetapayDaoImpl implements MetapayDao {
 	public int updateMetapayBalance(SqlSession session, String userId, Long amount) throws SQLException {
 		int result = 0;
 		
-		Map<String, Object> map = new HashMap();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
 		map.put("amount", amount);
 		result = session.insert("metapayMapper.insertBook", amount);
@@ -81,7 +92,7 @@ public class MetapayDaoImpl implements MetapayDao {
 				.payLogAmount(payLog.getPayLogAmount()).build();
 		
 		result = session.insert("metapayMapper.payMetapay", log);
-		if (this.updateMetapayBalance(session, userId, payLog.getPayLogAmount()) != 1)
+		if (this.updateMetapayBalance(session, userId, payLog.getPayLogAmount() * -1) != 1)
 			throw new SQLException("메타페이 결제에 오류가 발생했습니다.");
 
 		return result;
@@ -99,13 +110,27 @@ public class MetapayDaoImpl implements MetapayDao {
 
 	/**
 	 * 메타페이 계좌 연동
-	 * @param: String userId, PayAccount payAccount(은행 id, 계좌 번호)
+	 * @param: SqlSession session, PayAccount payAccount(메타페이 id, 은행 id, 계좌 번호)
 	 * @result: int(등록된 레코드 수)
 	 * */
 	@Override
-	public int addMetapayAccount(String userId, PayAccount payAccount) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addMetapayAccount(SqlSession session, PayAccount payAccount) throws SQLException {
+		boolean flag = false;
+		boolean state = false;
+		int result = 0;
+		
+		try {
+			if (session == null) {
+				session = DbUtil.getSession();
+				flag = true;
+			}
+			
+			result = session.insert("metapayMapper.addMetapayAccount", payAccount);
+			if (result == 1) state = true;
+		} finally {
+			if (flag) DbUtil.sessionClose(session, state);
+		}
+		return result;
 	}
 
 	/**

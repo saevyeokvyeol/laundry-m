@@ -3,6 +3,8 @@ package com.laundry_m.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.laundry_m.mvc.dao.MetapayDao;
+import com.laundry_m.mvc.dao.MetapayDaoImpl;
 import com.laundry_m.mvc.exception.DuplicationException;
 import com.laundry_m.mvc.exception.InsufficientBalanceException;
 import com.laundry_m.mvc.exception.NotExistException;
@@ -12,7 +14,8 @@ import com.laundry_m.mvc.vo.Metapay;
 import com.laundry_m.mvc.vo.PayAccount;
 import com.laundry_m.mvc.vo.PayLog;
 
-public interface MetapayService {
+public class MetapayServiceImpl implements MetapayService {
+	private MetapayDao metapayDao = new MetapayDaoImpl();
 	/**
 	 * 메타페이 가입
 	 * @param: Metapay metapay(사용자 ID, 메타페이 비밀번호, 메타페이 계좌(메타페이 번호, 은행 id, 계좌번호))
@@ -21,8 +24,13 @@ public interface MetapayService {
 	 * 			   NotExistException(로그인한 아이디나 은행 아이디가 DB에 존재하지 않을 경우 오류)
 	 * 			   NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * */
-	void joinMetapay(Metapay metapay) throws SQLException, DuplicationException, NotLoginException, NotExistException, NotFilledInException;
-	
+	@Override
+	public void joinMetapay(Metapay metapay)
+			throws SQLException, DuplicationException, NotLoginException, NotExistException, NotFilledInException {
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
 	 * 메타페이 충전
 	 * @param: String userId, PayLog payLog(메타페이 번호, 메타페이 거래 종류, 계좌ID, 거래 금액)
@@ -30,8 +38,13 @@ public interface MetapayService {
 	 * 			   NotExistException(메타페이 아이디나 계좌 아이디가 DB에 존재하지 않을 경우 오류)
 	 * 			   NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * */
-	void chargeMetapay(String userId, PayLog payLog) throws SQLException, NotLoginException, NotExistException, NotFilledInException;
-	
+	@Override
+	public void chargeMetapay(String userId, PayLog payLog)
+			throws SQLException, NotLoginException, NotExistException, NotFilledInException {
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
 	 * 메타페이 인출
 	 * @param: String userId, PayLog payLog(메타페이 번호, 메타페이 거래 종류, 계좌ID, 거래 금액)
@@ -40,8 +53,13 @@ public interface MetapayService {
 	 * 			   InsufficientBalanceException(메타페이 잔액이 거래 금액보다 클 경우 경우 오류)
 	 * 			   NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * */
-	void withdrawMetapay(String userId, PayLog payLog) throws SQLException, NotLoginException, NotExistException, InsufficientBalanceException, NotFilledInException;
-	
+	@Override
+	public void withdrawMetapay(String userId, PayLog payLog) throws SQLException, NotLoginException, NotExistException,
+			InsufficientBalanceException, NotFilledInException {
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
 	 * 메타페이 계좌 연동
 	 * @param: String userId, PayAccount payAccount(은행 id, 계좌 번호)
@@ -49,31 +67,46 @@ public interface MetapayService {
 	 * 			   NotExistException(회원 아이디나 은행 아이디가 DB에 존재하지 않을 경우 오류)
 	 * 			   NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * */
-	void addMetapayAccount(String userId, PayAccount payAccount) throws SQLException, NotLoginException, NotExistException, NotFilledInException;
-	
+	@Override
+	public void addMetapayAccount(String userId, PayAccount payAccount)
+			throws SQLException, NotLoginException, NotExistException, NotFilledInException {
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
 	 * 메타페이 계좌 연동 해지
 	 * @param: Long payAccountId
 	 * @exception: NotLoginException(로그인하지 않고 메타페이 계좌 연동을 해지할 경우 오류)
 	 * 			   NotExistException(계좌 아이디가 DB에 존재하지 않을 경우 오류)
 	 * */
-	void deleteMetapayAccount(Long payAccountId) throws SQLException, NotLoginException, NotExistException;
-	
+	@Override
+	public void deleteMetapayAccount(Long payAccountId) throws SQLException, NotLoginException, NotExistException {
+		// TODO Auto-generated method stub
+
+	}
+
 	/**
 	 * 전체 메타페이 검색
 	 * @return: List<Metapay>
 	 * */
-	List<Metapay> searchMetapayAll() throws SQLException;
-	
+	@Override
+	public List<Metapay> searchMetapayAll() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * 아이디로 메타페이 검색
 	 * @param: String userId
 	 * @exception: NotLoginException(로그인하지 않고 메타페이를 검색할 경우 오류)
 	 * 			   NotExistException(회원 아이디가 DB에 존재하지 않을 경우 오류)
 	 * */
-	Metapay searchMetapayByUserId(String userId) throws SQLException, NotLoginException, NotExistException;
-	
-	/**
-	 * 전체 메타페이 거래 내역 검색
-	 * */
+	@Override
+	public Metapay searchMetapayByUserId(String userId) throws SQLException, NotLoginException, NotExistException {
+		Metapay metapay = metapayDao.selectMetapayByUserId(userId);
+		if (metapay == null) throw new NotExistException("메타페이 가입자가 아닙니다.");
+		return metapay;
+	}
+
 }

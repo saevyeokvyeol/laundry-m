@@ -9,6 +9,8 @@ import com.laundry_m.mvc.vo.Adjust;
 import com.laundry_m.mvc.vo.Book;
 import com.laundry_m.mvc.vo.BookLine;
 
+import util.DbUtil;
+
 public interface BookDao {
 	/**
 	 * 예약 등록: 예약 인서트
@@ -57,6 +59,13 @@ public interface BookDao {
 	 * @return: List<Book>
 	 * */
 	List<Book> searchBookAll() throws SQLException;
+	
+	/**
+	 * 날짜로 예약 검색
+	 * @param: String date
+	 * @return: List<Book>
+	 * */
+	public List<Book> searchBookByDate(String date) throws SQLException;
 	
 	/**
 	 * 유저 아이디로 예약 검색

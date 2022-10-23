@@ -7,17 +7,21 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.laundry_m.mvc.dao.BookDao;
 import com.laundry_m.mvc.dao.BookDaoImpl;
+import com.laundry_m.mvc.dao.LaundryDao;
+import com.laundry_m.mvc.dao.LaundryDaoImpl;
 import com.laundry_m.mvc.exception.InsufficientBalanceException;
 import com.laundry_m.mvc.exception.InvalidUserException;
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
 import com.laundry_m.mvc.vo.Book;
+import com.laundry_m.mvc.vo.Laundry;
 
 import util.DbUtil;
 
 public class BookServiceImpl implements BookService {
 	private BookDao bookDao = new BookDaoImpl();
+	private LaundryDao laundryDao = new LaundryDaoImpl();
 	/**
 	 * 예약 등록
 	 * 1. 예약을 인서트한다.
@@ -91,15 +95,17 @@ public class BookServiceImpl implements BookService {
 	 * */
 	@Override
 	public List<Book> searchBookAll() throws SQLException, NotLoginException, InvalidUserException {
-		SqlSession session = null;
-		List<Book> books = null;
-		try {
-			session = DbUtil.getSession();
-			books = session.selectList("bookMapper.searchBookAll");
-		} finally {
-			DbUtil.sessionClose(session);
-		}
-		return books;
+		return bookDao.searchBookAll();
+	}
+	
+	/**
+	 * 날짜로 예약 검색
+	 * @param: String date
+	 * @return: List<Book>
+	 * */
+	@Override
+	public List<Book> searchBookByDate(String date) throws SQLException {
+		return bookDao.searchBookByDate(date);
 	}
 	
 	/**
@@ -120,7 +126,7 @@ public class BookServiceImpl implements BookService {
 	
 	/**
 	 * 점포 아이디로 예약 검색
-	 * @param: Book book(점포 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
+	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
 	 * @return: List<Book>
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * 			   NotExistException(점포가 DB에 존재하지 않을 경우 오류)
@@ -130,6 +136,8 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<Book> searchBookByLaundryId(Book book)
 			throws SQLException, NotLoginException, NotExistException, InvalidUserException {
+//		Laundry laundry = laundryDao.sele
+		
 		List<Book> books = bookDao.searchBookByLaundryId(book);
 		return books;
 	}

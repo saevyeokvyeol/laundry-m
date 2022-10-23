@@ -167,6 +167,23 @@ public class BookDaoImpl implements BookDao {
 	}
 	
 	/**
+	 * 날짜로 예약 검색
+	 * @return: List<Book>
+	 * */
+	@Override
+	public List<Book> searchBookByDate(String date) throws SQLException {
+		SqlSession session = null;
+		List<Book> books = null;
+		try {
+			session = DbUtil.getSession();
+			books = session.selectList("bookMapper.searchBookByDate", date);
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		return books;
+	}
+	
+	/**
 	 * 유저 아이디로 예약 검색
 	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
 	 * @return: List<Book>

@@ -63,6 +63,41 @@
 		values(adjust_seq.nextval, #{laundryId}, #{bookId}, systimestamp)
 	</insert>
 	
+	<select id="searchBookAll" resultMap="bookMap">
+		select b.book_Id, b.user_id, b.book_Count, b.book_Insert_Date, b.book_Update_Date, b.book_Memo, b.book_Total_Fee,
+		    bs.book_state_id, bs.book_state_name,
+		    bm.book_method_id, bm.book_method_name,
+		    l.laundry_id, l.laundry_name,
+		    bl.book_line_id, bl.book_line_fee, bl.clothes_Id, bl.fabric_Id
+		from book b join book_state bs
+		on b.book_state_id = bs.book_state_id
+		join book_method bm
+		on bm.book_method_id = b.book_method_id
+		join laundry l
+		on l.laundry_id = b.laundry_id
+		join book_line bl
+		on b.book_id = bl.book_id
+		order by book_insert_date desc
+	</select>
+	
+	<select id="searchBookByDate" parameterType="string" resultMap="bookMap">
+		select b.book_Id, b.user_id, b.book_Count, b.book_Insert_Date, b.book_Update_Date, b.book_Memo, b.book_Total_Fee,
+		    bs.book_state_id, bs.book_state_name,
+		    bm.book_method_id, bm.book_method_name,
+		    l.laundry_id, l.laundry_name,
+		    bl.book_line_id, bl.book_line_fee, bl.clothes_Id, bl.fabric_Id
+		from book b join book_state bs
+		on b.book_state_id = bs.book_state_id
+		join book_method bm
+		on bm.book_method_id = b.book_method_id
+		join laundry l
+		on l.laundry_id = b.laundry_id
+		join book_line bl
+		on b.book_id = bl.book_id
+		where to_char(book_insert_date, 'YYYYMMDD') = #{_parameter}
+		order by book_insert_date desc
+	</select>
+	
 	<select id="searchBookByUserId" parameterType="book" resultMap="bookMap">
 		select b.book_Id, b.user_id, b.book_Count, b.book_Insert_Date, b.book_Update_Date, b.book_Memo, b.book_Total_Fee,
 		    bs.book_state_id, bs.book_state_name,
@@ -83,7 +118,30 @@
 				bs.book_state_id <![CDATA[<=]]> #{bookStateId}
 			</if>
 		</trim>
-		order by book_insert_date desc, book_line_id
+		order by book_insert_date desc
+	</select>
+	
+	<select id="searchBookByLaundryId" parameterType="book" resultMap="bookMap">
+		select b.book_Id, b.user_id, b.book_Count, b.book_Insert_Date, b.book_Update_Date, b.book_Memo, b.book_Total_Fee,
+		    bs.book_state_id, bs.book_state_name,
+		    bm.book_method_id, bm.book_method_name,
+		    l.laundry_id, l.laundry_name,
+		    bl.book_line_id, bl.book_line_fee, bl.clothes_Id, bl.fabric_Id
+		from book b join book_state bs
+		on b.book_state_id = bs.book_state_id
+		join book_method bm
+		on bm.book_method_id = b.book_method_id
+		join laundry l
+		on l.laundry_id = b.laundry_id
+		join book_line bl
+		on b.book_id = bl.book_id
+		where b.laundry_id = #{laundryId}
+		<trim prefix="and">
+			<if test="bookStateId != null">
+				bs.book_state_id <![CDATA[<=]]> #{bookStateId}
+			</if>
+		</trim>
+		order by book_insert_date desc
 	</select>
 	
 	<select id="searchBookByBookId" parameterType="long" resultMap="bookMap">

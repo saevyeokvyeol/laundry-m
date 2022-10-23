@@ -1,7 +1,11 @@
 package com.laundry_m.mvc.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import com.laundry_m.mvc.exception.InvalidUserException;
+import com.laundry_m.mvc.exception.NotExistException;
+import com.laundry_m.mvc.exception.NotLoginException;
 import com.laundry_m.mvc.service.BookService;
 import com.laundry_m.mvc.service.BookServiceImpl;
 import com.laundry_m.mvc.session.Session;
@@ -44,6 +48,32 @@ public class BookController {
 	}
 	
 	/**
+	 * 전체 예약 검색
+	 * */
+	public void searchBookAll() {
+		try {
+			List<Book> books = bookService.searchBookAll();
+			SuccessView.printUserBook(books);
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 전체 예약 검색
+	 * */
+	public void searchBookByDate(String date) {
+		try {
+			List<Book> books = bookService.searchBookByDate(date);
+			SuccessView.printUserBook(books);
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	/**
 	 * 유저 아이디로 예약 검색
 	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호 이상만 검색))
 	 * */
@@ -52,6 +82,22 @@ public class BookController {
 			Users users = (Users)session.getAttribute("loginUser");
 			Book book = Book.builder().userId(users.getUserId()).bookStateId(bookStateId).build();
 			List<Book> books = bookService.searchBookByUserId(book);
+			SuccessView.printUserBook(books);
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 점포 아이디로 예약 검색
+	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호 이상만 검색))
+	 * */
+	public void searchBookByLaundryId(Long bookStateId) {
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Book book = Book.builder().userId(users.getUserId()).bookStateId(bookStateId).build();
+			List<Book> books = bookService.searchBookByLaundryId(book);
 			SuccessView.printUserBook(books);
 		} catch (Exception e) {
 			e.printStackTrace();

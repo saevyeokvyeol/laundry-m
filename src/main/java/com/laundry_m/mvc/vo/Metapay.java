@@ -1,7 +1,7 @@
 package com.laundry_m.mvc.vo;
 
 import java.time.LocalDateTime;
-
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -20,10 +20,11 @@ public class Metapay {
 	private LocalDateTime metapayUpdateDate;
 	
 	private Users user;
+	private List<PayAccount> payAccounts;
 	
 	@Builder
 	public Metapay(Long metapayId, String userId, String metapayBalance, String metapayPassword,
-			LocalDateTime metapayDate, LocalDateTime metapayUpdateDate, Users user) {
+			LocalDateTime metapayDate, LocalDateTime metapayUpdateDate, Users user, List<PayAccount> payAccounts) {
 		super();
 		this.metapayId = metapayId;
 		this.userId = userId;
@@ -32,5 +33,6 @@ public class Metapay {
 		this.metapayDate = metapayDate;
 		this.metapayUpdateDate = metapayUpdateDate;
 		this.user = user;
+		this.payAccounts = payAccounts;
 	}
 }

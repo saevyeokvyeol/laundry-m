@@ -53,10 +53,10 @@ public interface MetapayDao {
 	
 	/**
 	 * 메타페이 계좌 연동
-	 * @param: String userId, PayAccount payAccount(은행 id, 계좌 번호)
+	 * @param: SqlSession session, PayAccount payAccount(메타페이 id, 은행 id, 계좌 번호)
 	 * @result: int(등록된 레코드 수)
 	 * */
-	int addMetapayAccount(String userId, PayAccount payAccount) throws SQLException;
+	int addMetapayAccount(SqlSession session, PayAccount payAccount) throws SQLException;
 	
 	/**
 	 * 메타페이 계좌 연동 해지
