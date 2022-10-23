@@ -1,5 +1,6 @@
 package com.laundry_m.mvc.vo;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,15 +17,15 @@ public class Metapay {
 	private String userId;
 	private String metapayBalance;
 	private String metapayPassword;
-	private LocalDateTime metapayDate;
-	private LocalDateTime metapayUpdateDate;
+	private Timestamp metapayDate;
+	private Timestamp metapayUpdateDate;
 	
 	private Users user;
 	private List<PayAccount> payAccounts;
 	
 	@Builder
 	public Metapay(Long metapayId, String userId, String metapayBalance, String metapayPassword,
-			LocalDateTime metapayDate, LocalDateTime metapayUpdateDate, Users user, List<PayAccount> payAccounts) {
+			Timestamp metapayDate, Timestamp metapayUpdateDate, Users user, List<PayAccount> payAccounts) {
 		super();
 		this.metapayId = metapayId;
 		this.userId = userId;

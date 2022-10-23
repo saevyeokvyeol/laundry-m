@@ -1,5 +1,6 @@
 package com.laundry_m.mvc.vo;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 
@@ -16,7 +17,7 @@ public class PayLog {
 	private int payCategoryId;
 	private Long payAccountId;
 	private Long payLogAmount;
-	private LocalDateTime payLogInsertDate;
+	private Timestamp payLogInsertDate;
 	private Long laundryId;
 	private Metapay metapay;
 	private PayCategory payCategory;
@@ -24,7 +25,7 @@ public class PayLog {
 	
 	@Builder
 	public PayLog(Long payLogId, Long metapayId, int payCategoryId, Long payAccountId, Long laundryId,
-			Long payLogAmount, LocalDateTime payLogInsertDate, Metapay metapay, PayCategory payCategory,
+			Long payLogAmount, Timestamp payLogInsertDate, Metapay metapay, PayCategory payCategory,
 			PayAccount payAccount) {
 		super();
 		this.payLogId = payLogId;
