@@ -15,12 +15,12 @@ public class Users {
 	private String userType;
 	private String userAddress;
 	private String userState;
-	private Long userLatitude;
-	private Long userLongitude;
+	private double userLatitude;
+	private double userLongitude;
 	
 	@Builder
 	public Users(String userId, String userPwd, String userName, String userPhone, String userType, String userAddress,
-			String userState, Long userLatitude, Long userLongitude) {
+			String userState, double userLatitude, double userLongitude) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;

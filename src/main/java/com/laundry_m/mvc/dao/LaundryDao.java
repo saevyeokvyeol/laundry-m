@@ -8,6 +8,7 @@ import com.laundry_m.mvc.vo.ExtraFee;
 import com.laundry_m.mvc.vo.Fabric;
 import com.laundry_m.mvc.vo.Fee;
 import com.laundry_m.mvc.vo.Laundry;
+import com.laundry_m.mvc.vo.Users;
 
 public interface LaundryDao {
 	/** 
@@ -100,4 +101,14 @@ public interface LaundryDao {
 	 * */
 	int clothesfabricFee(Long laundryId,Long clothesId, Long fabricId) throws SQLException;
 	
+	/**
+	 * 세탁소 아이디로 찾기
+	 * */
+	List<Laundry> selectByLaundryId(String LaundryId) throws SQLException;
+	
+	/**
+	 * 회원 주소 - 세탁소 주소 사이 거리 구하기
+	 * */
+	double userBetweenLaun(Users users, Laundry laundry) throws SQLException;
+
 }

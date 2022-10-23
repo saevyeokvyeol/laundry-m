@@ -18,8 +18,8 @@ public class Laundry {
 	private String laundryAddress;
 	private int laundryDeliveryFee;
 	private String laundryAccountNumber;
-	private Long laundryLatitude;
-	private Long laundryLongitude;
+	private double laundryLatitude;
+	private double laundryLongitude;
 	
 	private Users user;
 	private List<Book> book;
@@ -30,7 +30,7 @@ public class Laundry {
 	
 	@Builder
 	public Laundry(Long laundryId, String userId, String laundryName, String laundryTel, String laundryAddress,
-			int laundryDeliveryFee, String laundryAccountNumber, Long laundryLatitude, Long laundryLongitude, Users user,
+			int laundryDeliveryFee, String laundryAccountNumber, double laundryLatitude, double laundryLongitude, Users user,
 			List<Book> book, List<Fee> fee, List<ExtraFee> extraFee, List<Adjust> adjust, List<Favorite> favorite) {
 		super();
 		this.laundryId = laundryId;

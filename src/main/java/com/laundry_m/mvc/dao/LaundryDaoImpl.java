@@ -10,6 +10,7 @@ import com.laundry_m.mvc.vo.ExtraFee;
 import com.laundry_m.mvc.vo.Fabric;
 import com.laundry_m.mvc.vo.Fee;
 import com.laundry_m.mvc.vo.Laundry;
+import com.laundry_m.mvc.vo.Users;
 
 import util.DbUtil;
 
@@ -258,5 +259,52 @@ public class LaundryDaoImpl implements LaundryDao {
 		
 		return totalFee;
 	}
+
+	@Override
+	public List<Laundry> selectByLaundryId(String LaundryId) throws SQLException {
+		SqlSession session = null;
+		List<Laundry> laundries = null;
+		
+		try {
+			session = DbUtil.getSession();
+			laundries = session.selectList("laundryMapper.selectByLaundryId");
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		
+		return laundries;
+	}
+
+	@Override
+	public double userBetweenLaun(Users users, Laundry laundry) throws SQLException {
+		
+		//회원의 위도, 경도 구한다
+		double userLatit =  users.getUserLatitude(); //위도
+		double userLong = users.getUserLongitude(); //경도
+		
+		//세탁소의 위도, 경도 구한다
+		double laundryLatit = laundry.getLaundryLatitude(); //위도
+		double laundryLong = laundry.getLaundryLongitude(); //경도
+		
+		//경도 - 경도
+		double theta = userLong - laundryLong;
+        double dist = Math.sin(deg2rad(userLatit))* Math.sin(deg2rad(laundryLatit)) 
+        			+ Math.cos(deg2rad(userLatit)) * Math.cos(deg2rad(laundryLatit))*Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60*1.1515*1609.344;
+
+        return dist; //단위 meter
+		
+	}
+	
+	//10진수를 radian(라디안)으로 변환
+    private static double deg2rad(double deg){
+        return (deg * Math.PI/180.0);
+    }
+    //radian(라디안)을 10진수로 변환
+    private static double rad2deg(double rad){
+        return (rad * 180 / Math.PI);
+    }
 
 }
