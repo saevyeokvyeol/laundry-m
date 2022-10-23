@@ -15,8 +15,8 @@ public class Users {
 	private String userType;
 	private String userAddress;
 	private String userState;
-	private double userLatitude;
-	private double userLongitude;
+	private Double userLatitude;
+	private Double userLongitude;
 	
 	@Builder
 	public Users(String userId, String userPwd, String userName, String userPhone, String userType, String userAddress,

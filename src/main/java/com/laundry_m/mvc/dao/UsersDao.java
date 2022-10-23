@@ -21,6 +21,7 @@ public interface UsersDao {
 	 * */
 	int updateUser(Users users) throws SQLException;
 
+
 	/** 
 	 * 로그인
 	 * @param : User user(회원 아이디, 비밀번호)
