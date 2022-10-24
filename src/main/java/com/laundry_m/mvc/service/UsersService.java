@@ -27,7 +27,7 @@ public interface UsersService {
 	 * @return : User user
 	 * @exception : NotExistException(아이디 DB에 존재하지 않을 경우 오류)
 	 *  */
-	void loginUser(String userId, String userPwd) throws SQLException, NotExistException;
+	public Users loginUser(Users users) throws SQLException, NotExistException;
 	
 	/**
 	 * 회원 정보 수정 

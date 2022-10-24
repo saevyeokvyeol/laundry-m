@@ -3,7 +3,13 @@ package com.laundry_m.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.laundry_m.mvc.vo.BookLine;
+import com.laundry_m.mvc.vo.PayLog;
 import com.laundry_m.mvc.vo.Users;
+
+import util.DbUtil;
 
 public class UsersDaoImpl implements UsersDao{
 
@@ -19,10 +25,24 @@ public class UsersDaoImpl implements UsersDao{
 		return 0;
 	}
 
+
+	/** 
+	 * 로그인
+	 * @param : User user
+	 * @return : User user
+	 * */
 	@Override
-	public Users loginUser(String userId, String userPwd) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public Users loginUser(Users users) throws SQLException {
+		SqlSession session = null;
+		Users loginUser = null;
+		try {
+			session = DbUtil.getSession();
+			// id pw 일치하면
+			loginUser = session.selectOne("usersMapper.loginUser", users);
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		return loginUser;
 	}
 
 	@Override

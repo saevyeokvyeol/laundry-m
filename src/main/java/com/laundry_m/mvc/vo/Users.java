@@ -33,4 +33,5 @@ public class Users {
 		this.userLongitude = userLongitude;
 	}
 	
+	
 }
