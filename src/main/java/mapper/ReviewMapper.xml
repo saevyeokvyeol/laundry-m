@@ -6,7 +6,7 @@
 
 	<!-- 리뷰 작성 -->
 	<insert id ="createReview" parameterType="review">
-		insert into review values(review_seq.nextval, #{userId}, #{laundryId}, #{bookId}, #{reviewContent}, #{reviewRate}, systimestamp ,systimestamp)
+		INSERT INTO REVIEW	VALUES(review_seq.nextval, #{userId}, (select laundry_id from review where book_id = #{bookId}), #{bookId}, #{reviewContent}, #{reviewRate}, systimestamp ,systimestamp)
 	</insert> 
 	
 	<!-- 리뷰 수정 -->

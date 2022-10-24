@@ -21,6 +21,7 @@ public class ReviewMenuView {
 		while (run) {
 			try {
 				System.out.println("리뷰 작성할 예약번호를 입력해주세요");
+				System.out.println(" 주문번호 | 아이디 | 수량 | 총금액 | 결제방법 | 주문시간 | 주문상태 | 메모 ");
 				System.out.print("▶ ");
 				System.out.println();
 				bookController.searchBookByUserId(10L, 10L); //수정
@@ -43,6 +44,7 @@ public class ReviewMenuView {
 						.reviewContent(content).build();
 				
 				reviewController.createReview(reviews);
+				System.out.println();
 				break;
 			} catch (Exception e) {
 				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
