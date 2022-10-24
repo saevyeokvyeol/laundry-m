@@ -190,7 +190,7 @@ public class LaundryController {
 	/**
 	 * 세탁소 아이디로 찾기
 	 * */
-	public void selectByLaundryId(String userId) {
+	public void selectByUserId(String userId) {
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
