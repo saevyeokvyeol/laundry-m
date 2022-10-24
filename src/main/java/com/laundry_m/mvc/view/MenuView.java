@@ -7,8 +7,6 @@ import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.controller.UsersController;
 import com.laundry_m.mvc.controller.ReviewController;
 
-import com.laundry_m.mvc.vo.Users;
-
 public class MenuView {
 	private static Scanner sc = new Scanner(System.in);
 	private static BookController bookController = new BookController();
