@@ -76,14 +76,14 @@ public class MetapayServiceImpl implements MetapayService {
 
 	/**
 	 * 메타페이 계좌 연동 해지
-	 * @param: Long payAccountId
+	 * @param: PayAccount payAcount
 	 * @exception: NotLoginException(로그인하지 않고 메타페이 계좌 연동을 해지할 경우 오류)
 	 * 			   NotExistException(계좌 아이디가 DB에 존재하지 않을 경우 오류)
 	 * */
 	@Override
-	public void deleteMetapayAccount(Long payAccountId) throws SQLException, NotLoginException, NotExistException {
-		// TODO Auto-generated method stub
-
+	public void deleteMetapayAccount(PayAccount payAcount) throws SQLException, NotLoginException, NotExistException {
+		int result = metapayDao.deleteMetapayAccount(payAcount);
+		if (result != 1) throw new NotExistException("계좌 연동을 해지할 수 없습니다.");
 	}
 
 	/**

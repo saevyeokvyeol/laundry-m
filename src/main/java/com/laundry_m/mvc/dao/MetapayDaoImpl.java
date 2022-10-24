@@ -135,15 +135,25 @@ public class MetapayDaoImpl implements MetapayDao {
 
 	/**
 	 * 메타페이 계좌 연동 해지
-	 * @param: Long payAccountId
+	 * @param: PayAccount payAcount
 	 * @result: int(등록된 레코드 수)
 	 * */
 	@Override
-	public int deleteMetapayAccount(Long payAccountId) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteMetapayAccount(PayAccount payAcount) throws SQLException {
+		SqlSession session = null;
+		int result = 0;
+		boolean state = false;
+		
+		try {
+			session = DbUtil.getSession();
+			result = session.update("metapayMapper.deleteMetapayAccount", payAcount);
+			if (result == 1) state = true;
+		} finally {
+			DbUtil.sessionClose(session, state);
+		}
+		
+		return result;
 	}
-
 	
 	/**
 	 * 아이디로 메타페이 검색

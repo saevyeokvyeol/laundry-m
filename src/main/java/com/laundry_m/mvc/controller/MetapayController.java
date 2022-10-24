@@ -5,6 +5,7 @@ import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
 import com.laundry_m.mvc.vo.Metapay;
+import com.laundry_m.mvc.vo.PayAccount;
 import com.laundry_m.mvc.vo.Users;
 
 public class MetapayController {
@@ -23,10 +24,47 @@ public class MetapayController {
 		}
 	}
 	
+	public Metapay metapayCheck() {
+		Metapay metapay = null;
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			metapay = metapayService.searchMetapayByUserId(users.getUserId());
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		return metapay;
+	}
+	
 	public void searchMetapayByUserId() {
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
-			metapayService.searchMetapayByUserId(users.getUserId());
+			Metapay metapay = metapayService.searchMetapayByUserId(users.getUserId());
+			SuccessView.printMetapay(metapay);
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	public void searchPayAccountByUserId() {
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Metapay metapay = metapayService.searchMetapayByUserId(users.getUserId());
+			SuccessView.printPayAccount(metapay.getPayAccounts());
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	public void deleteMetapayAccount(Long payAccountId) {
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Metapay metapay = metapayService.searchMetapayByUserId(users.getUserId());
+			PayAccount payAccount = PayAccount.builder().metapayId(metapay.getMetapayId())
+					.payAccountId(payAccountId).build();
+			metapayService.deleteMetapayAccount(payAccount);
+			SuccessView.printMessage("계좌 번호 " + payAccountId + "가 정상적으로 연결 해지되었습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

@@ -60,10 +60,10 @@ public interface MetapayDao {
 	
 	/**
 	 * 메타페이 계좌 연동 해지
-	 * @param: Long payAccountId
+	 * @param: PayAccount payAcount
 	 * @result: int(등록된 레코드 수)
 	 * */
-	int deleteMetapayAccount(Long payAccountId) throws SQLException;
+	int deleteMetapayAccount(PayAccount payAcount) throws SQLException;
 	
 	/**
 	 * 아이디로 메타페이 검색

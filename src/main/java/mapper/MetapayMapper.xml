@@ -3,6 +3,23 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="metapayMapper">
+	<resultMap type="metapay" id="metapayMap">
+		<id column="metapay_id" property="metapayId"/>
+		<result column="user_id" property="userId"/>
+		<result column="metapay_Balance" property="metapayBalance"/>
+		<result column="metapay_Password" property="metapayPassword"/>
+		<result column="metapay_Date" property="metapayDate"/>
+		<result column="metapay_Update_Date" property="metapayUpdateDate"/>
+		
+		<collection property="payAccounts" ofType="payAccount">
+			<id column="payAccountId" property="payAccountId"/>
+			<result column="metapay_id" property="metapayId"/>
+			<result column="bankId" property="bankId"/>
+			<result column="payAccountNumber" property="payAccountNumber"/>
+			<result column="payAccountQuitState" property="payAccountQuitState"/>
+		</collection>
+	</resultMap>
+
 	<update id="updateMetapayBalance" parameterType="map">
 		update metapay
 		set metapay_balance = metapay_balance + #{amount}
@@ -14,7 +31,18 @@
 		values(pay_log_id_seq.nextval, #{metapayId}, #{payCategoryId}, null, #{payLogAmount}, systimestamp)
 	</insert>
 	
-	<select id="selectMetapayByUserId" parameterType="string" resultType="metapay">
-		select * from metapay where user_id = #{_parameter}
+	<update id="deleteMetapayAccount" parameterType="payAccount">
+		update pay_account
+		set pay_account_quit_sate = 'T'
+		where metapay_id = #{metapayId} and pay_account_id = #{payAccountId}
+	</update>
+	
+	<select id="selectMetapayByUserId" parameterType="string" resultType="metapayMap">
+		select m.*, p.pay_account_id, p.bank_id, p.pay_account_number, p.pay_account_quit_state
+		from metapay m join pay_account p
+		on m.metapay_id = p.metapay_id
+		where user_id = #{_parameter} and p.pay_account_quit_state = 'F'
 	</select>
+	
+	<select id="se"></select>
 </mapper>

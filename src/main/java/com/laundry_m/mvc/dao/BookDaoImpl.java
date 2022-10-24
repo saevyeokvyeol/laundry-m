@@ -39,13 +39,19 @@ public class BookDaoImpl implements BookDao {
 			// 트랜잭션이 필요한 경우 트랜잭션 메소드를 호출합니다.
 			for (BookLine bookLine : book.getBookLine()) {
 				int re = this.insertBookLine(session, bookLine);
-				throw new SQLException("예약에 오류가 발생했습니다.");
+				if (re != 1 || !state) {
+					state = false;
+					throw new SQLException("예약에 오류가 발생했습니다.");
+				}
 			}
 			
 			if (book.getBookMethodId() == 2) {
 				PayLog payLog = PayLog.builder().laundryId(book.getLaundryId()).build();
 				int re = metapayDao.payMetapay(session, book.getUserId(), payLog);
-				throw new SQLException("메타페이 결제에 오류가 발생했습니다.");
+				if (re != 1 || !state) {
+					state = false;
+					throw new SQLException("메타페이 결제에 오류가 발생했습니다.");
+				}
 			}
 		} finally {
 			// 세션을 닫습니다.

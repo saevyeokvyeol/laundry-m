@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.laundry_m.mvc.vo.Book;
 import com.laundry_m.mvc.vo.BookLine;
+import com.laundry_m.mvc.vo.Metapay;
+import com.laundry_m.mvc.vo.PayAccount;
 
 public class SuccessView {
 	private static DecimalFormat won = new DecimalFormat("#,###");
@@ -22,8 +24,33 @@ public class SuccessView {
 	private static String getDate(Timestamp timestamp) {
 		return timestamp.toLocaleString();
 	}
+	
+	private static String getAccountNumber(String accountNumber) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(accountNumber);
+		buffer.insert(4, "-");
+		buffer.insert(8, "-");
+		return buffer.toString();
+	}
+	
 	public static void printMessage(String message) {
 		System.out.println(message);
+	}
+	
+	public static void printMetapay(Metapay metapay) {
+		System.out.println("< " + metapay.getUserId() + " 님의 메타페이 가입 정보 >");
+		System.out.println("현재 잔액: " + won.format(metapay.getMetapayBalance()));
+		System.out.println("가입일: " + getDate(metapay.getMetapayDate()));
+		
+		System.out.println("< 연결된 계좌 목록: " + metapay.getPayAccounts().size() + "개 >");
+		printPayAccount(metapay.getPayAccounts());
+	}
+	
+	public static void printPayAccount(List<PayAccount> payAccounts) {
+		String[] bank = {"", "농협", "국민", "우리", "하나"};
+		for (PayAccount account : payAccounts) {
+			System.out.println(payAccounts.indexOf(account) + ". | 계좌 코드: " + account.getPayAccountId() + " | " + bank[account.getBankId().intValue()] + " | " + getAccountNumber(account.getPayAccountNumber()));
+		}
 	}
 	
 	public static void printUserBook(List<Book> books) {

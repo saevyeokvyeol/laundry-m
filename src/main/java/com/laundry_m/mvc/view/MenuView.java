@@ -3,10 +3,12 @@ package com.laundry_m.mvc.view;
 import java.util.Scanner;
 
 import com.laundry_m.mvc.controller.BookController;
+import com.laundry_m.mvc.controller.MetapayController;
 
 public class MenuView {
 	private static Scanner sc = new Scanner(System.in);
 	private static BookController bookController = new BookController();
+	private static MetapayController metapayController = new MetapayController();
 	
 	/**
 	 * 시작 메뉴
@@ -158,15 +160,15 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 내 메타페이 정보 보기 | 2. 최근 거래 내역 보기 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내 메타페이 정보 보기 | 2. 최근 거래 내역 보기 | 3. 연결 계좌 해지 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					metapayController.searchMetapayByUserId();
 					break;
 				case 2 :
-					
+					MetapayMenuView.deleteMetapayAccount();
 					break;
 				case 3 :
 					
