@@ -6,7 +6,7 @@
 
 	<!-- 리뷰 작성 -->
 	<insert id ="createReview" parameterType="review">
-		INSERT INTO REVIEW	VALUES(review_seq.nextval, #{userId}, (select laundry_id from review where book_id = #{bookId}), #{bookId}, #{reviewContent}, #{reviewRate}, systimestamp ,systimestamp)
+		INSERT INTO REVIEW	VALUES(review_seq.nextval, #{userId}, (select laundry_id from book where book_id = #{bookId}), #{bookId}, #{reviewContent}, #{reviewRate}, systimestamp ,systimestamp)
 	</insert> 
 	
 	<!-- 리뷰 수정 -->
@@ -18,7 +18,7 @@
 	
 	<!-- 리뷰 삭제 -->
 	<delete id = "deleteReview" parameterType="review">
-		delete from review where #{reviewId}
+		delete from review where review_id=#{reviewId}
 	</delete>
 		
 	<!-- 전체 리뷰 보기 -->
