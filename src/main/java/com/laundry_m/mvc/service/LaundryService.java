@@ -13,6 +13,7 @@ import com.laundry_m.mvc.vo.ExtraFee;
 import com.laundry_m.mvc.vo.Fabric;
 import com.laundry_m.mvc.vo.Fee;
 import com.laundry_m.mvc.vo.Laundry;
+import com.laundry_m.mvc.vo.Users;
 
 public interface LaundryService {
 	/**
@@ -124,5 +125,21 @@ public interface LaundryService {
 	 *  @exception : NotExistException(아아디 DB에 존재하지 않을 경우 오류)
 	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * */
-	List<Laundry> selectByLowestByLaundry(Long feeId, Long FabricId) throws SQLException, NotExistException, NotLoginException;
+	Laundry selectByLowestByLaundry(Long feeId, Long FabricId) throws SQLException, NotExistException, NotLoginException;
+	
+	/**
+	 * 특정 세탁소에서 옷 + 재질 가격 더하는 메소드
+	 * */
+	int clothesfabricFee(Long laundryId,Long clothesId, Long fabricId) throws SQLException, NotExistException, NotLoginException;;
+	
+	/**
+	 * 세탁소 아이디로 찾기
+	 * */
+	List<Laundry> selectByLaundryId(String LaundryId) throws SQLException, NotExistException, NotLoginException;;
+	
+	/**
+	 * 회원 주소 - 세탁소 주소 사이 거리 구하기
+	 * */
+	double userBetweenLaun(Users users, Laundry laundry) throws SQLException, NotLoginException, NotExistException;
+
 }

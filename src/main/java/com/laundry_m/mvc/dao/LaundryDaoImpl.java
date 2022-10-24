@@ -150,7 +150,7 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public int updateFee(ExtraFee extraFee) throws SQLException {
+	public int updateExtraFee(ExtraFee extraFee) throws SQLException {
 		SqlSession session = null;
 		int result = 0;
 		boolean state = false;
@@ -169,7 +169,7 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public int deleteFee(ExtraFee extraFee) throws SQLException {
+	public int deleteExtraFee(ExtraFee extraFee) throws SQLException {
 		SqlSession session = null;
 		int result = 0;
 		boolean state = false;
@@ -218,18 +218,18 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public List<Laundry> selectByLowestByLaundry(Long feeId, Long FabricId) throws SQLException {
+	public Laundry selectByLowestByLaundry(Long clothesId, Long FabricId) throws SQLException {
 		SqlSession session = null;
-		List<Laundry> laundries = null;
+		Laundry laundry = null;
 		
 		try {
 			session = DbUtil.getSession();
-			laundries = session.selectList("laundryMapper.selectByLowestByLaundry");
+			//laundry = session.selectList("laundryMapper.selectByLowestByLaundry");
 		} finally {
 			DbUtil.sessionClose(session);
 		}
 		
-		return laundries;
+		return laundry;
 	}
 
 	@Override
