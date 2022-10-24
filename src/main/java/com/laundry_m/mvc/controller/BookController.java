@@ -90,11 +90,14 @@ public class BookController {
 	 * 유저 아이디로 예약 검색
 	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호 이상만 검색))
 	 * */
-	public void searchBookByUserId(Long bookStateId) {
+	public void searchBookByUserId(Long start, Long end) {
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
-			Book book = Book.builder().userId(users.getUserId()).bookStateId(bookStateId).build();
-			List<Book> books = bookService.searchBookByUserId(book);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("userId", users.getUserId());
+			map.put("start", start);
+			map.put("end", end);
+			List<Book> books = bookService.searchBookByUserId(map);
 			SuccessView.printUserBook(books);
 		} catch (Exception e) {
 			e.printStackTrace();
