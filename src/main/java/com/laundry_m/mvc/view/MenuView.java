@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.laundry_m.mvc.controller.BookController;
+import com.laundry_m.mvc.controller.LaundryController;
 import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.controller.UsersController;
 import com.laundry_m.mvc.session.Session;
@@ -18,6 +19,7 @@ public class MenuView {
 	private static UsersController usersController = new UsersController();
 	private static ReviewController reviewController = new ReviewController();
 	private static StatisticsController statisticsController = new StatisticsController();
+	private static LaundryController laundryController = new LaundryController();
 	
 	/**
 	 * 시작 메뉴
@@ -165,7 +167,8 @@ public class MenuView {
 				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 			}
 		}
-	}	/**
+	}
+	/**
 	 * 일반 회원 마이페이지 메뉴
 	 * */
 	public static void reviewpageMenu() {
@@ -192,7 +195,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -260,7 +263,7 @@ public class MenuView {
 					laundryManageMenu();
 					break;
 				case 3 :
-					reviewController.searchReviewByLaundryId(null);
+					reviewController.searchReviewByLaundryId();//수정 예정
 					break;
 				case 4 :
 					Map<String, Object> map = new HashMap<>();
@@ -363,16 +366,16 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					adminUserMenu();
 					break;
 				case 2 :
-					
+					adminLaundryMenu();
 					break;
 				case 3 :
-					
+					adminBookMenu();
 					break;
 				case 4 :
-					
+					adminProfitMenu();
 					break;
 				case 9 : 
 					usersController.logout();
@@ -403,7 +406,7 @@ public class MenuView {
 					
 					break;
 				case 2 :
-					
+
 					break;
 				case 3 :
 					

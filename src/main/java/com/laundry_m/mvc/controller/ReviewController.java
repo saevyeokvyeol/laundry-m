@@ -7,6 +7,7 @@ import com.laundry_m.mvc.service.ReviewServiceImpl;
 import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
+import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Review;
 import com.laundry_m.mvc.vo.Users;
 
@@ -99,11 +100,10 @@ public class ReviewController {
 	 * 점포 아이디로 리뷰 검색
 	 * @param: Long laundryId
 	 */
-	  public void searchReviewByLaundryId(Long laundryId){ 
+	  public void searchReviewByLaundryId(){ 
 		  try {
-			  Users users = (Users)session.getAttribute("loginUser");
-			  Review review = Review.builder().userId(users.getUserId()).laundryId(laundryId).build();
-			  List<Review> reviews = reviewService.searchReviewByLaundryId(laundryId);
+			  Laundry laundry = (Laundry)session.getAttribute("selectByUserId");
+			  List<Review> reviews = reviewService.searchReviewByLaundryId(laundry.getLaundryId());
 			  SuccessView.printUserReview(reviews);
 		  }catch(Exception e) {
 			  e.printStackTrace();
