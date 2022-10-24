@@ -14,17 +14,17 @@ public class Metapay {
 	
 	private Long metapayId;
 	private String userId;
-	private String metapayBalance;
+	private Long metapayBalance;
 	private String metapayPassword;
 	private Timestamp metapayDate;
 	private Timestamp metapayUpdateDate;
 	
 	private Users user;
-	private List<PayAccount> payAccounts;
+	private List<PayAccount> payAccount;
 	
 	@Builder
-	public Metapay(Long metapayId, String userId, String metapayBalance, String metapayPassword,
-			Timestamp metapayDate, Timestamp metapayUpdateDate, Users user, List<PayAccount> payAccounts) {
+	public Metapay(Long metapayId, String userId, Long metapayBalance, String metapayPassword,
+			Timestamp metapayDate, Timestamp metapayUpdateDate, Users user, List<PayAccount> payAccount) {
 		super();
 		this.metapayId = metapayId;
 		this.userId = userId;
@@ -33,6 +33,6 @@ public class Metapay {
 		this.metapayDate = metapayDate;
 		this.metapayUpdateDate = metapayUpdateDate;
 		this.user = user;
-		this.payAccounts = payAccounts;
+		this.payAccount = payAccount;
 	}
 }

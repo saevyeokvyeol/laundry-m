@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.laundry_m.mvc.controller.BookController;
+import com.laundry_m.mvc.controller.LaundryController;
 import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.service.BookService;
 import com.laundry_m.mvc.vo.Book;
@@ -14,6 +15,7 @@ public class BookMenuView {
 	private static Scanner sc = new Scanner(System.in);
 	private static BookController bookController = new BookController();
 	private static MetapayController metapayController = new MetapayController();
+	private static LaundryController laundryController = new LaundryController();
 	
 	/**
 	 * 예약 폼 메뉴
@@ -39,7 +41,7 @@ public class BookMenuView {
 					Long fabricId = (long) Integer.parseInt(sc.nextLine());
 					
 					// 가격 계산 메소드
-					int bookLineFee = 0;
+					int bookLineFee = laundryController.searchLaundryFee(laundryId, clothesId, fabricId);
 					
 					BookLine bookLine = BookLine.builder().clothesId(clothesId).fabricId(fabricId).bookLineFee(bookLineFee).build();
 					bookLines.add(bookLine);
@@ -74,10 +76,38 @@ public class BookMenuView {
 						.bookTotalFee(bookTotalFee)
 						.bookLine(bookLines).build();
 				
-				bookController.updateBookComplete(bookTotalFee);
+				bookController.makeBook(book);
 			} catch (Exception e) {
 				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 			}
+		}
+	}
+	
+	public static void searchBookByLaundryIdAndBookStateId() {
+		System.out.println("검색할 예약 상태를 입력해주세요.");
+		System.out.println("[ 1. 예약 확인 중 | 2. 수거 예정 | 3. 수거 중 | 4. 세탁 진행 중 | 5. 세탁 완료 | 6. 배달 예정 | 7. 배달 중 | 8. 배달 완료 | 9. 예약 거절 | 10. 정산 완료 ]");
+		System.out.print("▶ ");
+		Long bookStateId = (long)Integer.parseInt(sc.nextLine());
+		bookController.searchBookByLaundryId(bookStateId, bookStateId);
+	}
+	
+	public static void updateBookState() {
+		try {
+			System.out.println("업데이트할 예약 번호를 입력해주세요.");
+			bookController.searchBookByLaundryId(1L, 7L);
+			System.out.print("▶ ");
+			Long bookId = (long)Integer.parseInt(sc.nextLine());
+			System.out.println("업데이트할 예약 상태 번호를 입력해주세요.");
+			System.out.println("[ 1. 수거 예정 | 2. 수거 중 | 3. 세탁 진행 중 | 4. 세탁 완료 | 5. 배달 예정 | 6. 배달 중 | 7. 배달 완료 | 8. 예약 거절 | 9. 정산 완료 ]");
+			System.out.print("▶ ");
+			Long bookStateId = (long)Integer.parseInt(sc.nextLine());
+			if (bookStateId == 7) {
+				bookController.updateBookComplete(bookId);
+			} else {
+				bookController.searchBookByLaundryId(bookStateId, ++bookStateId);
+			}
+		} catch (Exception e) {
+			FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 		}
 	}
 }

@@ -36,7 +36,7 @@ public interface FavoriteService {
 	 * @exception: NotLoginException(로그인하지 않고 예약을 시도할 경우 오류)
 	 * 			   InvalidUserException(해당 회원이 아닌 회원이 즐겨찾기를 검색할 경우 오류)
 	 * */
-	List<Favorite> searchFavoriteByUserId(Long userId) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
+	List<Favorite> searchFavoriteByUserId(String userId) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
 
 	/**
 	 * 점포 아이디로 즐겨찾기
@@ -45,4 +45,5 @@ public interface FavoriteService {
 	 * @exception: NotLoginException(로그인하지 않고 예약을 시도할 경우 오류)
 	 * */
 	List<Favorite> searchFavoriteByLaundryId(Long laundryId) throws SQLException, NotLoginException;
+
 }

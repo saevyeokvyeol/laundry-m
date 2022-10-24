@@ -32,6 +32,8 @@
 		<typeAlias type="com.laundry_m.mvc.vo.PayCategory" alias="payCategory"/>
 		<typeAlias type="com.laundry_m.mvc.vo.PayLog" alias="PayLog"/>
 		<typeAlias type="com.laundry_m.mvc.vo.Review" alias="review"/>
+		<typeAlias type="com.laundry_m.mvc.vo.StatisticsDetail" alias="statisticsDetail"/>
+		<typeAlias type="com.laundry_m.mvc.vo.StatisticsTotal" alias="statisticsTotal"/>
 		<typeAlias type="com.laundry_m.mvc.vo.Users" alias="users"/>
 	</typeAliases>
 	
@@ -53,5 +55,10 @@
 		<mapper resource="mapper/LaundryMapper.xml"/>
 		<!-- <mapper resource="mapper/MetapayMapper.xml"/> -->
 		<mapper resource="mapper/ReviewMapper.xml"/>
+<<<<<<< HEAD
+=======
+		<mapper resource="mapper/FavoriteMapper.xml"/>
+		<mapper resource="mapper/StatisticsMapper.xml"/>
+>>>>>>> c363766887328550822b60d08e9902448c606558
 	</mappers>
 </configuration>

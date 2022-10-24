@@ -51,6 +51,12 @@
 		values(book_line_id_seq.nextval, book_id_seq.currval, #{clothesId}, #{fabricId}, #{bookLineFee})
 	</insert>
 	
+	<update id="updateBookState" parameterType="book">
+		update book
+		set book_state_id = #{bookStateId}
+		where book_id = #{bookId}
+	</update>
+	
 	<update id="updateBookComplete" parameterType="long">
 		update book
 		set book_state_id = 10
@@ -98,7 +104,7 @@
 		order by book_insert_date desc
 	</select>
 	
-	<select id="searchBookByUserId" parameterType="book" resultMap="bookMap">
+	<select id="searchBookByUserId" parameterType="map" resultMap="bookMap">
 		select b.book_Id, b.user_id, b.book_Count, b.book_Insert_Date, b.book_Update_Date, b.book_Memo, b.book_Total_Fee,
 		    bs.book_state_id, bs.book_state_name,
 		    bm.book_method_id, bm.book_method_name,
@@ -114,14 +120,14 @@
 		on b.book_id = bl.book_id
 		where b.user_id = #{userId}
 		<trim prefix="and">
-			<if test="bookStateId != null">
-				bs.book_state_id <![CDATA[<=]]> #{bookStateId}
+			<if test="start != null">
+				bs.book_state_id between #{start} and #{end}
 			</if>
 		</trim>
 		order by book_insert_date desc
 	</select>
 	
-	<select id="searchBookByLaundryId" parameterType="book" resultMap="bookMap">
+	<select id="searchBookByLaundryId" parameterType="map" resultMap="bookMap">
 		select b.book_Id, b.user_id, b.book_Count, b.book_Insert_Date, b.book_Update_Date, b.book_Memo, b.book_Total_Fee,
 		    bs.book_state_id, bs.book_state_name,
 		    bm.book_method_id, bm.book_method_name,
@@ -137,8 +143,8 @@
 		on b.book_id = bl.book_id
 		where b.laundry_id = #{laundryId}
 		<trim prefix="and">
-			<if test="bookStateId != null">
-				bs.book_state_id <![CDATA[<=]]> #{bookStateId}
+			<if test="start != null">
+				bs.book_state_id between #{start} and #{end}
 			</if>
 		</trim>
 		order by book_insert_date desc

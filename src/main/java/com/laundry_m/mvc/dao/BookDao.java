@@ -2,6 +2,7 @@ package com.laundry_m.mvc.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -69,17 +70,17 @@ public interface BookDao {
 	
 	/**
 	 * 유저 아이디로 예약 검색
-	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
+	 * @param: Map<String, Object> map(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
 	 * @return: List<Book>
 	 * */
-	List<Book> searchBookByUserId(Book book) throws SQLException;
+	List<Book> searchBookByUserId(Map<String, Object> map) throws SQLException;
 	
 	/**
 	 * 점포 아이디로 예약 검색
-	 * @param: Book book(점포 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
+	 * @param: Map<String, Object> map(점포 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
 	 * @return: List<Book>
 	 * */
-	List<Book> searchBookByLaundryId(Book book) throws SQLException;
+	List<Book> searchBookByLaundryId(Map<String, Object> map) throws SQLException;
 	
 	/**
 	 * 예약 아이디로 예약 검색

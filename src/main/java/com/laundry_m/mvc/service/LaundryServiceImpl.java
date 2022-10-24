@@ -117,15 +117,21 @@ public class LaundryServiceImpl implements LaundryService {
 	}
 
 	@Override
-	public List<Laundry> selectByLaundryId(String LaundryId) throws SQLException, NotExistException, NotLoginException {
-		return laundryDao.selectByLaundryId(LaundryId);
+	public Laundry selectByUserId(String userId) throws SQLException, NotExistException, NotLoginException {
+		return laundryDao.selectByUserId(userId);
 	}
 
 	@Override
-	public double userBetweenLaun(Users users, Laundry laundry)
+	public int userBetweenLaun(Users users, Laundry laundry)
 			throws SQLException, NotLoginException, NotExistException {
 		
 		return laundryDao.userBetweenLaun(users, laundry);
+	}
+
+	@Override
+	public List<Laundry> selectByMyLaundry(String userAddress) throws SQLException, NotExistException, NotLoginException {
+		
+		return laundryDao.selectByMyLaundry(userAddress);
 	}
 
 }

@@ -1,16 +1,23 @@
 package com.laundry_m.mvc.view;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.laundry_m.mvc.controller.BookController;
 import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.controller.UsersController;
+import com.laundry_m.mvc.session.Session;
+import com.laundry_m.mvc.controller.ReviewController;
+import com.laundry_m.mvc.controller.StatisticsController;
 
 public class MenuView {
 	private static Scanner sc = new Scanner(System.in);
 	private static BookController bookController = new BookController();
 	private static MetapayController metapayController = new MetapayController();
 	private static UsersController usersController = new UsersController();
+	private static ReviewController reviewController = new ReviewController();
+	private static StatisticsController statisticsController = new StatisticsController();
 	
 	/**
 	 * 시작 메뉴
@@ -57,7 +64,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					laundrySearchMenu();
 					break;
 				case 2 :
 					
@@ -66,7 +73,7 @@ public class MenuView {
 					
 					break;
 				case 4 :
-					
+					customerMypageMenu();
 					break;
 				case 9 : 
 					usersController.logout();
@@ -95,10 +102,10 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					LaundryMenuVIew.findLaundry();
 					break;
 				case 2 :
-					
+					LaundryMenuVIew.selectByLaundryName();
 					break;
 				case 8 :
 					run = false;
@@ -129,25 +136,61 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					bookController.searchBookByUserId(7L);
+					bookController.searchBookByUserId(1L, 7L);
 					break;
 				case 2 :
-					bookController.searchBookByUserId(null);
+					bookController.searchBookByUserId(8L, 10L);
 					break;
 				case 3 :
-					
+					reviewpageMenu();
 					break;
 				case 4 :
 					
 					break;
 				case 5 :
-					customerMetapayMenu();
+					MetapayMenuView.metapayCheck();
 					break;
 				case 8 :
 					run = false;
 					break;
 				case 9 : 
 					usersController.logout();
+					break;
+				case 0 : 
+					MenuView.exit();
+				default:
+					System.out.println("메뉴를 잘못 선택하셨습니다.");
+				}
+			} catch (Exception e) {
+				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+			}
+		}
+	}	/**
+	 * 일반 회원 마이페이지 메뉴
+	 * */
+	public static void reviewpageMenu() {
+		boolean run = true;
+		while (run) {
+			try {
+				System.out.println("\n" + "[ 1. 내가 쓴 리뷰 리스트 | 2. 리뷰 쓰기 | 3. 리뷰 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.print("▶ ");
+				int menu = Integer.parseInt(sc.nextLine());
+				switch(menu) {
+				case 1 :
+					reviewController.searchReviewByUserId();
+					break;
+				case 2 :
+					ReviewMenuView.reviewForm();
+					break;
+				case 3 :
+					ReviewMenuView.reviewUpdateForm();
+					break;
+				case 8 :
+					run = false;
+
+					break;
+				case 9 : 
+					
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -178,7 +221,7 @@ public class MenuView {
 					MetapayMenuView.deleteMetapayAccount();
 					break;
 				case 3 :
-					
+					MetapayMenuView.deleteMetapayAccount();
 					break;
 				case 8 :
 					run = false;
@@ -212,13 +255,15 @@ public class MenuView {
 					
 					break;
 				case 2 :
-					
+					laundryManageMenu();
 					break;
 				case 3 :
-					
+					reviewController.searchReviewByLaundryId(null);
 					break;
 				case 4 :
-					
+					Map<String, Object> map = new HashMap<>();
+					map.put("laundryId", 0);
+					statisticsController.searchStatistics(map);
 					break;
 				case 9 : 
 					usersController.logout();
@@ -280,13 +325,13 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					bookController.searchBookByLaundryId(1L, 7L);
 					break;
 				case 2 :
-					
+					BookMenuView.searchBookByLaundryIdAndBookStateId();
 					break;
 				case 3 :
-					
+					BookMenuView.updateBookState();
 					break;
 				case 8 :
 					run = false;
@@ -311,7 +356,7 @@ public class MenuView {
 	public static void adminMenu() {
 		while (true) {
 			try {
-				System.out.println("\n" + "[ 1. 회원 관리 | 2. 사장님 관리 | 3. 예약 관리 | 4. 매출 통계 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 회원 관리 | 2. 사장님 관리 | 3. 예약 관리 | 4. 세탁소 통계 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -422,7 +467,7 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 전체 예약 검색 | 2. 날짜로 예약 검색 | 3. 날짜별 예약 통계 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 전체 예약 검색 | 2. 날짜로 예약 검색 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -466,7 +511,7 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 총 매출 통계 | 2. 일별 매출 통계 | 3. 품목별 매출 통계 | 4. 세탁소별 매출 통계 | 5. 회원별 매출 통계 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 총 매출 통계 | 2. 일별 매출 통계 | 3. 세탁소별 매출 통계 | 4. 회원별 매출 통계 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -480,9 +525,6 @@ public class MenuView {
 					
 					break;
 				case 4 :
-					
-					break;
-				case 5 :
 					
 					break;
 				case 8 :
@@ -506,7 +548,7 @@ public class MenuView {
 	 * 프로그램 종료 메소드
 	 * */
 	public static void exit() {
-		System.out.println("런드리엠이 종료되었습니다.");
+		System.out.println("런드리M이 종료되었습니다.");
 		System.out.println("이용해주셔서 감사합니다.");
 		System.exit(0);
 	}

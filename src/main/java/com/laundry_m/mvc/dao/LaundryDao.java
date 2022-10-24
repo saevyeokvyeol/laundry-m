@@ -3,6 +3,8 @@ package com.laundry_m.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.laundry_m.mvc.exception.NotExistException;
+import com.laundry_m.mvc.exception.NotLoginException;
 import com.laundry_m.mvc.vo.Clothes;
 import com.laundry_m.mvc.vo.ExtraFee;
 import com.laundry_m.mvc.vo.Fabric;
@@ -104,11 +106,16 @@ public interface LaundryDao {
 	/**
 	 * 세탁소 아이디로 찾기
 	 * */
-	List<Laundry> selectByLaundryId(String LaundryId) throws SQLException;
+	Laundry selectByUserId(String userId) throws SQLException;
 	
 	/**
 	 * 회원 주소 - 세탁소 주소 사이 거리 구하기
 	 * */
-	double userBetweenLaun(Users users, Laundry laundry) throws SQLException;
+	int userBetweenLaun(Users users, Laundry laundry) throws SQLException;
+	
+	/**
+	 * 사용자 위치에서 세탁소 찾기
+	 * */
+	List<Laundry> selectByMyLaundry(String userAddress) throws SQLException, NotExistException, NotLoginException;
 
 }

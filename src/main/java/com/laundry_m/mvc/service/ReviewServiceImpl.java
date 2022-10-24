@@ -29,8 +29,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public void createReview(Review review)
 			throws SQLException, NotLoginException, NotExistException, InvalidUserException, NotFilledInException {
-		// TODO Auto-generated method stub
-
+		int result = reviewDao.createReview(review);
+		if(result != 1) {
+			throw new SQLException("리뷰 등록에 실패하였습니다.");
+		}
 	}
 
 	/**
@@ -44,7 +46,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public void modifyReview(Review review)
 			throws SQLException, NotLoginException, NotExistException, InvalidUserException, NotFilledInException {
-		// TODO Auto-generated method stub
+		int result = reviewDao.modifyReview(review);
+		if(result != 1) {
+			throw new SQLException("리뷰 수정에 실패하였습니다.");
+		}
 
 	}
 

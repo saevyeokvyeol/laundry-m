@@ -11,12 +11,12 @@
 		<result column="metapay_Date" property="metapayDate"/>
 		<result column="metapay_Update_Date" property="metapayUpdateDate"/>
 		
-		<collection property="payAccounts" ofType="payAccount">
-			<id column="payAccountId" property="payAccountId"/>
+		<collection property="payAccount" ofType="payAccount">
+			<id column="pay_Account_Id" property="payAccountId"/>
 			<result column="metapay_id" property="metapayId"/>
-			<result column="bankId" property="bankId"/>
-			<result column="payAccountNumber" property="payAccountNumber"/>
-			<result column="payAccountQuitState" property="payAccountQuitState"/>
+			<result column="bank_Id" property="bankId"/>
+			<result column="pay_Account_Number" property="payAccountNumber"/>
+			<result column="pay_Account_Quit_State" property="payAccountQuitState"/>
 		</collection>
 	</resultMap>
 
@@ -37,12 +37,10 @@
 		where metapay_id = #{metapayId} and pay_account_id = #{payAccountId}
 	</update>
 	
-	<select id="selectMetapayByUserId" parameterType="string" resultType="metapayMap">
+	<select id="selectMetapayByUserId" parameterType="string" resultMap="metapayMap">
 		select m.*, p.pay_account_id, p.bank_id, p.pay_account_number, p.pay_account_quit_state
 		from metapay m join pay_account p
 		on m.metapay_id = p.metapay_id
 		where user_id = #{_parameter} and p.pay_account_quit_state = 'F'
 	</select>
-	
-	<select id="se"></select>
 </mapper>

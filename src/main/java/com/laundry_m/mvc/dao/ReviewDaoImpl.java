@@ -12,7 +12,7 @@ import util.DbUtil;
 
 public class ReviewDaoImpl implements ReviewDao {
 	
-	private ReviewDao reviewDao = new ReviewDaoImpl();
+	/* private ReviewDao reviewDao = new ReviewDaoImpl(); */
 	
 	/**
 	 * 리뷰 작성
@@ -31,7 +31,7 @@ public class ReviewDaoImpl implements ReviewDao {
 			session = DbUtil.getSession();
 			
 			//세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
-			result = session.insert("ReviewMapper.createReview");
+			result = session.insert("ReviewMapper.createReview", review);
 			if(result == 1) state = true;
 			
 		}finally {
@@ -83,7 +83,7 @@ public class ReviewDaoImpl implements ReviewDao {
 			session = DbUtil.getSession();
 			
 			//세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
-			result = session.update("reviewMapper.deleteReview", reviewId);
+			result = session.delete("reviewMapper.deleteReview", reviewId);
 			if(result == 1) state = true;		
 			
 		}finally {
@@ -126,7 +126,7 @@ public class ReviewDaoImpl implements ReviewDao {
 			session = DbUtil.getSession();
 			
 			//세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
-			reviews = session.selectList("reviewMapper.searchReviewByUserId");
+			reviews = session.selectList("reviewMapper.searchReviewByUserId", userId);
 		}finally {
 			DbUtil.sessionClose(session);
 		}
@@ -147,7 +147,7 @@ public class ReviewDaoImpl implements ReviewDao {
 			session = DbUtil.getSession();
 			
 			//세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
-			reviews = session.selectList("reviewMapper.searchReviewByLaundryId");
+			reviews = session.selectList("reviewMapper.searchReviewByLaundryId", laundryId);
 		}finally {
 			DbUtil.sessionClose(session);
 		}

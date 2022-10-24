@@ -1,6 +1,7 @@
 package com.laundry_m.mvc.controller;
 
 import com.laundry_m.mvc.service.MetapayService;
+import com.laundry_m.mvc.service.MetapayServiceImpl;
 import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
@@ -9,7 +10,7 @@ import com.laundry_m.mvc.vo.PayAccount;
 import com.laundry_m.mvc.vo.Users;
 
 public class MetapayController {
-	private MetapayService metapayService;
+	private MetapayService metapayService = new MetapayServiceImpl();
 	private Session session = Session.getInstance();
 
 	public void joinMetapay(Metapay metapay) {
@@ -30,6 +31,7 @@ public class MetapayController {
 			Users users = (Users)session.getAttribute("loginUser");
 			metapay = metapayService.searchMetapayByUserId(users.getUserId());
 		} catch (Exception e) {
+			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		return metapay;
@@ -50,7 +52,7 @@ public class MetapayController {
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
 			Metapay metapay = metapayService.searchMetapayByUserId(users.getUserId());
-			SuccessView.printPayAccount(metapay.getPayAccounts());
+			SuccessView.printPayAccount(metapay.getPayAccount());
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

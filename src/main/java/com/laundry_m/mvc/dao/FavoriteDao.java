@@ -25,7 +25,7 @@ public interface FavoriteDao {
 	 * @param: Long userId
 	 * @return: List<Favorite>
 	 * */
-	List<Favorite> searchFavoriteByUserId(Long userId) throws SQLException;
+	List<Favorite> searchFavoriteByUserId(String userId) throws SQLException;
 
 	/**
 	 * 점포 아이디로 즐겨찾기
@@ -33,4 +33,5 @@ public interface FavoriteDao {
 	 * @return: List<Favorite>
 	 * */
 	List<Favorite> searchFavoriteByLaundryId(Long laundryId) throws SQLException;
+
 }
