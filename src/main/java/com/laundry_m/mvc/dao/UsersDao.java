@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.laundry_m.mvc.vo.Users;
 
-public interface UserDao {
+public interface UsersDao {
 
 	/**
 	 * 회원 가입 : 회원 인서트
@@ -20,6 +20,7 @@ public interface UserDao {
 	 * @return : User user
 	 * */
 	int updateUser(Users users) throws SQLException;
+
 
 	/** 
 	 * 로그인

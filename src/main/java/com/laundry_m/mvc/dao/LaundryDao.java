@@ -64,13 +64,13 @@ public interface LaundryDao {
 	 *  @param : ExtraFee extraFee(천아이디, 점포 아이디, 가격)
 	 *  @return : int(등록한 레코드 수)
 	 * */
-	int updateFee(ExtraFee extraFee) throws SQLException;
+	int updateExtraFee(ExtraFee extraFee) throws SQLException;
 
 	/** 
 	 * 	추가가격 삭제
 	 *  @param : Long extraFeeId
 	 *  */
-	int deleteFee(ExtraFee extraFee) throws SQLException;
+	int deleteExtraFee(ExtraFee extraFee) throws SQLException;
 
 	/**
 	 *  세탁소 이름으로 찾기
@@ -94,7 +94,7 @@ public interface LaundryDao {
 	 *  @param : Long feeId, Long extraFeeId
 	 *  @return : Laundry
 	 * */
-	List<Laundry> selectByLowestByLaundry(Long feeId, Long FabricId) throws SQLException;
+	Laundry selectByLowestByLaundry(Long clothesId, Long FabricId) throws SQLException;
 	
 	/**
 	 * 특정 세탁소에서 옷 + 재질 가격 더하는 메소드

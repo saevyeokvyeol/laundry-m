@@ -1,5 +1,6 @@
 package com.laundry_m.mvc.vo;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 
@@ -20,8 +21,8 @@ public class Review {
 	private Long bookId;
 	private String reviewContent;
 	private Long reviewRate;
-	private LocalDateTime reviewInsertDate;
-	private LocalDateTime reviewUpdateDate;
+	private Timestamp reviewInsertDate;
+	private Timestamp reviewUpdateDate;
 	
 	private Laundry laundry;
 	private Book book;
@@ -30,7 +31,7 @@ public class Review {
 	@Builder
 
 	public Review(Long reviewId, String userId, Long laundryId, Long bookId, String reviewContent, Long reviewRate,
-			LocalDateTime reviewInsertDate, LocalDateTime reviewUpdateDate, Users users, Laundry laundry, Book book) {
+			Timestamp reviewInsertDate, Timestamp reviewUpdateDate, Users users, Laundry laundry, Book book) {
 		super();
 		this.reviewId = reviewId;
 		this.userId = userId;

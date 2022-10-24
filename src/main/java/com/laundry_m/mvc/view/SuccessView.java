@@ -9,6 +9,7 @@ import com.laundry_m.mvc.vo.Book;
 import com.laundry_m.mvc.vo.BookLine;
 import com.laundry_m.mvc.vo.Metapay;
 import com.laundry_m.mvc.vo.PayAccount;
+import com.laundry_m.mvc.vo.Laundry;
 
 public class SuccessView {
 	private static DecimalFormat won = new DecimalFormat("#,###");
@@ -68,5 +69,16 @@ public class SuccessView {
 			}
 			System.out.println();
 		}
+	}
+	
+	public static void printLaundryList(List<Laundry> laundries , List<Double> distances) {
+		//나와의 거리 | 세탁소 이름 | 세탁소 주소 | 세탁소 번호 | 배달료
+		for(Laundry laundry : laundries) {
+			System.out.println( distances + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + laundry.getLaundryTel() +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
+		}
+	}
+	
+	public static void printLaundry(Laundry laundry, double distance) {
+		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + laundry.getLaundryTel() +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
 	}
 }

@@ -9,7 +9,7 @@ import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
 import com.laundry_m.mvc.vo.Users;
 
-public interface UserService {
+public interface UsersService {
 	/**
 	 * 회원가입
 	 * 1. 회원을 인서트 한다.
