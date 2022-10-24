@@ -96,13 +96,16 @@ public class SuccessView {
 
 	}
 	public static void printUserReview(List<Review> reviews) {
+		System.out.print("리뷰번호 | ID | 세탁소ID| 별점 | 리뷰내용 ");
+		System.out.println("");
 		for(Review review : reviews) {
-			System.out.print(review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId());
+			System.out.print(""+ review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId());
 			if(review.getReviewContent() != null) {
-				System.out.println(" | " + review.getReviewRate());
-				System.out.println(" | " + review.getReviewContent());
+				System.out.println("" +review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId() + " | " + review.getReviewRate() + " | " + review.getReviewContent());
+				System.out.println("");
 			}else {
-				System.out.println();
+				System.out.println("작성하신 리뷰가 없습니다");
+				System.out.println("");
 			}
 		}
 		
