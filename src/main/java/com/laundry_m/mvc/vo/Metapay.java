@@ -14,7 +14,7 @@ public class Metapay {
 	
 	private Long metapayId;
 	private String userId;
-	private String metapayBalance;
+	private Long metapayBalance;
 	private String metapayPassword;
 	private Timestamp metapayDate;
 	private Timestamp metapayUpdateDate;
@@ -23,7 +23,7 @@ public class Metapay {
 	private List<PayAccount> payAccount;
 	
 	@Builder
-	public Metapay(Long metapayId, String userId, String metapayBalance, String metapayPassword,
+	public Metapay(Long metapayId, String userId, Long metapayBalance, String metapayPassword,
 			Timestamp metapayDate, Timestamp metapayUpdateDate, Users user, List<PayAccount> payAccount) {
 		super();
 		this.metapayId = metapayId;

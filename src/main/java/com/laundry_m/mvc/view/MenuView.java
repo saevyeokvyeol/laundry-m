@@ -141,7 +141,7 @@ public class MenuView {
 					
 					break;
 				case 5 :
-					customerMetapayMenu();
+					MetapayMenuView.metapayCheck();
 					break;
 				case 8 :
 					run = false;

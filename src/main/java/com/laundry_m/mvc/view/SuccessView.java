@@ -41,16 +41,16 @@ public class SuccessView {
 	public static void printMetapay(Metapay metapay) {
 		System.out.println("< " + metapay.getUserId() + " 님의 메타페이 가입 정보 >");
 		System.out.println("현재 잔액: " + won.format(metapay.getMetapayBalance()));
-		System.out.println("가입일: " + getDate(metapay.getMetapayDate()));
+		System.out.println("가입일: " + getDate(metapay.getMetapayDate()) + "\n");
 		
-		System.out.println("< 연결된 계좌 목록: " + metapay.getPayAccounts().size() + "개 >");
-		printPayAccount(metapay.getPayAccounts());
+		System.out.println("< 연결된 계좌 목록: " + metapay.getPayAccount().size() + "개 >");
+		printPayAccount(metapay.getPayAccount());
 	}
 	
 	public static void printPayAccount(List<PayAccount> payAccounts) {
 		String[] bank = {"", "농협", "국민", "우리", "하나"};
 		for (PayAccount account : payAccounts) {
-			System.out.println(payAccounts.indexOf(account) + ". | 계좌 코드: " + account.getPayAccountId() + " | " + bank[account.getBankId().intValue()] + " | " + getAccountNumber(account.getPayAccountNumber()));
+			System.out.println((payAccounts.indexOf(account) + 1) + " 계좌 코드: " + account.getPayAccountId() + " | " + bank[account.getBankId().intValue()] + " | " + getAccountNumber(account.getPayAccountNumber()));
 		}
 	}
 	
