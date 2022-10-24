@@ -15,11 +15,16 @@ public class ReviewMenuView {
 	/**
 	 * 리뷰 입력폼 메뉴
 	 * */
-	public static void reviewForm(Long bookId) {
+	public static void reviewForm() {
 		boolean run = true;
 		Long starRate;
 		while (run) {
 			try {
+				System.out.println("리뷰 작성할 예약번호를 입력해주세요");
+				System.out.print("▶ ");
+				System.out.println();
+				bookController.searchBookByUserId(10L, 10L); //수정
+				Long bookId = Long.parseLong(sc.nextLine());
 				do {
 					System.out.println("\n" + " 해당 주문 완료 건에 ★(별점)을 입력해주세요.");
 					System.out.print("▶ ★x");
@@ -62,7 +67,7 @@ public class ReviewMenuView {
 					if((starRate > 6) || (starRate < 0)) {
 						System.out.println("별점은 0~5 까지 입력해주세요.");
 					}
-				}while(starRate>5);
+				}while(starRate>5 && starRate >= 0);
 				
 				System.out.println("\n" + " 리뷰를 입력해주세요");
 				System.out.print("▶ ");

@@ -174,12 +174,7 @@ public class MenuView {
 					reviewController.searchReviewByUserId();
 					break;
 				case 2 :
-					System.out.println("리뷰 작성할 예약번호를 입력해주세요");
-					System.out.print("▶ ");
-					System.out.println();
-					bookController.searchBookByUserId(10L, 10L); //수정
-					Long bookId = Long.parseLong(sc.nextLine());
-					ReviewMenuView.reviewForm(bookId);
+					ReviewMenuView.reviewForm();
 					break;
 				case 3 :
 					ReviewMenuView.reviewUpdateForm();
