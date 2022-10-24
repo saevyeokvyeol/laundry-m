@@ -1,6 +1,5 @@
 package com.laundry_m.mvc.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -243,6 +242,33 @@ public class LaundryController {
 			FailView.errorMessage(e.getMessage());
 		}
 		
+	}
+	
+	/**
+	 * 내 주소 기반으로 세탁소 찾기
+	 * */
+	public void selectByMyLaundry() {
+		
+		List<Double> distanceList = new ArrayList<Double>();
+
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			System.out.println("현재 " + users.getUserName() + "님의 주소를 기반으로 근처 세탁소를 검색합니다");
+			System.out.println();
+			
+			Users dbUsers = Users.builder().userAddress(users.getUserAddress()).build();
+			
+			List<Laundry> laundries = laundryService.selectByMyLaundry();
+			
+			for(Laundry laundry : laundries) {
+				double distance = laundryService.userBetweenLaun(dbUsers, laundry);
+				distanceList.add(distance);
+			}
+			SuccessView.printLaundryList(laundries, distanceList);
+			
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
 	}
 	
 }

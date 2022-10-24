@@ -3,6 +3,7 @@ package com.laundry_m.mvc.view;
 import java.util.Scanner;
 
 import com.laundry_m.mvc.controller.LaundryController;
+import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Users;
 
@@ -44,12 +45,10 @@ public class LaundryMenuVIew {
 	/**
 	 * 내 근처 세탁소 찾기 메뉴 - 예약으로 이동
 	 * */
-	public static void findLaundry(Users users) {
-		System.out.println("현재 " + users.getUserName() + "님의 주소를 기반으로 세탁소를 검색합니다");
+	public static void findLaundry() {
 		
 		try {
-			laundryController.selectByAddressLaundry(users.getUserAddress());
-			
+			laundryController.selectByMyLaundry();
 		} catch (Exception e) {
 			FailView.errorMessage("주변 세탁소를 찾지 못했어요 :( ");
 		}

@@ -128,4 +128,10 @@ public class LaundryServiceImpl implements LaundryService {
 		return laundryDao.userBetweenLaun(users, laundry);
 	}
 
+	@Override
+	public List<Laundry> selectByMyLaundry() throws SQLException, NotExistException, NotLoginException {
+		
+		return laundryDao.selectByMyLaundry();
+	}
+
 }

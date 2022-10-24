@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.laundry_m.mvc.controller.BookController;
 import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.controller.UsersController;
+import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.controller.ReviewController;
 
 public class MenuView {
@@ -57,7 +58,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					laundrySearchMenu();
 					break;
 				case 2 :
 					
@@ -95,7 +96,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					LaundryMenuVIew.findLaundry(null);
+					LaundryMenuVIew.findLaundry();
 					break;
 				case 2 :
 					LaundryMenuVIew.selectByLaundryName();

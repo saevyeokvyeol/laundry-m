@@ -1,10 +1,13 @@
 package com.laundry_m.mvc.dao;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.laundry_m.mvc.exception.NotExistException;
+import com.laundry_m.mvc.exception.NotLoginException;
 import com.laundry_m.mvc.vo.Clothes;
 import com.laundry_m.mvc.vo.ExtraFee;
 import com.laundry_m.mvc.vo.Fabric;
@@ -194,7 +197,7 @@ public class LaundryDaoImpl implements LaundryDao {
 		
 		try {
 			session = DbUtil.getSession();
-			laundries = session.selectList("laundryMapper.selectByNameLaundry");
+			laundries = session.selectList("laundryMapper.selectByNameLaundry", LaundryName);
 		} finally {
 			DbUtil.sessionClose(session);
 		}
@@ -209,7 +212,7 @@ public class LaundryDaoImpl implements LaundryDao {
 		
 		try {
 			session = DbUtil.getSession();
-			laundries = session.selectList("laundryMapper.selectByAddressLaundry");
+			laundries = session.selectList("laundryMapper.selectByAddressLaundry" , LaundryAddress);
 		} finally {
 			DbUtil.sessionClose(session);
 		}
@@ -286,16 +289,16 @@ public class LaundryDaoImpl implements LaundryDao {
 		double laundryLatit = laundry.getLaundryLatitude(); //위도
 		double laundryLong = laundry.getLaundryLongitude(); //경도
 		
+		
 		//경도 - 경도
 		double theta = userLong - laundryLong;
-        double dist = Math.sin(deg2rad(userLatit))* Math.sin(deg2rad(laundryLatit)) 
-        			+ Math.cos(deg2rad(userLatit)) * Math.cos(deg2rad(laundryLatit))*Math.cos(deg2rad(theta));
+        double dist = Math.sin(deg2rad(userLatit)) * Math.sin(deg2rad(laundryLatit)) 
+        			+ Math.cos(deg2rad(userLatit)) * Math.cos(deg2rad(laundryLatit)) * Math.cos(deg2rad(theta));
         dist = Math.acos(dist);
         dist = rad2deg(dist);
-        dist = dist * 60*1.1515*1609.344;
+        dist = dist * 60 * 1.1515 * 1609.344;
 
         return dist; //단위 meter
-		
 	}
 	
 	//10진수를 radian(라디안)으로 변환
@@ -306,5 +309,21 @@ public class LaundryDaoImpl implements LaundryDao {
     private static double rad2deg(double rad){
         return (rad * 180 / Math.PI);
     }
+
+    
+	@Override
+	public List<Laundry> selectByMyLaundry() throws SQLException, NotExistException, NotLoginException {
+		SqlSession session = null;
+		List<Laundry> laundries = null;
+		
+		try {
+			session = DbUtil.getSession();
+			laundries = session.selectList("laundryMapper.selectByMyLaundry");
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		
+		return laundries;
+	}
 
 }

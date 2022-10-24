@@ -58,20 +58,31 @@
 	</insert>
 	
 	<!-- 이름으로 세탁소 구하기 -->
-	<select id="selectByNameLaundry" parameterType="string">
+	<select id="selectByNameLaundry" parameterType="string" resultType="com.laundry_m.mvc.vo.Laundry">
 		select *
 			from(
 			    select *
 			    from laundry
 			    where laundry_name like '%${parameter}%'
+
+			)
+		<![CDATA[where rownum <= 10]]> 
+	</select>
+	
+	<!-- 사용자 주소 기반으로 세탁소 구하기 -->
+	<select id="selectByMyLaundry" parameterType="string" resultType="com.laundry_m.mvc.vo.Laundry">
+		select * 
+			from(
+			    select *
+			    from laundry
+			    where laundry_address like '%${userAddress}%'
 			)
 		<![CDATA[where rownum <= 10]]> 
 	</select>
 	
 	
-	
 	<!-- 주소로 세탁소 구하기 -->
-	<select id="selectByAddressLaundry" parameterType="string">
+	<select id="selectByAddressLaundry" parameterType="string" resultType="com.laundry_m.mvc.vo.Laundry">
 		select *
 			from(
 			    select *
@@ -83,7 +94,7 @@
 	
 	
 	<!-- 가격 가장 낮은 세탁소 구하기 -->
-	<select id="selectByLowestByLaundry" parameterType="long">
+	<select id="selectByLowestByLaundry" parameterType="long" resultType="com.laundry_m.mvc.vo.Laundry">
 		select * 
 			from (
 			    select laundry_id, fabric_fee + clothes_fee as sum
@@ -96,7 +107,7 @@
 	</select>
 	
 	<!-- 세탁소 아이디로 세탁소 구하기 -->
-	<select id="selectByLaundryId" parameterType="string">
+	<select id="selectByLaundryId" parameterType="string" resultType="com.laundry_m.mvc.vo.Laundry">
 		select *
 			from(
 			    select *
