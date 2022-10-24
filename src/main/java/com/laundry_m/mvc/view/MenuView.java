@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.laundry_m.mvc.controller.BookController;
 import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.controller.UsersController;
+import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.controller.ReviewController;
 import com.laundry_m.mvc.controller.StatisticsController;
 
@@ -61,7 +62,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					laundrySearchMenu();
 					break;
 				case 2 :
 					
@@ -99,7 +100,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					LaundryMenuVIew.findLaundry(null);
+					LaundryMenuVIew.findLaundry();
 					break;
 				case 2 :
 					LaundryMenuVIew.selectByLaundryName();
@@ -139,7 +140,7 @@ public class MenuView {
 					bookController.searchBookByUserId(8L, 10L);
 					break;
 				case 3 :
-					reviewController.searchReviewByUserId(null);
+					reviewpageMenu();
 					break;
 				case 4 :
 					
@@ -149,6 +150,42 @@ public class MenuView {
 					break;
 				case 8 :
 					run = false;
+					break;
+				case 9 : 
+					
+					break;
+				case 0 : 
+					MenuView.exit();
+				default:
+					System.out.println("메뉴를 잘못 선택하셨습니다.");
+				}
+			} catch (Exception e) {
+				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+			}
+		}
+	}	/**
+	 * 일반 회원 마이페이지 메뉴
+	 * */
+	public static void reviewpageMenu() {
+		boolean run = true;
+		while (run) {
+			try {
+				System.out.println("\n" + "[ 1. 내가 쓴 리뷰 리스트 | 2. 리뷰 쓰기 | 3. 리뷰 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.print("▶ ");
+				int menu = Integer.parseInt(sc.nextLine());
+				switch(menu) {
+				case 1 :
+					reviewController.searchReviewByUserId();
+					break;
+				case 2 :
+					ReviewMenuView.reviewForm();
+					break;
+				case 3 :
+					ReviewMenuView.reviewUpdateForm();
+					break;
+				case 8 :
+					run = false;
+
 					break;
 				case 9 : 
 					

@@ -1,6 +1,5 @@
 package com.laundry_m.mvc.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -191,20 +190,16 @@ public class LaundryController {
 	/**
 	 * 세탁소 아이디로 찾기
 	 * */
-	public void selectByLaundryId(String LaundryId) {
-		
-		List<Double> distanceList = new ArrayList<Double>();
+	public void selectByLaundryId(String userId) {
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
-			List<Laundry> list = laundryService.selectByLaundryId(LaundryId);
+			Laundry laundry = laundryService.selectByUserId(users.getUserId());
 			
-			for(Laundry laundry : list) {
-				//각각의 세탁소별 유저와의 거리 구한다
-				double distance = laundryService.userBetweenLaun(users, laundry);
-				distanceList.add(distance);
-			}
-			SuccessView.printLaundryList(list, distanceList);
+			
+			double distance = laundryService.userBetweenLaun(users, laundry);
+			
+			SuccessView.printLaundry(laundry, distance);
 			
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
@@ -256,7 +251,31 @@ public class LaundryController {
 			FailView.errorMessage(e.getMessage());
 		}
 		return result;
+	}
+	
+	/**	
+	 * 내 주소 기반으로 세탁소 찾기
+	 * */
+	public void selectByMyLaundry() {
 		
+		List<Double> distanceList = new ArrayList<Double>();
+
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			System.out.println("현재 " + users.getUserName() + "님의 주소를 기반으로 근처 세탁소를 검색합니다");
+			System.out.println();
+			
+			List<Laundry> laundries = laundryService.selectByMyLaundry(users.getUserAddress());
+			
+			for(Laundry laundry : laundries) {
+				double distance = laundryService.userBetweenLaun(users, laundry);
+				distanceList.add(distance);
+			}
+			SuccessView.printLaundryList(laundries, distanceList);
+			
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
 	}
 	
 }

@@ -25,6 +25,14 @@ public class SuccessView {
 		return sb.toString();
 	}
 	
+	private static String getLaunTel(String tel) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(tel);
+		sb.insert(2, '-');
+		sb.insert(6, '-');
+		return sb.toString();
+	}
+	
 	private static String getDate(Timestamp timestamp) {
 		return timestamp.toLocaleString();
 	}
@@ -76,26 +84,31 @@ public class SuccessView {
 
 	
 	public static void printLaundryList(List<Laundry> laundries , List<Double> distances) {
-		//나와의 거리 | 세탁소 이름 | 세탁소 주소 | 세탁소 번호 | 배달료
+		//(번호) 나와의 거리 | 세탁소 이름 | 세탁소 주소 | 세탁소 번호 | 배달료
 		int i = 0;
+		System.out.println( " 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비" );
 		for(Laundry laundry : laundries) {
-			System.out.println( distances.get(i) + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + laundry.getLaundryTel() +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
+			System.out.println( "(" + (i+1) + ") " + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
 			i++;
 		}
 	}
 	
 	public static void printLaundry(Laundry laundry, double distance) {
-		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + laundry.getLaundryTel() +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
+		System.out.println( " 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비" );
+		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
 
 	}
 	public static void printUserReview(List<Review> reviews) {
+		System.out.print("리뷰번호 | ID | 세탁소ID| 별점 | 리뷰내용 ");
+		System.out.println("");
 		for(Review review : reviews) {
-			System.out.print(review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId());
+			System.out.print(""+ review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId());
 			if(review.getReviewContent() != null) {
-				System.out.println(" | " + review.getReviewRate());
-				System.out.println(" | " + review.getReviewContent());
+				System.out.println("" +review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId() + " | " + review.getReviewRate() + " | " + review.getReviewContent());
+				System.out.println("");
 			}else {
-				System.out.println();
+				System.out.println("작성하신 리뷰가 없습니다");
+				System.out.println("");
 			}
 		}
 	}

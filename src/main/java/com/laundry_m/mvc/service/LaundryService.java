@@ -133,13 +133,19 @@ public interface LaundryService {
 	int clothesfabricFee(Long laundryId,Long clothesId, Long fabricId) throws SQLException, NotExistException, NotLoginException;;
 	
 	/**
-	 * 세탁소 아이디로 찾기
+	 * 회원 아이디로 세탁소 찾기
 	 * */
-	List<Laundry> selectByLaundryId(String LaundryId) throws SQLException, NotExistException, NotLoginException;;
+	Laundry selectByUserId(String userId) throws SQLException, NotExistException, NotLoginException;;
 	
 	/**
 	 * 회원 주소 - 세탁소 주소 사이 거리 구하기
 	 * */
-	double userBetweenLaun(Users users, Laundry laundry) throws SQLException, NotLoginException, NotExistException;
+	int userBetweenLaun(Users users, Laundry laundry) throws SQLException, NotLoginException, NotExistException;
+	
+	/**
+	 * 사용자 위치에서 세탁소 찾기
+	 * */
+	List<Laundry> selectByMyLaundry(String userAddress) throws SQLException, NotExistException, NotLoginException;
+
 
 }
