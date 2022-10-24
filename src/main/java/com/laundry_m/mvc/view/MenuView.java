@@ -171,7 +171,7 @@ public class MenuView {
 					MetapayMenuView.deleteMetapayAccount();
 					break;
 				case 3 :
-					
+					MetapayMenuView.deleteMetapayAccount();
 					break;
 				case 8 :
 					run = false;
@@ -205,7 +205,7 @@ public class MenuView {
 					
 					break;
 				case 2 :
-					
+					laundryManageMenu();
 					break;
 				case 3 :
 					
@@ -273,13 +273,13 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					bookController.searchBookByLaundryId(1L, 7L);
 					break;
 				case 2 :
-					
+					BookMenuView.searchBookByLaundryIdAndBookStateId();
 					break;
 				case 3 :
-					
+					BookMenuView.updateBookState();
 					break;
 				case 8 :
 					run = false;
@@ -499,7 +499,7 @@ public class MenuView {
 	 * 프로그램 종료 메소드
 	 * */
 	public static void exit() {
-		System.out.println("런드리엠이 종료되었습니다.");
+		System.out.println("런드리M이 종료되었습니다.");
 		System.out.println("이용해주셔서 감사합니다.");
 		System.exit(0);
 	}
