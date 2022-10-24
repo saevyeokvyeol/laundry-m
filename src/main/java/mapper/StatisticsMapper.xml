@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="statisticsMapper">
+	<select id="searchTotalStatistics" parameterType="map" resultType="statisticsTotal">
+		select count(*) as book_count, sum(book_total_fee) as book_total_fee
+		from book
+		<trim prefix="where">
+			<if test="date != null">
+				to_char(book_insert_date, 'YYYYMMDD') = #{date}
+			</if>
+			<if test="laundryId != null">
+				laundry_id = #{laundryId}
+			</if>
+			<if test="userId != null">
+				user_id = #{userId}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="searchDetailStatistics" parameterType="map" resultType="statisticsDetail">
+		select bl.clothes_id, count(*) as count
+		from book b join book_line bl
+		on b.book_id = bl.book_id
+		<trim prefix="where">
+			<if test="date != null">
+				to_char(book_insert_date, 'YYYYMMDD') = #{date}
+			</if>
+			<if test="laundryId != null">
+				laundry_id = #{laundryId}
+			</if>
+			<if test="userId != null">
+				user_id = #{userId}
+			</if>
+		</trim>
+		order by clothes_id
+	</select>
+</mapper>
