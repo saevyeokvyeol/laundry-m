@@ -16,11 +16,11 @@ public class Users {
 	private String userAddress;
 	private String userState;
 	private Double userLatitude;
-	private Double userLongitude;
+	private Double userLongtitude;
 	
 	@Builder
 	public Users(String userId, String userPwd, String userName, String userPhone, String userType, String userAddress,
-			String userState, double userLatitude, double userLongitude) {
+			String userState, Double userLatitude, Double userLongtitude) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -30,7 +30,7 @@ public class Users {
 		this.userAddress = userAddress;
 		this.userState = userState;
 		this.userLatitude = userLatitude;
-		this.userLongitude = userLongitude;
+		this.userLongtitude = userLongtitude;
 	}
 	
 	

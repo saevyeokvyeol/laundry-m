@@ -280,7 +280,7 @@ public class LaundryDaoImpl implements LaundryDao {
 		
 		//회원의 위도, 경도 구한다
 		double userLatit =  users.getUserLatitude(); //위도
-		double userLong = users.getUserLongitude(); //경도
+		double userLong = users.getUserLongtitude(); //경도
 		
 		//세탁소의 위도, 경도 구한다
 		double laundryLatit = laundry.getLaundryLatitude(); //위도

@@ -19,4 +19,8 @@
 		select * from users where user_id = #{userId} and user_pwd = #{userPwd}
 	</select>
 	
+	<insert id="insertUser" parameterType="users" >
+		insert into users values (#{userId}, #{userPwd}, #{userName}, #{userPhone}, #{userType}, #{userAddress}, #{userState}, #{userLatitude}, #{userLongtitude})
+	</insert>
+	
 </mapper>

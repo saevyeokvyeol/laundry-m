@@ -15,6 +15,7 @@ public interface UsersService {
 	 * 1. 회원을 인서트 한다.
 
 	 * @param : User user(회원 아이디, 비밀번호, 연락처, 회원타입, 주소, 이름)
+	 * @return 
 	 * @exception : DuplicationException(아이디가 이미 존재할 경우 오류)
 	 * 				NotExistException(아아디 DB에 존재하지 않을 경우 오류)
 	 * 				NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)

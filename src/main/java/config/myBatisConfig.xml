@@ -51,8 +51,7 @@
 		<mapper resource="mapper/BookMapper.xml"/>
 		<mapper resource="mapper/UsersMapper.xml"/>
 		<mapper resource="mapper/LaundryMapper.xml"/>
-		<mapper resource="mapper/MetapayMapper.xml"/>
+		<!-- <mapper resource="mapper/MetapayMapper.xml"/> -->
 		<mapper resource="mapper/ReviewMapper.xml"/>
-<!-- 		<mapper resource="mapper/MetapayMapper.xml"/> -->
 	</mappers>
 </configuration>
