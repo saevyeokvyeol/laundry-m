@@ -130,13 +130,13 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					bookController.searchBookByUserId(7L);
+					/* bookController.searchBookByUserId(1L, 7L); */
 					break;
 				case 2 :
-					bookController.searchBookByUserId(null);
+					/* bookController.searchBookByUserId(null); */
 					break;
 				case 3 :
-					reviewController.searchReviewByUserId(null);
+					reviewpageMenu();
 					break;
 				case 4 :
 					
@@ -146,6 +146,47 @@ public class MenuView {
 					break;
 				case 8 :
 					run = false;
+					break;
+				case 9 : 
+					
+					break;
+				case 0 : 
+					MenuView.exit();
+				default:
+					System.out.println("메뉴를 잘못 선택하셨습니다.");
+				}
+			} catch (Exception e) {
+				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+			}
+		}
+	}	/**
+	 * 일반 회원 마이페이지 메뉴
+	 * */
+	public static void reviewpageMenu() {
+		boolean run = true;
+		while (run) {
+			try {
+				System.out.println("\n" + "[ 1. 내가 쓴 리뷰 리스트 | 2. 리뷰 쓰기 | 3. 리뷰 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.print("▶ ");
+				int menu = Integer.parseInt(sc.nextLine());
+				switch(menu) {
+				case 1 :
+					reviewController.searchReviewByUserId();
+					break;
+				case 2 :
+					System.out.println("리뷰 작성할 예약번호를 입력해주세요");
+					System.out.print("▶ ");
+					System.out.println();
+					bookController.searchBookByUserId(10L, 10L); //수정
+					Long bookId = Long.parseLong(sc.nextLine());
+					ReviewMenuView.reviewForm(bookId);
+					break;
+				case 3 :
+					ReviewMenuView.reviewUpdateForm();
+					break;
+				case 8 :
+					run = false;
+
 					break;
 				case 9 : 
 					

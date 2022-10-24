@@ -84,11 +84,10 @@ public class ReviewController {
 		 * @param: String userId
 		 */
 	
-	  public void searchReviewByUserId(String userId){ 
+	  public void searchReviewByUserId(){ 
 		  try {
 			  Users users = (Users)session.getAttribute("loginUser");
-			  Review review = Review.builder().userId(users.getUserId()).userId(userId).build();
-			  List<Review> reviews = reviewService.searchReviewByUserId(userId);
+			  List<Review> reviews = reviewService.searchReviewByUserId(users.getUserId());
 			  SuccessView.printUserReview(reviews);
 		  }catch(Exception e) {
 			  e.printStackTrace();
