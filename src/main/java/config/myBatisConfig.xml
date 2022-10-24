@@ -54,5 +54,7 @@
 		<mapper resource="mapper/MetapayMapper.xml"/>
 		<mapper resource="mapper/ReviewMapper.xml"/>
 <!-- 		<mapper resource="mapper/MetapayMapper.xml"/> -->
+		<mapper resource="mapper/ReviewMapper.xml"/>
+		<mapper resource="mapper/FavoriteMapper.xml"/>
 	</mappers>
 </configuration>

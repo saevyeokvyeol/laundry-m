@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="favoriteMapper">
+
+	<!-- 찜 목록 입력 -->
+	<insert id ="addFavorite" parameterType="favorite">
+		insert into favorite values(FAVORITE_SEQ.NEXTVAL, #{userId}, #{laundryId})
+	</insert> 
+	
+	<!-- 찜 목록 삭제 -->
+	<delete id = "deleteFavorite" parameterType="favorite">
+		delete from favorite where #{favoriteId}
+	</delete>
+	
+	<!-- 찜 목록 회원아이디로 검색 -->
+	<select id="searchFavoriteByUserId" parameterType="favorite">
+		select favorite_id, user_id, laundry_id
+		from favorite
+		where user_id=#{user_id}
+	</select>
+
+	<!-- 찜 목록 세탁소아이디로 검색 -->
+	<select id="searchFavoriteByLaundryId" parameterType="favorite">
+		select favorite_id, user_id, laundry_id
+		from favorite
+		where laundry_id=#{laundry_id}	
+	</select>
+</mapper>

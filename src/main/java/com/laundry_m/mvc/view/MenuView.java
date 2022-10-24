@@ -5,6 +5,8 @@ import java.util.Scanner;
 import com.laundry_m.mvc.controller.BookController;
 import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.controller.UsersController;
+import com.laundry_m.mvc.controller.ReviewController;
+
 import com.laundry_m.mvc.vo.Users;
 
 public class MenuView {
@@ -12,6 +14,7 @@ public class MenuView {
 	private static BookController bookController = new BookController();
 	private static MetapayController metapayController = new MetapayController();
 	private static UsersController usersController = new UsersController();
+	private static ReviewController reviewController = new ReviewController();
 	
 	/**
 	 * 시작 메뉴
@@ -65,7 +68,7 @@ public class MenuView {
 					
 					break;
 				case 4 :
-					
+					customerMypageMenu();
 					break;
 				case 9 : 
 					
@@ -134,7 +137,7 @@ public class MenuView {
 					bookController.searchBookByUserId(null);
 					break;
 				case 3 :
-					
+					reviewController.searchReviewByUserId(null);
 					break;
 				case 4 :
 					
@@ -214,7 +217,7 @@ public class MenuView {
 					
 					break;
 				case 3 :
-					
+					reviewController.searchReviewByLaundryId(null);
 					break;
 				case 4 :
 					

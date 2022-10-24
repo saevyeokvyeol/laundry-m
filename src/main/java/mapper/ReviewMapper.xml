@@ -18,32 +18,42 @@
 	
 	<!-- 리뷰 삭제 -->
 	<delete id = "deleteReview" parameterType="review">
-		delete from review where #{review_seq.nextval}
+		delete from review where #{reviewId}
 	</delete>
 		
 	<!-- 전체 리뷰 보기 -->
 	<select id = "searchReviewAll" resultType="Long">
-		select * from review
+		select review_id, user_id, laundry_id, book_id, review_content, review_rate, review_insert_date, review_update_date
+		from review
+		order by review_insert_date desc
 	</select>
 	
 	<!-- 유저 아이디로 리뷰 검색 /회원이 작성한 리뷰 보기 -->
 	<select id = "searchReviewByUserId" resultType="Long">
-		select * from review where user_id=#{userId}
+		select review_id, user_id, laundry_id, book_id, review_content, review_rate, review_insert_date, review_update_date
+		from review where user_id=#{userId}
+		order by review_insert_date desc
 	</select>
 	
 	<!-- 점포 아이디로 리뷰 검색 -->
 	<select id = "searchReviewByLaundryId" resultType="Long">
-		select * from review where laundry_id=#{laundryId}
+		select review_id, user_id, laundry_id, book_id, review_content, review_rate, review_insert_date, review_update_date
+		from review where laundry_id=#{laundryId}
+		order by review_insert_date desc
 	</select>
 	
 	<!-- 예약 번호로 리뷰 검색 -->
 	<select id = "searchReviewByBookId" resultType="Long">
-		select * from review where book_id=#{bookId}
+		select review_id, user_id, laundry_id, book_id, review_content, review_rate, review_insert_date, review_update_date
+		from review where book_id=#{bookId}
+		order by review_insert_date desc
 	</select>
 	
 	<!-- 리뷰 번호로 리뷰 검색 -->
 	<select id = "searchReviewByReviewId" resultType="Long">
-		select * from review where review_id=#{reviewId}
+		select review_id, user_id, laundry_id, book_id, review_content, review_rate, review_insert_date, review_update_date
+		from review where review_id=#{reviewId}
+		order by review_insert_date desc
 	</select>
 	
 	
