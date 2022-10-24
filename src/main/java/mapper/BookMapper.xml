@@ -104,7 +104,7 @@
 		order by book_insert_date desc
 	</select>
 	
-	<select id="searchBookByUserId" parameterType="book" resultMap="bookMap">
+	<select id="searchBookByUserId" parameterType="map" resultMap="bookMap">
 		select b.book_Id, b.user_id, b.book_Count, b.book_Insert_Date, b.book_Update_Date, b.book_Memo, b.book_Total_Fee,
 		    bs.book_state_id, bs.book_state_name,
 		    bm.book_method_id, bm.book_method_name,
@@ -120,8 +120,8 @@
 		on b.book_id = bl.book_id
 		where b.user_id = #{userId}
 		<trim prefix="and">
-			<if test="bookStateId != null">
-				bs.book_state_id <![CDATA[<=]]> #{bookStateId}
+			<if test="start != null">
+				bs.book_state_id between #{start} and #{end}
 			</if>
 		</trim>
 		order by book_insert_date desc

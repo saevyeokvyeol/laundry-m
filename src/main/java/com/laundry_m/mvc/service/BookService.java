@@ -74,14 +74,14 @@ public interface BookService {
 	
 	/**
 	 * 유저 아이디로 예약 검색
-	 * @param: Book book(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
+	 * @param: Map<String, Object> map(유저 아이디, 예약 상태 번호(선택 - 없을 경우 모든 예약 상태 검색, 있을 경우 해당 예약 상태 번호만 검색))
 	 * @return: List<Book>
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * 			   NotExistException(회원이 DB에 존재하지 않을 경우 오류)
 	 * 			   InvalidUserException(관리자나 해당 회원이 아닐 경우 오류)
 	 * 			   NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * */
-	List<Book> searchBookByUserId(Book book) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
+	List<Book> searchBookByUserId(Map<String, Object> map) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
 	
 	/**
 	 * 점포 아이디로 예약 검색
