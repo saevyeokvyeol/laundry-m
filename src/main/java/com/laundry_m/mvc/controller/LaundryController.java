@@ -256,12 +256,10 @@ public class LaundryController {
 			System.out.println("현재 " + users.getUserName() + "님의 주소를 기반으로 근처 세탁소를 검색합니다");
 			System.out.println();
 			
-			Users dbUsers = Users.builder().userAddress(users.getUserAddress()).build();
-			
-			List<Laundry> laundries = laundryService.selectByMyLaundry();
+			List<Laundry> laundries = laundryService.selectByMyLaundry(users.getUserAddress());
 			
 			for(Laundry laundry : laundries) {
-				double distance = laundryService.userBetweenLaun(dbUsers, laundry);
+				double distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
 			SuccessView.printLaundryList(laundries, distanceList);

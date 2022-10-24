@@ -279,26 +279,32 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public double userBetweenLaun(Users users, Laundry laundry) throws SQLException {
+	public int userBetweenLaun(Users users, Laundry laundry) throws SQLException {
 		
 		//회원의 위도, 경도 구한다
-		double userLatit =  users.getUserLatitude(); //위도
-		double userLong = users.getUserLongitude(); //경도
-		
+//		double userLatit =  users.getUserLatitude(); //위도
+//		double userLong = users.getUserLongitude(); //경도
+
+		double userLatit = users.getUserLongitude(); //경도
+		double userLong = users.getUserLatitude();
+
 		//세탁소의 위도, 경도 구한다
-		double laundryLatit = laundry.getLaundryLatitude(); //위도
-		double laundryLong = laundry.getLaundryLongitude(); //경도
+//		double laundryLatit = laundry.getLaundryLatitude(); //위도
+//		double laundryLong = laundry.getLaundryLongitude(); //경도
+		//세탁소의 위도, 경도 구한다
+		double laundryLatit = laundry.getLaundryLongitude(); //경도
+		double laundryLong = laundry.getLaundryLatitude(); //위도
 		
 		
 		//경도 - 경도
 		double theta = userLong - laundryLong;
-        double dist = Math.sin(deg2rad(userLatit)) * Math.sin(deg2rad(laundryLatit)) 
-        			+ Math.cos(deg2rad(userLatit)) * Math.cos(deg2rad(laundryLatit)) * Math.cos(deg2rad(theta));
+        double dist = (Math.sin(deg2rad(userLatit)) * Math.sin(deg2rad(laundryLatit))) 
+        			+ (Math.cos(deg2rad(userLatit)) * Math.cos(deg2rad(laundryLatit))) * Math.cos(deg2rad(theta));
         dist = Math.acos(dist);
         dist = rad2deg(dist);
-        dist = dist * 60 * 1.1515 * 1609.344;
+        dist = dist * 60 * 1.1515 * 1.609344;
 
-        return dist; //단위 meter
+        return (int)dist; //단위 km
 	}
 	
 	//10진수를 radian(라디안)으로 변환
@@ -312,13 +318,19 @@ public class LaundryDaoImpl implements LaundryDao {
 
     
 	@Override
-	public List<Laundry> selectByMyLaundry() throws SQLException, NotExistException, NotLoginException {
+	public List<Laundry> selectByMyLaundry(String userAddress) throws SQLException, NotExistException, NotLoginException {
 		SqlSession session = null;
 		List<Laundry> laundries = null;
 		
 		try {
 			session = DbUtil.getSession();
-			laundries = session.selectList("laundryMapper.selectByMyLaundry");
+			
+			//사용자 주소에서 '구'만 가져온다
+			String str = userAddress;
+			str = str.trim();
+			String [] newStr = str.split("\\s+");
+			
+			laundries = session.selectList("laundryMapper.selectByMyLaundry" , newStr[1]);
 		} finally {
 			DbUtil.sessionClose(session);
 		}

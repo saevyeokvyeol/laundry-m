@@ -140,12 +140,12 @@ public interface LaundryService {
 	/**
 	 * 회원 주소 - 세탁소 주소 사이 거리 구하기
 	 * */
-	double userBetweenLaun(Users users, Laundry laundry) throws SQLException, NotLoginException, NotExistException;
+	int userBetweenLaun(Users users, Laundry laundry) throws SQLException, NotLoginException, NotExistException;
 	
 	/**
 	 * 사용자 위치에서 세탁소 찾기
 	 * */
-	List<Laundry> selectByMyLaundry() throws SQLException, NotExistException, NotLoginException;
+	List<Laundry> selectByMyLaundry(String userAddress) throws SQLException, NotExistException, NotLoginException;
 
 
 }

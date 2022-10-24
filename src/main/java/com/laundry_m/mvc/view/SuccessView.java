@@ -22,6 +22,14 @@ public class SuccessView {
 		return sb.toString();
 	}
 	
+	private static String getLaunTel(String tel) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(tel);
+		sb.insert(2, '-');
+		sb.insert(6, '-');
+		return sb.toString();
+	}
+	
 	private static String getDate(Timestamp timestamp) {
 		return timestamp.toLocaleString();
 	}
@@ -75,14 +83,16 @@ public class SuccessView {
 	public static void printLaundryList(List<Laundry> laundries , List<Double> distances) {
 		//(번호) 나와의 거리 | 세탁소 이름 | 세탁소 주소 | 세탁소 번호 | 배달료
 		int i = 0;
+		System.out.println( " 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비" );
 		for(Laundry laundry : laundries) {
-			System.out.println( "(" + (i+1) + ") " + distances.get(i) + "m | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + laundry.getLaundryTel() +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
+			System.out.println( "(" + (i+1) + ") " + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
 			i++;
 		}
 	}
 	
 	public static void printLaundry(Laundry laundry, double distance) {
-		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + laundry.getLaundryTel() +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
+		System.out.println( " 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비" );
+		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
 
 	}
 	public static void printUserReview(List<Review> reviews) {
