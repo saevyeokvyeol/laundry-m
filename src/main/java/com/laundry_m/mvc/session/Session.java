@@ -26,4 +26,8 @@ public class Session {
 	public void removeAttribute(String key) {
 		sessionMap.remove(key);
 	}
+	
+	public void removeAll() {
+		sessionMap.clear();
+	}
 }

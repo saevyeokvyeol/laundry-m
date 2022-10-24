@@ -13,7 +13,7 @@ public class UsersController {
 	private UsersService usersService = new UsersServiceImpl();
 	private Session session = Session.getInstance();
 	
-		public void loginUser(String userId, String userPwd) {
+	public void loginUser(String userId, String userPwd) {
 		try {
 			Users users = Users.builder().userId(userId).userPwd(userPwd).build();
 			Users loginUser = usersService.loginUser(users);
@@ -28,11 +28,22 @@ public class UsersController {
 				new MenuView().customerMenu();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		
 	}
 
+	public void insertUser(Users users) {
+		try {
+			usersService.makeUser(users);
+			SuccessView.printMessage("\n" + users.getUserName() + "님, 가입이 완료되었습니다.\n로그인 후 서비스를 이용해주세요.");
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
 
+	public void logout() {
+		session.removeAll();
+		MenuView.menuView();
+	}
 }

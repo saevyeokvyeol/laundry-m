@@ -13,10 +13,25 @@ import util.DbUtil;
 
 public class UsersDaoImpl implements UsersDao{
 
+	/**
+	 * 회원 가입 : 회원 인서트
+	 * @param : User user(회원 아이디, 비밀번호, 연락처, 회원타입, 주소, 이름)	 
+	 * @return : int(등록한 레코드 수)
+	 * */
 	@Override
 	public int insertUser(Users users) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = -1;
+		SqlSession session = null;
+		boolean state = false;
+		try {
+			session = DbUtil.getSession();
+			result = session.insert("usersMapper.insertUser", users);
+			if (result == 1) state = true;
+			System.out.println("result" + result);
+		} finally {
+			DbUtil.sessionClose(session, state);
+		}
+		return result;
 	}
 
 	@Override
