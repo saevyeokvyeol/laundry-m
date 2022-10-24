@@ -27,7 +27,7 @@ public interface UsersDao {
 	 * @param : User user(회원 아이디, 비밀번호)
 	 * @return : User user
 	 * */
-	Users loginUser(String userId, String userPwd) throws SQLException;
+	Users loginUser(Users users) throws SQLException;
 	
 	/** 
 	 * 전체 유저 검색 

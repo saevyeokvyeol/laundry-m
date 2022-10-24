@@ -4,11 +4,17 @@ import java.util.Scanner;
 
 import com.laundry_m.mvc.controller.BookController;
 import com.laundry_m.mvc.controller.MetapayController;
+import com.laundry_m.mvc.controller.UsersController;
+import com.laundry_m.mvc.controller.ReviewController;
+
+import com.laundry_m.mvc.vo.Users;
 
 public class MenuView {
 	private static Scanner sc = new Scanner(System.in);
 	private static BookController bookController = new BookController();
 	private static MetapayController metapayController = new MetapayController();
+	private static UsersController usersController = new UsersController();
+	private static ReviewController reviewController = new ReviewController();
 	
 	/**
 	 * 시작 메뉴
@@ -22,10 +28,13 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
 					break;
 				case 2 :
-					customerMenu(); // 로그인 메소드 구현 후에는 지우고 로그인으로 대체해주세요.
+					System.out.print("\n아이디 입력 > ");
+					String loginId = sc.nextLine();
+					System.out.print("비밀번호 입력 > ");
+					String loginPwd = sc.nextLine();
+					usersController.loginUser(loginId, loginPwd);
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -59,7 +68,7 @@ public class MenuView {
 					
 					break;
 				case 4 :
-					
+					customerMypageMenu();
 					break;
 				case 9 : 
 					
@@ -128,7 +137,7 @@ public class MenuView {
 					bookController.searchBookByUserId(null);
 					break;
 				case 3 :
-					
+					reviewController.searchReviewByUserId(null);
 					break;
 				case 4 :
 					
@@ -208,7 +217,7 @@ public class MenuView {
 					laundryManageMenu();
 					break;
 				case 3 :
-					
+					reviewController.searchReviewByLaundryId(null);
 					break;
 				case 4 :
 					

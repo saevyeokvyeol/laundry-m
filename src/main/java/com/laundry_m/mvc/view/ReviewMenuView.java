@@ -11,7 +11,7 @@ public class ReviewMenuView {
 	private static ReviewController reviewController = new ReviewController();
 	
 	/**
-	 * 리뷰 폼 메뉴
+	 * 리뷰 입력폼 메뉴
 	 * */
 	public static void reviewForm(Long bookId) {
 		boolean run = true;

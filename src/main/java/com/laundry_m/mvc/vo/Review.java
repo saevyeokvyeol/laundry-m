@@ -29,7 +29,6 @@ public class Review {
 	
 
 	@Builder
-
 	public Review(Long reviewId, String userId, Long laundryId, Long bookId, String reviewContent, Long reviewRate,
 			Timestamp reviewInsertDate, Timestamp reviewUpdateDate, Users users, Laundry laundry, Book book) {
 		super();

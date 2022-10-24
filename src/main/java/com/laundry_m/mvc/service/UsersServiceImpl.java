@@ -22,9 +22,10 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public void loginUser(String userId, String userPwd) throws SQLException, NotExistException {
-		// TODO Auto-generated method stub
-		
+	public Users loginUser(Users users) throws SQLException, NotExistException {
+		Users loginUser = usersDao.loginUser(users);
+		if(users == null) { throw new NotExistException("아이디 혹은 비밀번호가 올바르지 않습니다."); }
+		return loginUser;
 	}
 
 	@Override

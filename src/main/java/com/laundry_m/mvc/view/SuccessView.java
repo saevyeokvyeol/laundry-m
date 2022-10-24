@@ -9,6 +9,7 @@ import com.laundry_m.mvc.vo.BookLine;
 import com.laundry_m.mvc.vo.Metapay;
 import com.laundry_m.mvc.vo.PayAccount;
 import com.laundry_m.mvc.vo.Laundry;
+import com.laundry_m.mvc.vo.Review;
 
 public class SuccessView {
 	private static DecimalFormat won = new DecimalFormat("#,###");
@@ -69,6 +70,7 @@ public class SuccessView {
 			System.out.println();
 		}
 	}
+
 	
 	public static void printLaundryList(List<Laundry> laundries , List<Double> distances) {
 		//나와의 거리 | 세탁소 이름 | 세탁소 주소 | 세탁소 번호 | 배달료
@@ -79,5 +81,19 @@ public class SuccessView {
 	
 	public static void printLaundry(Laundry laundry, double distance) {
 		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + laundry.getLaundryTel() +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
+
+	}
+	public static void printUserReview(List<Review> reviews) {
+		for(Review review : reviews) {
+			System.out.print(review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId());
+			if(review.getReviewContent() != null) {
+				System.out.println(" | " + review.getReviewRate());
+				System.out.println(" | " + review.getReviewContent());
+			}else {
+				System.out.println();
+			}
+		}
+		
+
 	}
 }
