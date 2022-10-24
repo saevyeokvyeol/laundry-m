@@ -95,10 +95,10 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					LaundryMenuVIew.findLaundry(null);
 					break;
 				case 2 :
-					
+					LaundryMenuVIew.selectByLaundryName();
 					break;
 				case 8 :
 					run = false;

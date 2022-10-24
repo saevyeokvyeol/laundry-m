@@ -56,5 +56,54 @@
 		insert into ExtraFee
 		values (#{extra_Fee_id_Seq.nextval} , #{fabricId}, #{laundryId}, #{fabricFee}, #{extraFeeOperation} )
 	</insert>
+	
+	<!-- 이름으로 세탁소 구하기 -->
+	<select id="selectByNameLaundry" parameterType="string">
+		select *
+			from(
+			    select *
+			    from laundry
+			    where laundry_name like '%${parameter}%'
+			)
+		<![CDATA[where rownum <= 10]]> 
+	</select>
+	
+	
+	
+	<!-- 주소로 세탁소 구하기 -->
+	<select id="selectByAddressLaundry" parameterType="string">
+		select *
+			from(
+			    select *
+			    from laundry
+			    where laundry_address like '%${parameter}%'
+			)
+		<![CDATA[where rownum <= 10]]> 
+	</select>
+	
+	
+	<!-- 가격 가장 낮은 세탁소 구하기 -->
+	<select id="selectByLowestByLaundry" parameterType="long">
+		select * 
+			from (
+			    select laundry_id, fabric_fee + clothes_fee as sum
+			    from  extra_fee  join fee 
+			    using (laundry_id) 
+			    where fabric_id = #{parameter1} and clothes_id = #{parameter2}
+			    order by sum asc
+			)
+		<![CDATA[where rownum <= 1]]> 
+	</select>
+	
+	<!-- 세탁소 아이디로 세탁소 구하기 -->
+	<select id="selectByLaundryId" parameterType="string">
+		select *
+			from(
+			    select *
+			    from laundry
+			    where laundry_id like '%${parameter}%'
+			)
+		<![CDATA[where rownum <= 10]]> 
+	</select>
 
 </mapper>

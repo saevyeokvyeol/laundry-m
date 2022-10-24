@@ -224,7 +224,7 @@ public class LaundryDaoImpl implements LaundryDao {
 		
 		try {
 			session = DbUtil.getSession();
-			//laundry = session.selectList("laundryMapper.selectByLowestByLaundry");
+			laundry = session.selectOne("laundryMapper.selectByLowestByLaundry");
 		} finally {
 			DbUtil.sessionClose(session);
 		}

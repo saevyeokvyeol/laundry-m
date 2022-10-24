@@ -1,5 +1,6 @@
 package com.laundry_m.mvc.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -231,6 +232,18 @@ public class LaundryController {
 		
 	}
 	
+	/**
+	 * 특정 세탁소에서 옷 + 재질 가격 더하기
+	 * */
+	public void clothesfabricFee(Long laundryId, Long clothesId, Long fabricId) {
+		try {
+			int result = laundryService.clothesfabricFee(laundryId, clothesId, fabricId);
+			SuccessView.printMessage("총 가격 : "+ result);
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+	}
 	
 }
 	

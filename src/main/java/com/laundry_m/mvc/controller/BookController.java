@@ -109,7 +109,7 @@ public class BookController {
 	public void searchBookByLaundryId(Long start, Long end) {
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
-			Map<String, Object> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("userId", users.getUserId());
 			map.put("start", start);
 			map.put("end", end);
