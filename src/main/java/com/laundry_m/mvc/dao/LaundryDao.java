@@ -101,7 +101,7 @@ public interface LaundryDao {
 	/**
 	 * 특정 세탁소에서 옷 + 재질 가격 더하는 메소드
 	 * */
-	int clothesfabricFee(Long laundryId,Long clothesId, Long fabricId) throws SQLException;
+	int clothesfabricFee(Long laundryId,int clothesId, int fabricId) throws SQLException;
 	
 	/**
 	 * 세탁소 아이디로 찾기
@@ -118,4 +118,10 @@ public interface LaundryDao {
 	 * */
 	List<Laundry> selectByMyLaundry(String userAddress) throws SQLException, NotExistException, NotLoginException;
 
+	/**
+	 * 천으로 세탁 방법 찾기
+	 * */
+	Fabric selectWashByFabric(int fabricId) throws SQLException, NotExistException, NotLoginException;
+
+	
 }

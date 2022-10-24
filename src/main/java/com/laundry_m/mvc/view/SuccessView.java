@@ -125,4 +125,9 @@ public class SuccessView {
 			System.out.println(clothes[detail.getClothesId()] + " : " + detail.getCount() + "건");
 		}
 	}
+	
+	public static void printWashMethod(Laundry laundry) {
+		System.out.println("");
+	}
+	
 }

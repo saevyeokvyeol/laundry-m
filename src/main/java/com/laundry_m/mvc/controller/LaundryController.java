@@ -230,7 +230,7 @@ public class LaundryController {
 	/**
 	 * 특정 세탁소에서 옷 + 재질 가격 더하기
 	 * */
-	public void clothesfabricFee(Long laundryId, Long clothesId, Long fabricId) {
+	public void clothesfabricFee(Long laundryId, int clothesId, int fabricId) {
 		try {
 			int result = laundryService.clothesfabricFee(laundryId, clothesId, fabricId);
 			SuccessView.printMessage("총 가격 : "+ result);
@@ -243,7 +243,7 @@ public class LaundryController {
 	/**
 	 * 특정 세탁소에서 옷 + 재질 가격 더하기
 	 * */
-	public int searchLaundryFee(Long laundryId, Long clothesId, Long fabricId) {
+	public int searchLaundryFee(Long laundryId, int clothesId, int fabricId) {
 		int result = 0;
 		try {
 			result = laundryService.clothesfabricFee(laundryId, clothesId, fabricId);
@@ -276,6 +276,21 @@ public class LaundryController {
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
+	}
+	
+	/**
+	 * 천으로 세탁 방법 찾기
+	 * */
+	public String selectWashByFabric(int fabricId) {
+		String washMethod = null;
+		try {
+			Fabric fabric = laundryService.selectWashByFabric(fabricId);
+			washMethod = fabric.getFabricWashMethod();
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+		return washMethod;
 	}
 	
 }

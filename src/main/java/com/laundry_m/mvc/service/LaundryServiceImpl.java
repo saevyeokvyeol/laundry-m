@@ -111,7 +111,7 @@ public class LaundryServiceImpl implements LaundryService {
 	}
 
 	@Override
-	public int clothesfabricFee(Long laundryId, Long clothesId, Long fabricId)
+	public int clothesfabricFee(Long laundryId, int clothesId, int fabricId)
 			throws SQLException, NotExistException, NotLoginException {
 		return laundryDao.clothesfabricFee(laundryId, clothesId, fabricId);
 	}
@@ -132,6 +132,12 @@ public class LaundryServiceImpl implements LaundryService {
 	public List<Laundry> selectByMyLaundry(String userAddress) throws SQLException, NotExistException, NotLoginException {
 		
 		return laundryDao.selectByMyLaundry(userAddress);
+	}
+
+	@Override
+	public Fabric selectWashByFabric(int fabricId) throws SQLException, NotExistException, NotLoginException {
+		
+		return null;
 	}
 
 }

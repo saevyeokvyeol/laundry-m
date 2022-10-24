@@ -130,7 +130,7 @@ public interface LaundryService {
 	/**
 	 * 특정 세탁소에서 옷 + 재질 가격 더하는 메소드
 	 * */
-	int clothesfabricFee(Long laundryId,Long clothesId, Long fabricId) throws SQLException, NotExistException, NotLoginException;;
+	int clothesfabricFee(Long laundryId, int clothesId, int fabricId) throws SQLException, NotExistException, NotLoginException;;
 	
 	/**
 	 * 회원 아이디로 세탁소 찾기
@@ -146,6 +146,11 @@ public interface LaundryService {
 	 * 사용자 위치에서 세탁소 찾기
 	 * */
 	List<Laundry> selectByMyLaundry(String userAddress) throws SQLException, NotExistException, NotLoginException;
+	
+	/**
+	 * 천으로 세탁 방법 찾기
+	 * */
+	Fabric selectWashByFabric(int fabricId) throws SQLException, NotExistException, NotLoginException;
 
 
 }

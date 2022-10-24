@@ -236,7 +236,7 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public int clothesfabricFee(Long laundryId, Long clothesId, Long fabricId) throws SQLException {
+	public int clothesfabricFee(Long laundryId, int clothesId, int fabricId) throws SQLException {
 		SqlSession session = null;
 		Laundry laundry = null;
 		int totalFee = 0;
@@ -336,6 +336,21 @@ public class LaundryDaoImpl implements LaundryDao {
 		}
 		
 		return laundries;
+	}
+
+	@Override
+	public Fabric selectWashByFabric(int fabricId) throws SQLException, NotExistException, NotLoginException {
+		SqlSession session = null;
+		Fabric fabric = null;
+		
+		try {
+			session = DbUtil.getSession();
+			fabric = session.selectOne("laundryMapper.selectWashByFabric" , fabricId);
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		
+		return fabric;
 	}
 
 }

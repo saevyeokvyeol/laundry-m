@@ -68,7 +68,7 @@ public class MenuView {
 					
 					break;
 				case 3 :
-					
+					LaundryMenuVIew.recomWashMethod();
 					break;
 				case 4 :
 					customerMypageMenu();
