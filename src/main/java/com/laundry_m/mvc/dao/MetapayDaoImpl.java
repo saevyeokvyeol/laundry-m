@@ -27,7 +27,7 @@ public class MetapayDaoImpl implements MetapayDao {
 		try {
 			session = DbUtil.getSession();
 			result = session.insert("metapayMapper.joinMetapay", metapay);
-			int re = this.addMetapayAccount(session, metapay.getPayAccounts().get(0));
+			int re = this.addMetapayAccount(session, metapay.getPayAccount().get(0));
 			
 			if (result == 1 && re == 1) state = true;
 		} finally {

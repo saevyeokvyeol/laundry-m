@@ -77,7 +77,7 @@ public class MetapayMenuView {
 			PayAccount payAccount = PayAccount.builder().bankId(bankId).payAccountNumber(payAccountNumber).build();
 			List<PayAccount> payAccounts = new ArrayList<PayAccount>();
 			payAccounts.add(payAccount);
-			Metapay metapay = Metapay.builder().metapayPassword(metapayPassword).payAccounts(payAccounts).build();
+			Metapay metapay = Metapay.builder().metapayPassword(metapayPassword).payAccount(payAccounts).build();
 			metapayController.joinMetapay(metapay);
 		} catch (Exception e) {
 			FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
