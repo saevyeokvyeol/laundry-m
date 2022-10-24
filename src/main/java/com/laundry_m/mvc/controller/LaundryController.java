@@ -241,6 +241,19 @@ public class LaundryController {
 	}
 	
 	/**
+	 * 특정 세탁소에서 옷 + 재질 가격 더하기
+	 * */
+	public int searchLaundryFee(Long laundryId, Long clothesId, Long fabricId) {
+		int result = 0;
+		try {
+			result = laundryService.clothesfabricFee(laundryId, clothesId, fabricId);
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**	
 	 * 내 주소 기반으로 세탁소 찾기
 	 * */
 	public void selectByMyLaundry() {
