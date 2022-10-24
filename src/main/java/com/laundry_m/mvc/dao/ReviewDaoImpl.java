@@ -31,7 +31,7 @@ public class ReviewDaoImpl implements ReviewDao {
 			session = DbUtil.getSession();
 			
 			//세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
-			result = session.insert("ReviewMapper.createReview", review);
+			result = session.insert("reviewMapper.createReview", review);
 			if(result == 1) state = true;
 			
 		}finally {

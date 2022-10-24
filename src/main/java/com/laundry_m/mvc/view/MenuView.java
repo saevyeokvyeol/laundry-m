@@ -31,6 +31,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
+					InsertUserView.insertUserForm();
 					break;
 				case 2 :
 					System.out.print("\n아이디 입력 > ");
@@ -45,6 +46,7 @@ public class MenuView {
 					System.out.println("메뉴를 잘못 선택하셨습니다.");
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 			}
 		}
@@ -74,7 +76,7 @@ public class MenuView {
 					customerMypageMenu();
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -109,7 +111,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -152,7 +154,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -170,7 +172,7 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 내가 쓴 리뷰 리스트 | 2. 리뷰 쓰기 | 3. 리뷰 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내가 쓴 리뷰 리스트 | 2. 리뷰 쓰기 | 3. 리뷰 수정 | 4.리뷰 삭제 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -183,9 +185,11 @@ public class MenuView {
 				case 3 :
 					ReviewMenuView.reviewUpdateForm();
 					break;
+				case 4 :
+					ReviewMenuView.deleteForm();
+					break;
 				case 8 :
 					run = false;
-
 					break;
 				case 9 : 
 					
@@ -225,7 +229,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -264,7 +268,7 @@ public class MenuView {
 					statisticsController.searchStatistics(map);
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -298,7 +302,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -335,7 +339,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -371,7 +375,7 @@ public class MenuView {
 					
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -408,7 +412,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -445,7 +449,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -489,7 +493,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -529,7 +533,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();

@@ -14,13 +14,14 @@ import com.laundry_m.mvc.vo.Users;
 public class UsersServiceImpl implements UsersService{
 	private UsersDao usersDao = new UsersDaoImpl();
 
+	
 	@Override
 	public void makeUser(Users users)
 			throws SQLException, DuplicationException, NotExistException, NotFilledInException {
-		// TODO Auto-generated method stub
-		
+		int result = usersDao.insertUser(users);
+		if(result != 1) { throw new NotExistException("가입 실패하였습니다. 다시 시도해주세요."); }
 	}
-
+	
 	@Override
 	public Users loginUser(Users users) throws SQLException, NotExistException {
 		Users loginUser = usersDao.loginUser(users);
@@ -51,4 +52,8 @@ public class UsersServiceImpl implements UsersService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+
+	
 }
