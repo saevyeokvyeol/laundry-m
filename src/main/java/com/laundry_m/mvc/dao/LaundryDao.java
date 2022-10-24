@@ -106,7 +106,7 @@ public interface LaundryDao {
 	/**
 	 * 세탁소 아이디로 찾기
 	 * */
-	List<Laundry> selectByLaundryId(String LaundryId) throws SQLException;
+	Laundry selectByUserId(String userId) throws SQLException;
 	
 	/**
 	 * 회원 주소 - 세탁소 주소 사이 거리 구하기

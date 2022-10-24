@@ -112,7 +112,7 @@
 			from(
 			    select *
 			    from laundry
-			    where laundry_id like '%${parameter}%'
+			    where user_id like '%${parameter}%'
 			)
 		<![CDATA[where rownum <= 10]]> 
 	</select>

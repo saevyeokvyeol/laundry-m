@@ -117,8 +117,8 @@ public class LaundryServiceImpl implements LaundryService {
 	}
 
 	@Override
-	public List<Laundry> selectByLaundryId(String LaundryId) throws SQLException, NotExistException, NotLoginException {
-		return laundryDao.selectByLaundryId(LaundryId);
+	public Laundry selectByUserId(String userId) throws SQLException, NotExistException, NotLoginException {
+		return laundryDao.selectByUserId(userId);
 	}
 
 	@Override

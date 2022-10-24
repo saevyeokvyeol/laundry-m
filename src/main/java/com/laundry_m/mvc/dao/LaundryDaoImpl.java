@@ -264,18 +264,18 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public List<Laundry> selectByLaundryId(String LaundryId) throws SQLException {
+	public Laundry selectByUserId(String userId) throws SQLException {
 		SqlSession session = null;
-		List<Laundry> laundries = null;
+		Laundry laundry = null;
 		
 		try {
 			session = DbUtil.getSession();
-			laundries = session.selectList("laundryMapper.selectByLaundryId");
+			laundry = session.selectOne("laundryMapper.selectByLaundryId", userId);
 		} finally {
 			DbUtil.sessionClose(session);
 		}
 		
-		return laundries;
+		return laundry;
 	}
 
 	@Override

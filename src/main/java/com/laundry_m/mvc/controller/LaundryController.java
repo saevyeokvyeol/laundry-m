@@ -190,20 +190,16 @@ public class LaundryController {
 	/**
 	 * 세탁소 아이디로 찾기
 	 * */
-	public void selectByLaundryId(String LaundryId) {
-		
-		List<Double> distanceList = new ArrayList<Double>();
+	public void selectByLaundryId(String userId) {
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
-			List<Laundry> list = laundryService.selectByLaundryId(LaundryId);
+			Laundry laundry = laundryService.selectByUserId(users.getUserId());
 			
-			for(Laundry laundry : list) {
-				//각각의 세탁소별 유저와의 거리 구한다
-				double distance = laundryService.userBetweenLaun(users, laundry);
-				distanceList.add(distance);
-			}
-			SuccessView.printLaundryList(list, distanceList);
+			
+			double distance = laundryService.userBetweenLaun(users, laundry);
+			
+			SuccessView.printLaundry(laundry, distance);
 			
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
