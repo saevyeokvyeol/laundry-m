@@ -12,8 +12,8 @@ import lombok.Setter;
 public class BookLine {
 	private Long bookLineId;
 	private Long bookId;
-	private Long clothesId;
-	private Long fabricId;
+	private int clothesId;
+	private int fabricId;
 	private int bookLineFee;
 	
 	private Book book;
@@ -21,7 +21,7 @@ public class BookLine {
 	private Fabric fabric;
 	
 	@Builder
-	public BookLine(Long bookLineId, Long bookId, Long clothesId, Long fabricId, int bookLineFee, Book book, Clothes clothes, Fabric fabric) {
+	public BookLine(Long bookLineId, Long bookId, int clothesId, int fabricId, int bookLineFee, Book book, Clothes clothes, Fabric fabric) {
 		super();
 		this.bookLineId = bookLineId;
 		this.bookId = bookId;

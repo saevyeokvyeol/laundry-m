@@ -41,7 +41,7 @@ public interface UsersDao {
 	 *  @param : User user(회원 아이디, 회원 이름(선택 - 없을 경우 모든 회원 아이디 검색, 해당 이름만 검색))
 	 *  @return : List<User> 
 	 *  */
-	List<Users> selectByUserId(Users users) throws SQLException;
+	Users selectByUserId(Users users) throws SQLException;
 	
 	/** 
 	 *  회원 타입으로 검색

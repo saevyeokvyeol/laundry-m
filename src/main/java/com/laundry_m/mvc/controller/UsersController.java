@@ -1,5 +1,10 @@
 package com.laundry_m.mvc.controller;
 
+import java.sql.SQLException;
+
+import com.laundry_m.mvc.exception.NotExistException;
+import com.laundry_m.mvc.exception.NotFilledInException;
+import com.laundry_m.mvc.exception.NotLoginException;
 import com.laundry_m.mvc.service.UsersService;
 import com.laundry_m.mvc.service.UsersServiceImpl;
 import com.laundry_m.mvc.session.Session;
@@ -38,6 +43,7 @@ public class UsersController {
 			usersService.makeUser(users);
 			SuccessView.printMessage("\n" + users.getUserName() + "님, 가입이 완료되었습니다.\n로그인 후 서비스를 이용해주세요.");
 		} catch (Exception e) {
+			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
@@ -46,4 +52,38 @@ public class UsersController {
 		session.removeAll();
 		MenuView.menuView();
 	}
+	
+	public Users selectByUserId() {
+		Users sessionUser = (Users)session.getAttribute("loginUser");
+		try {
+			Users findUser = usersService.selectByUserId(sessionUser);
+			return findUser;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotLoginException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		return null;
+	}
+
+	public void updateUserInfo(Users updateUser) {
+		try {
+			usersService.updateUserInfo(updateUser);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotLoginException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotFilledInException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
 }

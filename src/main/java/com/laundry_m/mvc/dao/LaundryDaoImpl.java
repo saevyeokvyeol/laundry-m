@@ -67,7 +67,7 @@ public class LaundryDaoImpl implements LaundryDao {
 		
 		try {
 			session = DbUtil.getSession();
-			result = session.update("laundryMapper.insertFee", fee);
+			result = session.insert("laundryMapper.insertFee", fee);
 			
 			if(result == 1) state = true;
 		

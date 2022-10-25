@@ -7,7 +7,7 @@
 	<!-- 세탁소 등록 -->
 	<insert id="insertLaundry" parameterType="laundry">
 		insert into laundry
-		values(#{laundryId}, #{userId}, #{laundryName}, #{laundryTel}, #{laundryAddress}, #{laundryDeliveryFee}, #{laundryAccountNumber}, #{laundryLatitude}, #{laundryLongitude})
+		values(laundry_id_Seq.nextval, #{userId}, #{laundryName}, #{laundryTel}, #{laundryAddress},#{laundryLatitude} , #{laundryAccountNumber}, 3000, #{laundryLongitude})
 		<!-- sysdate 대신 systimestamp! -->
 	</insert>
 	
@@ -27,7 +27,7 @@
 	<!-- 세탁소 요금 추가 -->
 	<insert id="insertFee" parameterType="fee">
 		insert into fee
-		values (#{fee_id_Seq.nextval}, #{laundryId}, #{clothesId}, ${clothesFee})
+		values (fee_Seq.nextval, laundry_Seq.currval, #{clothesId}, #{clothesFee})
 	</insert>
 	
 	<!-- 세탁소 요금 수정 -->
