@@ -7,7 +7,7 @@
 	<!-- 세탁소 등록 -->
 	<insert id="insertLaundry" parameterType="laundry">
 		insert into laundry
-		values(#{laundryId}, #{userId}, #{laundryName}, #{laundryTel}, #{laundryAddress}, #{laundryDeliveryFee}, #{laundryAccountNumber}, #{laundryLatitude}, #{laundryLongitude})
+		values(laundry_id_Seq.nextval, #{userId}, #{laundryName}, #{laundryTel}, #{laundryAddress},#{laundryLatitude} , #{laundryAccountNumber}, 3000, #{laundryLongitude})
 		<!-- sysdate 대신 systimestamp! -->
 	</insert>
 	
@@ -27,7 +27,7 @@
 	<!-- 세탁소 요금 추가 -->
 	<insert id="insertFee" parameterType="fee">
 		insert into fee
-		values (#{fee_id_Seq.nextval}, #{laundryId}, #{clothesId}, ${clothesFee})
+		values (fee_Seq.nextval, laundry_Seq.currval, #{clothesId}, #{clothesFee})
 	</insert>
 	
 	<!-- 세탁소 요금 수정 -->
@@ -94,16 +94,17 @@
 	
 	
 	<!-- 가격 가장 낮은 세탁소 구하기 -->
-	<select id="selectByLowestByLaundry" parameterType="long" resultType="laundry">
-		select * 
+	<select id="selectByLowestByLaundry" parameterType="map" resultType="laundry">
+		select l.*, sum
 			from (
 			    select laundry_id, fabric_fee + clothes_fee as sum
 			    from  extra_fee  join fee 
 			    using (laundry_id) 
-			    where fabric_id = #{parameter1} and clothes_id = #{parameter2}
+			    where fabric_id = #{FabricId} and clothes_id = #{clothesId}
 			    order by sum asc
-			)
-		<![CDATA[where rownum <= 1]]> 
+			) f join laundry l
+			on f.laundry_id = l.laundry_id
+		<![CDATA[where laundry_address like '%${userAddress}%' and rownum <= 1]]> 
 	</select>
 	
 	<!-- 세탁소 아이디로 세탁소 구하기 -->
@@ -118,7 +119,7 @@
 	</select>
 
 	<!-- 옷감 아이디로 세탁 방법 구하기 -->
-	<select id="selectByFabricId" parameterType="string" resultType="laundry">
+	<select id="selectWashByFabric" parameterType="string" resultType="fabric">
 	    select *
 	    from fabric
 	    where fabric_id like '%${parameter}%'

@@ -34,11 +34,11 @@ public class BookMenuView {
 					System.out.println("[ 1. 상의/자켓 | 2. 하의 | 3. 스커트 | 4. 와이셔츠/남방 | 5. 티셔츠 | 6. 블라우스 | 7. 원피스 | 8. 스웨터/가디건 | 9. 봄가을점퍼/아웃도어 | 10. 코트"
 							+ "\n  11. 가죽/모피의류 | 12. 겨울패딩/점퍼 | 13. 넥타이 | 14. 스카프/목도리 | 15. 이불/침구류 | 16. 커튼/카페트 | 17. 한복류 18. 모자 | 19. 가방/기타가죽제품 20. 운동화/스니커즈류 ]");
 					System.out.print("▶ ");
-					Long clothesId = (long) Integer.parseInt(sc.nextLine());
+					int clothesId = Integer.parseInt(sc.nextLine());
 					System.out.println("\n" + i + "번째 옷의 재질을 입력해주세요.");
 					System.out.println("[ 1. 면 | 2. 니트 | 3. 레이온 | 4. 데님 | 5. 실크/쉬폰 | 6. 린넨 | 7. 퍼 | 8. 앙고라 | 9. 가죽 ]");
 					System.out.print("▶ ");
-					Long fabricId = (long) Integer.parseInt(sc.nextLine());
+					int fabricId = Integer.parseInt(sc.nextLine());
 					
 					// 가격 계산 메소드
 					int bookLineFee = laundryController.searchLaundryFee(laundryId, clothesId, fabricId);

@@ -78,7 +78,7 @@ public class SuccessView {
 				System.out.println();
 			}
 			for (BookLine bookLine : book.getBookLine()) {
-				System.out.println("  └ " + clothes[bookLine.getClothesId().intValue()] + " | " + fabric[bookLine.getFabricId().intValue()] + " | " + won.format(bookLine.getBookLineFee()) + "원");
+				//System.out.println("  └ " + clothes[bookLine.getClothesId().intValue()] + " | " + fabric[bookLine.getFabricId().intValue()] + " | " + won.format(bookLine.getBookLineFee()) + "원");
 			}
 			System.out.println();
 		}
