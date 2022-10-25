@@ -214,12 +214,15 @@ public class LaundryController {
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
-			Laundry laundry = laundryService.selectByLowestByLaundry(clothesId, FabricId);
+			Laundry laundry = laundryService.selectByLowestByLaundry(users.getUserAddress(),clothesId, FabricId);
 			
 			double distance = laundryService.userBetweenLaun(users, laundry);
 			
-			SuccessView.printLaundry(laundry, distance);
+			//세션에 검색 결과 저장
+			session.setAttribute("lowestLaundry", laundry);
+			session.setAttribute("distance", distance);
 			
+			SuccessView.printLaundry(laundry, distance);
 			
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
@@ -278,6 +281,35 @@ public class LaundryController {
 		}
 	}
 	
+	/**
+	 * 천으로 세탁 방법 찾기
+	 * */
+	public String selectWashByFabric(int fabricId) {
+		String washMethod = null;
+		try {
+			Fabric fabric = laundryService.selectWashByFabric(fabricId);
+			washMethod = fabric.getFabricWashMethod();
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+		return washMethod;
+	}
+	
+	/**
+	 * 세탁소 정보 조회
+	 * */
+	public void selectLaundryAll() {
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Laundry laundry = laundryService.selectByUserId(users.getUserId());
+			
+			SuccessView.printMyLaundry(users, laundry);
+			
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
 }
 	
 	

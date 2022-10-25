@@ -57,6 +57,5 @@
 		<mapper resource="mapper/ReviewMapper.xml"/>
 		<mapper resource="mapper/FavoriteMapper.xml"/>
 		<mapper resource="mapper/StatisticsMapper.xml"/>
-
 	</mappers>
 </configuration>

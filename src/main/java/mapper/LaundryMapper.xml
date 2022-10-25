@@ -58,7 +58,7 @@
 	</insert>
 	
 	<!-- 이름으로 세탁소 구하기 -->
-	<select id="selectByNameLaundry" parameterType="string" resultType="com.laundry_m.mvc.vo.Laundry">
+	<select id="selectByNameLaundry" parameterType="string" resultType="laundry">
 		select *
 			from(
 			    select *
@@ -82,7 +82,7 @@
 	
 	
 	<!-- 주소로 세탁소 구하기 -->
-	<select id="selectByAddressLaundry" parameterType="string" resultType="com.laundry_m.mvc.vo.Laundry">
+	<select id="selectByAddressLaundry" parameterType="string" resultType="laundry">
 		select *
 			from(
 			    select *
@@ -94,20 +94,21 @@
 	
 	
 	<!-- 가격 가장 낮은 세탁소 구하기 -->
-	<select id="selectByLowestByLaundry" parameterType="long" resultType="com.laundry_m.mvc.vo.Laundry">
-		select * 
+	<select id="selectByLowestByLaundry" parameterType="map" resultType="laundry">
+		select l.*, sum
 			from (
 			    select laundry_id, fabric_fee + clothes_fee as sum
 			    from  extra_fee  join fee 
 			    using (laundry_id) 
-			    where fabric_id = #{parameter1} and clothes_id = #{parameter2}
+			    where fabric_id = #{FabricId} and clothes_id = #{clothesId}
 			    order by sum asc
-			)
-		<![CDATA[where rownum <= 1]]> 
+			) f join laundry l
+			on f.laundry_id = l.laundry_id
+		<![CDATA[where laundry_address like '%${userAddress}%' and rownum <= 1]]> 
 	</select>
 	
 	<!-- 세탁소 아이디로 세탁소 구하기 -->
-	<select id="selectByLaundryId" parameterType="string" resultType="com.laundry_m.mvc.vo.Laundry">
+	<select id="selectByLaundryId" parameterType="string" resultType="laundry">
 		select *
 			from(
 			    select *
@@ -116,5 +117,13 @@
 			)
 		<![CDATA[where rownum <= 10]]> 
 	</select>
+
+	<!-- 옷감 아이디로 세탁 방법 구하기 -->
+	<select id="selectWashByFabric" parameterType="string" resultType="fabric">
+	    select *
+	    from fabric
+	    where fabric_id like '%${parameter}%'
+	</select>
+
 
 </mapper>

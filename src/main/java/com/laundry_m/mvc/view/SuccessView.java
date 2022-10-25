@@ -7,12 +7,14 @@ import java.util.List;
 
 import com.laundry_m.mvc.vo.Book;
 import com.laundry_m.mvc.vo.BookLine;
+import com.laundry_m.mvc.vo.Favorite;
 import com.laundry_m.mvc.vo.Metapay;
 import com.laundry_m.mvc.vo.PayAccount;
 import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Review;
 import com.laundry_m.mvc.vo.StatisticsDetail;
 import com.laundry_m.mvc.vo.StatisticsTotal;
+import com.laundry_m.mvc.vo.Users;
 
 public class SuccessView {
 	private static DecimalFormat won = new DecimalFormat("#,###");
@@ -99,7 +101,7 @@ public class SuccessView {
 
 	}
 	public static void printUserReview(List<Review> reviews) {
-		System.out.print("리뷰번호 | ID | 세탁소ID| 별점 | 리뷰내용 ");
+		System.out.print("리뷰번호 | ID | 세탁소ID | 별점 | 리뷰내용 ");
 		System.out.println("");
 		for(Review review : reviews) {
 			System.out.print(""+ review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId());
@@ -125,4 +127,39 @@ public class SuccessView {
 			System.out.println(clothes[detail.getClothesId()] + " : " + detail.getCount() + "건");
 		}
 	}
+	
+	public static void printWashMethod(Laundry laundry) {
+		System.out.println("");
+	}
+	
+	public static void printMyLaundry(Users users, Laundry laundry) {
+		System.out.println(users.getUserName() + "님의 세탁소 정보를 조회합니다.");
+		System.out.println("     "+laundry.getLaundryName()+"     ");
+		
+		System.out.println("[주소]" + laundry.getLaundryAddress());
+		System.out.println("[번호]" + getLaunTel(laundry.getLaundryTel()));
+		System.out.println("[배달요금]" + laundry.getLaundryDeliveryFee());
+		
+	}
+
+	public static void printFavorite(List<Favorite> favorites, Laundry laundry) {
+		System.out.print("즐겨찾기 번호 | 세탁소ID ");
+		System.out.println("");
+		for(Favorite favorite : favorites) {
+			if(favorite.getFavoriteId() != null) {
+				System.out.println("" +favorite.getFavoriteId() + " | " + favorite.getUserId()+ " | " + favorite.getLaundryId() + " | " + laundry.getLaundryName());
+				System.out.println("");
+			}else {
+				System.out.println("즐겨찾기 한 세탁소가 없습니다");
+				System.out.println("");
+			}
+		}
+		
+	}
+
+	public static void printFavoritebyLaundryId(List<Favorite> favorites) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
