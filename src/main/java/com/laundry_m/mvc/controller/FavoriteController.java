@@ -1,5 +1,6 @@
 package com.laundry_m.mvc.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.laundry_m.mvc.service.FavoriteService;

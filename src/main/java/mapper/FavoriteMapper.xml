@@ -21,7 +21,7 @@
 	
 	<!-- 찜 목록 삭제 -->
 	<delete id = "deleteFavorite" parameterType="favorite">
-		delete from favorite where #{favoriteId}
+		delete from favorite where favorite_id = #{favoriteId}
 	</delete>
 	
 	<!-- 찜 목록 회원아이디로 검색 -->

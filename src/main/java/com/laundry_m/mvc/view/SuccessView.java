@@ -88,9 +88,9 @@ public class SuccessView {
 	public static void printLaundryList(List<Laundry> laundries , List<Double> distances) {
 		//(번호) 나와의 거리 | 세탁소 이름 | 세탁소 주소 | 세탁소 번호 | 배달료
 		int i = 0;
-		System.out.println( " 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비" );
+		System.out.println( " 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비"  +  " | "  + "     세탁소 ID");
 		for(Laundry laundry : laundries) {
-			System.out.println( "(" + (i+1) + ") " + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
+			System.out.println( "(" + (i+1) + ") " + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원"   +  " | "  + laundry.getLaundryId());
 			i++;
 		}
 	}
@@ -142,11 +142,11 @@ public class SuccessView {
 	}
 
 	public static void printFavorite(List<Favorite> favorites) {
-		System.out.print("즐겨찾기 번호 | 아이디 | 세탁소ID | 세탁소 이름");
+		System.out.print("사용자아이디 | 세탁소이름 | 세탁소ID | 즐겨찾기 번호");
 		System.out.println("");
 		for(Favorite favorite : favorites) {
 			if(favorite.getFavoriteId() != null) {
-				System.out.println("" + favorite.getFavoriteId() + " | " + favorite.getUserId() + " | " + favorite.getLaundryId() + " | " + favorite.getLaundry().getLaundryName());
+				System.out.println("" + favorite.getUserId() + " | " + favorite.getLaundry().getLaundryName() + " | " + favorite.getLaundryId() + " | " + favorite.getFavoriteId() );
 				System.out.println("");
 			}else {
 				System.out.println("즐겨찾기 한 세탁소가 없습니다");
