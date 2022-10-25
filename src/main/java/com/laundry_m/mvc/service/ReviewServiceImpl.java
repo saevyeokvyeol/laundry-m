@@ -64,6 +64,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public void deleteReview(Long reviewId)
 			throws SQLException, NotLoginException, NotExistException, InvalidUserException, NotFilledInException {
 		int result = reviewDao.deleteReview(reviewId);
+		if(result != 1) {
+			throw new SQLException("리뷰 삭제에 실패하였습니다.");
+		}
 
 	}
 

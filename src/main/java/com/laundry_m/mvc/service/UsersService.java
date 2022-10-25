@@ -52,7 +52,7 @@ public interface UsersService {
 	 *  @exception : NotExistException(회원 아이디 DB에 존재하지 않을 경우 오류)
 	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * */
-	List<Users> selectByUserId(Users users) throws SQLException, NotExistException, NotLoginException;
+	Users selectByUserId(Users users) throws SQLException, NotExistException, NotLoginException;
 	
 	/**
 	 *  회원 타입으로 검색

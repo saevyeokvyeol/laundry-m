@@ -105,9 +105,9 @@ public class LaundryServiceImpl implements LaundryService {
 		return laundryDao.selectByAddressLaundry(LaundryAddress);
 	}
 
-	public Laundry selectByLowestByLaundry(int clothesId, int FabricId)
+	public Laundry selectByLowestByLaundry(String userAddress, int clothesId, int FabricId)
 			throws SQLException, NotExistException, NotLoginException {
-		return laundryDao.selectByLowestByLaundry(clothesId, FabricId);
+		return laundryDao.selectByLowestByLaundry(userAddress ,clothesId, FabricId);
 	}
 
 	@Override
@@ -137,7 +137,7 @@ public class LaundryServiceImpl implements LaundryService {
 	@Override
 	public Fabric selectWashByFabric(int fabricId) throws SQLException, NotExistException, NotLoginException {
 		
-		return null;
+		return laundryDao.selectWashByFabric(fabricId);
 	}
 
 }

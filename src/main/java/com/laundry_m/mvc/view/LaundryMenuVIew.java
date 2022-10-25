@@ -55,27 +55,34 @@ public class LaundryMenuVIew {
 			try {
 				System.out.println("세탁하실 옷 종류를 선택하세요");
 				String[] clothes = {"","상의/자켓","하의","스커트","와이셔츠/남방","티셔츠","블라우스","원피스","스웨터/가디건","봄가을점퍼/아웃도어","코트","가죽/모피의류","겨울패딩/점퍼","넥타이","스카프/목도리","이불/침구류","커튼/카페트","한복류","모자","가방/기타가죽제품","운동화/스니커즈류"};
-				for(int i = 0 ; i <= clothes.length ; i++) {
-					System.out.println(i+1+"."+ clothes[i+1]);
+				for(int i = 1 ; i <= clothes.length ; i++) {
+					System.out.println(i+"."+ clothes[i]);
+					if(i == 20) break;
 				}
+				System.out.println("=========================");
 				System.out.print("옷 종류 선택 : ▶ ");
 				int clothesId = Integer.parseInt(sc.nextLine());
 				
 				String[] fabrics = {"","면","니트","레이온","데님","실크/쉬폰","린넨","퍼","앙고라","가죽"};
-				for(int i = 0 ; i <= fabrics.length ; i++) {
-					System.out.println(i+1+"."+ fabrics[i+1]);
+				for(int i = 1 ; i <= fabrics.length ; i++) {
+					System.out.println(i+"."+ fabrics[i]);
+					if(i == 9) break;
 				}
+				
+				System.out.println("=========================");
+				System.out.print("옷감 종류 선택 : ▶ ");
 				int fabricId = Integer.parseInt(sc.nextLine());
-				
 				String washMethod = laundryController.selectWashByFabric(fabricId);
-				System.out.println("이 옷은 " + washMethod + "로 세탁하는게 좋겠네요 ^^");
+				System.out.println();
+				System.out.println("♣ 이 옷은 " + washMethod + " 으로 세탁하는걸 추천드려요 ♣");
 				
-				System.out.println("가장 저렴한 세탁소를 추천드릴게요 :) ");
+				System.out.println("회원님의 근처에서 가장 저렴한 세탁소를 추천드릴게요 :) ");
+				System.out.println();
 				//전체 세탁소 돌면서 옷 + 옷감 가격 구한다
 				laundryController.selectByLowestByLaundry(clothesId, fabricId);
 				
 				System.out.println();
-				System.out.println("위 세탁소로 바로 예약하시겠어요?");
+				System.out.println("위 세탁소로 바로 예약하시겠어요? (Y/N)");
 				session.getAttribute("laundry");
 				session.getAttribute("distance");
 				
@@ -83,6 +90,7 @@ public class LaundryMenuVIew {
 				String answer = sc.nextLine();
 				if(answer == "Y") {
 					//예약하기로 이동
+					
 				}
 				//취소
 				

@@ -5,11 +5,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.laundry_m.mvc.controller.BookController;
+import com.laundry_m.mvc.controller.FavoriteController;
+import com.laundry_m.mvc.controller.LaundryController;
 import com.laundry_m.mvc.controller.MetapayController;
-import com.laundry_m.mvc.controller.UsersController;
-import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.controller.ReviewController;
 import com.laundry_m.mvc.controller.StatisticsController;
+import com.laundry_m.mvc.controller.UsersController;
 
 public class MenuView {
 	private static Scanner sc = new Scanner(System.in);
@@ -18,6 +19,8 @@ public class MenuView {
 	private static UsersController usersController = new UsersController();
 	private static ReviewController reviewController = new ReviewController();
 	private static StatisticsController statisticsController = new StatisticsController();
+	private static LaundryController laundryController = new LaundryController();
+	private static FavoriteController favoriteController = new FavoriteController();
 	
 	/**
 	 * 시작 메뉴
@@ -35,7 +38,7 @@ public class MenuView {
 				case 2 :
 					System.out.print("\n아이디 입력 > ");
 					String loginId = sc.nextLine();
-					System.out.print("비밀번호 입력 > ");
+					System.out.print("\n비밀번호 입력 > ");
 					String loginPwd = sc.nextLine();
 					usersController.loginUser(loginId, loginPwd);
 					break;
@@ -65,7 +68,7 @@ public class MenuView {
 					laundrySearchMenu();
 					break;
 				case 2 :
-					
+					favoriteController.searchFavoriteByUserId();
 					break;
 				case 3 :
 					
@@ -143,7 +146,7 @@ public class MenuView {
 					reviewpageMenu();
 					break;
 				case 4 :
-					
+					UserMenuView.updateUserInfoForm();
 					break;
 				case 5 :
 					MetapayMenuView.metapayCheck();
@@ -256,10 +259,10 @@ public class MenuView {
 					laundryManageMenu();
 					break;
 				case 3 :
-					reviewController.searchReviewByLaundryId(null);
+//					reviewController.searchReviewByLaundryId(null);
 					break;
 				case 4 :
-					Map<String, Object> map = new HashMap<>();
+					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("laundryId", 0);
 					statisticsController.searchStatistics(map);
 					break;

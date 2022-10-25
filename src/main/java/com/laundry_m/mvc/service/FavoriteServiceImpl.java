@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.laundry_m.mvc.dao.FavoriteDao;
+import com.laundry_m.mvc.dao.FavoriteDaoImpl;
 import com.laundry_m.mvc.exception.DuplicationException;
 import com.laundry_m.mvc.exception.InvalidUserException;
 import com.laundry_m.mvc.exception.NotExistException;
@@ -15,6 +17,7 @@ import com.laundry_m.mvc.vo.Review;
 import util.DbUtil;
 
 public class FavoriteServiceImpl implements FavoriteService{
+	private FavoriteDao favoriteDao = new FavoriteDaoImpl();
 
 	/**
 	 * 즐겨찾기 추가
@@ -27,7 +30,10 @@ public class FavoriteServiceImpl implements FavoriteService{
 	@Override
 	public void addFavorite(Favorite favorite)
 			throws SQLException, NotLoginException, NotExistException, DuplicationException, InvalidUserException {
-		// TODO Auto-generated method stub
+		int result = favoriteDao.addFavorite(favorite);
+		if(result != 1) {
+			throw new SQLException("즐겨찾기 등록에 실패했습니다.");
+		}
 		
 	}
 	
@@ -41,7 +47,10 @@ public class FavoriteServiceImpl implements FavoriteService{
 	@Override
 	public void deleteFavorite(Long favoriteId)
 			throws SQLException, NotLoginException, NotExistException, InvalidUserException {
-		// TODO Auto-generated method stub
+		int result = favoriteDao.deleteFavorite(favoriteId);
+		if(result != 1) {
+			throw new SQLException("즐겨찾기 삭제에 실패하였습니다.");
+		}
 		
 	}
 	
@@ -55,14 +64,7 @@ public class FavoriteServiceImpl implements FavoriteService{
 	@Override
 	public List<Favorite> searchFavoriteByUserId(String userId)
 			throws SQLException, NotLoginException, NotExistException, InvalidUserException {
-		SqlSession session = null;
-		List<Favorite> favorites = null;
-		try {
-			session = DbUtil.getSession();
-			favorites = session.selectList("favoriteMapper.searchFavoriteByUserId");
-		} finally {
-			DbUtil.sessionClose(session);
-		}
+		List<Favorite> favorites = favoriteDao.searchFavoriteByUserId(userId);
 		return favorites;
 	}
 	
@@ -74,14 +76,7 @@ public class FavoriteServiceImpl implements FavoriteService{
 	 * */
 	@Override
 	public List<Favorite> searchFavoriteByLaundryId(Long laundryId) throws SQLException, NotLoginException {
-		SqlSession session = null;
-		List<Favorite> favorites = null;
-		try {
-			session = DbUtil.getSession();
-			favorites = session.selectList("favoriteMapper.searchFavoriteByLaundryId");
-		} finally {
-			DbUtil.sessionClose(session);
-		}
+		List<Favorite> favorites = favoriteDao.searchFavoriteByLaundryId(laundryId);
 		return favorites;
 	}
 

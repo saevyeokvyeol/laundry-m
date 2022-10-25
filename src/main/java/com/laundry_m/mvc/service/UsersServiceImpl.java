@@ -29,10 +29,17 @@ public class UsersServiceImpl implements UsersService{
 		return loginUser;
 	}
 
+	
+	/**
+	 * 회원 정보 수정 
+	 * @param : User user
+	 * @exception : NotLoginException(로그인 하지 않았을 경우 오류)
+	 * 				NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
+	 * 
+	 * */
 	@Override
 	public void updateUserInfo(Users users) throws SQLException, NotLoginException, NotFilledInException {
-		// TODO Auto-generated method stub
-		
+		int result = usersDao.updateUser(users);
 	}
 
 	@Override
@@ -42,9 +49,9 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	@Override
-	public List<Users> selectByUserId(Users users) throws SQLException, NotExistException, NotLoginException {
-		// TODO Auto-generated method stub
-		return null;
+	public Users selectByUserId(Users users) throws SQLException, NotExistException, NotLoginException {
+		Users loginUser = usersDao.selectByUserId(users);
+		return loginUser;
 	}
 
 	@Override
