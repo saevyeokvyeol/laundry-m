@@ -68,7 +68,6 @@ public class MenuView {
 				switch(menu) {
 				case 1 :
 					laundrySearchMenu();
-					
 					break;
 				case 2 :
 					favoriteMenu();
@@ -265,7 +264,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					favoriteController.searchFavoriteByUserId();
+					favoriteMenuView.searchFavoriteList();
 					break;
 				case 2 :
 					favoriteMenuView.searchFavoriteByLaundryAddress();
