@@ -221,7 +221,7 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public Laundry selectByLowestByLaundry(Long clothesId, Long FabricId) throws SQLException {
+	public Laundry selectByLowestByLaundry(int clothesId, int FabricId) throws SQLException {
 		SqlSession session = null;
 		Laundry laundry = null;
 		

@@ -2,15 +2,17 @@ package com.laundry_m.mvc.view;
 
 import java.util.Scanner;
 
+
 import com.laundry_m.mvc.controller.LaundryController;
 import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.vo.Fabric;
 import com.laundry_m.mvc.vo.Laundry;
-import com.laundry_m.mvc.vo.Users;
 
 public class LaundryMenuVIew {
 	private static Scanner sc = new Scanner(System.in);
 	private static LaundryController laundryController = new LaundryController();
+	private static Session session = Session.getInstance();
+
 	
 	/**
 	 * 세탁소 등록 폼
@@ -70,12 +72,23 @@ public class LaundryMenuVIew {
 				
 				System.out.println("가장 저렴한 세탁소를 추천드릴게요 :) ");
 				//전체 세탁소 돌면서 옷 + 옷감 가격 구한다
+				laundryController.selectByLowestByLaundry(clothesId, fabricId);
 				
-				laundryController.searchLaundryFee(null, clothesId, fabricId);
+				System.out.println();
+				System.out.println("위 세탁소로 바로 예약하시겠어요?");
+				session.getAttribute("laundry");
+				session.getAttribute("distance");
+				
+				System.out.print("▶");
+				String answer = sc.nextLine();
+				if(answer == "Y") {
+					//예약하기로 이동
+				}
+				//취소
 				
 				
 			} catch (Exception e) {
-				FailView.errorMessage("세탁소 등록에 실패했어요");
+				FailView.errorMessage("세탁소 검색에 실패했어요");
 			}
 		}
 	}
@@ -111,5 +124,42 @@ public class LaundryMenuVIew {
 		
 		
 	}
-
+	
+	/**
+	 * 세탁소 위치로 찾기 - 예약으로 이동 
+	 * */
+	public static void selectByLaundryLocation() {
+		
+		try {
+			System.out.println("검색할 구를 입력해주세요");
+			System.out.print("▶ ");
+			String laundryLocation= sc.nextLine();
+			laundryController.selectByAddressLaundry(laundryLocation);
+			
+		} catch (Exception e) {
+			FailView.errorMessage("에러가 발생했어요 :( ");
+		}
+		
+		
+	}
+	
+	/**
+	 * 사장님 아이디로 검색
+	 * */
+	public static void selectByLaundryUserId() {
+		
+		try {
+			System.out.println("검색할 사장님 아이디를 입력해주세요");
+			System.out.print("▶ ");
+			String userId = sc.nextLine();
+			laundryController.selectByUserId(userId);
+			
+		} catch (Exception e) {
+			FailView.errorMessage("에러가 발생했어요 :( ");
+		}
+		
+		
+	}
+	
+	
 }

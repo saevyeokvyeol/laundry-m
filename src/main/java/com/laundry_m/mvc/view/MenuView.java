@@ -252,12 +252,12 @@ public class MenuView {
 	public static void laundryMenu() {
 		while (true) {
 			try {
-				System.out.println("\n" + "[ 1. 내 세탁소 보기 | 2. 예약 내역 조회 | 3. 리뷰 조회 | 4. 매출 통계 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내 세탁소 관리 | 2. 예약 내역 조회 | 3. 리뷰 조회 | 4. 매출 통계 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					laundryManageMenu();
 					break;
 				case 2 :
 					laundryManageMenu();
@@ -296,7 +296,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					laundryController.selectLaundryAll();
 					break;
 				case 2 :
 					
@@ -440,13 +440,13 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					LaundryMenuVIew.selectByLaundryName();
 					break;
 				case 2 :
-					
+					LaundryMenuVIew.selectByLaundryLocation();
 					break;
 				case 3 :
-					
+					LaundryMenuVIew.selectByLaundryUserId();
 					break;
 				case 8 :
 					run = false;

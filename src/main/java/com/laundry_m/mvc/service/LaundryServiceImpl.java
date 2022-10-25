@@ -105,7 +105,7 @@ public class LaundryServiceImpl implements LaundryService {
 		return laundryDao.selectByAddressLaundry(LaundryAddress);
 	}
 
-	public Laundry selectByLowestByLaundry(Long clothesId, Long FabricId)
+	public Laundry selectByLowestByLaundry(int clothesId, int FabricId)
 			throws SQLException, NotExistException, NotLoginException {
 		return laundryDao.selectByLowestByLaundry(clothesId, FabricId);
 	}

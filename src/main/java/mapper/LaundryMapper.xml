@@ -118,7 +118,7 @@
 	</select>
 
 	<!-- 옷감 아이디로 세탁 방법 구하기 -->
-	<select id="selectByLaundryId" parameterType="string" resultType="laundry">
+	<select id="selectByFabricId" parameterType="string" resultType="laundry">
 	    select *
 	    from fabric
 	    where fabric_id like '%${parameter}%'

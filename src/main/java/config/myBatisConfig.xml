@@ -55,10 +55,7 @@
 		<mapper resource="mapper/LaundryMapper.xml"/>
 		<!-- <mapper resource="mapper/MetapayMapper.xml"/> -->
 		<mapper resource="mapper/ReviewMapper.xml"/>
-<<<<<<< HEAD
-=======
 		<mapper resource="mapper/FavoriteMapper.xml"/>
 		<mapper resource="mapper/StatisticsMapper.xml"/>
->>>>>>> c363766887328550822b60d08e9902448c606558
 	</mappers>
 </configuration>
