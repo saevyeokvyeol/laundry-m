@@ -38,8 +38,9 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void makeBook(Book book) throws SQLException, NotLoginException, NotExistException,
 			InsufficientBalanceException, NotFilledInException {
-		// TODO Auto-generated method stub
-
+		int result = bookDao.insertBook(book);
+		
+		if (result != 1) throw new SQLException("정상적으로 예약되지 않았습니다.\n잠시 후 다시 시도해주세요.");
 	}
 
 	/**
@@ -87,6 +88,8 @@ public class BookServiceImpl implements BookService {
 	public void updateBookCanceled(Long bookId)
 			throws SQLException, NotLoginException, NotExistException, InvalidUserException {
 		int result = bookDao.updateBookCanceled(bookId);
+		
+		if (result != 1) throw new SQLException("예약이 정상적으로 취소되지 않았습니다.");
 	}
 	
 	/**

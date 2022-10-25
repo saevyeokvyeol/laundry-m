@@ -1,5 +1,10 @@
 package com.laundry_m.mvc.controller;
 
+import java.sql.SQLException;
+
+import com.laundry_m.mvc.exception.NotExistException;
+import com.laundry_m.mvc.exception.NotFilledInException;
+import com.laundry_m.mvc.exception.NotLoginException;
 import com.laundry_m.mvc.service.MetapayService;
 import com.laundry_m.mvc.service.MetapayServiceImpl;
 import com.laundry_m.mvc.session.Session;
@@ -58,17 +63,31 @@ public class MetapayController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	public void addMetapayAccount(PayAccount payAccount)
+			throws SQLException, NotLoginException, NotExistException, NotFilledInException {
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Metapay metapay = metapayService.searchMetapayByUserId(users.getUserId());
+			payAccount.setMetapayId(metapay.getMetapayId());
+			SuccessView.printPayAccount(metapay.getPayAccount());
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
 	
 	public void deleteMetapayAccount(Long payAccountId) {
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
 			Metapay metapay = metapayService.searchMetapayByUserId(users.getUserId());
+			if (metapay.getPayAccount().size() <= 1) {
+				throw new SQLException("메타페이 연결 계좌는 하나 이상 존재해야 합니다.");
+			}
 			PayAccount payAccount = PayAccount.builder().metapayId(metapay.getMetapayId())
 					.payAccountId(payAccountId).build();
 			metapayService.deleteMetapayAccount(payAccount);
 			SuccessView.printMessage("계좌 번호 " + payAccountId + "가 정상적으로 연결 해지되었습니다.");
 		} catch (Exception e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}

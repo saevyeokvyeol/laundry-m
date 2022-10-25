@@ -31,9 +31,23 @@
 		values(pay_log_id_seq.nextval, #{metapayId}, #{payCategoryId}, null, #{payLogAmount}, systimestamp)
 	</insert>
 	
+	<insert id="addMetapayAccount" parameterType="payAccount">
+		insert into pay_account
+		values(pay_account_seq.nextval, 
+		<choose>
+			<when test="metapayId != null">
+			#{metapay_id}
+			</when>
+			<otherwise>
+				metapay_seq.currval
+			</otherwise>
+		</choose>
+		#{bankId}, #{payAccountNumber}, 'F')
+	</insert>
+	
 	<update id="deleteMetapayAccount" parameterType="payAccount">
 		update pay_account
-		set pay_account_quit_sate = 'T'
+		set pay_account_quit_state = 'T'
 		where metapay_id = #{metapayId} and pay_account_id = #{payAccountId}
 	</update>
 	
