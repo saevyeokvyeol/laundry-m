@@ -211,7 +211,7 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 내 메타페이 정보 보기 | 2. 최근 거래 내역 보기 | 3. 연결 계좌 추가 | 4. 연결 계좌 해지 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내 메타페이 정보 보기 | 2. 최근 거래 내역 보기 | 3. 연결 계좌 변경 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -219,10 +219,10 @@ public class MenuView {
 					metapayController.searchMetapayByUserId();
 					break;
 				case 2 :
-					MetapayMenuView.deleteMetapayAccount();
+					
 					break;
 				case 3 :
-					MetapayMenuView.deleteMetapayAccount();
+					MetapayMenuView.addMetapayAccount();
 					break;
 				case 8 :
 					run = false;

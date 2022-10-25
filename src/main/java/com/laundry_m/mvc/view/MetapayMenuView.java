@@ -87,13 +87,20 @@ public class MetapayMenuView {
 	/**
 	 * 메타페이 계좌 연동 해지
 	 * */
-	public static void deleteMetapayAccount() {
-		System.out.println("\n해지할 계좌 코드를 입력해주세요.");
-		System.out.println();
-		metapayController.searchPayAccountByUserId();
-		System.out.print("▶ ");
-		Long payAccountId = (long) Integer.parseInt(sc.nextLine());
-		metapayController.deleteMetapayAccount(payAccountId);
-	}
+	public static void addMetapayAccount() {
+		try {
+			System.out.println("\n결제 계좌 은행을 선택해주세요.");
+			System.out.println("[ 1. 농협 | 2. 국민 | 3. 우리 | 4. 하나 ]");
+			Long bankId = (long) Integer.parseInt(sc.nextLine());
 
+			System.out.println("\n결제 계좌 번호를 입력해주세요.");
+			System.out.print("▶ ");
+			String payAccountNumber = sc.nextLine();
+			
+			PayAccount account = PayAccount.builder().bankId(bankId).payAccountNumber(payAccountNumber).build();
+			metapayController.addMetapayAccount(account);
+		} catch (Exception e) {
+			FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+		}
+	}
 }

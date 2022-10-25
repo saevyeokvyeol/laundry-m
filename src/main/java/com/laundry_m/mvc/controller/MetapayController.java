@@ -76,22 +76,6 @@ public class MetapayController {
 		}
 	}
 	
-	public void deleteMetapayAccount(Long payAccountId) {
-		try {
-			Users users = (Users)session.getAttribute("loginUser");
-			Metapay metapay = metapayService.searchMetapayByUserId(users.getUserId());
-			if (metapay.getPayAccount().size() <= 1) {
-				throw new SQLException("메타페이 연결 계좌는 하나 이상 존재해야 합니다.");
-			}
-			PayAccount payAccount = PayAccount.builder().metapayId(metapay.getMetapayId())
-					.payAccountId(payAccountId).build();
-			metapayService.deleteMetapayAccount(payAccount);
-			SuccessView.printMessage("계좌 번호 " + payAccountId + "가 정상적으로 연결 해지되었습니다.");
-		} catch (Exception e) {
-			FailView.errorMessage(e.getMessage());
-		}
-	}
-	
 	public boolean MetapayApplicable() {
 		try {
 			Users users = (Users)session.getAttribute("loginUser");

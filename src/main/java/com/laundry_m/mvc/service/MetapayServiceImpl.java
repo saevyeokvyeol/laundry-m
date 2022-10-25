@@ -71,30 +71,8 @@ public class MetapayServiceImpl implements MetapayService {
 	public void addMetapayAccount(PayAccount payAccount)
 			throws SQLException, NotLoginException, NotExistException, NotFilledInException {
 		int result = metapayDao.addMetapayAccount(null, payAccount);
-		if (result != 1) throw new NotExistException("계좌를 연동할 수 없습니다.");
+		if (result != 1) throw new NotExistException("연동 계좌를 변경할 수 없습니다.\n잠시 뒤 다시 시도해주세요.");
 
-	}
-
-	/**
-	 * 메타페이 계좌 연동 해지
-	 * @param: PayAccount payAcount
-	 * @exception: NotLoginException(로그인하지 않고 메타페이 계좌 연동을 해지할 경우 오류)
-	 * 			   NotExistException(계좌 아이디가 DB에 존재하지 않을 경우 오류)
-	 * */
-	@Override
-	public void deleteMetapayAccount(PayAccount payAcount) throws SQLException, NotLoginException, NotExistException {
-		int result = metapayDao.deleteMetapayAccount(payAcount);
-		if (result != 1) throw new NotExistException("계좌 연동을 해지할 수 없습니다.");
-	}
-
-	/**
-	 * 전체 메타페이 검색
-	 * @return: List<Metapay>
-	 * */
-	@Override
-	public List<Metapay> searchMetapayAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/**
@@ -108,6 +86,18 @@ public class MetapayServiceImpl implements MetapayService {
 		Metapay metapay = metapayDao.selectMetapayByUserId(userId);
 		if (metapay == null) throw new NotExistException("메타페이 가입자가 아닙니다.");
 		return metapay;
+	}
+
+	/**
+	 * 메타페이 아이디로 거래 내역 검색
+	 * @param: Long metapayId
+	 * @return: List<PayLog>
+	 * @exception: NotLoginException(로그인하지 않고 메타페이를 검색할 경우 오류)
+	 * 			   NotExistException(회원 아이디가 DB에 존재하지 않을 경우 오류)
+	 * */
+	@Override
+	public List<PayLog> searchPayLogByMetapayId(Long metapayId) throws SQLException, NotLoginException, NotExistException {
+		return metapayDao.searchPayLogByMetapayId(metapayId);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.laundry_m.mvc.dao;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -125,7 +126,13 @@ public class MetapayDaoImpl implements MetapayDao {
 				flag = true;
 			}
 			
+			if (flag) {
+				int re = this.deleteMetapayAccount(session, payAccount);
+				if (re < 1) throw new SQLException("연동 계좌를 변경할 수 없습니다.\n잠시 뒤 다시 시도해주세요.");
+			}
+			
 			result = session.insert("metapayMapper.addMetapayAccount", payAccount);
+			
 			if (result == 1) state = true;
 		} finally {
 			if (flag) DbUtil.sessionClose(session, state);
@@ -135,22 +142,12 @@ public class MetapayDaoImpl implements MetapayDao {
 
 	/**
 	 * 메타페이 계좌 연동 해지
-	 * @param: PayAccount payAcount
+	 * @param: SqlSession session, PayAccount payAcount
 	 * @result: int(등록된 레코드 수)
 	 * */
 	@Override
-	public int deleteMetapayAccount(PayAccount payAcount) throws SQLException {
-		SqlSession session = null;
-		int result = 0;
-		boolean state = false;
-		
-		try {
-			session = DbUtil.getSession();
-			result = session.update("metapayMapper.deleteMetapayAccount", payAcount);
-			if (result == 1) state = true;
-		} finally {
-			DbUtil.sessionClose(session, state);
-		}
+	public int deleteMetapayAccount(SqlSession session, PayAccount payAcount) throws SQLException {
+		int result = session.update("metapayMapper.deleteMetapayAccount", payAcount);
 		
 		return result;
 	}
@@ -171,9 +168,24 @@ public class MetapayDaoImpl implements MetapayDao {
 		} finally {
 			DbUtil.sessionClose(session);
 		}
-		
 		return metapay;
 	}
-
 	
+	/**
+	 * 메타페이 아이디로 거래 내역 검색
+	 * @param: Long metapayId
+	 * @return: List<PayLog>
+	 * */
+	public List<PayLog> searchPayLogByMetapayId(Long metapayId) throws SQLException {
+		SqlSession session = null;
+		List<PayLog> payLogs = null;
+		
+		try {
+			session = DbUtil.getSession();
+			payLogs = session.selectOne("metapayMapper.searchPayLogByMetapayId", metapayId);
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		return payLogs;
+	}
 }

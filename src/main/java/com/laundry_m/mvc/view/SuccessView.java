@@ -63,7 +63,7 @@ public class SuccessView {
 	public static void printPayAccount(List<PayAccount> payAccounts) {
 		String[] bank = {"", "농협", "국민", "우리", "하나"};
 		for (PayAccount account : payAccounts) {
-			System.out.println((payAccounts.indexOf(account) + 1) + " 계좌 코드: " + account.getPayAccountId() + " | " + bank[account.getBankId().intValue()] + " | " + getAccountNumber(account.getPayAccountNumber()));
+			System.out.println((payAccounts.indexOf(account) + 1) + ". 계좌 코드: " + account.getPayAccountId() + " | " + bank[account.getBankId().intValue()] + " | " + getAccountNumber(account.getPayAccountNumber()));
 		}
 	}
 	
