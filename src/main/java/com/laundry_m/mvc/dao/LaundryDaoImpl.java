@@ -2,7 +2,9 @@ package com.laundry_m.mvc.dao;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -221,13 +223,23 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public Laundry selectByLowestByLaundry(int clothesId, int FabricId) throws SQLException {
+	public Laundry selectByLowestByLaundry(String userAddress, int clothesId, int FabricId) throws SQLException {
 		SqlSession session = null;
 		Laundry laundry = null;
 		
 		try {
 			session = DbUtil.getSession();
-			laundry = session.selectOne("laundryMapper.selectByLowestByLaundry");
+			
+			String str = userAddress;
+			str = str.trim();
+			String [] newStr = str.split("\\s+");
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("clothesId", clothesId);
+			map.put("FabricId", FabricId);
+			map.put("userAddress", newStr[1] );
+			
+			laundry = session.selectOne("laundryMapper.selectByLowestByLaundry", map);
 		} finally {
 			DbUtil.sessionClose(session);
 		}

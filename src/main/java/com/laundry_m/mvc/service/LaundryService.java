@@ -125,7 +125,7 @@ public interface LaundryService {
 	 *  @exception : NotExistException(아아디 DB에 존재하지 않을 경우 오류)
 	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * */
-	Laundry selectByLowestByLaundry(int feeId, int FabricId) throws SQLException, NotExistException, NotLoginException;
+	Laundry selectByLowestByLaundry(String userAddress, int feeId, int FabricId) throws SQLException, NotExistException, NotLoginException;
 	
 	/**
 	 * 특정 세탁소에서 옷 + 재질 가격 더하는 메소드

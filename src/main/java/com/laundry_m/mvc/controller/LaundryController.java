@@ -214,12 +214,12 @@ public class LaundryController {
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
-			Laundry laundry = laundryService.selectByLowestByLaundry(clothesId, FabricId);
+			Laundry laundry = laundryService.selectByLowestByLaundry(users.getUserAddress(),clothesId, FabricId);
 			
 			double distance = laundryService.userBetweenLaun(users, laundry);
 			
 			//세션에 검색 결과 저장
-			session.setAttribute("laundry", laundry);
+			session.setAttribute("lowestLaundry", laundry);
 			session.setAttribute("distance", distance);
 			
 			SuccessView.printLaundry(laundry, distance);
