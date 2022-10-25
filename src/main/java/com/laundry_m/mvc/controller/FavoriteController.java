@@ -8,8 +8,6 @@ import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
 import com.laundry_m.mvc.vo.Favorite;
-import com.laundry_m.mvc.vo.Laundry;
-import com.laundry_m.mvc.vo.Review;
 import com.laundry_m.mvc.vo.Users;
 
 public class FavoriteController {
@@ -40,7 +38,7 @@ public class FavoriteController {
 	 * 			   NotExistException(즐겨찾기 아이디가 DB에 존재하지 않을 경우 오류)
 	 * 			   InvalidUserException(세탁소 운영 회원이 즐겨찾기를 시도할 경우 오류)
 	 * */
-	void deleteFavorite(Long favoriteId) {
+	public void deleteFavorite(Long favoriteId) {
 		 try {
 				//로그인 세션
 				favoriteService.deleteFavorite(favoriteId);

@@ -102,9 +102,9 @@ public class ReviewController {
 	 */
 	  public void searchReviewByLaundryId(){ 
 		  try {
-			  Laundry laundry = (Laundry)session.getAttribute("selectByUserId");
-			  List<Review> reviews = reviewService.searchReviewByLaundryId(laundry.getLaundryId());
-			  SuccessView.printUserReview(reviews);
+			  Users users = (Users)session.getAttribute("loginUser");
+			  List<Review> reviews = reviewService.searchReviewByLaundryId(users.getUserId());
+			  SuccessView.printAdminReview(reviews);
 		  }catch(Exception e) {
 			  e.printStackTrace();
 			  FailView.errorMessage(e.getMessage());
