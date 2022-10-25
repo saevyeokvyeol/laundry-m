@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.laundry_m.mvc.controller.BookController;
+import com.laundry_m.mvc.controller.FavoriteController;
 import com.laundry_m.mvc.controller.LaundryController;
 import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.controller.UsersController;
@@ -20,6 +21,7 @@ public class MenuView {
 	private static ReviewController reviewController = new ReviewController();
 	private static StatisticsController statisticsController = new StatisticsController();
 	private static LaundryController laundryController = new LaundryController();
+	private static FavoriteController favoriteController = new FavoriteController();
 	
 	/**
 	 * 시작 메뉴
@@ -69,7 +71,7 @@ public class MenuView {
 					laundrySearchMenu();
 					break;
 				case 2 :
-					
+					favoriteController.searchFavoriteByUserId();
 					break;
 				case 3 :
 					LaundryMenuVIew.recomWashMethod();

@@ -15,16 +15,16 @@
 	</delete>
 	
 	<!-- 찜 목록 회원아이디로 검색 -->
-	<select id="searchFavoriteByUserId" parameterType="favorite">
-		select favorite_id, user_id, laundry_id
+	<select id="searchFavoriteByUserId" parameterType="String" resultType="favorite">
+		select favorite_id, user_id, laundry_id (select laundry_name from laundry where laundry_id = #{laundryId} )
 		from favorite
-		where user_id=#{user_id}
+		where user_id=#{userId}
 	</select>
 
 	<!-- 찜 목록 세탁소아이디로 검색 -->
-	<select id="searchFavoriteByLaundryId" parameterType="favorite">
+	<select id="searchFavoriteByLaundryId" parameterType="String" resultType="favorite">
 		select favorite_id, user_id, laundry_id
 		from favorite
-		where laundry_id=#{laundry_id}	
+		where user_id=#{userId}
 	</select>
 </mapper>
