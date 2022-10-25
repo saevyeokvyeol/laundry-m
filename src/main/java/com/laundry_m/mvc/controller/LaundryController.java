@@ -210,7 +210,7 @@ public class LaundryController {
 	/**
 	 * 옷 가격 최저가 세탁소 검색
 	 * */
-	public void selectByLowestByLaundry(Long clothesId, Long FabricId) {
+	public void selectByLowestByLaundry(int clothesId, int FabricId) {
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
@@ -230,7 +230,7 @@ public class LaundryController {
 	/**
 	 * 특정 세탁소에서 옷 + 재질 가격 더하기
 	 * */
-	public void clothesfabricFee(Long laundryId, Long clothesId, Long fabricId) {
+	public void clothesfabricFee(Long laundryId, int clothesId, int fabricId) {
 		try {
 			int result = laundryService.clothesfabricFee(laundryId, clothesId, fabricId);
 			SuccessView.printMessage("총 가격 : "+ result);
@@ -243,7 +243,7 @@ public class LaundryController {
 	/**
 	 * 특정 세탁소에서 옷 + 재질 가격 더하기
 	 * */
-	public int searchLaundryFee(Long laundryId, Long clothesId, Long fabricId) {
+	public int searchLaundryFee(Long laundryId, int clothesId, int fabricId) {
 		int result = 0;
 		try {
 			result = laundryService.clothesfabricFee(laundryId, clothesId, fabricId);

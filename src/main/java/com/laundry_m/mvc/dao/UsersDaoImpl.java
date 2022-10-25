@@ -13,11 +13,6 @@ import util.DbUtil;
 
 public class UsersDaoImpl implements UsersDao{
 
-	/**
-	 * 회원 가입 : 회원 인서트
-	 * @param : User user(회원 아이디, 비밀번호, 연락처, 회원타입, 주소, 이름)	 
-	 * @return : int(등록한 레코드 수)
-	 * */
 	@Override
 	public int insertUser(Users users) throws SQLException {
 		int result = -1;
@@ -27,7 +22,6 @@ public class UsersDaoImpl implements UsersDao{
 			session = DbUtil.getSession();
 			result = session.insert("usersMapper.insertUser", users);
 			if (result == 1) state = true;
-			System.out.println("result" + result);
 		} finally {
 			DbUtil.sessionClose(session, state);
 		}
@@ -36,16 +30,19 @@ public class UsersDaoImpl implements UsersDao{
 
 	@Override
 	public int updateUser(Users users) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = -1;
+		SqlSession session = null;
+		boolean state = false;
+		try {
+			session = DbUtil.getSession();
+			result = session.insert("usersMapper.updateUser", users);
+			if (result == 1) state = true;
+		} finally {
+			DbUtil.sessionClose(session, state);
+		}
+		return result;
 	}
 
-
-	/** 
-	 * 로그인
-	 * @param : User user
-	 * @return : User user
-	 * */
 	@Override
 	public Users loginUser(Users users) throws SQLException {
 		SqlSession session = null;
@@ -67,9 +64,16 @@ public class UsersDaoImpl implements UsersDao{
 	}
 
 	@Override
-	public List<Users> selectByUserId(Users users) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public Users selectByUserId(Users users) throws SQLException {
+		SqlSession session = null;
+		Users loginUser = null;
+		try {
+			session = DbUtil.getSession();
+			loginUser = session.selectOne("usersMapper.selectByUserId", users);
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		return loginUser;
 	}
 
 	@Override

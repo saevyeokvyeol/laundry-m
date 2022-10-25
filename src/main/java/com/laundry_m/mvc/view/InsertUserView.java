@@ -21,13 +21,18 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.laundry_m.mvc.controller.LaundryController;
 import com.laundry_m.mvc.controller.UsersController;
+import com.laundry_m.mvc.vo.BookLine;
+import com.laundry_m.mvc.vo.Fee;
+import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Users;
 
 public class InsertUserView {
 	private static Properties properties = new Properties();
 	private static Scanner sc = new Scanner(System.in);
 	private static UsersController usersController = new UsersController();
+	private static LaundryController laundryController = new LaundryController();
 	
 	private final static String ID = "^[0-9a-zA-Z]*$";
 	//private final static String PASSWORD = "^[0-9]*$";
@@ -43,7 +48,6 @@ public class InsertUserView {
             e.printStackTrace();
         }
 	}
-	
 	
 	/**
 	 * 회원가입 폼 메뉴
@@ -129,7 +133,6 @@ public class InsertUserView {
 		}
 		
 		String address = null;
-		String address2 = null;
 		double latitude = 0f;
 		double longtitude = 0f;
 		
@@ -156,15 +159,133 @@ public class InsertUserView {
 				String longti = getXYMapfromJson(getKakaoApiFromAddress(address)).get("x");
 				latitude = Double.parseDouble(lati);
 				longtitude = Double.parseDouble(longti);
-				//System.out.println(lati);
-				//System.out.println(longti);
 				break;
 			}
 			
 		}
 		String state = "N";
-		usersController.insertUser(new Users(id, password, name, phone, type, address, state, latitude, longtitude));
+		Users user = Users.builder().userId(id).userPwd(password).userName(name).userType(type)
+				.userAddress(address).userState(state).userLatitude(latitude).userLongtitude(longtitude).build();
+		usersController.insertUser(user);
+		
+		if(user.getUserType().equals("점주")) {
+			insertLaundryInfo(id);
+			insertLaundryFee();
+			insertLaundryExtraFee();
+		}
 	}
+	
+	/**
+	 * 회원가입 점주 - FEE 입력 메뉴
+	 * */
+	private static void insertLaundryFee() {
+		
+		String inputFee = "";
+		String[] clothes = {"상의/자켓","하의","스커트","와이셔츠/남방","티셔츠","블라우스","원피스","스웨터/가디건","봄가을점퍼/아웃도어","코트","가죽/모피의류","겨울패딩/점퍼","넥타이","스카프/목도리","이불/침구류","커튼/카페트","한복류","모자","가방/기타가죽제품","운동화/스니커즈류"};
+		while (true) {
+			System.out.print("\n 해당 제품의 기본 세탁료를 입력해주세요.");
+			int [] feeArray = new int[20];
+			int i=0;
+			for(String sort : clothes) {
+				System.out.print(sort + " >");
+				inputFee = sc.nextLine();
+				if (!inputFee.matches(PHONE)) {
+					System.out.println("가격은 숫자만 입력해주세요.");
+				} else {
+					break;
+				}
+				int inputFeeInt = Integer.parseInt(inputFee);
+				feeArray[i] = inputFeeInt;
+				i++;
+			}
+			i=1;
+			for(int insertFee : feeArray) {
+				Fee fee = Fee.builder().clothesId(i).clothesFee(insertFee).build();
+				laundryController.insertFee(fee);
+				i++;
+			}
+		}
+	}
+	
+	private static void insertLaundryExtraFee() {
+		
+		/*
+		Laundry laundry = Laundry.builder().userId(id).laundryName(name).laundryTel(tel).laundryAddress(address)
+				.laundryAccountNumber(account).laundryLatitude(latitude).laundryLongitude(longtitude).build();
+		laundryController.insertLaundry(laundry);
+		*/
+		
+	}
+
+	/**
+	 * 회원가입 점주 - 세탁소 정보 입력 메뉴
+	 * */
+	private static void insertLaundryInfo(String id) {
+		String name = null;
+		while (true) {
+			System.out.print("세탁소 이름 입력 > ");
+			name = sc.nextLine();
+			break;
+		}
+		
+		String tel = null;
+		while (true) {
+			System.out.print("세탁소 전화번호 입력 > ");
+			tel = sc.nextLine();
+			break;
+		}
+		
+		String address = null;
+		double latitude = 0f;
+		double longtitude = 0f;
+		
+		while (true) {
+			System.out.println("세탁소 주소 입력 > ");
+			System.out.println("세탁소를 운영중인 구를 입력해주세요 > ");
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("서울특별시 ");
+			String gu = sc.nextLine();
+			
+			if (!gu.equals("강남구")&&!gu.equals("강동구")&&!gu.equals("강서구")&&!gu.equals("강북구")&&!gu.equals("관악구")
+					&&!gu.equals("광진구")&&!gu.equals("구로구")&&!gu.equals("금천구")&&!gu.equals("노원구")&&!gu.equals("동대문구")
+					&&!gu.equals("도봉구")&&!gu.equals("동작구")&&!gu.equals("마포구")&&!gu.equals("서대문구")&&!gu.equals("성동구")
+					&&!gu.equals("성북구")&&!gu.equals("서초구")&&!gu.equals("송파구")&&!gu.equals("영등포구")&&!gu.equals("용산구")
+					&&!gu.equals("양천구")&&!gu.equals("은평구")&&!gu.equals("종로구")&&!gu.equals("중구")&&!gu.equals("중랑구")) {
+				System.out.println("구 정보를 정확히 입력해주세요. \n");
+			} else {
+				buffer.append(gu + " ");
+				System.out.println("그 외 상세주소를 입력해주세요(도로명주소) > ");
+				buffer.append(sc.nextLine());
+				address = buffer.toString();
+				
+				String lati = getXYMapfromJson(getKakaoApiFromAddress(address)).get("y");
+				String longti = getXYMapfromJson(getKakaoApiFromAddress(address)).get("x");
+				latitude = Double.parseDouble(lati);
+				longtitude = Double.parseDouble(longti);
+				break;
+			}
+			
+		}
+		
+		String account = null;
+		while (true) {
+			System.out.print("정산받을 점주 계좌번호 입력 > ");
+			account = sc.nextLine();
+			
+			if (!account.matches(PHONE) || account.length() == 13 == false) {
+				System.out.println("계좌번호는 -없이 숫자 13자리로 입력해주세요.\n");
+			} else {
+				break;
+			}
+		}
+		
+		Laundry laundry = Laundry.builder().userId(id).laundryName(name).laundryTel(tel).laundryAddress(address)
+				.laundryAccountNumber(account).laundryLatitude(latitude).laundryLongitude(longtitude).build();
+		laundryController.insertLaundry(laundry);
+		
+	}
+
+	
 	
 	public static String getKakaoApiFromAddress(String roadFullAddr) {
 	    String apiKey = properties.getProperty("apiKey");

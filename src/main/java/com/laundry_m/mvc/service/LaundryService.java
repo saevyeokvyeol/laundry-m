@@ -125,12 +125,12 @@ public interface LaundryService {
 	 *  @exception : NotExistException(아아디 DB에 존재하지 않을 경우 오류)
 	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * */
-	Laundry selectByLowestByLaundry(Long feeId, Long FabricId) throws SQLException, NotExistException, NotLoginException;
+	Laundry selectByLowestByLaundry(int feeId, int FabricId) throws SQLException, NotExistException, NotLoginException;
 	
 	/**
 	 * 특정 세탁소에서 옷 + 재질 가격 더하는 메소드
 	 * */
-	int clothesfabricFee(Long laundryId,Long clothesId, Long fabricId) throws SQLException, NotExistException, NotLoginException;;
+	int clothesfabricFee(Long laundryId,int clothesId, int fabricId) throws SQLException, NotExistException, NotLoginException;;
 	
 	/**
 	 * 회원 아이디로 세탁소 찾기

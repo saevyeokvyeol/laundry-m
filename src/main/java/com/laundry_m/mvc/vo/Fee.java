@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Fee {
 	private Long feeId;
 	private Long laundryId;
-	private Long clothesId;
+	private int clothesId;
 	private int clothesFee;
 	
 	private Laundry laundry;
@@ -19,7 +19,7 @@ public class Fee {
 	
 	
 	@Builder
-	public Fee(Long feeId, Long laundryId, Long clothesId, int clothesFee, Laundry laundry, Clothes clothes) {
+	public Fee(Long feeId, Long laundryId, int clothesId, int clothesFee, Laundry laundry, Clothes clothes) {
 		super();
 		this.feeId = feeId;
 		this.laundryId = laundryId;

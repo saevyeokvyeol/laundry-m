@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 public class ExtraFee {
 	private Long extraFeeId;
-	private Long fabricId;
+	private int fabricId;
 	private Long laundryId;
 	private int fabricFee;
 	private char extraFeeOperation;
@@ -18,7 +18,7 @@ public class ExtraFee {
 	private Laundry laundry;
 	
 	@Builder
-	public ExtraFee(Long extraFeeId, Long fabricId, Long laundryId, int fabricFee, char extraFeeOperation,
+	public ExtraFee(Long extraFeeId, int fabricId, Long laundryId, int fabricFee, char extraFeeOperation,
 			Fabric fabric, Laundry laundry) {
 		super();
 		this.extraFeeId = extraFeeId;
