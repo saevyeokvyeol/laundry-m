@@ -30,4 +30,9 @@ public class Session {
 	public void removeAll() {
 		sessionMap.clear();
 	}
+
+	public static Object getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

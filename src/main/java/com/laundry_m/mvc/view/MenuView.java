@@ -34,6 +34,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
+					InsertUserView.insertUserForm();
 					break;
 				case 2 :
 					System.out.print("\n아이디 입력 > ");
@@ -48,6 +49,7 @@ public class MenuView {
 					System.out.println("메뉴를 잘못 선택하셨습니다.");
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 			}
 		}
@@ -66,18 +68,19 @@ public class MenuView {
 				switch(menu) {
 				case 1 :
 					laundrySearchMenu();
+					
 					break;
 				case 2 :
-					favoriteController.searchFavoriteByUserId();
+					favoriteMenu();
 					break;
 				case 3 :
-					
+					LaundryMenuVIew.recomWashMethod();
 					break;
 				case 4 :
 					customerMypageMenu();
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -112,7 +115,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -124,6 +127,14 @@ public class MenuView {
 			}
 		}
 	}
+	
+	/**
+	 * 알아서 써주세요><
+	 * */
+	public static void laundryDetail() {
+		System.out.println();
+	}
+	
 	
 	/**
 	 * 일반 회원 마이페이지 메뉴
@@ -155,7 +166,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -166,14 +177,15 @@ public class MenuView {
 				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 			}
 		}
-	}	/**
+	}
+	/**
 	 * 일반 회원 마이페이지 메뉴
 	 * */
 	public static void reviewpageMenu() {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 내가 쓴 리뷰 리스트 | 2. 리뷰 쓰기 | 3. 리뷰 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내가 쓴 리뷰 리스트 | 2. 리뷰 쓰기 | 3. 리뷰 수정 | 4.리뷰 삭제 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -186,12 +198,14 @@ public class MenuView {
 				case 3 :
 					ReviewMenuView.reviewUpdateForm();
 					break;
+				case 4 :
+					ReviewMenuView.deleteForm();
+					break;
 				case 8 :
 					run = false;
-
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -228,7 +242,45 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
+					break;
+				case 0 : 
+					MenuView.exit();
+				default:
+					System.out.println("메뉴를 잘못 선택하셨습니다.");
+				}
+			} catch (Exception e) {
+				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+			}
+		}
+	}/**
+	 * 일반 회원 단골 세탁소 메뉴
+	 * */
+	public static void favoriteMenu() {
+		boolean run = true;
+		while (run) {
+			try {
+				System.out.println("\n" + "[ 1. 내 단골세탁소 정보 보기 | 2. 내근처 세탁소 추가하기 | 3. 단골세탁소 이름으로 추가하기 | 4. 단골세탁소 삭제하기 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.print("▶ ");
+				int menu = Integer.parseInt(sc.nextLine());
+				switch(menu) {
+				case 1 :
+					favoriteController.searchFavoriteByUserId();
+					break;
+				case 2 :
+					favoriteMenuView.searchFavoriteByLaundryAddress();
+					break;
+				case 3 :
+					favoriteMenuView.searchFavoriteByLaundryName();
+					break;
+				case 4 :
+					favoriteMenuView.deleteFavorite();
+					break;
+				case 8 :
+					run = false;
+					break;
+				case 9 : 
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -248,18 +300,18 @@ public class MenuView {
 	public static void laundryMenu() {
 		while (true) {
 			try {
-				System.out.println("\n" + "[ 1. 내 세탁소 보기 | 2. 예약 내역 조회 | 3. 리뷰 조회 | 4. 매출 통계 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내 세탁소 관리 | 2. 예약 내역 조회 | 3. 리뷰 조회 | 4. 매출 통계 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					laundryManageMenu();
 					break;
 				case 2 :
 					laundryManageMenu();
 					break;
 				case 3 :
-//					reviewController.searchReviewByLaundryId(null);
+					reviewController.searchReviewByLaundryId();
 					break;
 				case 4 :
 					Map<String, Object> map = new HashMap<String, Object>();
@@ -267,7 +319,7 @@ public class MenuView {
 					statisticsController.searchStatistics(map);
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -292,7 +344,7 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					laundryController.selectLaundryAll();
 					break;
 				case 2 :
 					
@@ -301,7 +353,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -338,7 +390,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -362,19 +414,19 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					adminUserMenu();
 					break;
 				case 2 :
-					
+					adminLaundryMenu();
 					break;
 				case 3 :
-					
+					adminBookMenu();
 					break;
 				case 4 :
-					
+					adminProfitMenu();
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -402,7 +454,7 @@ public class MenuView {
 					
 					break;
 				case 2 :
-					
+
 					break;
 				case 3 :
 					
@@ -411,7 +463,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -436,19 +488,19 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					LaundryMenuVIew.selectByLaundryName();
 					break;
 				case 2 :
-					
+					LaundryMenuVIew.selectByLaundryLocation();
 					break;
 				case 3 :
-					
+					LaundryMenuVIew.selectByLaundryUserId();
 					break;
 				case 8 :
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -492,7 +544,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();
@@ -532,7 +584,7 @@ public class MenuView {
 					run = false;
 					break;
 				case 9 : 
-					
+					usersController.logout();
 					break;
 				case 0 : 
 					MenuView.exit();

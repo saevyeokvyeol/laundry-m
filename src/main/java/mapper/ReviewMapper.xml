@@ -38,8 +38,9 @@
 	<!-- 점포 아이디로 리뷰 검색 -->
 	<select id = "searchReviewByLaundryId" parameterType="String" resultType="review">
 		select review_id, user_id, laundry_id, book_id, review_content, review_rate, review_insert_date, review_update_date
-		from review where laundry_id=#{laundryId}
-		order by review_insert_date desc
+		from review 
+		where laundry_id=(select laundry_id from laundry where user_id = #{userId})
+
 	</select>
 	
 	<!-- 예약 번호로 리뷰 검색 -->

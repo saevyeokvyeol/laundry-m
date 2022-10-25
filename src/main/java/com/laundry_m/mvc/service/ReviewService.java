@@ -64,7 +64,7 @@ public interface ReviewService {
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * 			   NotExistException(세탁소가 DB에 존재하지 않을 경우 오류)
 	 * */
-	List<Review> searchReviewByLaundryId(Long laundryId) throws SQLException, NotLoginException, NotExistException;
+	List<Review> searchReviewByLaundryId(String userId) throws SQLException, NotLoginException, NotExistException;
 	
 	/**
 	 * 예약 번호로 리뷰 검색
