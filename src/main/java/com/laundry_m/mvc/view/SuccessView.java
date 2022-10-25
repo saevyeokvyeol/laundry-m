@@ -142,12 +142,12 @@ public class SuccessView {
 		
 	}
 
-	public static void printFavorite(List<Favorite> favorites, Laundry laundry) {
+	public static void printFavorite(List<Favorite> favorites) {
 		System.out.print("즐겨찾기 번호 | 세탁소ID ");
 		System.out.println("");
 		for(Favorite favorite : favorites) {
 			if(favorite.getFavoriteId() != null) {
-				System.out.println("" +favorite.getFavoriteId() + " | " + favorite.getUserId()+ " | " + favorite.getLaundryId() + " | " + laundry.getLaundryName());
+				System.out.println("" +favorite.getFavoriteId() + " | " + favorite.getUserId()+ " | " + favorite.getLaundryId() );
 				System.out.println("");
 			}else {
 				System.out.println("즐겨찾기 한 세탁소가 없습니다");
@@ -157,9 +157,5 @@ public class SuccessView {
 		
 	}
 
-	public static void printFavoritebyLaundryId(List<Favorite> favorites) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

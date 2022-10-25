@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.laundry_m.mvc.service.FavoriteService;
 import com.laundry_m.mvc.service.FavoriteServiceImpl;
-import com.laundry_m.mvc.service.LaundryService;
-import com.laundry_m.mvc.service.LaundryServiceImpl;
 import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
@@ -16,7 +14,6 @@ import com.laundry_m.mvc.vo.Users;
 
 public class FavoriteController {
 	private FavoriteService favoriteService = new FavoriteServiceImpl();
-	private LaundryService laundryService = new LaundryServiceImpl();
 	private Session session = Session.getInstance();
 	
 	/**
@@ -63,9 +60,8 @@ public class FavoriteController {
 	public void searchFavoriteByUserId() {
 		try {
 			  Users users = (Users)session.getAttribute("loginUser");
-			  Laundry laundrys = laundryService.selectByUserId(users.getUserId());
 			  List<Favorite> favorites = favoriteService.searchFavoriteByUserId(users.getUserId());
-			  SuccessView.printFavorite(favorites, laundrys);
+			  SuccessView.printFavorite(favorites);
 		  }catch(Exception e) {
 			  e.printStackTrace();
 			  FailView.errorMessage(e.getMessage());
@@ -81,7 +77,7 @@ public class FavoriteController {
 	public void searchFavoriteByLaundryId(Long laundryId){
 		try {
 			  List<Favorite> favorites = favoriteService.searchFavoriteByLaundryId(laundryId);
-			  SuccessView.printFavoritebyLaundryId(favorites);
+			  SuccessView.printFavorite(favorites);
 		  }catch(Exception e) {
 			  e.printStackTrace();
 			  FailView.errorMessage(e.getMessage());
