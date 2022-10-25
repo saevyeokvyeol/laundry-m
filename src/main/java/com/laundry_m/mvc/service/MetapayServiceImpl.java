@@ -62,15 +62,16 @@ public class MetapayServiceImpl implements MetapayService {
 
 	/**
 	 * 메타페이 계좌 연동
-	 * @param: String userId, PayAccount payAccount(은행 id, 계좌 번호)
+	 * @param: PayAccount payAccount(은행 id, 계좌 번호)
 	 * @exception: NotLoginException(로그인하지 않고 메타페이 계좌를 연동할 경우 오류)
 	 * 			   NotExistException(회원 아이디나 은행 아이디가 DB에 존재하지 않을 경우 오류)
 	 * 			   NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * */
 	@Override
-	public void addMetapayAccount(String userId, PayAccount payAccount)
+	public void addMetapayAccount(PayAccount payAccount)
 			throws SQLException, NotLoginException, NotExistException, NotFilledInException {
-		// TODO Auto-generated method stub
+		int result = metapayDao.addMetapayAccount(null, payAccount);
+		if (result != 1) throw new NotExistException("계좌를 연동할 수 없습니다.");
 
 	}
 
