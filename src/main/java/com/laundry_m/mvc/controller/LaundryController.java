@@ -325,6 +325,38 @@ public class LaundryController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	
+	/**
+	 * 세탁소 상세 정보 보기 - 기본 메뉴, 가격
+	 * */
+	public List<Fee> selectAllFee(Long laundryId){
+		List<Fee> feeList = new ArrayList<Fee>();
+		
+		try {
+			feeList = laundryService.selectAllFee(laundryId);
+			
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+		return feeList;
+	}
+	
+	/**
+	 * 세탁소 추가 가격 메뉴 보기
+	 * */
+	public List<ExtraFee> selectAllExtraFee(Long laundryId){
+		List<ExtraFee> extraFeeList = new ArrayList<ExtraFee>();
+		
+		try {
+			extraFeeList = laundryService.selectAllExtraFees(laundryId);
+			
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+		return extraFeeList;
+	}
 }
 	
 	
