@@ -268,7 +268,7 @@ public class MenuView {
 					reviewController.searchReviewByLaundryId();//수정 예정
 					break;
 				case 4 :
-					Map<String, Object> map = new HashMap<>();
+					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("laundryId", 0);
 					statisticsController.searchStatistics(map);
 					break;

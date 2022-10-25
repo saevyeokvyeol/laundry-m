@@ -155,6 +155,11 @@ public class LaundryController {
 				double distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
+			
+			//세션에 검색 결과 저장
+			session.setAttribute("findByNameLaundry", list);
+			session.setAttribute("findByNamedistance", distanceList);
+			
 			SuccessView.printLaundryList(list, distanceList);
 			
 		} catch (Exception e) {
@@ -179,6 +184,11 @@ public class LaundryController {
 				double distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
+			
+			//세션에 검색 결과 저장
+			session.setAttribute("findByAddressLaundry", list);
+			session.setAttribute("findByAddressdistance", distanceList);
+			
 			SuccessView.printLaundryList(list, distanceList);
 			
 		} catch (Exception e) {
@@ -274,6 +284,11 @@ public class LaundryController {
 				double distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
+			
+			//세션에 검색 결과 저장
+			session.setAttribute("nearByLaundry",laundries);
+			session.setAttribute("mydistance", distanceList);
+			
 			SuccessView.printLaundryList(laundries, distanceList);
 			
 		} catch (Exception e) {
