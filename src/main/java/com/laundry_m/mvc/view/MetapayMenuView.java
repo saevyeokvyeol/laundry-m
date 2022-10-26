@@ -39,7 +39,7 @@ public class MetapayMenuView {
 					break;
 				}
 			} else {
-				System.out.println("메타페이 비밀번호를 입력해주세요.");
+				System.out.println("\n메타페이 비밀번호를 입력해주세요.");
 				System.out.print("▶ ");
 				String password = sc.nextLine();
 				if (metapay.getMetapayPassword().equals(password)) {

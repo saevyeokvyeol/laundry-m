@@ -205,8 +205,19 @@ public class SuccessView {
 	}
 	
 	public static void printPayLog(List<PayLog> payLogs) {
-		for (PayLog log : payLogs) {
-			System.out.print("");
+		if (payLogs == null || payLogs.size() == 0) {
+			System.out.println("메타페이 거래 내역이 존재하지 않습니다.");
+		} else {
+			int i = 1;
+			for (PayLog log : payLogs) {
+				System.out.print(i++ + ". " + log.getPayCategory().getPayCategoryName() + " | ");
+				if (log.getPayCategoryId() == 2) {
+					System.out.print(log.getLaundry().getLaundryName() + " | ");
+				} else {
+					System.out.print(getAccountNumber(log.getPayAccount().getPayAccountNumber()) + " | ");
+				}
+				System.out.println(getDate(log.getPayLogInsertDate()));
+			}
 		}
 	}
 
