@@ -1,7 +1,9 @@
 package com.laundry_m.mvc.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -349,6 +351,22 @@ public class LaundryController {
 	}
 	
 	/**
+	 * 세탁소 상세 정보 보기 폼
+	 * */
+	public Map<List<Object>, String> laundryDetailForm(Long laundryId){
+		
+		Map<List<Object>, String> map = new HashMap<List<Object>, String>();
+		
+		List<Fee> feeList = this.selectAllFee(laundryId);
+		List<ExtraFee> extraList = this.selectAllExtraFee(laundryId);
+		
+		
+		
+		return null;
+	}
+	
+	
+	/**
 	 * 세탁소 상세 정보 보기 - 기본 메뉴, 가격
 	 * */
 	public List<Fee> selectAllFee(Long laundryId){
@@ -356,7 +374,7 @@ public class LaundryController {
 		
 		try {
 			feeList = laundryService.selectAllFee(laundryId);
-			
+			SuccessView.printLaundryFee(feeList);
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
@@ -372,7 +390,7 @@ public class LaundryController {
 		
 		try {
 			extraFeeList = laundryService.selectAllExtraFees(laundryId);
-			
+			SuccessView.printLaundryExFee(extraFeeList);
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}

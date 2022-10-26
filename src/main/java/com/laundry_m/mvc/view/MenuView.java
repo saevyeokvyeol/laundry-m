@@ -259,7 +259,7 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 내 단골세탁소 정보 보기 | 2. 내근처 세탁소 추가하기 | 3. 단골세탁소 이름으로 추가하기 | 4. 단골세탁소 삭제하기 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내 단골세탁소 리스트 | 2. 내 근처 단골세탁소 추가 | 3. 이름으로 단골세탁소 추가 | 4. 단골세탁소 삭제 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {

@@ -166,7 +166,7 @@ public class InsertUserView {
 			
 		}
 		String state = "N";
-		Users user = Users.builder().userId(id).userPwd(password).userName(name).userType(type)
+		Users user = Users.builder().userId(id).userPwd(password).userName(name).userPhone(phone).userType(type)
 				.userAddress(address).userState(state).userLatitude(latitude).userLongtitude(longtitude).build();
 		
 		if(user.getUserType().equals("점주")) {
@@ -281,14 +281,18 @@ public class InsertUserView {
 	private static Laundry insertLaundryInfo(Users user) {
 		String name = null;
 		while (true) {
-			System.out.print("세탁소 이름 입력 > ");
+			System.out.println();
+			System.out.println("세탁소 이름을 입력해주세요.");
+			System.out.print("▶ ");
 			name = sc.nextLine();
 			break;
 		}
 		
 		String tel = null;
 		while (true) {
-			System.out.print("세탁소 전화번호 입력 > ");
+			System.out.println();
+			System.out.print("세탁소 전화번호를 입력해주세요.");
+			System.out.print("▶ ");
 			tel = sc.nextLine();
 			break;
 		}
@@ -298,8 +302,9 @@ public class InsertUserView {
 		double longtitude = 0f;
 		
 		while (true) {
-			System.out.println("세탁소 주소 입력 > ");
-			System.out.println("세탁소를 운영중인 구를 입력해주세요 > ");
+			System.out.println();
+			System.out.println("세탁소를 운영중인 시/군/구를 입력해주세요. ");
+			System.out.print("▶ ");
 			StringBuffer buffer = new StringBuffer();
 			buffer.append("서울특별시 ");
 			String gu = sc.nextLine();
@@ -312,7 +317,8 @@ public class InsertUserView {
 				System.out.println("구 정보를 정확히 입력해주세요. \n");
 			} else {
 				buffer.append(gu + " ");
-				System.out.println("그 외 상세주소를 입력해주세요(도로명주소) > ");
+				System.out.println("그 외 상세주소를 입력해주세요. ");
+				System.out.print("▶ ");
 				buffer.append(sc.nextLine());
 				address = buffer.toString();
 				
@@ -327,7 +333,9 @@ public class InsertUserView {
 		
 		String account = null;
 		while (true) {
-			System.out.print("정산받을 점주 계좌번호 입력 > ");
+			System.out.println();
+			System.out.println("정산받을 점주 계좌번호를 입력해주세요.");
+			System.out.print("▶ ");
 			account = sc.nextLine();
 			
 			if (!account.matches(PHONE) || account.length() == 13 == false) {
