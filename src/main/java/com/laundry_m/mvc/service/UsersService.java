@@ -48,7 +48,7 @@ public interface UsersService {
 	/**
 	 *  회원 아이디로 검색
 	 *  @param : User user(회원 아이디, 회원 이름(선택 - 없을 경우 모든 회원 아이디 검색, 해당 이름만 검색))
-	 *  @return : List<User> 
+	 *  @return : User user 
 	 *  @exception : NotExistException(회원 아이디 DB에 존재하지 않을 경우 오류)
 	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * */
@@ -62,4 +62,22 @@ public interface UsersService {
 	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * */
 	List<Users> selectByUserType(Users users) throws SQLException, NotExistException, NotLoginException;
+
+	/**
+	 *  회원 이름으로 검색
+	 *  @param : User user
+	 *  @return :List<Users>
+	 *  @exception : NotExistException(회원 이름이 DB에 존재하지 않을 경우 오류)
+	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
+	 * */
+	List<Users> selectByUserName(Users user) throws SQLException, NotExistException, NotLoginException;
+
+	/**
+	 *  회원 주소로 검색
+	 *  @param : String
+	 *  @return :List<Users>
+	 *  @exception : NotExistException(회원 이름이 DB에 존재하지 않을 경우 오류)
+	 *  			 NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
+	 * */
+	List<Users> selectByUserAddress(String address) throws SQLException, NotExistException, NotLoginException;
 }

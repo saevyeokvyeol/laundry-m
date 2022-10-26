@@ -60,6 +60,20 @@ public class UsersServiceImpl implements UsersService{
 		return null;
 	}
 
+	@Override
+	public List<Users> selectByUserName(Users user) throws SQLException, NotExistException, NotLoginException {
+		List<Users> userList = usersDao.selectByUserName(user);
+		if(userList == null) { throw new NotExistException("존재하지 않는 회원 이름입니다."); }
+		return userList;
+	}
+
+	@Override
+	public List<Users> selectByUserAddress(String address) throws SQLException, NotExistException, NotLoginException {
+		List<Users> userList = usersDao.selectByUserAddress(address);
+		if(userList == null) { throw new NotExistException(address + "에 거주중인 회원이 없습니다."); }
+		return userList;
+	}
+
 	
 
 	

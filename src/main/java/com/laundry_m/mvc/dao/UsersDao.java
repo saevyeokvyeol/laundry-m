@@ -39,7 +39,7 @@ public interface UsersDao {
 	/** 
 	 *  회원 아이디로 검색
 	 *  @param : User user(회원 아이디, 회원 이름(선택 - 없을 경우 모든 회원 아이디 검색, 해당 이름만 검색))
-	 *  @return : List<User> 
+	 *  @return : User user
 	 *  */
 	Users selectByUserId(Users users) throws SQLException;
 	
@@ -49,5 +49,20 @@ public interface UsersDao {
 	 *  @return : List<User> 
 	 *  */
 	List<Users> selectByUserType(Users users) throws SQLException;	
+	
+	/** 
+	 *  회원 이름으로 검색
+	 *  @param : User user
+	 *  @return : List<User> 
+	 *  */
+	List<Users> selectByUserName(Users users) throws SQLException;
+
+	/** 
+	 *  회원 주소로 검색
+	 *  @param : String address
+	 *  @return :List<User> 
+	 *  */
+	List<Users> selectByUserAddress(String address) throws SQLException;
+	
 	 
 }

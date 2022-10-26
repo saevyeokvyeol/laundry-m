@@ -11,7 +11,6 @@ import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.controller.ReviewController;
 import com.laundry_m.mvc.controller.StatisticsController;
 import com.laundry_m.mvc.controller.UsersController;
-import com.laundry_m.mvc.vo.ExtraFee;
 
 public class MenuView {
 	private static Scanner sc = new Scanner(System.in);
@@ -451,13 +450,13 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					
+					adminUserMenu.selectByUserId();
 					break;
 				case 2 :
-
+					adminUserMenu.selectByUserName();
 					break;
 				case 3 :
-					
+					adminUserMenu.selectByUserAddress();
 					break;
 				case 8 :
 					run = false;
