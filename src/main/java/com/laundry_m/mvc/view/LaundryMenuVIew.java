@@ -108,6 +108,21 @@ public class LaundryMenuVIew {
 		
 		try {
 			laundryController.selectByMyLaundry();
+			
+			System.out.println();
+			System.out.println("☞ 예약하실 세탁소 고유번호를 입력해주세요");
+			System.out.print("▶ ");
+			Long laundryId = Long.parseLong(sc.nextLine());
+
+			System.out.println("☞ 해당 세탁소로 바로 예약하시겠어요? (Y/N)");
+			System.out.print("▶ ");
+			String answer = sc.nextLine();
+			if(answer == "Y") {
+				//예약하기로 이동
+				
+			}
+			//취소
+			
 		} catch (Exception e) {
 			FailView.errorMessage("주변 세탁소를 찾지 못했어요 :( ");
 		}
@@ -124,6 +139,21 @@ public class LaundryMenuVIew {
 			System.out.print("▶ ");
 			String laundryName = sc.nextLine();
 			laundryController.selectByNameLaundry(laundryName);
+			
+			System.out.println();
+			System.out.println("☞ 예약하실 세탁소 고유번호를 입력해주세요");
+			System.out.print("▶ ");
+
+			Long laundryId = Long.parseLong(sc.nextLine());
+			
+			System.out.println("☞ 해당 세탁소로 바로 예약하시겠어요? (Y/N)");
+			System.out.print("▶ ");
+			String answer = sc.nextLine();
+			if(answer == "Y") {
+				//예약하기로 이동
+				
+			}
+			//취소
 			
 		} catch (Exception e) {
 			FailView.errorMessage("에러가 발생했어요 :( ");
@@ -142,6 +172,21 @@ public class LaundryMenuVIew {
 			System.out.print("▶ ");
 			String laundryLocation= sc.nextLine();
 			laundryController.selectByAddressLaundry(laundryLocation);
+			
+			System.out.println();
+			System.out.println("☞ 예약하실 세탁소 고유번호를 입력해주세요");
+			System.out.print("▶ ");
+
+			Long laundryId = Long.parseLong(sc.nextLine());
+			
+			System.out.println("☞ 해당 세탁소로 바로 예약하시겠어요? (Y/N)");
+			System.out.print("▶ ");
+			String answer = sc.nextLine();
+			if(answer == "Y") {
+				//예약하기로 이동
+				
+			}
+			//취소
 			
 		} catch (Exception e) {
 			FailView.errorMessage("에러가 발생했어요 :( ");
