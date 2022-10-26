@@ -148,7 +148,7 @@ public class LaundryController {
 	 * */
 	public void selectByNameLaundry(String LaundryName) {
 		
-		List<Double> distanceList = new ArrayList<Double>();
+		List<Integer> distanceList = new ArrayList<Integer>();
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
@@ -156,7 +156,7 @@ public class LaundryController {
 			
 			for(Laundry laundry : list) {
 				//각각의 세탁소별 유저와의 거리 구한다
-				double distance = laundryService.userBetweenLaun(users, laundry);
+				int distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
 			
@@ -177,7 +177,7 @@ public class LaundryController {
 	 * */
 	public void selectByAddressLaundry(String LaundryAddress) {
 		
-		List<Double> distanceList = new ArrayList<Double>();
+		List<Integer> distanceList = new ArrayList<Integer>();
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
@@ -185,7 +185,7 @@ public class LaundryController {
 			
 			for(Laundry laundry : list) {
 				//각각의 세탁소별 유저와의 거리 구한다
-				double distance = laundryService.userBetweenLaun(users, laundry);
+				int distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
 			
@@ -212,7 +212,7 @@ public class LaundryController {
 			Laundry laundry = laundryService.selectByUserId(users.getUserId());
 			
 			
-			double distance = laundryService.userBetweenLaun(users, laundry);
+			int distance = laundryService.userBetweenLaun(users, laundry);
 			
 			SuccessView.printLaundry(laundry, distance);
 			
@@ -248,7 +248,7 @@ public class LaundryController {
 			Users users = (Users)session.getAttribute("loginUser");
 			Laundry laundry = laundryService.selectByLowestByLaundry(users.getUserAddress(),clothesId, FabricId);
 			
-			double distance = laundryService.userBetweenLaun(users, laundry);
+			int distance = laundryService.userBetweenLaun(users, laundry);
 			
 			//세션에 검색 결과 저장
 			session.setAttribute("lowestLaundry", laundry);
@@ -293,7 +293,7 @@ public class LaundryController {
 	 * */
 	public void selectByMyLaundry() {
 		
-		List<Double> distanceList = new ArrayList<Double>();
+		List<Integer> distanceList = new ArrayList<Integer>();
 
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
@@ -303,7 +303,7 @@ public class LaundryController {
 			List<Laundry> laundries = laundryService.selectByMyLaundry(users.getUserAddress());
 			
 			for(Laundry laundry : laundries) {
-				double distance = laundryService.userBetweenLaun(users, laundry);
+				int distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
 			
