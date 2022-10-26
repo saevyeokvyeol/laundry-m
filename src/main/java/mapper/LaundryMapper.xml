@@ -4,6 +4,41 @@
 
 <mapper namespace="laundryMapper">
 	
+	<resultMap type="laundry" id="laundryMap">
+		<id column="laundry_id" property="laundryId"/>
+		<result column="fee_id" property="feeId"/>
+		<result column="extra_fee_id" property="extraFeeId"/>
+		
+		<collection property="fee" resultMap="feeMap"/>
+		<collection property="clothes" resultMap="clothesMap"/>
+		<collection property="extraFee" resultMap="extraFeeMap"/>
+		<collection property="fabric" resultMap="fabricMap"/>
+	</resultMap>
+	
+	<resultMap type="fee" id="feeMap">
+		<id column="fee_id" property="feeId"/>
+		<result column="clothes_id" property="clothesId"/>
+		<result column="clothes_fee" property="clothesFee"/>
+		
+		<collection property="clothes" resultMap="clothesMap"/>
+		
+	</resultMap>
+	
+	<!-- <resultMap type="clothes" id="clothesMap">
+		<id column="clothes_id" property="clothesId"/>\
+		<result column="clothes_name" property="clothesName"/>
+	</resultMap> -->
+	
+	<resultMap type="extraFee" id="extraFeeMap">
+		<id column="extra_Fee_id" property="extraFeeId"/>
+		<result column="fabric_fee" property="fabricFee"/>
+	</resultMap>
+	
+	<resultMap type="fabric" id="FabricMap">
+		<id column="fabric_id" property="fabricId"/>
+		<result column="fabric_name" property="fabricName"/>
+	</resultMap>
+	
 	<!-- 세탁소 등록 -->
 	<insert id="insertLaundry" parameterType="laundry">
 		insert into laundry
@@ -134,7 +169,7 @@
 	</select>
 	
 	<!-- 가격 메뉴 -->
-	<select id="selectAllFee" parameterType="long" resultType="fee">
+	<select id="selectAllFee" parameterType="long" resultMap="laundryMap">
 		select *
 		from laundry
 			join fee
@@ -145,7 +180,7 @@
 	</select>
 	
 	<!-- 추가가격 메뉴 -->
-	<select id="selectAllExtraFees" parameterType="long" resultType="extrafee">
+	<select id="selectAllExtraFees" parameterType="long" resultMap="laundryMap">
 	
 		select *
 		from laundry
