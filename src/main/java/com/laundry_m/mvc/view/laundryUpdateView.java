@@ -233,7 +233,7 @@ public class laundryUpdateView {
 					}
 					loginLaundry.setLaundryAddress(address);
 					loginLaundry.setLaundryLatitude(latitude);
-					loginLaundry.setLaundryLongtitude(latitude);
+					loginLaundry.setLaundryLongtitude(longtitude);
 					laundryController.updateLaundry(loginLaundry);
 					break;
 						
