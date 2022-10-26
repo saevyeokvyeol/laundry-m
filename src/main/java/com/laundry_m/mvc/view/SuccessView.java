@@ -10,6 +10,7 @@ import com.laundry_m.mvc.vo.BookLine;
 import com.laundry_m.mvc.vo.Favorite;
 import com.laundry_m.mvc.vo.Metapay;
 import com.laundry_m.mvc.vo.PayAccount;
+import com.laundry_m.mvc.vo.PayLog;
 import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Review;
 import com.laundry_m.mvc.vo.StatisticsDetail;
@@ -118,11 +119,15 @@ public class SuccessView {
 	
 	public static void printStatisticsTotal(StatisticsTotal total) {
 		System.out.println("총 예약 건: " +  won.format(total.getBookCount()) + "건");
-		System.out.println("총 예약 가격: " + won.format(total.getBookTotalFee()) + "원");
-		System.out.println();
+		if (total.getBookTotalFee() == null) {
+			System.out.println("총 예약 가격: 0원");
+		} else {			
+			System.out.println("총 예약 가격: " + won.format(total.getBookTotalFee()) + "원");
+		}
 	}
 	
 	public static void printStatisticsDetail(List<StatisticsDetail> details) {
+		System.out.println();
 		String[] clothes = {"","상의/자켓","하의","스커트","와이셔츠/남방","티셔츠","블라우스","원피스","스웨터/가디건","봄가을점퍼/아웃도어","코트","가죽/모피의류","겨울패딩/점퍼","넥타이","스카프/목도리","이불/침구류","커튼/카페트","한복류","모자","가방/기타가죽제품","운동화/스니커즈류"};
 		for (StatisticsDetail detail : details) {
 			System.out.println(clothes[detail.getClothesId()] + " : " + detail.getCount() + "건");
@@ -191,6 +196,12 @@ public class SuccessView {
 				System.out.println("작성된 리뷰가 없습니다");
 				System.out.println("");
 			}
+		}
+	}
+	
+	public static void printPayLog(List<PayLog> payLogs) {
+		for (PayLog log : payLogs) {
+			System.out.print("");
 		}
 	}
 

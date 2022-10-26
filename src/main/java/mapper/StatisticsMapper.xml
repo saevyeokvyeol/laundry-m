@@ -34,6 +34,7 @@
 				user_id = #{userId}
 			</if>
 		</trim>
+        group by bl.clothes_id
 		order by clothes_id
 	</select>
 </mapper>

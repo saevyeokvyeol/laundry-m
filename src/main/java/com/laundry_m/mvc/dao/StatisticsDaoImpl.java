@@ -24,7 +24,7 @@ public class StatisticsDaoImpl implements StatisticsDao {
 		StatisticsTotal statisticsTotal = null;
 		try {
 			session = DbUtil.getSession();
-			statisticsTotal = session.selectOne("statisticsMapper.searchTotalStatistics", statisticsTotal);
+			statisticsTotal = session.selectOne("statisticsMapper.searchTotalStatistics", map);
 		} finally {
 			DbUtil.sessionClose(session);
 		}
