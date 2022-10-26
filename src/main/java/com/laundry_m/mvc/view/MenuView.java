@@ -179,7 +179,7 @@ public class MenuView {
 		}
 	}
 	/**
-	 * 일반 회원 마이페이지 메뉴
+	 * 일반 리뷰 마이페이지 메뉴
 	 * */
 	public static void reviewpageMenu() {
 		boolean run = true;

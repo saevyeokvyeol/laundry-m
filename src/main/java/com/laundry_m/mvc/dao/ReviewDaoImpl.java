@@ -160,7 +160,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	 * @return: Review 
 	 * */
 	@Override
-	public Review searchReviewByBookId(Long bookId) throws SQLException {
+	public Review searchReviewByBookId(Review review) throws SQLException {
 		SqlSession session = null;
 		Review reviews = null;
 		try {
@@ -168,7 +168,7 @@ public class ReviewDaoImpl implements ReviewDao {
 			session = DbUtil.getSession();
 			
 			//세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
-			reviews = session.selectOne("reviewMapper.searchReviewByBookId", bookId);
+			reviews = session.selectOne("reviewMapper.searchReviewByBookId", review);
 		}finally {
 			DbUtil.sessionClose(session);
 		}

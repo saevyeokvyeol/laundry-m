@@ -74,7 +74,7 @@ public interface ReviewService {
 	 * 			   NotExistException(해당 예약이 DB에 존재하지 않을 경우 오류)
 	 * 			   InvalidUserException(예약하지 않은 회원이 조회할 경우 오류)
 	 * */
-	Review searchReviewByBookId(Long bookId) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
+	Review searchReviewByBookId(Review review) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
 	
 	/**
 	 * 리뷰 번호로 리뷰 검색

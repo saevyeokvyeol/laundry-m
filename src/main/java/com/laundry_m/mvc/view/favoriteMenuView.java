@@ -14,7 +14,6 @@ public class favoriteMenuView {
 	private static Session session = Session.getInstance();
 	
 	public static void searchFavoriteByLaundryAddress() {
-		boolean run = true;
 			try {
 				LaundryMenuVIew.findLaundry();
 				System.out.println("즐겨찾기 추가할 세탁소 번호를 입력해주세요");

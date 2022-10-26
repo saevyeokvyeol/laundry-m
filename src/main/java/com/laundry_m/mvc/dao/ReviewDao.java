@@ -46,13 +46,13 @@ public interface ReviewDao {
 	 * @return: List<Review>
 	 * */
 	List<Review> searchReviewByLaundryId(String userId) throws SQLException;
-
+	
 	/**
 	 * 예약 번호로 리뷰 검색
-	 * @param: Long bookId
+	 * @param: Review review
 	 * @return: Review
 	 * */
-	Review searchReviewByBookId(Long bookId) throws SQLException;
+	Review searchReviewByBookId(Review review) throws SQLException;
 
 	/**
 	 * 리뷰 번호로 리뷰 검색
@@ -60,4 +60,5 @@ public interface ReviewDao {
 	 * @return: Review
 	 * */
 	Review searchReviewByReviewId(Long reviewId) throws SQLException;
+
 }

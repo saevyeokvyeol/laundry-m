@@ -29,7 +29,7 @@
 		select f.favorite_id, f.user_id, f.laundry_id, l.laundry_name
 	        from favorite f join laundry l on l.laundry_id = f.laundry_id
 	        where f.user_id = #{user_id}
-	        order by f.favorite_id desc
+	        order by f.favorite_id asc
 	</select>
 
 	<!-- 찜 목록 세탁소아이디로 검색 -->

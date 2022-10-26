@@ -7,6 +7,7 @@ import com.laundry_m.mvc.service.ReviewServiceImpl;
 import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
+import com.laundry_m.mvc.vo.Favorite;
 import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Review;
 import com.laundry_m.mvc.vo.Users;
@@ -119,8 +120,15 @@ public class ReviewController {
 		 */
 	
 	  public Review searchReviewByBookId(Long bookId) {
-	 
-		  return null; 
+		 Review resultReview = null;
+			try {
+				Users users = (Users)session.getAttribute("loginUser");
+				Review review = Review.builder().userId(users.getUserId()).bookId(bookId).build();
+				resultReview = reviewService.searchReviewByBookId(review);
+			  }catch(Exception e) {
+				  return null;
+			  }
+			return resultReview;
 	  }
 	  
 	 /**
@@ -135,5 +143,6 @@ public class ReviewController {
 	  
 	  }
 			  
+	  			  		  
 			 
 }
