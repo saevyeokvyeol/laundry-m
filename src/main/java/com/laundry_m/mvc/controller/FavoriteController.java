@@ -82,5 +82,22 @@ public class FavoriteController {
 			  FailView.errorMessage(e.getMessage());
 		  }
 	}
+	/**
+	 * 점포 아이디 즐겨찾기 유무
+	 * @param: Long laundryId
+	 * */
+	public Favorite existFavoriteByLaundryId(Long laundryId){
+		Favorite resultFavorite = null;
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Favorite favorite = Favorite.builder().userId(users.getUserId()).laundryId(laundryId).build();
+			resultFavorite = favoriteService.existFavoriteByLaundryId(favorite);
+		  }catch(Exception e) {
+			  return null;
+		  }
+
+		
+		 return resultFavorite;
+	}
 
 }

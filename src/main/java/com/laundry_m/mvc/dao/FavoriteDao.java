@@ -34,5 +34,12 @@ public interface FavoriteDao {
 	 * @return: List<Favorite>
 	 * */
 	List<Favorite> searchFavoriteByLaundryId(Long laundryId) throws SQLException;
+	
+	/**
+	 * 점포 아이디 즐겨찾기 유무
+	 * @param: Favorite favorite
+	 * @return: List<Favorite>
+	 * */
+	Favorite existFavoriteByLaundryId(Favorite favorite) throws SQLException;
 
 }
