@@ -1,7 +1,9 @@
 package com.laundry_m.mvc.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -148,7 +150,7 @@ public class LaundryController {
 	 * */
 	public void selectByNameLaundry(String LaundryName) {
 		
-		List<Double> distanceList = new ArrayList<Double>();
+		List<Integer> distanceList = new ArrayList<Integer>();
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
@@ -156,7 +158,7 @@ public class LaundryController {
 			
 			for(Laundry laundry : list) {
 				//각각의 세탁소별 유저와의 거리 구한다
-				double distance = laundryService.userBetweenLaun(users, laundry);
+				int distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
 			
@@ -177,7 +179,7 @@ public class LaundryController {
 	 * */
 	public void selectByAddressLaundry(String LaundryAddress) {
 		
-		List<Double> distanceList = new ArrayList<Double>();
+		List<Integer> distanceList = new ArrayList<Integer>();
 		
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
@@ -185,7 +187,7 @@ public class LaundryController {
 			
 			for(Laundry laundry : list) {
 				//각각의 세탁소별 유저와의 거리 구한다
-				double distance = laundryService.userBetweenLaun(users, laundry);
+				int distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
 			
@@ -212,7 +214,7 @@ public class LaundryController {
 			Laundry laundry = laundryService.selectByUserId(users.getUserId());
 			
 			
-			double distance = laundryService.userBetweenLaun(users, laundry);
+			int distance = laundryService.userBetweenLaun(users, laundry);
 			
 			SuccessView.printLaundry(laundry, distance);
 			
@@ -248,7 +250,7 @@ public class LaundryController {
 			Users users = (Users)session.getAttribute("loginUser");
 			Laundry laundry = laundryService.selectByLowestByLaundry(users.getUserAddress(),clothesId, FabricId);
 			
-			double distance = laundryService.userBetweenLaun(users, laundry);
+			int distance = laundryService.userBetweenLaun(users, laundry);
 			
 			//세션에 검색 결과 저장
 			session.setAttribute("lowestLaundry", laundry);
@@ -293,7 +295,7 @@ public class LaundryController {
 	 * */
 	public void selectByMyLaundry() {
 		
-		List<Double> distanceList = new ArrayList<Double>();
+		List<Integer> distanceList = new ArrayList<Integer>();
 
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
@@ -303,7 +305,7 @@ public class LaundryController {
 			List<Laundry> laundries = laundryService.selectByMyLaundry(users.getUserAddress());
 			
 			for(Laundry laundry : laundries) {
-				double distance = laundryService.userBetweenLaun(users, laundry);
+				int distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
 			
@@ -349,6 +351,22 @@ public class LaundryController {
 	}
 	
 	/**
+	 * 세탁소 상세 정보 보기 폼
+	 * */
+	public Map<List<Object>, String> laundryDetailForm(Long laundryId){
+		
+		Map<List<Object>, String> map = new HashMap<List<Object>, String>();
+		
+		List<Fee> feeList = this.selectAllFee(laundryId);
+		List<ExtraFee> extraList = this.selectAllExtraFee(laundryId);
+		
+		
+		
+		return null;
+	}
+	
+	
+	/**
 	 * 세탁소 상세 정보 보기 - 기본 메뉴, 가격
 	 * */
 	public List<Fee> selectAllFee(Long laundryId){
@@ -356,7 +374,7 @@ public class LaundryController {
 		
 		try {
 			feeList = laundryService.selectAllFee(laundryId);
-			
+			SuccessView.printLaundryFee(feeList);
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
@@ -372,7 +390,7 @@ public class LaundryController {
 		
 		try {
 			extraFeeList = laundryService.selectAllExtraFees(laundryId);
-			
+			SuccessView.printLaundryExFee(extraFeeList);
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}

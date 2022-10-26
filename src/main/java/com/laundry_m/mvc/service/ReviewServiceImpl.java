@@ -122,15 +122,11 @@ public class ReviewServiceImpl implements ReviewService {
 	 * @param: Long bookId
 	 * @return: Review
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
-	 * 			   NotExistException(해당 예약이 DB에 존재하지 않을 경우 오류)
-	 * 			   InvalidUserException(예약하지 않은 회원이 조회할 경우 오류)
 	 * */
 	@Override
-	public Review searchReviewByBookId(Long bookId)
-			throws SQLException, NotLoginException, NotExistException, InvalidUserException {
-		Review review = reviewDao.searchReviewByBookId(bookId);
-		if(review == null) throw new NotExistException("해당 예약 내역에는 리뷰를 작성하지 않았습니다.");
-		return review;
+	public Review searchReviewByBookId(Review review) throws SQLException, NotLoginException {
+		Review reviews = reviewDao.searchReviewByBookId(review);
+		return reviews;
 	}
 
 	/**
@@ -141,10 +137,10 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 			   NotExistException(해당 리뷰가 DB에 존재하지 않을 경우 오류)
 	 * */
 	@Override
-	public Review searchReviewByReviewId(Long reviewId) throws SQLException, NotLoginException, NotExistException {
-		Review review = reviewDao.searchReviewByBookId(reviewId);
-		if(review == null) throw new NotExistException("리뷰를 찾을 수 없습니다.");
-		return review;
+	public Review searchReviewByReviewId(Review review) throws SQLException, NotLoginException, NotExistException {
+		Review reviews = reviewDao.searchReviewByReviewId(review);
+		if(reviews == null) throw new NotExistException("리뷰를 찾을 수 없습니다.");
+		return reviews;
 	}
 
 }

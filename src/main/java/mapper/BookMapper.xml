@@ -160,4 +160,5 @@
 		on l.laundry_id = b.laundry_id
 		where book_id = #{_parameter}
 	</select>
+
 </mapper>

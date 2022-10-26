@@ -130,7 +130,7 @@ public class MenuView {
 	/**
 	 * 알아서 써주세요><
 	 * */
-	public static void laundryDetail() {
+	public static void laundryDetail(String keyword) {
 		System.out.println();
 	}
 	
@@ -178,7 +178,7 @@ public class MenuView {
 		}
 	}
 	/**
-	 * 일반 회원 마이페이지 메뉴
+	 * 일반 리뷰 마이페이지 메뉴
 	 * */
 	public static void reviewpageMenu() {
 		boolean run = true;
@@ -219,7 +219,7 @@ public class MenuView {
 	
 	/**
 	 * 일반 회원 메타페이 메뉴
-	 * */
+	 * */ 
 	public static void customerMetapayMenu() {
 		boolean run = true;
 		while (run) {
@@ -259,7 +259,7 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 내 단골세탁소 정보 보기 | 2. 내근처 세탁소 추가하기 | 3. 단골세탁소 이름으로 추가하기 | 4. 단골세탁소 삭제하기 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내 단골세탁소 리스트 | 2. 내 근처 단골세탁소 추가 | 3. 이름으로 단골세탁소 추가 | 4. 단골세탁소 삭제 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -307,14 +307,14 @@ public class MenuView {
 					laundryManageMenu();
 					break;
 				case 2 :
-					laundryManageMenu();
+					laundryBookManageMenu();
 					break;
 				case 3 :
 					reviewController.searchReviewByLaundryId();
 					break;
 				case 4 :
 					Map<String, Object> map = new HashMap<String, Object>();
-					map.put("laundryId", 0);
+					map.put("laundryId", 0L);
 					statisticsController.searchStatistics(map);
 					break;
 				case 9 : 
@@ -566,18 +566,31 @@ public class MenuView {
 				System.out.println("\n" + "[ 1. 총 매출 통계 | 2. 일별 매출 통계 | 3. 세탁소별 매출 통계 | 4. 회원별 매출 통계 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
+				Map<String, Object> map = new HashMap<String, Object>();
 				switch(menu) {
 				case 1 :
-					
+					statisticsController.searchStatistics(map);
 					break;
 				case 2 :
-					
+					System.out.println("\n" + "날짜를 입력해주세요.");
+					System.out.print("▶ ");
+					String date = sc.nextLine();
+					map.put("date", date);
+					statisticsController.searchStatistics(map);
 					break;
 				case 3 :
-					
+					System.out.println("\n" + "세탁소 아이디를 입력해주세요.");
+					System.out.print("▶ ");
+					Long laundryId = (long) Integer.parseInt(sc.nextLine());
+					map.put("laundryId", laundryId);
+					statisticsController.searchStatistics(map);
 					break;
 				case 4 :
-					
+					System.out.println("\n" + "유저 아이디를 입력해주세요.");
+					System.out.print("▶ ");
+					String userId = sc.nextLine();
+					map.put("userId", userId);
+					statisticsController.searchStatistics(map);
 					break;
 				case 8 :
 					run = false;

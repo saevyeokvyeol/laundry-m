@@ -1,6 +1,7 @@
 package com.laundry_m.mvc.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
@@ -12,6 +13,7 @@ import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
 import com.laundry_m.mvc.vo.Metapay;
 import com.laundry_m.mvc.vo.PayAccount;
+import com.laundry_m.mvc.vo.PayLog;
 import com.laundry_m.mvc.vo.Users;
 
 public class MetapayController {
@@ -19,7 +21,7 @@ public class MetapayController {
 	private Session session = Session.getInstance();
 
 	public void joinMetapay(Metapay metapay) {
-		try {
+		try {			
 			Users users = (Users)session.getAttribute("loginUser");
 			metapay.setUserId(users.getUserId());
 			metapayService.joinMetapay(metapay);
@@ -36,7 +38,6 @@ public class MetapayController {
 			Users users = (Users)session.getAttribute("loginUser");
 			metapay = metapayService.searchMetapayByUserId(users.getUserId());
 		} catch (Exception e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		return metapay;
@@ -84,6 +85,18 @@ public class MetapayController {
 			else return false;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+	
+	public void searchPayLogByMetapayId() {
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Metapay metapay = metapayService.searchMetapayByUserId(users.getUserId());
+			List<PayLog> payLogs = metapayService.searchPayLogByMetapayId(metapay.getMetapayId());
+			SuccessView.printPayLog(payLogs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
 		}
 	}
 }

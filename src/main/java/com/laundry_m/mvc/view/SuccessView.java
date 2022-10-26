@@ -7,9 +7,12 @@ import java.util.List;
 
 import com.laundry_m.mvc.vo.Book;
 import com.laundry_m.mvc.vo.BookLine;
+import com.laundry_m.mvc.vo.ExtraFee;
 import com.laundry_m.mvc.vo.Favorite;
+import com.laundry_m.mvc.vo.Fee;
 import com.laundry_m.mvc.vo.Metapay;
 import com.laundry_m.mvc.vo.PayAccount;
+import com.laundry_m.mvc.vo.PayLog;
 import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Review;
 import com.laundry_m.mvc.vo.StatisticsDetail;
@@ -70,40 +73,45 @@ public class SuccessView {
 	public static void printUserBook(List<Book> books) {
 		String[] clothes = {"","상의/자켓","하의","스커트","와이셔츠/남방","티셔츠","블라우스","원피스","스웨터/가디건","봄가을점퍼/아웃도어","코트","가죽/모피의류","겨울패딩/점퍼","넥타이","스카프/목도리","이불/침구류","커튼/카페트","한복류","모자","가방/기타가죽제품","운동화/스니커즈류"};
 		String[] fabric = {"","면","니트","레이온","데님","실크/쉬폰","린넨","퍼","앙고라","가죽"};
-		for (Book book : books) {
-			System.out.print(book.getBookId() + " | " + book.getUserId() + " | " + book.getLaundry().getLaundryName() + " | " + book.getBookCount() + "벌 | " + won.format(book.getBookTotalFee()) + "원 | " + book.getBookMethod().getBookMethodName() + " | " + getDate(book.getBookInsertDate()) + " | " + book.getBookState().getBookStateName());
-			if (book.getBookMemo() != null) {
-				System.out.println(" | " + book.getBookMemo());
-			} else {
+		
+		if (books == null || books.size() == 0) {
+			System.out.println("예약 내역이 존재하지 않습니다.");
+		} else {
+			for (Book book : books) {
+				System.out.print(book.getBookId() + " | " + book.getUserId() + " | " + book.getLaundry().getLaundryName() + " | " + book.getBookCount() + "벌 | " + won.format(book.getBookTotalFee()) + "원 | " + book.getBookMethod().getBookMethodName() + " | " + getDate(book.getBookInsertDate()) + " | " + book.getBookState().getBookStateName());
+				if (book.getBookMemo() != null) {
+					System.out.println(" | " + book.getBookMemo());
+				} else {
+					System.out.println();
+				}
+				for (BookLine bookLine : book.getBookLine()) {
+					System.out.println("  └ " + clothes[bookLine.getClothesId()] + " | " + fabric[bookLine.getFabricId()] + " | " + won.format(bookLine.getBookLineFee()) + "원");
+				}
 				System.out.println();
 			}
-			for (BookLine bookLine : book.getBookLine()) {
-				//System.out.println("  └ " + clothes[bookLine.getClothesId().intValue()] + " | " + fabric[bookLine.getFabricId().intValue()] + " | " + won.format(bookLine.getBookLineFee()) + "원");
-			}
-			System.out.println();
 		}
 	}
 
 	
-	public static void printLaundryList(List<Laundry> laundries , List<Double> distances) {
+	public static void printLaundryList(List<Laundry> laundries , List<Integer> distances) {
 		//(번호) 나와의 거리 | 세탁소 이름 | 세탁소 주소 | 세탁소 번호 | 배달료
 		int i = 0;
-		System.out.println( "   나와의 거리 " +" | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" +" | " + "세탁소 고유번호" );
+		System.out.println( "  "+"고유번호 " +" | 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" );
 		for(Laundry laundry : laundries) {
-			System.out.println( "(" + (i+1) + ") " + laundry.getLaundryId() + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" +  " | "  + laundry.getLaundryId());
+			System.out.println("  "+ laundry.getLaundryId().toString() + "  |  " + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원");
 
 			i++;
 		}
 	}
 	
 	
-	public static void printLaundry(Laundry laundry, double distance) {
-		System.out.println("   나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" +" | " +  "세탁소 고유번호" );
-		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" +  " | "  + laundry.getLaundryId());
+	public static void printLaundry(Laundry laundry, int distance) {
+		System.out.println( "  "+"고유번호 " +" | 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" );
+		System.out.println("  "+ laundry.getLaundryId().toString() + "  |  "+ distance + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원");
 
 	}
 	public static void printUserReview(List<Review> reviews) {
-		System.out.print("리뷰번호 | ID | 세탁소ID | 별점 | 리뷰내용 ");
+		System.out.print("리뷰번호   |   ID   |  세탁소ID  |  예약 번호  | 별점 | 리뷰내용 ");
 		System.out.println("");
 		for(Review review : reviews) {
 			if(review.getReviewContent() != null) {
@@ -118,11 +126,15 @@ public class SuccessView {
 	
 	public static void printStatisticsTotal(StatisticsTotal total) {
 		System.out.println("총 예약 건: " +  won.format(total.getBookCount()) + "건");
-		System.out.println("총 예약 가격: " + won.format(total.getBookTotalFee()) + "원");
-		System.out.println();
+		if (total.getBookTotalFee() == null) {
+			System.out.println("총 예약 가격: 0원");
+		} else {			
+			System.out.println("총 예약 가격: " + won.format(total.getBookTotalFee()) + "원");
+		}
 	}
 	
 	public static void printStatisticsDetail(List<StatisticsDetail> details) {
+		System.out.println();
 		String[] clothes = {"","상의/자켓","하의","스커트","와이셔츠/남방","티셔츠","블라우스","원피스","스웨터/가디건","봄가을점퍼/아웃도어","코트","가죽/모피의류","겨울패딩/점퍼","넥타이","스카프/목도리","이불/침구류","커튼/카페트","한복류","모자","가방/기타가죽제품","운동화/스니커즈류"};
 		for (StatisticsDetail detail : details) {
 			System.out.println(clothes[detail.getClothesId()] + " : " + detail.getCount() + "건");
@@ -144,7 +156,7 @@ public class SuccessView {
 	}
 
 	public static void printFavorite(List<Favorite> favorites) {
-		System.out.print("사용자아이디 | 세탁소이름 | 세탁소ID | 즐겨찾기 번호");
+		System.out.print("   사용자아이디    |    세탁소이름    |    세탁소ID    |    예약 번호  |   즐겨찾기 번호");
 		System.out.println("");
 		for(Favorite favorite : favorites) {
 			if(favorite.getFavoriteId() != null) {
@@ -185,7 +197,7 @@ public class SuccessView {
 		System.out.println("");
 		for(Review review : reviews) {
 			if(review.getReviewContent() != null) {
-				System.out.println("" +review.getReviewId() + " | " + review.getUserId() + " | " + review.getBookId() + " | " + review.getReviewRate() + " | " + review.getReviewUpdateDate() + " | " + review.getReviewContent());
+				System.out.println("" +review.getReviewId() + " | " + review.getUserId() + " | " + review.getBookId() + " | " + review.getReviewRate() + " | " + getDate(review.getReviewUpdateDate()) + " | " + review.getReviewContent());
 				System.out.println("");
 			}else {
 				System.out.println("작성된 리뷰가 없습니다");
@@ -193,6 +205,23 @@ public class SuccessView {
 			}
 		}
 	}
-
+	
+	public static void printPayLog(List<PayLog> payLogs) {
+		for (PayLog log : payLogs) {
+			System.out.print("");
+		}
+	}
+	
+	public static void printLaundryFee(List<Fee> feeList) {
+		for(Fee fee : feeList) {
+			System.out.println(fee.getClothes().getClothesName() + " : " + fee.getClothesFee() );
+		}
+	}
+	
+	public static void printLaundryExFee(List<ExtraFee> exfeeList) {
+		for(ExtraFee exfee : exfeeList) {
+			System.out.println(exfee.getFabric().getFabricName() + " : " + exfee.getFabricFee() );
+		}
+	}
 	
 }

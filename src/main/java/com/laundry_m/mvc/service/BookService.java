@@ -95,12 +95,11 @@ public interface BookService {
 	List<Book> searchBookByLaundryId(Map<String, Object> map) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
 	
 	/**
-	 * 예약 아이디로 예약 검색
+	 * 유저 아이디로 예약 검색
 	 * @param: Long bookId
 	 * @return: Book
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
-	 * 			   NotExistException(예약이 DB에 존재하지 않을 경우 오류)
-	 * 			   InvalidUserException(관리자나 해당 회원이 아니거나 해당 점포를 소유하지 않을 경우 오류)
 	 * */
-	Book searchBookByBookId(Long bookId) throws SQLException, NotLoginException, NotExistException, InvalidUserException;
+	Book searchBookByBookId(Long bookId)
+			throws SQLException, NotLoginException, NotExistException, InvalidUserException;
 }

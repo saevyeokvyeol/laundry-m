@@ -226,7 +226,7 @@ public class BookDaoImpl implements BookDao {
 		return books;
 	}
 	
-	/**
+	/** 
 	 * 예약 아이디로 예약 검색
 	 * @param: Long bookId
 	 * @return: Book

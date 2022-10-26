@@ -19,6 +19,37 @@
 			<result column="pay_Account_Quit_State" property="payAccountQuitState"/>
 		</collection>
 	</resultMap>
+	
+	<resultMap type="payLog" id="payLogMap">
+		<id column="PAY_LOG_ID" property="payLogId"/>
+		<result column="METAPAY_ID" property="metapayId"/>
+		<result column="PAY_CATEGORY_ID" property="payCategoryId"/>
+		<result column="PAY_ACCOUNT_ID" property="payAccountId"/>
+		<result column="PAY_LOG_AMOUNT" property="payLogAmount"/>
+		<result column="PAY_LOG_INSERT_DATE" property="payLogInsertDate"/>
+		<result column="LAUNDRY_ID" property="laundryId"/>
+		
+		<association property="payAccount" javaType="payAccount">
+			<id column="pay_Account_Id" property="payAccountId"/>
+			<result column="metapay_id" property="metapayId"/>
+			<result column="pay_Account_Number" property="payAccountNumber"/>
+		</association>
+		
+		<association property="payCategory" javaType="payCategory">
+			<id column="pay_category_id" property="payCategoryId"/>
+			<result column="pay_category_name" property="payCategoryName"/>
+		</association>
+		
+		<association property="laundry" javaType="laundry">
+			<id column="laundry_id" property="laundryId"/>
+			<result column="laundry_name" property="laundryName"/>
+		</association>
+	</resultMap>
+
+	<insert id="joinMetapay" parameterType="metapay">
+		insert into metapay
+		values(METAPAY_SEQ.nextval, #{userId}, 0, #{metapayPassword}, systimestamp, systimestamp)
+	</insert>
 
 	<update id="updateMetapayBalance" parameterType="map">
 		update metapay
@@ -42,7 +73,7 @@
 				metapay_seq.currval
 			</otherwise>
 		</choose>
-		#{bankId}, #{payAccountNumber}, 'F')
+		, #{bankId}, #{payAccountNumber}, 'F')
 	</insert>
 	
 	<update id="deleteMetapayAccount" parameterType="payAccount">
@@ -56,5 +87,16 @@
 		from metapay m join pay_account p
 		on m.metapay_id = p.metapay_id
 		where user_id = #{_parameter} and p.pay_account_quit_state = 'F'
+	</select>
+	
+	<select id="searchPayLogByMetapayId" parameterType="string" resultMap="payLogMap">
+		select pl.*, pa.pay_account_number, pc.pay_category_name, l.laundry_name
+		from pay_log pl left join pay_account pa
+		on pl.pay_account_id = pa.pay_account_id
+		left join pay_category pc
+		on pl.pay_category_id = pc.pay_category_id
+		left join laundry l
+		on pl.laundry_id = l.laundry_id
+		where pl.metapay_id = #{_parameter}
 	</select>
 </mapper>
