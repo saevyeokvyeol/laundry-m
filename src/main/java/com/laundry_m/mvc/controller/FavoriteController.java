@@ -1,22 +1,18 @@
 package com.laundry_m.mvc.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.laundry_m.mvc.service.FavoriteService;
 import com.laundry_m.mvc.service.FavoriteServiceImpl;
-import com.laundry_m.mvc.service.LaundryService;
-import com.laundry_m.mvc.service.LaundryServiceImpl;
 import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
 import com.laundry_m.mvc.vo.Favorite;
-import com.laundry_m.mvc.vo.Laundry;
-import com.laundry_m.mvc.vo.Review;
 import com.laundry_m.mvc.vo.Users;
 
 public class FavoriteController {
 	private FavoriteService favoriteService = new FavoriteServiceImpl();
-	private LaundryService laundryService = new LaundryServiceImpl();
 	private Session session = Session.getInstance();
 	
 	/**
@@ -43,7 +39,7 @@ public class FavoriteController {
 	 * 			   NotExistException(즐겨찾기 아이디가 DB에 존재하지 않을 경우 오류)
 	 * 			   InvalidUserException(세탁소 운영 회원이 즐겨찾기를 시도할 경우 오류)
 	 * */
-	void deleteFavorite(Long favoriteId) {
+	public void deleteFavorite(Long favoriteId) {
 		 try {
 				//로그인 세션
 				favoriteService.deleteFavorite(favoriteId);
@@ -63,9 +59,8 @@ public class FavoriteController {
 	public void searchFavoriteByUserId() {
 		try {
 			  Users users = (Users)session.getAttribute("loginUser");
-			  Laundry laundrys = laundryService.selectByUserId(users.getUserId());
 			  List<Favorite> favorites = favoriteService.searchFavoriteByUserId(users.getUserId());
-			  SuccessView.printFavorite(favorites, laundrys);
+			  SuccessView.printFavorite(favorites);
 		  }catch(Exception e) {
 			  e.printStackTrace();
 			  FailView.errorMessage(e.getMessage());
@@ -81,7 +76,7 @@ public class FavoriteController {
 	public void searchFavoriteByLaundryId(Long laundryId){
 		try {
 			  List<Favorite> favorites = favoriteService.searchFavoriteByLaundryId(laundryId);
-			  SuccessView.printFavoritebyLaundryId(favorites);
+			  SuccessView.printFavorite(favorites);
 		  }catch(Exception e) {
 			  e.printStackTrace();
 			  FailView.errorMessage(e.getMessage());

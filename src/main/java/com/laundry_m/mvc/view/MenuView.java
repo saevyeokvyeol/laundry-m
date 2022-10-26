@@ -71,7 +71,7 @@ public class MenuView {
 					laundrySearchMenu();
 					break;
 				case 2 :
-					favoriteController.searchFavoriteByUserId();
+					favoriteMenu();
 					break;
 				case 3 :
 					LaundryMenuVIew.recomWashMethod();
@@ -127,6 +127,14 @@ public class MenuView {
 			}
 		}
 	}
+	
+	/**
+	 * 알아서 써주세요><
+	 * */
+	public static void laundryDetail() {
+		System.out.println();
+	}
+	
 	
 	/**
 	 * 일반 회원 마이페이지 메뉴
@@ -217,7 +225,7 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 내 메타페이 정보 보기 | 2. 최근 거래 내역 보기 | 3. 연결 계좌 해지 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내 메타페이 정보 보기 | 2. 최근 거래 내역 보기 | 3. 연결 계좌 변경 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -225,10 +233,48 @@ public class MenuView {
 					metapayController.searchMetapayByUserId();
 					break;
 				case 2 :
-					MetapayMenuView.deleteMetapayAccount();
+					
 					break;
 				case 3 :
-					MetapayMenuView.deleteMetapayAccount();
+					MetapayMenuView.addMetapayAccount();
+					break;
+				case 8 :
+					run = false;
+					break;
+				case 9 : 
+					usersController.logout();
+					break;
+				case 0 : 
+					MenuView.exit();
+				default:
+					System.out.println("메뉴를 잘못 선택하셨습니다.");
+				}
+			} catch (Exception e) {
+				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+			}
+		}
+	}/**
+	 * 일반 회원 단골 세탁소 메뉴
+	 * */
+	public static void favoriteMenu() {
+		boolean run = true;
+		while (run) {
+			try {
+				System.out.println("\n" + "[ 1. 내 단골세탁소 정보 보기 | 2. 내근처 세탁소 추가하기 | 3. 단골세탁소 이름으로 추가하기 | 4. 단골세탁소 삭제하기 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.print("▶ ");
+				int menu = Integer.parseInt(sc.nextLine());
+				switch(menu) {
+				case 1 :
+					favoriteMenuView.searchFavoriteList();
+					break;
+				case 2 :
+					favoriteMenuView.searchFavoriteByLaundryAddress();
+					break;
+				case 3 :
+					favoriteMenuView.searchFavoriteByLaundryName();
+					break;
+				case 4 :
+					favoriteMenuView.deleteFavorite();
 					break;
 				case 8 :
 					run = false;
@@ -265,10 +311,10 @@ public class MenuView {
 					laundryManageMenu();
 					break;
 				case 3 :
-					reviewController.searchReviewByLaundryId();//수정 예정
+					reviewController.searchReviewByLaundryId();
 					break;
 				case 4 :
-					Map<String, Object> map = new HashMap<>();
+					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("laundryId", 0);
 					statisticsController.searchStatistics(map);
 					break;

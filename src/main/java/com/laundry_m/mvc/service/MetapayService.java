@@ -44,26 +44,12 @@ public interface MetapayService {
 	
 	/**
 	 * 메타페이 계좌 연동
-	 * @param: String userId, PayAccount payAccount(은행 id, 계좌 번호)
+	 * @param: PayAccount payAccount(은행 id, 계좌 번호)
 	 * @exception: NotLoginException(로그인하지 않고 메타페이 계좌를 연동할 경우 오류)
 	 * 			   NotExistException(회원 아이디나 은행 아이디가 DB에 존재하지 않을 경우 오류)
 	 * 			   NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 * */
-	void addMetapayAccount(String userId, PayAccount payAccount) throws SQLException, NotLoginException, NotExistException, NotFilledInException;
-	
-	/**
-	 * 메타페이 계좌 연동 해지
-	 * @param: PayAccount payAcount
-	 * @exception: NotLoginException(로그인하지 않고 메타페이 계좌 연동을 해지할 경우 오류)
-	 * 			   NotExistException(계좌 아이디가 DB에 존재하지 않을 경우 오류)
-	 * */
-	void deleteMetapayAccount(PayAccount payAcount) throws SQLException, NotLoginException, NotExistException;
-	
-	/**
-	 * 전체 메타페이 검색
-	 * @return: List<Metapay>
-	 * */
-	List<Metapay> searchMetapayAll() throws SQLException;
+	void addMetapayAccount(PayAccount payAccount) throws SQLException, NotLoginException, NotExistException, NotFilledInException;
 	
 	/**
 	 * 아이디로 메타페이 검색
@@ -74,6 +60,11 @@ public interface MetapayService {
 	Metapay searchMetapayByUserId(String userId) throws SQLException, NotLoginException, NotExistException;
 	
 	/**
-	 * 전체 메타페이 거래 내역 검색
+	 * 메타페이 아이디로 거래 내역 검색
+	 * @param: Long metapayId
+	 * @return: List<PayLog>
+	 * @exception: NotLoginException(로그인하지 않고 메타페이를 검색할 경우 오류)
+	 * 			   NotExistException(회원 아이디가 DB에 존재하지 않을 경우 오류)
 	 * */
+	List<PayLog> searchPayLogByMetapayId(Long metapayId) throws SQLException, NotLoginException, NotExistException;
 }

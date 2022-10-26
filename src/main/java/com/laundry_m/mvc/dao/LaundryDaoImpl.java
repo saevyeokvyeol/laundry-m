@@ -2,6 +2,7 @@ package com.laundry_m.mvc.dao;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -393,6 +394,38 @@ public class LaundryDaoImpl implements LaundryDao {
 		}
 		
 		return fabric;
+	}
+
+	@Override
+	public List<Fee> selectAllFee(Long laundryId) throws SQLException, NotExistException, NotLoginException {
+		SqlSession session = null;
+		List<Fee> feeList = new ArrayList<Fee>();
+		
+		try {
+			session = DbUtil.getSession();
+			feeList = session.selectList("laundryMapper.selectAllFee", laundryId);
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		
+		return feeList;
+		
+	}
+
+	@Override
+	public List<ExtraFee> selectAllExtraFees(Long laundryId) throws SQLException, NotExistException, NotLoginException {
+		SqlSession session = null;
+		List<ExtraFee> extraFeeList = new ArrayList<ExtraFee>();
+		
+		try {
+			session = DbUtil.getSession();
+			extraFeeList = session.selectList("laundryMapper.selectAllExtraFees", laundryId);
+		} finally {
+			DbUtil.sessionClose(session);
+		}
+		
+		return extraFeeList;
+		
 	}
 
 }

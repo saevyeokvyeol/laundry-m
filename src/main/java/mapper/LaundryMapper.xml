@@ -132,6 +132,30 @@
 	    from fabric
 	    where fabric_id like '%${parameter}%'
 	</select>
+	
+	<!-- 가격 메뉴 -->
+	<select id="selectAllFee" parameterType="long" resultType="fee">
+		select *
+		from laundry
+			join fee
+			using (laundry_id)
+			join clothes
+			using (clothes_id)
+		where laundry_id = #{laundryId}
+	</select>
+	
+	<!-- 추가가격 메뉴 -->
+	<select id="selectAllExtraFees" parameterType="long" resultType="extrafee">
+	
+		select *
+		from laundry
+			join extra_fee
+			using (laundry_id)
+			join fabric 
+			using (fabric_id)
+		where laundry_id = #{laundryId}
+	
+	</select>
 
 
 </mapper>

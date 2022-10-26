@@ -1,6 +1,7 @@
 package com.laundry_m.mvc.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -60,10 +61,10 @@ public interface MetapayDao {
 	
 	/**
 	 * 메타페이 계좌 연동 해지
-	 * @param: PayAccount payAcount
+	 * @param: SqlSession session, PayAccount payAcount
 	 * @result: int(등록된 레코드 수)
 	 * */
-	int deleteMetapayAccount(PayAccount payAcount) throws SQLException;
+	int deleteMetapayAccount(SqlSession session, PayAccount payAcount) throws SQLException;
 	
 	/**
 	 * 아이디로 메타페이 검색
@@ -71,4 +72,11 @@ public interface MetapayDao {
 	 * @result: Metapay
 	 * */
 	Metapay selectMetapayByUserId(String userId) throws SQLException;
+	
+	/**
+	 * 메타페이 아이디로 거래 내역 검색
+	 * @param: Long metapayId
+	 * @return: List<PayLog>
+	 * */
+	List<PayLog> searchPayLogByMetapayId(Long metapayId) throws SQLException;
 }

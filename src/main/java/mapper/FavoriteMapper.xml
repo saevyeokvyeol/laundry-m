@@ -3,6 +3,16 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="favoriteMapper">
+	<resultMap type="favorite" id="favoriteMap">
+		<id column="favorite_id"  property="favoriteId"/>
+		<result column="user_id" property="userId"/>
+		<result column="laundry_Id" property="laundryId"/>
+					
+		<association property="laundry" javaType="laundry">
+			<id column="laundry_id" property="laundryId"/>
+			<result column="laundry_name" property="laundryName"/>
+		</association>	
+	</resultMap>
 
 	<!-- 찜 목록 입력 -->
 	<insert id ="addFavorite" parameterType="favorite">
@@ -11,18 +21,19 @@
 	
 	<!-- 찜 목록 삭제 -->
 	<delete id = "deleteFavorite" parameterType="favorite">
-		delete from favorite where #{favoriteId}
+		delete from favorite where favorite_id = #{favoriteId}
 	</delete>
 	
 	<!-- 찜 목록 회원아이디로 검색 -->
-	<select id="searchFavoriteByUserId" parameterType="String" resultType="favorite">
-		select favorite_id, user_id, laundry_id (select laundry_name from laundry where laundry_id = #{laundryId} )
-		from favorite
-		where user_id=#{userId}
+	<select id="searchFavoriteByUserId" parameterType="string" resultMap="favoriteMap">
+		select f.favorite_id, f.user_id, f.laundry_id, l.laundry_name
+	        from favorite f join laundry l on l.laundry_id = f.laundry_id
+	        where f.user_id = #{user_id}
+	        order by f.favorite_id desc
 	</select>
 
 	<!-- 찜 목록 세탁소아이디로 검색 -->
-	<select id="searchFavoriteByLaundryId" parameterType="String" resultType="favorite">
+	<select id="searchFavoriteByLaundryId" parameterType="string" resultMap="favoriteMap">
 		select favorite_id, user_id, laundry_id
 		from favorite
 		where user_id=#{userId}

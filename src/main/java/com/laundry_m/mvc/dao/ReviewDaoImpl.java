@@ -139,7 +139,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	 * @return: List<Review>
 	 * */
 	@Override
-	public List<Review> searchReviewByLaundryId(Long laundryId) throws SQLException {
+	public List<Review> searchReviewByLaundryId(String userId) throws SQLException {
 		SqlSession session = null;
 		List<Review> reviews = null;
 		try {
@@ -147,7 +147,7 @@ public class ReviewDaoImpl implements ReviewDao {
 			session = DbUtil.getSession();
 			
 			//세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
-			reviews = session.selectList("reviewMapper.searchReviewByLaundryId", laundryId);
+			reviews = session.selectList("reviewMapper.searchReviewByLaundryId", userId);
 		}finally {
 			DbUtil.sessionClose(session);
 		}

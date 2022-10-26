@@ -159,6 +159,11 @@ public class LaundryController {
 				double distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
+			
+			//세션에 검색 결과 저장
+			session.setAttribute("findByNameLaundry", list);
+			session.setAttribute("findByNamedistance", distanceList);
+			
 			SuccessView.printLaundryList(list, distanceList);
 			
 		} catch (Exception e) {
@@ -183,6 +188,11 @@ public class LaundryController {
 				double distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
+			
+			//세션에 검색 결과 저장
+			session.setAttribute("findByAddressLaundry", list);
+			session.setAttribute("findByAddressdistance", distanceList);
+			
 			SuccessView.printLaundryList(list, distanceList);
 			
 		} catch (Exception e) {
@@ -296,6 +306,11 @@ public class LaundryController {
 				double distance = laundryService.userBetweenLaun(users, laundry);
 				distanceList.add(distance);
 			}
+			
+			//세션에 검색 결과 저장
+			session.setAttribute("nearByLaundry",laundries);
+			session.setAttribute("mydistance", distanceList);
+			
 			SuccessView.printLaundryList(laundries, distanceList);
 			
 		} catch (Exception e) {
@@ -333,6 +348,37 @@ public class LaundryController {
 		}
 	}
 	
+	/**
+	 * 세탁소 상세 정보 보기 - 기본 메뉴, 가격
+	 * */
+	public List<Fee> selectAllFee(Long laundryId){
+		List<Fee> feeList = new ArrayList<Fee>();
+		
+		try {
+			feeList = laundryService.selectAllFee(laundryId);
+			
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+		return feeList;
+	}
+	
+	/**
+	 * 세탁소 추가 가격 메뉴 보기
+	 * */
+	public List<ExtraFee> selectAllExtraFee(Long laundryId){
+		List<ExtraFee> extraFeeList = new ArrayList<ExtraFee>();
+		
+		try {
+			extraFeeList = laundryService.selectAllExtraFees(laundryId);
+			
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+		return extraFeeList;
+	}
 }
 	
 	

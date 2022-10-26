@@ -111,9 +111,9 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 			   NotExistException(세탁소가 DB에 존재하지 않을 경우 오류)
 	 * */
 	@Override
-	public List<Review> searchReviewByLaundryId(Long laundryId)
+	public List<Review> searchReviewByLaundryId(String userId)
 			throws SQLException, NotLoginException, NotExistException {
-		List<Review> reviews = reviewDao.searchReviewByLaundryId(laundryId);
+		List<Review> reviews = reviewDao.searchReviewByLaundryId(userId);
 		return reviews;
 	}
 	

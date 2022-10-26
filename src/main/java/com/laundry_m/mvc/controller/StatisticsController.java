@@ -22,7 +22,7 @@ public class StatisticsController {
 
 	public void searchStatistics(Map<String, Object> map) {
 		try {
-			if (map.get("laundryId") != null && (int)map.get("laundryId") == 0) {
+			if (map.get("laundryId") != null && (Integer)map.get("laundryId") == 0) {
 				Users users = (Users)session.getAttribute("loginUser");
 				// 유저 아이디로 런드리 찾기
 				Laundry laundry = laundryService.selectByUserId(users.getUserId());
