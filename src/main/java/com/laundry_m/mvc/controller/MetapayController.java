@@ -21,7 +21,7 @@ public class MetapayController {
 	private Session session = Session.getInstance();
 
 	public void joinMetapay(Metapay metapay) {
-		try {
+		try {			
 			Users users = (Users)session.getAttribute("loginUser");
 			metapay.setUserId(users.getUserId());
 			metapayService.joinMetapay(metapay);
@@ -38,7 +38,6 @@ public class MetapayController {
 			Users users = (Users)session.getAttribute("loginUser");
 			metapay = metapayService.searchMetapayByUserId(users.getUserId());
 		} catch (Exception e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		return metapay;

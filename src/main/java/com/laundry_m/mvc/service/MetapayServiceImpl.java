@@ -27,8 +27,8 @@ public class MetapayServiceImpl implements MetapayService {
 	@Override
 	public void joinMetapay(Metapay metapay)
 			throws SQLException, DuplicationException, NotLoginException, NotExistException, NotFilledInException {
-		// TODO Auto-generated method stub
-
+		int result = metapayDao.joinMetapay(metapay);
+		if (result != 1) throw new SQLException("메타페이 가입이 정상적으로 완료되지 않았습니다.");
 	}
 
 	/**
