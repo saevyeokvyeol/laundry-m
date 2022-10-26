@@ -43,7 +43,7 @@ public class FavoriteController {
 		 try {
 				//로그인 세션
 				favoriteService.deleteFavorite(favoriteId);
-				SuccessView.printMessage("리뷰가 삭제되었습니다.");
+				SuccessView.printMessage("즐겨찾기가 삭제되었습니다.");
 			} catch (Exception e) {
 				e.printStackTrace();
 				FailView.errorMessage(e.getMessage());
