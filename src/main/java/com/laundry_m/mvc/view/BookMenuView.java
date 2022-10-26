@@ -97,14 +97,15 @@ public class BookMenuView {
 			System.out.println("업데이트할 예약 번호를 입력해주세요.");
 			System.out.print("▶ ");
 			Long bookId = (long)Integer.parseInt(sc.nextLine());
+			System.out.println("\n[ 1. 수거 예정 | 2. 수거 중 | 3. 세탁 진행 중 | 4. 세탁 완료 | 5. 배달 예정 | 6. 배달 중 | 7. 배달 완료 | 8. 예약 거절 | 9. 정산 완료 ]");
 			System.out.println("업데이트할 예약 상태 번호를 입력해주세요.");
-			System.out.println("[ 1. 수거 예정 | 2. 수거 중 | 3. 세탁 진행 중 | 4. 세탁 완료 | 5. 배달 예정 | 6. 배달 중 | 7. 배달 완료 | 8. 예약 거절 | 9. 정산 완료 ]");
 			System.out.print("▶ ");
 			Long bookStateId = (long)Integer.parseInt(sc.nextLine());
 			if (bookStateId == 7) {
 				bookController.updateBookComplete(bookId);
 			} else {
-				bookController.searchBookByLaundryId(bookStateId, ++bookStateId);
+				Book book = Book.builder().bookId(bookId).bookStateId(++bookStateId).build();
+				bookController.updateBookState(book);
 			}
 		} catch (Exception e) {
 			FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");

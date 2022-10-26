@@ -329,9 +329,8 @@ public class LaundryDaoImpl implements LaundryDao {
 		double userLong = users.getUserLongtitude(); //경도
 
 		//세탁소의 위도, 경도 구한다
-		double laundryLatit = laundry.getLaundryLongtitude(); //경도
-		double laundryLong = laundry.getLaundryLatitude(); //위도
-		
+		double laundryLatit = laundry.getLaundryLatitude(); //경도
+		double laundryLong = laundry.getLaundryLongtitude(); //위도
 		
 		//경도 - 경도
 		double theta = userLong - laundryLong;
@@ -339,9 +338,9 @@ public class LaundryDaoImpl implements LaundryDao {
         			+ (Math.cos(deg2rad(userLatit)) * Math.cos(deg2rad(laundryLatit))) * Math.cos(deg2rad(theta));
         dist = Math.acos(dist);
         dist = rad2deg(dist);
-        dist = dist * 60 * 1.1515 * 1.609344;
+        dist = dist * 60 * 1.1515 * 1609.344;
 
-        return (int)dist; //단위 km
+        return (int)(dist / 1000); //단위 km
 	}
 	
 	//10진수를 radian(라디안)으로 변환
