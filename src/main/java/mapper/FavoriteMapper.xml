@@ -45,4 +45,11 @@
 		from favorite
 		where laundry_id=#{laundryId} and user_id = #{userId}
 	</select>
+	
+	<!-- 찜 목록 유저아이디로 검색 -->
+	<select id="existFavoriteByUserId" parameterType="favorite" resultMap="favoriteMap">
+		select *
+		from favorite
+		where user_id = #{userId}
+	</select>
 </mapper>

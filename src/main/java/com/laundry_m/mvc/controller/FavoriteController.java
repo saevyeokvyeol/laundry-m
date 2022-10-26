@@ -108,13 +108,12 @@ public class FavoriteController {
 	 * 유저 아이디 즐겨찾기 유무
 	 * @param: Long laundryId
 	 * */
-	public Favorite existFavoriteByLaundryId(){
+	public Favorite existFavoriteByUserId(){
 		Favorite resultFavorite = null;
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
 			Favorite favorite = Favorite.builder().userId(users.getUserId()).build();
 			resultFavorite = favoriteService.existFavoriteByLaundryId(favorite);
-			System.out.println("resultFavorite");
 		  }catch(Exception e) {
 			  return null;
 		  }
