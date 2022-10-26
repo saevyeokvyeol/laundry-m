@@ -129,16 +129,4 @@ public class BookController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-	
-	public Book existBookByBookState() {
-		Book resultBook = null;
-		try {
-			Users users = (Users)session.getAttribute("loginUser");
-			Book book = Book.builder().userId(users.getUserId()).build();
-			resultBook = resultBook.existBookByBookState(book);
-		  }catch(Exception e) {
-			  return null;
-		  }
-		 return resultBook;
-	}
 }

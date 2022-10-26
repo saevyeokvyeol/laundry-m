@@ -100,5 +100,6 @@ public interface BookService {
 	 * @return: Book
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * */
-	Book existBookByBookState(Book book)throws SQLException, NotLoginException;
+	Book searchBookByBookId(Long bookId)
+			throws SQLException, NotLoginException, NotExistException, InvalidUserException;
 }
