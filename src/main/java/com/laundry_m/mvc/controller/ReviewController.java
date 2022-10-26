@@ -132,21 +132,34 @@ public class ReviewController {
 	  }
 	  
 		 /**
-			 * 리뷰 번호로 리뷰 검색 - 정산 완료 예약 - 리뷰 선택 시 리뷰 볼 수 있게 이동
-			 * @param: Long reviewId
-			 * @return: Review
-			 */
-				  
-		  public Review searchReviewByReviewId(Long reviewId) { 
-			Review resultReview = null;
-			try {
-				Users users = (Users)session.getAttribute("loginUser");
-				Review review = Review.builder().userId(users.getUserId()).bookId(reviewId).build();
-				resultReview = reviewService.searchReviewByReviewId(review);
-			  }catch(Exception e) {
-				  return null;
-			  }
-			return resultReview;
+		 * 리뷰 번호로 리뷰 검색 - 정산 완료 예약 - 리뷰 선택 시 리뷰 볼 수 있게 이동
+		 * @param: Long reviewId
+		 * @return: Review
+		 */
+			  
+	  public Review searchReviewByReviewId(Long reviewId) { 
+		Review resultReview = null;
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Review review = Review.builder().userId(users.getUserId()).bookId(reviewId).build();
+			resultReview = reviewService.searchReviewByReviewId(review);
+		  }catch(Exception e) {
+			  return null;
 		  }
+		return resultReview;
+	  }
+	  
+	  public List<Review> existReviewByUserId(){ 
+		  List<Review> reviews = null;
+		  try {
+			  Users users = (Users)session.getAttribute("loginUser");
+			  reviews = reviewService.searchReviewByUserId(users.getUserId());
+  		  }catch(Exception e) {
+			  e.printStackTrace();
+			  FailView.errorMessage(e.getMessage());
+		  }
+		  return reviews;
+	  }
+	  
 	  
 }

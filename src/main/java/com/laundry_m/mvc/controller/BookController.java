@@ -129,4 +129,20 @@ public class BookController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	
+	public List<Book> existBook(Long start, Long end){
+		List<Book> books = null;
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("userId", users.getUserId());
+			map.put("start", start);
+			map.put("end", end);
+			books = bookService.searchBookByUserId(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		return books;
+	}
 }
