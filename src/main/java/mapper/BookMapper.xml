@@ -160,4 +160,10 @@
 		on l.laundry_id = b.laundry_id
 		where book_id = #{_parameter}
 	</select>
+	
+	<select id="existBookByBookState" parameterType="string" resultMap="bookMap">
+		select book_id
+		from book
+		where book_state_id=10 and user_id=${userId}
+	</select>
 </mapper>

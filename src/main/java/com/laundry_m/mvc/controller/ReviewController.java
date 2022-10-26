@@ -82,9 +82,9 @@ public class ReviewController {
 		  }
 	  
 	 /**
-		 * 유저 아이디로 리뷰 검색
-		 * @param: String userId
-		 */
+	 * 유저 아이디로 리뷰 검색
+	 * @param: String userId
+	 */
 	
 	  public void searchReviewByUserId(){ 
 		  try {
@@ -133,7 +133,6 @@ public class ReviewController {
 	  
 		 /**
 			 * 리뷰 번호로 리뷰 검색 - 정산 완료 예약 - 리뷰 선택 시 리뷰 볼 수 있게 이동
-			 * 
 			 * @param: Long reviewId
 			 * @return: Review
 			 */

@@ -154,13 +154,9 @@ public class BookServiceImpl implements BookService {
 	 * 			   InvalidUserException(관리자나 해당 회원이 아니거나 해당 점포를 소유하지 않을 경우 오류)
 	 * */
 	@Override
-	public Book searchBookByBookId(Long bookId)
-			throws SQLException, NotLoginException, NotExistException, InvalidUserException {
-		Book book = bookDao.searchBookByBookId(bookId);
-		
-		if (book == null) throw new NotExistException("해당 예약 내역을 찾을 수 없습니다.");
-		
-		return book;
+	public Book existBookByBookState(Book book) throws SQLException, NotLoginException{
+		Book books = bookDao.existBookByBookState(book);
+				return books;
 	}
 
 }

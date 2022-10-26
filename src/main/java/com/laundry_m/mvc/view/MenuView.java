@@ -270,7 +270,7 @@ public class MenuView {
 					favoriteMenuView.searchFavoriteByLaundryAddress();
 					break;
 				case 3 :
-//					favoriteMenuView.searchFavoriteByLaundryName();
+					favoriteMenuView.searchFavoriteByLaundryName();
 					break;
 				case 4 :
 					favoriteMenuView.deleteFavorite();

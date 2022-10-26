@@ -232,16 +232,16 @@ public class BookDaoImpl implements BookDao {
 	 * @return: Book
 	 * */
 	@Override
-	public Book searchBookByBookId(Long bookId) throws SQLException {
+	public Book existBookByBookState(Book book) throws SQLException {
 		SqlSession session = null;
-		Book book = null;
+		Book books = null;
 		try {
 			session = DbUtil.getSession();
-			book = session.selectOne("bookMapper.searchBookByBookId", bookId);
+			book = session.selectOne("bookMapper.searchBookByBookId", books);
 		} finally {
 			DbUtil.sessionClose(session);
 		}
-		return book;
+		return books;
 	}
 
 }

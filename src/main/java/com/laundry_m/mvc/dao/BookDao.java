@@ -87,5 +87,5 @@ public interface BookDao {
 	 * @param: Long bookId
 	 * @return: Book
 	 * */
-	Book searchBookByBookId(Long bookId) throws SQLException;
+	Book existBookByBookState(Book book)throws SQLException;
 }

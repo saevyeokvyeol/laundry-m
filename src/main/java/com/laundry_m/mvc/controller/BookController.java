@@ -12,6 +12,7 @@ import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
 import com.laundry_m.mvc.vo.Book;
+import com.laundry_m.mvc.vo.Favorite;
 import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Users;
 
@@ -127,5 +128,17 @@ public class BookController {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
+	}
+	
+	public Book existBookByBookState() {
+		Book resultBook = null;
+		try {
+			Users users = (Users)session.getAttribute("loginUser");
+			Book book = Book.builder().userId(users.getUserId()).build();
+			resultBook = resultBook.existBookByBookState(book);
+		  }catch(Exception e) {
+			  return null;
+		  }
+		 return resultBook;
 	}
 }

@@ -17,33 +17,39 @@ public class ReviewMenuView {
 	 * */
 	public static void reviewForm() {
 		Long starRate;
+		
 			try {
-				System.out.println(" 주문번호 | 아이디 | 수량 | 총금액 | 결제방법 | 주문시간 | 주문상태 | 메모 ");
-				bookController.searchBookByUserId(10L, 10L); //수정
-				System.out.println("리뷰 작성할 주문번호를 입력해주세요");
-				System.out.print("▶ ");
-				Long bookId = Long.parseLong(sc.nextLine());
-				Review review = reviewController.searchReviewByBookId(bookId);
-					if(review == null) {
-						do {
-							System.out.println("\n" + " 해당 주문 완료 건에 ★(별점)을 입력해주세요.");
-							System.out.print("▶ ★x");
-							starRate = (long) Integer.parseInt(sc.nextLine());
-							if((starRate >= 6) || (starRate < 0)) {
-								System.out.println("별점은 0~5 까지 입력해주세요.");
-							}
-						}while(starRate>5);
+				/*if(bookController.searchBookByUserId(10L, 10L)==null) {*/
+					System.out.println(" 주문번호 | 아이디 | 수량 | 총금액 | 결제방법 | 주문시간 | 주문상태 | 메모 ");
+					bookController.searchBookByUserId(10L, 10L); //수정
+					System.out.println("리뷰 작성할 주문번호를 입력해주세요");
+					System.out.print("▶ ");
+					Long bookId = Long.parseLong(sc.nextLine());
+					Review review = reviewController.searchReviewByBookId(bookId);
+						if(review == null) {
+							do {
+								System.out.println("\n" + " 해당 주문 완료 건에 ★(별점)을 입력해주세요.");
+								System.out.print("▶ ★x");
+								starRate = (long) Integer.parseInt(sc.nextLine());
+								if((starRate >= 6) || (starRate < 0)) {
+									System.out.println("별점은 0~5 까지 입력해주세요.");
+								}
+							}while(starRate>5);
+							
+							System.out.println("\n" + " 리뷰를 입력해주세요");
+							System.out.print("▶ ");
+							String content = sc.nextLine();
+							Review reviews = Review.builder().bookId(bookId)
+									.reviewRate(starRate)
+									.reviewContent(content).build();
+							reviewController.createReview(reviews);
 						
-						System.out.println("\n" + " 리뷰를 입력해주세요");
-						System.out.print("▶ ");
-						String content = sc.nextLine();
-						Review reviews = Review.builder().bookId(bookId)
-								.reviewRate(starRate)
-								.reviewContent(content).build();
-						reviewController.createReview(reviews);
-				}else if(review != null){
-					FailView.errorMessage("해당 예약에 대한 리뷰를 이미 작성하셨습니다.");
-				}
+					}else if(review != null){
+						FailView.errorMessage("해당 예약에 대한 리뷰를 이미 작성하셨습니다.");
+					}
+					/* } */
+					
+					
 			} catch (Exception e) {
 				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 		}
