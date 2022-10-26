@@ -137,10 +137,10 @@ public class ReviewServiceImpl implements ReviewService {
 	 * 			   NotExistException(해당 리뷰가 DB에 존재하지 않을 경우 오류)
 	 * */
 	@Override
-	public Review searchReviewByReviewId(Long reviewId) throws SQLException, NotLoginException, NotExistException {
-		Review review = reviewDao.searchReviewByReviewId(reviewId);
-		if(review == null) throw new NotExistException("리뷰를 찾을 수 없습니다.");
-		return review;
+	public Review searchReviewByReviewId(Review review) throws SQLException, NotLoginException, NotExistException {
+		Review reviews = reviewDao.searchReviewByReviewId(review);
+		if(reviews == null) throw new NotExistException("리뷰를 찾을 수 없습니다.");
+		return reviews;
 	}
 
 }

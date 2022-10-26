@@ -83,5 +83,5 @@ public interface ReviewService {
 	 * @exception: NotLoginException(로그인하지 않고 검색을 시도할 경우 오류)
 	 * 			   NotExistException(해당 리뷰가 DB에 존재하지 않을 경우 오류)
 	 * */
-	Review searchReviewByReviewId(Long reviewId) throws SQLException, NotLoginException, NotExistException;
+	Review searchReviewByReviewId(Review review) throws SQLException, NotLoginException, NotExistException;
 }

@@ -59,6 +59,6 @@ public interface ReviewDao {
 	 * @param: Long reviewId
 	 * @return: Review
 	 * */
-	Review searchReviewByReviewId(Long reviewId) throws SQLException;
+	Review searchReviewByReviewId(Review review) throws SQLException;
 
 }
