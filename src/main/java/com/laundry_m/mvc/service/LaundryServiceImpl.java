@@ -3,6 +3,7 @@ package com.laundry_m.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,12 @@ public class LaundryServiceImpl implements LaundryService {
 	
 	private LaundryDao laundryDao = new LaundryDaoImpl();
 
-	public void insertLaundry(Laundry laundry)
+	public void insertLaundry(SqlSession session, Laundry laundry)
 			throws SQLException, NotLoginException, DuplicationException, NotExistException, NotFilledInException {
-		int result = laundryDao.insertLaundry(laundry);
+		int result = laundryDao.insertLaundry(session, laundry);
 		if(result != 1) {
 			throw new SQLException("세탁소 등록에 실패하였습니다.");
 		}
-
 	}
 
 	public void updateLaundry(Laundry laundry)
@@ -51,8 +51,8 @@ public class LaundryServiceImpl implements LaundryService {
 
 	}
 
-	public void insertFee(Fee fee) throws SQLException, NotExistException, NotFilledInException {
-		int result = laundryDao.insertFee(fee);
+	public void insertFee(SqlSession session, Fee fee) throws SQLException, NotExistException, NotFilledInException {
+		int result = laundryDao.insertFee(session, fee);
 		if(result != 1 ) {
 			throw new SQLException("가격 등록에 실패하였습니다");
 		}
@@ -74,8 +74,8 @@ public class LaundryServiceImpl implements LaundryService {
 
 	}
 
-	public void insertExtraFee(ExtraFee extraFee) throws SQLException, NotLoginException, NotFilledInException {
-		int result = laundryDao.insertExtraFee(extraFee);
+	public void insertExtraFee(SqlSession session, ExtraFee extraFee) throws SQLException, NotLoginException, NotFilledInException {
+		int result = laundryDao.insertExtraFee(session, extraFee);
 		if(result != 1 ) {
 			throw new SQLException("추가 가격 등록에 실패하였습니다");
 		}
@@ -138,6 +138,16 @@ public class LaundryServiceImpl implements LaundryService {
 	public Fabric selectWashByFabric(int fabricId) throws SQLException, NotExistException, NotLoginException {
 		
 		return laundryDao.selectWashByFabric(fabricId);
+	}
+
+	@Override
+	public List<Fee> selectAllFee(Long laundryId) throws SQLException, NotExistException, NotLoginException {
+		return laundryDao.selectAllFee(laundryId);
+	}
+
+	@Override
+	public List<ExtraFee> selectAllExtraFees(Long laundryId) throws SQLException, NotExistException, NotLoginException {
+		return laundryDao.selectAllExtraFees(laundryId);
 	}
 
 }

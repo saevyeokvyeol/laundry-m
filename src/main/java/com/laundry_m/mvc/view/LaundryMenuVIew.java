@@ -2,7 +2,6 @@ package com.laundry_m.mvc.view;
 
 import java.util.Scanner;
 
-
 import com.laundry_m.mvc.controller.LaundryController;
 import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.vo.Fabric;
@@ -35,7 +34,7 @@ public class LaundryMenuVIew {
 				String laundryAccountNumber = sc.nextLine();
 				
 				Laundry laundry = Laundry.builder().laundryName(laundryName).laundryTel(laundryTel).laundryAddress(laundryAddress).laundryAccountNumber(laundryAccountNumber).build();
-				laundryController.insertLaundry(laundry);
+				//laundryController.insertLaundry(laundry);
 				
 			} catch (Exception e) {
 				FailView.errorMessage("세탁소 등록에 실패했어요");

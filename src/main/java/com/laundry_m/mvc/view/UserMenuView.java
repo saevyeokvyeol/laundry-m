@@ -32,81 +32,109 @@ public class UserMenuView {
 	
 	
 	public static void updateUserInfoForm() {
+		boolean run = true;
 		boolean run1 = true;
-		while (run1) {
-			Users loginUserInfo = usersController.selectByUserId();
-			System.out.print(loginUserInfo.getUserName()+"님의 정보입니다.");
-			System.out.print("아이디 " + loginUserInfo.getUserId());
-			System.out.print("회원유형 " + loginUserInfo.getUserType());
-			System.out.print("주소 " + loginUserInfo.getUserAddress());
-			
-			System.out.println("\n" + "[ 1. 정보 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
-			System.out.print("▶ ");
-			int menu = Integer.parseInt(sc.nextLine());
-			switch(menu) {
-				case 1 : 
-					System.out.println("\n" + "[ 1. 이름 수정 | 2. 비밀번호 수정 | 3. 주소 수정 ]");
+		while (run) {
+			try {
+				Users loginUserInfo = usersController.selectByLoginUserId();
+				System.out.println();
+				System.out.println("이름 : " + loginUserInfo.getUserName());
+				System.out.println("아이디 : " + loginUserInfo.getUserId());
+				System.out.println("전화번호 : " + loginUserInfo.getUserPhone());
+				System.out.println("주소 : " + loginUserInfo.getUserAddress());
+				
+				while (run1) {
+					boolean run2 = true;
+					System.out.println("\n" + "[ 1. 정보 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 					System.out.print("▶ ");
-					int menu1 = Integer.parseInt(sc.nextLine());
+					int menu = Integer.parseInt(sc.nextLine());
 					switch(menu) {
-						case 1 :
-							System.out.print("변경할 이름을 입력해주세요. ");
-							String input = sc.nextLine();
-							Users updateUser = loginUserInfo.builder().userName(input).build();
-							usersController.updateUserInfo(updateUser);
-							break;
-						case 2 :
-							System.out.print("변경할 비밀번호를 입력해주세요. ");
-							input = sc.nextLine();
-							updateUser = loginUserInfo.builder().userPwd(input).build();
-							usersController.updateUserInfo(updateUser);
-							break;
-						case 3 :
-							String address = null;
-							double latitude = 0f;
-							double longtitude = 0f;
-							
-							System.out.println("변경할 주소를 입력해주세요. ");
-							System.out.println("거주중인 구을 입력해주세요 > ");
-							StringBuffer buffer = new StringBuffer();
-							buffer.append("서울특별시 ");
-							String gu = sc.nextLine();
-							
-							if (!gu.equals("강남구")&&!gu.equals("강동구")&&!gu.equals("강서구")&&!gu.equals("강북구")&&!gu.equals("관악구")
-									&&!gu.equals("광진구")&&!gu.equals("구로구")&&!gu.equals("금천구")&&!gu.equals("노원구")&&!gu.equals("동대문구")
-									&&!gu.equals("도봉구")&&!gu.equals("동작구")&&!gu.equals("마포구")&&!gu.equals("서대문구")&&!gu.equals("성동구")
-									&&!gu.equals("성북구")&&!gu.equals("서초구")&&!gu.equals("송파구")&&!gu.equals("영등포구")&&!gu.equals("용산구")
-									&&!gu.equals("양천구")&&!gu.equals("은평구")&&!gu.equals("종로구")&&!gu.equals("중구")&&!gu.equals("중랑구")) {
-								System.out.println("거주중인 구 정보를 정확히 입력해주세요. \n");
-							} else {
-								buffer.append(gu + " ");
-								System.out.println("그 외 상세주소를 입력해주세요(도로명주소) > ");
-								buffer.append(sc.nextLine());
-								address = buffer.toString();
-								String lati = InsertUserView.getXYMapfromJson(InsertUserView.getKakaoApiFromAddress(address)).get("y");
-								String longti = InsertUserView.getXYMapfromJson(InsertUserView.getKakaoApiFromAddress(address)).get("x");
-								latitude = Double.parseDouble(lati);
-								longtitude = Double.parseDouble(longti);
-								break;
+						case 1 : 
+							while (run2) {
+								System.out.println("\n" + "[ 1. 이름 수정 | 2. 비밀번호 수정 | 3. 주소 수정 | 4. 전화번호 수정 | 8. 뒤로 가기 ]");
+								System.out.print("▶ ");
+								int menu1 = Integer.parseInt(sc.nextLine());
+								switch(menu1) {
+									case 1 :
+										System.out.println("변경할 이름을 입력해주세요.");
+										System.out.print("▶ ");
+										String input = sc.nextLine();
+										loginUserInfo.setUserName(input);
+										usersController.updateUserInfo(loginUserInfo);
+										break;
+									case 2 :
+										System.out.println("변경할 비밀번호를 입력해주세요.");
+										System.out.print("▶ ");
+										input = sc.nextLine();
+										loginUserInfo.setUserPwd(input);
+										usersController.updateUserInfo(loginUserInfo);
+										break;
+									case 3 :
+										String address = null;
+										double latitude = 0f;
+										double longtitude = 0f;
+										
+										System.out.println("변경할 주소의 시/군/구 정보를 입력해주세요. (ex 송파구)");
+										System.out.print("▶ ");
+										StringBuffer buffer = new StringBuffer();
+										buffer.append("서울특별시 ");
+										String gu = sc.nextLine();
+										
+										if (!gu.equals("강남구")&&!gu.equals("강동구")&&!gu.equals("강서구")&&!gu.equals("강북구")&&!gu.equals("관악구")
+												&&!gu.equals("광진구")&&!gu.equals("구로구")&&!gu.equals("금천구")&&!gu.equals("노원구")&&!gu.equals("동대문구")
+												&&!gu.equals("도봉구")&&!gu.equals("동작구")&&!gu.equals("마포구")&&!gu.equals("서대문구")&&!gu.equals("성동구")
+												&&!gu.equals("성북구")&&!gu.equals("서초구")&&!gu.equals("송파구")&&!gu.equals("영등포구")&&!gu.equals("용산구")
+												&&!gu.equals("양천구")&&!gu.equals("은평구")&&!gu.equals("종로구")&&!gu.equals("중구")&&!gu.equals("중랑구")) {
+											System.out.println("거주중인 구 정보를 정확히 입력해주세요.");
+										} else {
+											buffer.append(gu + " ");
+											System.out.println("그 외 상세주소를 입력해주세요.");
+											System.out.print("▶ ");
+											buffer.append(sc.nextLine());
+											address = buffer.toString();
+											String lati = InsertUserView.getXYMapfromJson(InsertUserView.getKakaoApiFromAddress(address)).get("y");
+											String longti = InsertUserView.getXYMapfromJson(InsertUserView.getKakaoApiFromAddress(address)).get("x");
+											latitude = Double.parseDouble(lati);
+											longtitude = Double.parseDouble(longti);
+											break;
+										}
+										loginUserInfo.setUserAddress(address); 
+										loginUserInfo.setUserLongtitude(longtitude);
+										loginUserInfo.setUserLatitude(latitude);
+										usersController.updateUserInfo(loginUserInfo);
+										break;
+									case 4 :
+										System.out.println("변경할 전화번호를 입력해주세요.");
+										System.out.print("▶ ");
+										input = sc.nextLine();
+										loginUserInfo.setUserPhone(input);
+										usersController.updateUserInfo(loginUserInfo);
+										break;
+									case 8 : 
+										run2 = false; 
+										break;
+								}
 							}
-							updateUser = loginUserInfo.builder().userAddress(address).userLatitude(latitude).userLongtitude(longtitude).build();
-							usersController.updateUserInfo(updateUser);
+							break;	
+						case 8 :
+							run1 = false;
+							run = false;
+							break;
+						case 9 : 
+							usersController.logout();
 							break;
 						case 0 : 
 							MenuView.exit();
-							break;
+						default:
+							System.out.println("메뉴를 잘못 선택하셨습니다.");
+						}
 					}
-				case 8 :
-					run1 = false;
-					break;
-				case 9 : 
-					usersController.logout();
-					break;
-				case 0 : 
-					MenuView.exit();
-				default:
-					System.out.println("메뉴를 잘못 선택하셨습니다.");
+				
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+					FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 				}
 			}
-	}
+		}
 }

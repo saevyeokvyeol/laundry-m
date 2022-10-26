@@ -2,10 +2,16 @@ package com.laundry_m.mvc.vo;
 
 
 
+import java.util.List;
+
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
+@NoArgsConstructor
 public class Users {
 	
 	private String userId;
@@ -18,9 +24,11 @@ public class Users {
 	private Double userLatitude;
 	private Double userLongtitude;
 	
+	private Laundry laundry;
+	
 	@Builder
 	public Users(String userId, String userPwd, String userName, String userPhone, String userType, String userAddress,
-			String userState, Double userLatitude, Double userLongtitude) {
+			String userState, Double userLatitude, Double userLongtitude,Laundry laundry) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -31,6 +39,7 @@ public class Users {
 		this.userState = userState;
 		this.userLatitude = userLatitude;
 		this.userLongtitude = userLongtitude;
+		this.laundry = laundry;
 	}
 	
 	

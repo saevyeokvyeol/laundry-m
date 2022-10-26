@@ -89,20 +89,22 @@ public class SuccessView {
 	public static void printLaundryList(List<Laundry> laundries , List<Double> distances) {
 		//(번호) 나와의 거리 | 세탁소 이름 | 세탁소 주소 | 세탁소 번호 | 배달료
 		int i = 0;
-		System.out.println( " 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비" );
+		System.out.println( "   나와의 거리 " +" | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" +" | " + "세탁소 고유번호" );
 		for(Laundry laundry : laundries) {
-			System.out.println( "(" + (i+1) + ") " + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
+			System.out.println( "(" + (i+1) + ") " + laundry.getLaundryId() + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" +  " | "  + laundry.getLaundryId());
+
 			i++;
 		}
 	}
 	
+	
 	public static void printLaundry(Laundry laundry, double distance) {
-		System.out.println( " 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비" );
-		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" );
+		System.out.println("   나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" +" | " +  "세탁소 고유번호" );
+		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" +  " | "  + laundry.getLaundryId());
 
 	}
 	public static void printUserReview(List<Review> reviews) {
-		System.out.print("리뷰번호 | ID | 세탁소ID | 별점 | 리뷰내용 ");
+		System.out.print("리뷰번호   |   ID   |  세탁소ID  |  예약 번호  | 별점 | 리뷰내용 ");
 		System.out.println("");
 		for(Review review : reviews) {
 			if(review.getReviewContent() != null) {
@@ -147,11 +149,11 @@ public class SuccessView {
 	}
 
 	public static void printFavorite(List<Favorite> favorites) {
-		System.out.print("즐겨찾기 번호 | 세탁소ID ");
+		System.out.print("   사용자아이디    |    세탁소이름    |    세탁소ID    |    예약 번호  |   즐겨찾기 번호");
 		System.out.println("");
 		for(Favorite favorite : favorites) {
 			if(favorite.getFavoriteId() != null) {
-				System.out.println("" +favorite.getFavoriteId() + " | " + favorite.getUserId()+ " | " + favorite.getLaundryId() );
+				System.out.println("" + favorite.getUserId() + " | " + favorite.getLaundry().getLaundryName() + " | " + favorite.getLaundryId() + " | " + favorite.getFavoriteId() );
 				System.out.println("");
 			}else {
 				System.out.println("즐겨찾기 한 세탁소가 없습니다");
@@ -160,13 +162,35 @@ public class SuccessView {
 		}
 		
 	}
-
+	
+	public static void printUserInfo(Users users) {
+		System.out.println();
+		System.out.println("[이름] " + users.getUserName());
+		System.out.println("[아이디] " + users.getUserId());
+		System.out.println("[전화번호] " + users.getUserPhone());
+		System.out.println("[주소] " + users.getUserAddress());
+		System.out.println("[회원타입] " + users.getUserType());
+		System.out.println("[삭제여부] " + users.getUserState());
+	}
+	
+	public static void printUserInfoList(List<Users> userList) {
+		for(Users user : userList) {
+			System.out.println();
+			System.out.println("[이름] " + user.getUserName());
+			System.out.println("[아이디] " + user.getUserId());
+			System.out.println("[전화번호] " + user.getUserPhone());
+			System.out.println("[주소] " + user.getUserAddress());
+			System.out.println("[회원타입] " + user.getUserType());
+			System.out.println("[삭제여부] " + user.getUserState());
+		}
+	}
+	
 	public static void printAdminReview(List<Review> reviews) {
 		System.out.print("리뷰번호 | ID | 예약번호 | 별점 | 수정날짜 | 리뷰내용");
 		System.out.println("");
 		for(Review review : reviews) {
 			if(review.getReviewContent() != null) {
-				System.out.println("" +review.getReviewId() + " | " + review.getUserId() + " | " + review.getBookId() + " | " + review.getReviewRate() + " | " + review.getReviewUpdateDate() + " | " + review.getReviewContent());
+				System.out.println("" +review.getReviewId() + " | " + review.getUserId() + " | " + review.getBookId() + " | " + review.getReviewRate() + " | " + getDate(review.getReviewUpdateDate()) + " | " + review.getReviewContent());
 				System.out.println("");
 			}else {
 				System.out.println("작성된 리뷰가 없습니다");

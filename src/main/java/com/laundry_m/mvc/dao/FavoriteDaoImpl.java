@@ -2,6 +2,7 @@ package com.laundry_m.mvc.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -80,6 +81,22 @@ public class FavoriteDaoImpl implements FavoriteDao {
 			
 			//세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
 			favorites = session.selectList("favoriteMapper.searchFavoriteByLaundryId", laundryId);
+		}finally {
+			DbUtil.sessionClose(session);
+		}
+		return favorites;
+	}
+
+	@Override
+	public Favorite existFavoriteByLaundryId(Favorite favorite) throws SQLException {
+		SqlSession session = null;
+		Favorite favorites = null;
+		try {
+			//DbUtil에서 세션을 가져옵니다.d
+			session = DbUtil.getSession();
+			
+			//세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
+			favorites = session.selectOne("favoriteMapper.existFavoriteByLaundryId", favorite);
 		}finally {
 			DbUtil.sessionClose(session);
 		}

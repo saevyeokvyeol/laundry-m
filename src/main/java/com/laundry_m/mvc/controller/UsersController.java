@@ -1,6 +1,7 @@
 package com.laundry_m.mvc.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
@@ -53,7 +54,7 @@ public class UsersController {
 		MenuView.menuView();
 	}
 	
-	public Users selectByUserId() {
+	public Users selectByLoginUserId() {
 		Users sessionUser = (Users)session.getAttribute("loginUser");
 		try {
 			Users findUser = usersService.selectByUserId(sessionUser);
@@ -71,9 +72,44 @@ public class UsersController {
 		return null;
 	}
 
+	
+	public void selectByUserId(Users user) {
+		try {
+			Users findUser = usersService.selectByUserId(user);
+			SuccessView.printUserInfo(findUser);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotLoginException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	public void selectByUserName(Users user) {
+		try {
+			List<Users> userList = usersService.selectByUserName(user);
+			SuccessView.printUserInfoList(userList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotLoginException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	
 	public void updateUserInfo(Users updateUser) {
 		try {
 			usersService.updateUserInfo(updateUser);
+			SuccessView.printMessage("\n" + updateUser.getUserName() + "님의 정보가 성공적으로 변경되었습니다.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
@@ -84,6 +120,23 @@ public class UsersController {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
+	}
+
+	public void selectByUserAddress(String address) {
+		try {
+			List<Users> userList = usersService.selectByUserAddress(address);
+			SuccessView.printUserInfoList(userList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotLoginException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		
 	}
 	
 }

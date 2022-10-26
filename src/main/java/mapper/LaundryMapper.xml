@@ -7,7 +7,7 @@
 	<!-- 세탁소 등록 -->
 	<insert id="insertLaundry" parameterType="laundry">
 		insert into laundry
-		values(laundry_id_Seq.nextval, #{userId}, #{laundryName}, #{laundryTel}, #{laundryAddress},#{laundryLatitude} , #{laundryAccountNumber}, 3000, #{laundryLongitude})
+		values(laundry_Seq.nextval, #{userId}, #{laundryName}, #{laundryTel}, #{laundryAddress},#{laundryLatitude} , #{laundryAccountNumber}, 3000, #{laundryLongtitude})
 		<!-- sysdate 대신 systimestamp! -->
 	</insert>
 	
@@ -16,11 +16,11 @@
 		update laundry 
 		set 
 		<!-- 수정 요소 : 세탁소 이름, 전화번호, 세탁소 주소 (위도 경도 포함) -->
-		laundry_Name = #{laundryName},
-		laundry_Tel = #{laundryTel},
-		laundry_Address = #{laundryAddress}
-		laundry_Latitude = #{laundryLatitude}
-		laundry_Longitude = #{laundryLongitude}
+		laundry_name = #{laundryName},
+		laundry_tel = #{laundryTel},
+		laundry_address = #{laundryAddress},
+		laundry_latitude = #{laundryLatitude},
+		laundry_longtitude = #{laundryLongtitude}
 		where user_id = #{userId}
 	</update>
 	
@@ -36,26 +36,34 @@
 		set
 		<!-- 세탁소 아이디, 옷 아이디, 가격 -->
 		clothes_fee = #{clothesFee}
-		where laundry_id = #{laundryId} and fee_id = #{feeId}
+		where laundry_id = #{laundryId} and clothes_id = #{clothesId}
 	</update>
 
 	<!-- 세탁소 취급 옷 종류 추가 -->
 	<insert id="insertClothes" parameterType="clothes">
 		insert into clothes
-		values (#{clothes_id_Seq.nextval} , #{clothesName})
+		values (clothes_id_Seq.nextval , #{clothesName})
 	</insert>
 
 	<!-- 세탁소 취급 천 종류 추가 -->
 	<insert id="insertFabric" parameterType="fabric">
 		insert into Fabric
-		values (#{fabric_id_Seq.nextval} , #{fabricName}, #{fabricWashMethod})
+		values (fabric_Seq.nextval , #{fabricName}, #{fabricWashMethod})
 	</insert>
 
 	<!-- 세탁소 추가 가격 추가 -->
 	<insert id="insertExtraFee" parameterType="extraFee">
-		insert into ExtraFee
-		values (#{extra_Fee_id_Seq.nextval} , #{fabricId}, #{laundryId}, #{fabricFee}, #{extraFeeOperation} )
+		insert into Extra_Fee
+		values (extra_Fee_Seq.nextval, #{fabricId}, laundry_Seq.currval, #{fabricFee}, #{extraFeeOperation} )
 	</insert>
+	
+	<!-- 세탁소 추가 가격 수정 -->
+	<update id="updateExtraFee" parameterType="extraFee">
+		update Extra_Fee
+		set
+		fabric_fee = #{fabricFee}, extra_fee_operation = #{extraFeeOperation}
+		where laundry_id = #{laundryId} and fabric_id = #{fabricId}
+	</update>
 	
 	<!-- 이름으로 세탁소 구하기 -->
 	<select id="selectByNameLaundry" parameterType="string" resultType="laundry">
@@ -123,6 +131,30 @@
 	    select *
 	    from fabric
 	    where fabric_id like '%${parameter}%'
+	</select>
+	
+	<!-- 가격 메뉴 -->
+	<select id="selectAllFee" parameterType="long" resultType="fee">
+		select *
+		from laundry
+			join fee
+			using (laundry_id)
+			join clothes
+			using (clothes_id)
+		where laundry_id = #{laundryId}
+	</select>
+	
+	<!-- 추가가격 메뉴 -->
+	<select id="selectAllExtraFees" parameterType="long" resultType="extrafee">
+	
+		select *
+		from laundry
+			join extra_fee
+			using (laundry_id)
+			join fabric 
+			using (fabric_id)
+		where laundry_id = #{laundryId}
+	
 	</select>
 
 

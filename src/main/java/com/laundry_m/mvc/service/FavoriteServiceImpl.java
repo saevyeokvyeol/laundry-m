@@ -2,6 +2,7 @@ package com.laundry_m.mvc.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -77,6 +78,18 @@ public class FavoriteServiceImpl implements FavoriteService{
 	@Override
 	public List<Favorite> searchFavoriteByLaundryId(Long laundryId) throws SQLException, NotLoginException {
 		List<Favorite> favorites = favoriteDao.searchFavoriteByLaundryId(laundryId);
+		return favorites;
+	}
+	
+	/**
+	 * 점포 아이디 즐겨찾기 유무
+	 * @param: Favorite favorite
+	 * @return: List<Favorite>
+	 * @exception: NotLoginException(로그인하지 않고 예약을 시도할 경우 오류)
+	 * */
+	@Override
+	public Favorite existFavoriteByLaundryId(Favorite favorite) throws SQLException, NotLoginException {
+		Favorite favorites = favoriteDao.existFavoriteByLaundryId(favorite);
 		return favorites;
 	}
 

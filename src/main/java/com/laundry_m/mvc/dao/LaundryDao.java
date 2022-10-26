@@ -3,6 +3,8 @@ package com.laundry_m.mvc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotLoginException;
 import com.laundry_m.mvc.vo.Clothes;
@@ -18,7 +20,7 @@ public interface LaundryDao {
 	 * 	@param : Laundry laundry(세탁소 점포아이디, 아이디, 점포 이름, 점포 번호, 수거비용)
 	 * 	@return : int(등록한 레코드 수)
 	 *  */
-	int insertLaundry(Laundry laundry) throws SQLException;
+	int insertLaundry(SqlSession session, Laundry laundry) throws SQLException;
 
 	/** 
 	 *  세탁소 갱신
@@ -32,7 +34,7 @@ public interface LaundryDao {
 	 *  @param : Fee fee(가격 번호, 세탁소아이디, 옷 아이디, 가격)
 	 *  @return : int(등록한 레코드 수)
 	 * */
-	int insertFee(Fee fee) throws SQLException;
+	int insertFee(SqlSession session, Fee fee) throws SQLException;
 
 	/** 가격 갱신
 	 *  @param : Fee fee(세탁소 아이디, 옷 아이디, 가격)
@@ -59,7 +61,7 @@ public interface LaundryDao {
 	 *  @param : ExtraFee extraFee(추가가격 아이디, 천아이디, 점포 아이디, 가격)
 	 *  @return : int(등록한 레코드 수)
 	 *  */
-	int insertExtraFee(ExtraFee extraFee) throws SQLException;
+	int insertExtraFee(SqlSession session, ExtraFee extraFee) throws SQLException;
 
 	/** 
 	 *  추가가격 수정: extra_fee 테이블 레코드 update
@@ -121,6 +123,17 @@ public interface LaundryDao {
 	 * 천으로 세탁 방법 찾기
 	 * */
 	Fabric selectWashByFabric(int fabricId) throws SQLException, NotExistException, NotLoginException;
+	
+	/**
+	 * 세탁소 메뉴 보기
+	 * */
+	List<Fee> selectAllFee(Long laundryId) throws SQLException, NotExistException, NotLoginException;
+	
+	/**
+	 * 세탁소 추가가격 메뉴 보기
+	 * */
+	List<ExtraFee> selectAllExtraFees(Long laundryId) throws SQLException, NotExistException, NotLoginException;
+	
 
 	
 }
