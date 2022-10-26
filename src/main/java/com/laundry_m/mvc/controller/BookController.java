@@ -6,14 +6,18 @@ import java.util.Map;
 
 import com.laundry_m.mvc.service.BookService;
 import com.laundry_m.mvc.service.BookServiceImpl;
+import com.laundry_m.mvc.service.LaundryService;
+import com.laundry_m.mvc.service.LaundryServiceImpl;
 import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.view.FailView;
 import com.laundry_m.mvc.view.SuccessView;
 import com.laundry_m.mvc.vo.Book;
+import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Users;
 
 public class BookController {
 	private BookService bookService = new BookServiceImpl();
+	private LaundryService laundryService = new LaundryServiceImpl();
 	private Session session = Session.getInstance();
 
 	/**
@@ -112,8 +116,9 @@ public class BookController {
 	public void searchBookByLaundryId(Long start, Long end) {
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
+			Laundry laundry = laundryService.selectByUserId(users.getUserId());
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("userId", users.getUserId());
+			map.put("laundryId", laundry.getLaundryId());
 			map.put("start", start);
 			map.put("end", end);
 			List<Book> books = bookService.searchBookByLaundryId(map);

@@ -84,7 +84,7 @@ public class BookMenuView {
 	}
 	
 	public static void searchBookByLaundryIdAndBookStateId() {
-		System.out.println("검색할 예약 상태를 입력해주세요.");
+		System.out.println("\n검색할 예약 상태를 입력해주세요.");
 		System.out.println("[ 1. 예약 확인 중 | 2. 수거 예정 | 3. 수거 중 | 4. 세탁 진행 중 | 5. 세탁 완료 | 6. 배달 예정 | 7. 배달 중 | 8. 배달 완료 | 9. 예약 거절 | 10. 정산 완료 ]");
 		System.out.print("▶ ");
 		Long bookStateId = (long)Integer.parseInt(sc.nextLine());
@@ -93,8 +93,8 @@ public class BookMenuView {
 	
 	public static void updateBookState() {
 		try {
-			System.out.println("업데이트할 예약 번호를 입력해주세요.");
 			bookController.searchBookByLaundryId(1L, 7L);
+			System.out.println("업데이트할 예약 번호를 입력해주세요.");
 			System.out.print("▶ ");
 			Long bookId = (long)Integer.parseInt(sc.nextLine());
 			System.out.println("업데이트할 예약 상태 번호를 입력해주세요.");
