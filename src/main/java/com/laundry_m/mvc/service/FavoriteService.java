@@ -55,13 +55,5 @@ public interface FavoriteService {
 	 * */
 	Favorite existFavoriteByLaundryId(Favorite favorite) throws SQLException, NotLoginException;
 	
-	/**
-	 * 유저 아이디 즐겨찾기 유무
-	 * @param: Favorite favorite
-	 * @return: List<Favorite>
-	 * @exception: NotLoginException(로그인하지 않고 예약을 시도할 경우 오류)
-	 * */
-	Favorite existFavoriteByUserId(Favorite favorite) throws SQLException, NotLoginException;
-
 	
 }
