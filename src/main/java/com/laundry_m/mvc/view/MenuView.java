@@ -314,7 +314,7 @@ public class MenuView {
 					break;
 				case 4 :
 					Map<String, Object> map = new HashMap<String, Object>();
-					map.put("laundryId", 0);
+					map.put("laundryId", 0L);
 					statisticsController.searchStatistics(map);
 					break;
 				case 9 : 
