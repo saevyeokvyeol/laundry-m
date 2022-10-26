@@ -19,7 +19,7 @@ public class Laundry {
 	private int laundryDeliveryFee;
 	private String laundryAccountNumber;
 	private double laundryLatitude;
-	private double laundryLongitude;
+	private double laundryLongtitude;
 	
 	private Users user;
 	private List<Book> book;
@@ -30,7 +30,7 @@ public class Laundry {
 	
 	@Builder
 	public Laundry(Long laundryId, String userId, String laundryName, String laundryTel, String laundryAddress,
-			int laundryDeliveryFee, String laundryAccountNumber, double laundryLatitude, double laundryLongitude, Users user,
+			int laundryDeliveryFee, String laundryAccountNumber, double laundryLatitude, double laundryLongtitude, Users user,
 			List<Book> book, List<Fee> fee, List<ExtraFee> extraFee, List<Adjust> adjust, List<Favorite> favorite) {
 		super();
 		this.laundryId = laundryId;
@@ -41,7 +41,7 @@ public class Laundry {
 		this.laundryDeliveryFee = laundryDeliveryFee;
 		this.laundryAccountNumber = laundryAccountNumber;
 		this.laundryLatitude = laundryLatitude;
-		this.laundryLongitude = laundryLongitude;
+		this.laundryLongtitude = laundryLongtitude;
 		this.user = user;
 		this.book = book;
 		this.fee = fee;

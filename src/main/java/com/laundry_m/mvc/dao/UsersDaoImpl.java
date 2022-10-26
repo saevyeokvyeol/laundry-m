@@ -6,12 +6,17 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.laundry_m.mvc.vo.BookLine;
+import com.laundry_m.mvc.vo.Clothes;
+import com.laundry_m.mvc.vo.ExtraFee;
+import com.laundry_m.mvc.vo.Fee;
+import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.PayLog;
 import com.laundry_m.mvc.vo.Users;
 
 import util.DbUtil;
 
 public class UsersDaoImpl implements UsersDao{
+	private LaundryDao laundryDao = new LaundryDaoImpl();
 
 	@Override
 	public int insertUser(Users users) throws SQLException {
@@ -21,6 +26,20 @@ public class UsersDaoImpl implements UsersDao{
 		try {
 			session = DbUtil.getSession();
 			result = session.insert("usersMapper.insertUser", users);
+			
+			if (users.getUserType().equals("점주")) {
+				Laundry laundry = users.getLaundry();
+				int re = laundryDao.insertLaundry(session, laundry);
+				if (re != 1) throw new SQLException("입력해주세요^^;");
+				for (Fee fee : laundry.getFee()) {
+					re = laundryDao.insertFee(session, fee);
+					if (re != 1) throw new SQLException("입력해주세요^^;");
+				}
+				for (ExtraFee extraFee : laundry.getExtraFee()) {
+					re = laundryDao.insertExtraFee(session, extraFee);
+					if (re != 1) throw new SQLException("입력해주세요^^;");
+				}
+			}
 			if (result == 1) state = true;
 		} finally {
 			DbUtil.sessionClose(session, state);

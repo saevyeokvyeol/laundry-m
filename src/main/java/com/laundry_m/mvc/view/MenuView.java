@@ -11,6 +11,7 @@ import com.laundry_m.mvc.controller.MetapayController;
 import com.laundry_m.mvc.controller.ReviewController;
 import com.laundry_m.mvc.controller.StatisticsController;
 import com.laundry_m.mvc.controller.UsersController;
+import com.laundry_m.mvc.vo.ExtraFee;
 
 public class MenuView {
 	private static Scanner sc = new Scanner(System.in);
@@ -39,7 +40,7 @@ public class MenuView {
 				case 2 :
 					System.out.print("\n아이디 입력 > ");
 					String loginId = sc.nextLine();
-					System.out.print("\n비밀번호 입력 > ");
+					System.out.print("비밀번호 입력 > ");
 					String loginPwd = sc.nextLine();
 					usersController.loginUser(loginId, loginPwd);
 					break;
@@ -134,7 +135,7 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 진행 중인 예약 내역 | 2. 지난 이용 내역 | 3. 내 리뷰 관리 | 4. 내 정보 수정 | 5. 메타페이 관리 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 진행 중인 예약 내역 | 2. 지난 이용 내역 | 3. 내 리뷰 관리 | 4. 내 정보 확인 & 수정 | 5. 메타페이 관리 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -300,7 +301,7 @@ public class MenuView {
 					laundryController.selectLaundryAll();
 					break;
 				case 2 :
-					
+					laundryUpdateView.laundryInfoUpdateForm();
 					break;
 				case 8 :
 					run = false;

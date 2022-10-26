@@ -3,6 +3,8 @@ package com.laundry_m.mvc.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.laundry_m.mvc.exception.DuplicationException;
 import com.laundry_m.mvc.exception.InvalidUserException;
 import com.laundry_m.mvc.exception.NotExistException;
@@ -27,7 +29,7 @@ public interface LaundryService {
 	 * 				NotExistException(점주 로그인 id, 세탁소 id DB에 존재하지 않을 경우 오류)
 	 * 				NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */
-	void insertLaundry(Laundry laundry) throws SQLException, NotLoginException, DuplicationException, NotExistException, NotFilledInException;
+	void insertLaundry(SqlSession session, Laundry laundry) throws SQLException, NotLoginException, DuplicationException, NotExistException, NotFilledInException;
 	
 	/**
 	 *  세탁소 수정
@@ -55,7 +57,7 @@ public interface LaundryService {
 	 * 			    NotExistException(점포 아이디나 회원 아이디 등이 DB에 존재하지 않을 경우 오류)
 	 * 			    NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */	
-	void insertFee(Fee fee) throws SQLException, NotExistException, NotFilledInException;
+	void insertFee(SqlSession session, Fee fee) throws SQLException, NotExistException, NotFilledInException;
 	
 	/**
 	 *  점포 가격 갱신
@@ -79,7 +81,7 @@ public interface LaundryService {
 	 *  			 NotLoginException(로그인하지 않고 점포가격 추가를 시도할 경우 오류)
 	 *  			 NotFilledInException(필요한 필드가 입력되지 않았을 경우 오류)
 	 */
-	void insertExtraFee(ExtraFee extraFee) throws SQLException, NotLoginException, NotFilledInException;
+	void insertExtraFee(SqlSession session, ExtraFee extraFee) throws SQLException, NotLoginException, NotFilledInException;
 	
 	/**
 	 *  추가가격 수정: extra_fee 테이블 레코드 update

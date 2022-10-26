@@ -23,12 +23,12 @@
 		insert into users values (#{userId}, #{userPwd}, #{userName}, #{userPhone}, #{userType}, #{userAddress}, #{userState}, #{userLatitude}, #{userLongtitude})
 	</insert>
 	
-	<select id="selectByUserId" parameterType="users" >
+	<select id="selectByUserId" parameterType="users" resultType="users">
 		select * from users where user_id = #{userId} and user_state='N'
 	</select>
 	
 	<update id="updateUser" parameterType="users" >
-		update users set user_pwd = #{userPwd}, user_name = #{userName}, user_address = #{userAddress}, user_latitude = #{userLatitude}, user_longtitude = #{userLongtitude} where user_id = #{userId}
+		update users set user_pwd = #{userPwd}, user_name = #{userName}, user_address = #{userAddress}, user_latitude = #{userLatitude}, user_longtitude = #{userLongtitude}, user_phone = #{userPhone} where user_id = #{userId}
 	</update>
 	
 </mapper>

@@ -74,6 +74,7 @@ public class UsersController {
 	public void updateUserInfo(Users updateUser) {
 		try {
 			usersService.updateUserInfo(updateUser);
+			SuccessView.printMessage("\n" + updateUser.getUserName() + "님의 정보가 성공적으로 변경되었습니다.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
