@@ -89,7 +89,7 @@
 		where user_id = #{_parameter} and p.pay_account_quit_state = 'F'
 	</select>
 	
-	<select id="searchPayLogByMetapayId" parameterType="string" resultMap="payLogMap">
+	<select id="searchPayLogByMetapayId" parameterType="long" resultMap="payLogMap">
 		select pl.*, pa.pay_account_number, pc.pay_category_name, l.laundry_name
 		from pay_log pl left join pay_account pa
 		on pl.pay_account_id = pa.pay_account_id

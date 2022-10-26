@@ -232,7 +232,7 @@ public class MenuView {
 					metapayController.searchMetapayByUserId();
 					break;
 				case 2 :
-					
+					metapayController.searchPayLogByMetapayId();
 					break;
 				case 3 :
 					MetapayMenuView.addMetapayAccount();

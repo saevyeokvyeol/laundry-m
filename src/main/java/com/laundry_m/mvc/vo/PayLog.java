@@ -22,6 +22,7 @@ public class PayLog {
 	private Metapay metapay;
 	private PayCategory payCategory;
 	private PayAccount payAccount;
+	private Laundry laundry;
 	
 	@Builder
 	public PayLog(Long payLogId, Long metapayId, int payCategoryId, Long payAccountId, Long laundryId,

@@ -370,32 +370,34 @@ public class LaundryController {
 	 * 세탁소 상세 정보 보기 - 기본 메뉴, 가격
 	 * */
 	public List<Fee> selectAllFee(Long laundryId){
-		List<Fee> feeList = new ArrayList<Fee>();
+		Laundry laundry = null;
 		
 		try {
-			feeList = laundryService.selectAllFee(laundryId);
-			SuccessView.printLaundryFee(feeList);
+			laundry = laundryService.selectAllFee(laundryId);
+			SuccessView.printLaundryFee(laundry.getFee());
 		} catch (Exception e) {
+			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		
-		return feeList;
+		return laundry.getFee();
 	}
 	
 	/**
 	 * 세탁소 추가 가격 메뉴 보기
 	 * */
 	public List<ExtraFee> selectAllExtraFee(Long laundryId){
-		List<ExtraFee> extraFeeList = new ArrayList<ExtraFee>();
+		Laundry laundry = null;
 		
 		try {
-			extraFeeList = laundryService.selectAllExtraFees(laundryId);
-			SuccessView.printLaundryExFee(extraFeeList);
+			laundry = laundryService.selectAllExtraFees(laundryId);
+			SuccessView.printLaundryExFee(laundry.getExtraFee());
 		} catch (Exception e) {
+			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		
-		return extraFeeList;
+		return laundry.getExtraFee();
 	}
 }
 	

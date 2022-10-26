@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.laundry_m.mvc.view.SuccessView;
 import com.laundry_m.mvc.vo.BookLine;
 import com.laundry_m.mvc.vo.Metapay;
 import com.laundry_m.mvc.vo.PayAccount;
@@ -182,7 +183,7 @@ public class MetapayDaoImpl implements MetapayDao {
 		
 		try {
 			session = DbUtil.getSession();
-			payLogs = session.selectOne("metapayMapper.searchPayLogByMetapayId", metapayId);
+			payLogs = session.selectList("metapayMapper.searchPayLogByMetapayId", metapayId);
 		} finally {
 			DbUtil.sessionClose(session);
 		}

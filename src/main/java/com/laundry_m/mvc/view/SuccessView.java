@@ -98,7 +98,7 @@ public class SuccessView {
 		int i = 0;
 		System.out.println( "  "+"고유번호 " +" | 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" );
 		for(Laundry laundry : laundries) {
-			System.out.println("  "+ laundry.getLaundryId().toString() + "  |  " + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원");
+			System.out.println("  "+ laundry.getLaundryId() + "  |  " + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원");
 
 			i++;
 		}
@@ -107,7 +107,7 @@ public class SuccessView {
 	
 	public static void printLaundry(Laundry laundry, int distance) {
 		System.out.println( "  "+"고유번호 " +" | 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" );
-		System.out.println("  "+ laundry.getLaundryId().toString() + "  |  "+ distance + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원");
+		System.out.println("  "+ laundry.getLaundryId() + "  |  "+ distance + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원");
 
 	}
 	public static void printUserReview(List<Review> reviews) {
@@ -207,8 +207,19 @@ public class SuccessView {
 	}
 	
 	public static void printPayLog(List<PayLog> payLogs) {
-		for (PayLog log : payLogs) {
-			System.out.print("");
+		if (payLogs == null || payLogs.size() == 0) {
+			System.out.println("메타페이 거래 내역이 존재하지 않습니다.");
+		} else {
+			int i = 1;
+			for (PayLog log : payLogs) {
+				System.out.print(i++ + ". " + log.getPayCategory().getPayCategoryName() + " | ");
+				if (log.getPayCategoryId() == 2) {
+					System.out.print(log.getLaundry().getLaundryName() + " | ");
+				} else {
+					System.out.print(getAccountNumber(log.getPayAccount().getPayAccountNumber()) + " | ");
+				}
+				System.out.println(getDate(log.getPayLogInsertDate()));
+			}
 		}
 	}
 	
