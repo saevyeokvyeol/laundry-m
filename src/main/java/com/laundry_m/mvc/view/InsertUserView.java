@@ -186,7 +186,7 @@ public class InsertUserView {
 		
 		String inputFee = "";
 		String[] clothes = {"상의/자켓","하의","스커트","와이셔츠/남방","티셔츠","블라우스","원피스","스웨터/가디건","봄가을점퍼/아웃도어","코트","가죽/모피의류","겨울패딩/점퍼","넥타이","스카프/목도리","이불/침구류","커튼/카페트","한복류","모자","가방/기타가죽제품","운동화/스니커즈류"};
-		List<Fee> list = new ArrayList<>();
+		List<Fee> list = new ArrayList<Fee>();
 		while (true) {
 			System.out.println("\n 해당 제품의 기본 세탁료를 입력해주세요.");
 			int [] feeArray = new int[20];
@@ -225,7 +225,7 @@ public class InsertUserView {
 		String inputExtraFee = "";
 		int inputExtraFeeInt = 0;
 		String[] fabric = {"면","니트","레이온","데님","실크/쉬폰","린넨","퍼","앙고라","가죽"};
-		List<ExtraFee> list = new ArrayList<>();
+		List<ExtraFee> list = new ArrayList<ExtraFee>();
 		while (true) {
 			System.out.print("\n 해당 재질의 세탁운영 여부와 추가 세탁료를 입력해주세요.");
 			int [] feeArray = new int[9];
