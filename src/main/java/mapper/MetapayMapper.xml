@@ -46,6 +46,11 @@
 		</association>
 	</resultMap>
 
+	<insert id="joinMetapay" parameterType="metapay">
+		insert into metapay
+		values(METAPAY_SEQ.nextval, #{userId}, 0, #{metapayPassword}, systimestamp, systimestamp)
+	</insert>
+
 	<update id="updateMetapayBalance" parameterType="map">
 		update metapay
 		set metapay_balance = metapay_balance + #{amount}
@@ -68,7 +73,7 @@
 				metapay_seq.currval
 			</otherwise>
 		</choose>
-		#{bankId}, #{payAccountNumber}, 'F')
+		, #{bankId}, #{payAccountNumber}, 'F')
 	</insert>
 	
 	<update id="deleteMetapayAccount" parameterType="payAccount">

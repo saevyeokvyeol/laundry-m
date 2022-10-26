@@ -23,7 +23,7 @@ public class MetapayMenuView {
 		try {
 			Metapay metapay = metapayController.metapayCheck();
 			if (metapay == null) {
-				System.out.println("\n메타페이 가입자가 아닙니다.\n지금 가입하시겠습니까?");
+				System.out.println("지금 가입하시겠습니까?");
 				System.out.println("[ 1. 예 | 2. 아니오]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
