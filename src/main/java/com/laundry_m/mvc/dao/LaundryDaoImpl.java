@@ -22,25 +22,23 @@ import util.DbUtil;
 
 public class LaundryDaoImpl implements LaundryDao {
 
+	/** 
+	 * 	세탁소 등록: 세탁소 인서트
+	 * 	@param : Laundry laundry(세탁소 점포아이디, 아이디, 점포 이름, 점포 번호, 수거비용)
+	 * 	@return : int(등록한 레코드 수)
+	 *  */
 	@Override
-	public int insertLaundry(Laundry laundry) throws SQLException {
-		SqlSession session = null;
-		int result = 0;
-		boolean state = false;
-		
-		try {
-			session = DbUtil.getSession();
-			
-			result = session.insert("laundryMapper.insertLaundry");
-			if(result == 1) state = true;
-			
-		} finally {
-			DbUtil.sessionClose(session, state);
-		}
+	public int insertLaundry(SqlSession session, Laundry laundry) throws SQLException {
+		int result = session.insert("laundryMapper.insertLaundry", laundry);
 		
 		return result;
 	}
 
+	/** 
+	 *  세탁소 갱신
+	 *  @param : Laundry laundry(세탁소 이름, 전화번호, 세탁소 주소)
+	 *  @return : int(등록한 레코드 수)
+	 *  */
 	@Override
 	public int updateLaundry(Laundry laundry) throws SQLException {
 		SqlSession session = null;
@@ -60,18 +58,31 @@ public class LaundryDaoImpl implements LaundryDao {
 		return result;
 	}
 
+	/** 
+	 *  가격 등록
+	 *  @param : Fee fee(가격 번호, 세탁소아이디, 옷 아이디, 가격)
+	 *  @return : int(등록한 레코드 수)
+	 * */
 	@Override
-	public int insertFee(Fee fee) throws SQLException {
+	public int insertFee(SqlSession session, Fee fee) throws SQLException {
+		
+		int result = session.insert("laundryMapper.insertFee", fee);
+		return result;
+	}
+
+	/** 가격 갱신
+	 *  @param : Fee fee(세탁소 아이디, 옷 아이디, 가격)
+	 *  @return : int(등록한 레코드 수)
+	 * */
+	@Override
+	public int updateFee(Fee fee) throws SQLException {
 		SqlSession session = null;
 		int result = 0;
 		boolean state = false;
-		
 		try {
 			session = DbUtil.getSession();
-			result = session.insert("laundryMapper.insertFee", fee);
-			
+			result = session.update("laundryMapper.updateFee", fee);
 			if(result == 1) state = true;
-		
 		} finally {
 			DbUtil.sessionClose(session, state);
 		}
@@ -79,25 +90,11 @@ public class LaundryDaoImpl implements LaundryDao {
 		return result;
 	}
 
-	@Override
-	public int updateFee(Fee fee) throws SQLException {
-		SqlSession session = null;
-		int result = 0;
-		boolean state = false;
-		
-		try {
-			session = DbUtil.getSession();
-			result = session.update("laundryMapper.updateFee", fee);
-			
-			if(result == 1) state = true;
-		
-		} finally {
-			DbUtil.sessionClose(session, state);
-		}
-		
-		return result;
-	}
-	
+	/** 
+	 *  옷 인서트
+	 *  @param : Clothes clothes(옷 아이디, 옷 이름)
+	 *  @return : int(등록한 레코드 수)
+	 *  */
 	@Override
 	public int insertClothes(Clothes clothes) throws SQLException {
 		SqlSession session = null;
@@ -117,6 +114,11 @@ public class LaundryDaoImpl implements LaundryDao {
 		return result;
 	}
 
+	/** 
+	 * 	천 인서트
+	 *   @param : Fabric fabric(천 아이디, 천이름, 세탁방법)
+	 *   @return : int(등록한 레코드 수)
+	 * */
 	@Override
 	public int insertFabric(Fabric fabric) throws SQLException {
 		SqlSession session = null;
@@ -125,8 +127,7 @@ public class LaundryDaoImpl implements LaundryDao {
 		
 		try {
 			session = DbUtil.getSession();
-			result = session.update("laundryMapper.insertFabric");
-			
+			result = session.update("laundryMapper.insertFabric", fabric);
 			if(result == 1) state = true;
 		
 		} finally {
@@ -136,25 +137,22 @@ public class LaundryDaoImpl implements LaundryDao {
 		return result;
 	}
 
+	/** 
+	 *  추가가격 인서트
+	 *  @param : ExtraFee extraFee(추가가격 아이디, 천아이디, 점포 아이디, 가격)
+	 *  @return : int(등록한 레코드 수)
+	 *  */
 	@Override
-	public int insertExtraFee(ExtraFee extraFee) throws SQLException {
-		SqlSession session = null;
-		int result = 0;
-		boolean state = false;
-		
-		try {
-			session = DbUtil.getSession();
-			result = session.update("laundryMapper.insertExtraFee");
-			
-			if(result == 1) state = true;
-		
-		} finally {
-			DbUtil.sessionClose(session, state);
-		}
-		
+	public int insertExtraFee(SqlSession session, ExtraFee extraFee) throws SQLException {
+		int result = session.update("laundryMapper.insertExtraFee", extraFee);
 		return result;
 	}
 
+	/** 
+	 *  추가가격 수정: extra_fee 테이블 레코드 update
+	 *  @param : ExtraFee extraFee(천아이디, 점포 아이디, 가격)
+	 *  @return : int(등록한 레코드 수)
+	 * */
 	@Override
 	public int updateExtraFee(ExtraFee extraFee) throws SQLException {
 		SqlSession session = null;
@@ -163,7 +161,7 @@ public class LaundryDaoImpl implements LaundryDao {
 		
 		try {
 			session = DbUtil.getSession();
-			result = session.update("laundryMapper.updateFee", extraFee);
+			result = session.update("laundryMapper.updateExtraFee", extraFee);
 			
 			if(result == 1) state = true;
 		
@@ -174,6 +172,10 @@ public class LaundryDaoImpl implements LaundryDao {
 		return result;
 	}
 
+	/** 
+	 * 	추가가격 삭제
+	 *  @param : Long extraFeeId
+	 *  */
 	@Override
 	public int deleteExtraFee(ExtraFee extraFee) throws SQLException {
 		SqlSession session = null;
@@ -193,6 +195,11 @@ public class LaundryDaoImpl implements LaundryDao {
 		return result;
 	}
 
+	/**
+	 *  세탁소 이름으로 찾기
+	 *  @param : String LaundryName
+	 *  @return : List<Laundry>
+	 * */
 	@Override
 	public List<Laundry> selectByNameLaundry(String LaundryName) throws SQLException {
 		SqlSession session = null;
@@ -208,6 +215,11 @@ public class LaundryDaoImpl implements LaundryDao {
 		return laundries;
 	}
 
+	/**
+	 *  세탁소 주소로 찾기
+	 *  @param : String LaundryAddress
+	 *  @return : List<Laundry>
+	 * */
 	@Override
 	public List<Laundry> selectByAddressLaundry(String LaundryAddress) throws SQLException {
 		SqlSession session = null;
@@ -223,6 +235,14 @@ public class LaundryDaoImpl implements LaundryDao {
 		return laundries;
 	}
 
+	/**
+	 *  옷 가격 최저가 세탁소 검색
+	 *  1. 옷 가격 검색 시 가격
+	 *  2. 천 가격 검색 시 가격
+	 *  3. 두 가격을 더한 값 order by 첫번째 값에 대한 점포아이디
+	 *  @param : Long feeId, Long extraFeeId
+	 *  @return : Laundry
+	 * */
 	@Override
 	public Laundry selectByLowestByLaundry(String userAddress, int clothesId, int FabricId) throws SQLException {
 		SqlSession session = null;
@@ -248,6 +268,9 @@ public class LaundryDaoImpl implements LaundryDao {
 		return laundry;
 	}
 
+	/**
+	 * 특정 세탁소에서 옷 + 재질 가격 더하는 메소드
+	 * */
 	@Override
 	public int clothesfabricFee(Long laundryId, int clothesId, int fabricId) throws SQLException {
 		SqlSession session = null;
@@ -276,6 +299,9 @@ public class LaundryDaoImpl implements LaundryDao {
 		return totalFee;
 	}
 
+	/**
+	 * 세탁소 아이디로 찾기
+	 * */
 	@Override
 	public Laundry selectByUserId(String userId) throws SQLException {
 		SqlSession session = null;
@@ -291,6 +317,9 @@ public class LaundryDaoImpl implements LaundryDao {
 		return laundry;
 	}
 
+	/**
+	 * 회원 주소 - 세탁소 주소 사이 거리 구하기
+	 * */
 	@Override
 	public int userBetweenLaun(Users users, Laundry laundry) throws SQLException {
 		
@@ -300,7 +329,7 @@ public class LaundryDaoImpl implements LaundryDao {
 		double userLong = users.getUserLongtitude(); //경도
 
 		//세탁소의 위도, 경도 구한다
-		double laundryLatit = laundry.getLaundryLongitude(); //경도
+		double laundryLatit = laundry.getLaundryLongtitude(); //경도
 		double laundryLong = laundry.getLaundryLatitude(); //위도
 		
 		
@@ -324,7 +353,10 @@ public class LaundryDaoImpl implements LaundryDao {
         return (rad * 180 / Math.PI);
     }
 
-    
+
+	/**
+	 * 사용자 위치에서 세탁소 찾기
+	 * */
 	@Override
 	public List<Laundry> selectByMyLaundry(String userAddress) throws SQLException, NotExistException, NotLoginException {
 		SqlSession session = null;
@@ -346,6 +378,9 @@ public class LaundryDaoImpl implements LaundryDao {
 		return laundries;
 	}
 
+	/**
+	 * 천으로 세탁 방법 찾기
+	 * */
 	@Override
 	public Fabric selectWashByFabric(int fabricId) throws SQLException, NotExistException, NotLoginException {
 		SqlSession session = null;

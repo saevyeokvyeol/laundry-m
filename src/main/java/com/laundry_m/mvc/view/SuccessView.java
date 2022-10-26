@@ -88,7 +88,7 @@ public class SuccessView {
 	public static void printLaundryList(List<Laundry> laundries , List<Double> distances) {
 		//(번호) 나와의 거리 | 세탁소 이름 | 세탁소 주소 | 세탁소 번호 | 배달료
 		int i = 0;
-		System.out.println( " 번호 " +" | " + " 나와의 거리 " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비" + "     세탁소 번호" );
+		System.out.println( "   나와의 거리 " +" | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" +" | " + "세탁소 고유번호" );
 		for(Laundry laundry : laundries) {
 			System.out.println( "(" + (i+1) + ") " + laundry.getLaundryId() + distances.get(i) + "km | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" +  " | "  + laundry.getLaundryId());
 
@@ -97,8 +97,8 @@ public class SuccessView {
 	}
 	
 	public static void printLaundry(Laundry laundry, double distance) {
-		System.out.println( " 번호 " +" | " + " 나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "     배달비" + "     세탁소 번호" );
-		System.out.println( distance + " | " + laundry.getLaundryId() + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" +  " | "  + laundry.getLaundryId());
+		System.out.println("   나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" +" | " +  "세탁소 고유번호" );
+		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" +  " | "  + laundry.getLaundryId());
 
 	}
 	public static void printUserReview(List<Review> reviews) {

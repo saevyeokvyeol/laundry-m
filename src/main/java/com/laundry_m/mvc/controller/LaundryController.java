@@ -3,6 +3,8 @@ package com.laundry_m.mvc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.laundry_m.mvc.service.LaundryService;
 import com.laundry_m.mvc.service.LaundryServiceImpl;
 import com.laundry_m.mvc.session.Session;
@@ -23,9 +25,9 @@ public class LaundryController {
 	/**
 	 * 세탁소 등록
 	 * */
-	public void insertLaundry(Laundry laundry) {
+	public void insertLaundry(SqlSession session, Laundry laundry) {
 		try {
-			laundryService.insertLaundry(laundry);
+			laundryService.insertLaundry(session, laundry);
 			SuccessView.printMessage("세탁소 등록 성공");
 
 		} catch (Exception e) {
@@ -50,9 +52,9 @@ public class LaundryController {
 	/**
 	 * 세탁소 가격 등록
 	 * */
-	public void insertFee(Fee fee) {
+	public void insertFee(SqlSession session, Fee fee) {
 		try {
-			laundryService.insertFee(fee);
+			laundryService.insertFee(session, fee);
 			SuccessView.printMessage("세탁소 가격 등록 성공");
 
 		} catch (Exception e) {
@@ -65,9 +67,10 @@ public class LaundryController {
 	 * */
 	public void updateFee(Fee fee) {
 		try {
+			Laundry laundry = selectLaundryByLoginUserId();
+			fee.setLaundryId(laundry.getLaundryId());
 			laundryService.updateFee(fee);
 			SuccessView.printMessage("세탁소 가격 수정 성공");
-
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
@@ -103,9 +106,9 @@ public class LaundryController {
 	/**
 	 * 세탁소 추가 가격 등록
 	 * */
-	public void insertExtraFee(ExtraFee extraFee) {
+	public void insertExtraFee(SqlSession session, ExtraFee extraFee) {
 		try {
-			laundryService.insertExtraFee(extraFee);
+			laundryService.insertExtraFee(session, extraFee);
 			SuccessView.printMessage("세탁소 추가 가격 등록 성공");
 
 		} catch (Exception e) {
@@ -116,11 +119,12 @@ public class LaundryController {
 	/**
 	 * 세탁소 추가 가격 수정
 	 * */
-	public void updateFee(ExtraFee extraFee) {
+	public void updateExtraFee(ExtraFee extraFee) {
 		try {
+			Laundry laundry = selectLaundryByLoginUserId();
+			extraFee.setLaundryId(laundry.getLaundryId());
 			laundryService.updateExtraFee(extraFee);
 			SuccessView.printMessage("세탁소 추가 가격 수정 성공");
-
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
@@ -199,6 +203,7 @@ public class LaundryController {
 	
 	/**
 	 * 세탁소 아이디로 찾기
+	 * print in SuccessView
 	 * */
 	public void selectByUserId(String userId) {
 		
@@ -216,6 +221,23 @@ public class LaundryController {
 		}
 		
 	}
+	
+	/**
+	 * 세탁소 로그인된 아이디로 찾기
+	 * return : laundry
+	 * */
+	public Laundry selectLaundryByLoginUserId() {
+		Laundry laundry = new Laundry();
+		try {
+			Users user = (Users) session.getAttribute("loginUser");
+			String id = user.getUserId();
+			laundry = laundryService.selectByUserId(id);
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		return laundry;
+	}
+	
 	
 	/**
 	 * 옷 가격 최저가 세탁소 검색

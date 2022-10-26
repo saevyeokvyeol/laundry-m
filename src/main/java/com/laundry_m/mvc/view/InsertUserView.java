@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.laundry_m.mvc.controller.LaundryController;
 import com.laundry_m.mvc.controller.UsersController;
-import com.laundry_m.mvc.vo.BookLine;
+import com.laundry_m.mvc.session.Session;
+import com.laundry_m.mvc.vo.ExtraFee;
 import com.laundry_m.mvc.vo.Fee;
 import com.laundry_m.mvc.vo.Laundry;
 import com.laundry_m.mvc.vo.Users;
@@ -33,6 +35,7 @@ public class InsertUserView {
 	private static Scanner sc = new Scanner(System.in);
 	private static UsersController usersController = new UsersController();
 	private static LaundryController laundryController = new LaundryController();
+	private static Session session = Session.getInstance();
 	
 	private final static String ID = "^[0-9a-zA-Z]*$";
 	//private final static String PASSWORD = "^[0-9]*$";
@@ -71,7 +74,6 @@ public class InsertUserView {
 			System.out.print("비밀번호 입력 > ");
 			password = sc.nextLine();
 			
-			//if (password.length() < 4 || !password.matches(PASSWORD)) {
 			if (password.length() < 4) {
 				System.out.println("비밀번호는 네 글자 이상 입력해주세요.\n");
 			} else {
@@ -166,33 +168,39 @@ public class InsertUserView {
 		String state = "N";
 		Users user = Users.builder().userId(id).userPwd(password).userName(name).userType(type)
 				.userAddress(address).userState(state).userLatitude(latitude).userLongtitude(longtitude).build();
-		usersController.insertUser(user);
 		
 		if(user.getUserType().equals("점주")) {
-			insertLaundryInfo(id);
-			insertLaundryFee();
-			insertLaundryExtraFee();
+			//session.setAttribute("joinUserId",id);
+			Laundry laundry = insertLaundryInfo(user);
+			laundry = insertLaundryFee(laundry);
+			laundry = insertLaundryExtraFee(laundry);
+			user.setLaundry(laundry);
 		}
+		usersController.insertUser(user);
 	}
 	
 	/**
 	 * 회원가입 점주 - FEE 입력 메뉴
 	 * */
-	private static void insertLaundryFee() {
+	private static Laundry insertLaundryFee(Laundry laundry) {
 		
 		String inputFee = "";
 		String[] clothes = {"상의/자켓","하의","스커트","와이셔츠/남방","티셔츠","블라우스","원피스","스웨터/가디건","봄가을점퍼/아웃도어","코트","가죽/모피의류","겨울패딩/점퍼","넥타이","스카프/목도리","이불/침구류","커튼/카페트","한복류","모자","가방/기타가죽제품","운동화/스니커즈류"};
+		List<Fee> list = new ArrayList<>();
 		while (true) {
-			System.out.print("\n 해당 제품의 기본 세탁료를 입력해주세요.");
+			System.out.println("\n 해당 제품의 기본 세탁료를 입력해주세요.");
 			int [] feeArray = new int[20];
 			int i=0;
 			for(String sort : clothes) {
-				System.out.print(sort + " >");
-				inputFee = sc.nextLine();
-				if (!inputFee.matches(PHONE)) {
-					System.out.println("가격은 숫자만 입력해주세요.");
-				} else {
-					break;
+				boolean run1 = true;
+				while (run1) {
+					System.out.print(sort + " >");
+					inputFee = sc.nextLine();
+					if (!inputFee.matches(PHONE)) {
+						System.out.println("세탁료는 숫자만 입력해주세요.");
+					} else {
+						break;
+					}
 				}
 				int inputFeeInt = Integer.parseInt(inputFee);
 				feeArray[i] = inputFeeInt;
@@ -201,26 +209,76 @@ public class InsertUserView {
 			i=1;
 			for(int insertFee : feeArray) {
 				Fee fee = Fee.builder().clothesId(i).clothesFee(insertFee).build();
-				laundryController.insertFee(fee);
+				list.add(fee);
 				i++;
 			}
+			break;
 		}
+		laundry.setFee(list);
+		return laundry;
 	}
 	
-	private static void insertLaundryExtraFee() {
-		
-		/*
-		Laundry laundry = Laundry.builder().userId(id).laundryName(name).laundryTel(tel).laundryAddress(address)
-				.laundryAccountNumber(account).laundryLatitude(latitude).laundryLongitude(longtitude).build();
-		laundryController.insertLaundry(laundry);
-		*/
-		
+	/**
+	 * 회원가입 점주 - EXTRA FEE 입력 메뉴
+	 * */
+	private static Laundry insertLaundryExtraFee(Laundry laundry) {
+		String inputExtraFee = "";
+		int inputExtraFeeInt = 0;
+		String[] fabric = {"면","니트","레이온","데님","실크/쉬폰","린넨","퍼","앙고라","가죽"};
+		List<ExtraFee> list = new ArrayList<>();
+		while (true) {
+			System.out.print("\n 해당 재질의 세탁운영 여부와 추가 세탁료를 입력해주세요.");
+			int [] feeArray = new int[9];
+			char [] operationArray = new char[9];
+			int i=0;
+			for(String sort : fabric) {
+				System.out.println("\n"+sort + "의 운영여부 >");
+				System.out.println("[ 1. 운영 | 2. 미운영 ]");
+				System.out.print("▶ ");
+				//String operation = "";
+				int menu = Integer.parseInt(sc.nextLine());
+				switch(menu) {
+					case 1 :
+						System.out.print(sort + "의 세탁료 >");
+						boolean run2 = true;
+						while (run2) {
+							inputExtraFee = sc.nextLine();
+							if (!inputExtraFee.matches(PHONE)) {
+								System.out.println("세탁료는 숫자만 입력해주세요.");
+							} else {
+								run2 = false;
+								break;
+							}
+						}
+						inputExtraFeeInt = Integer.parseInt(inputExtraFee);
+						feeArray[i] = inputExtraFeeInt;
+						operationArray[i] = 'Y';
+						break;
+					case 2 :
+						operationArray[i] = 'N';
+						break;
+					default :
+						System.out.println("정확한 번호를 입력해주세요.");
+				}
+				i++;
+			}
+			i=1;
+			for(int insertFee : feeArray) {
+				ExtraFee extraFee = ExtraFee.builder().fabricId(i).extraFeeOperation(operationArray[(i++)-1]).fabricFee(insertFee).build();
+				list.add(extraFee);
+			}
+			break;
+		}
+		laundry.setExtraFee(list);
+		return laundry;
 	}
 
 	/**
 	 * 회원가입 점주 - 세탁소 정보 입력 메뉴
+	 * @param user 
+	 * @return 
 	 * */
-	private static void insertLaundryInfo(String id) {
+	private static Laundry insertLaundryInfo(Users user) {
 		String name = null;
 		while (true) {
 			System.out.print("세탁소 이름 입력 > ");
@@ -279,10 +337,9 @@ public class InsertUserView {
 			}
 		}
 		
-		Laundry laundry = Laundry.builder().userId(id).laundryName(name).laundryTel(tel).laundryAddress(address)
-				.laundryAccountNumber(account).laundryLatitude(latitude).laundryLongitude(longtitude).build();
-		laundryController.insertLaundry(laundry);
-		
+		Laundry laundry = Laundry.builder().userId(user.getUserId()).laundryName(name).laundryTel(tel).laundryAddress(address)
+				.laundryAccountNumber(account).laundryLatitude(latitude).laundryLongtitude(longtitude).build();
+		return laundry;
 	}
 
 	
