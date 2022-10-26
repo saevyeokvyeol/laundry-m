@@ -219,7 +219,7 @@ public class MenuView {
 	
 	/**
 	 * 일반 회원 메타페이 메뉴
-	 * */
+	 * */ 
 	public static void customerMetapayMenu() {
 		boolean run = true;
 		while (run) {
