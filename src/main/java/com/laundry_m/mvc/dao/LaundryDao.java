@@ -127,12 +127,12 @@ public interface LaundryDao {
 	/**
 	 * 세탁소 메뉴 보기
 	 * */
-	List<Fee> selectAllFee(Long laundryId) throws SQLException, NotExistException, NotLoginException;
+	Laundry selectAllFee(Long laundryId) throws SQLException, NotExistException, NotLoginException;
 	
 	/**
 	 * 세탁소 추가가격 메뉴 보기
 	 * */
-	List<ExtraFee> selectAllExtraFees(Long laundryId) throws SQLException, NotExistException, NotLoginException;
+	Laundry selectAllExtraFees(Long laundryId) throws SQLException, NotExistException, NotLoginException;
 	
 
 	

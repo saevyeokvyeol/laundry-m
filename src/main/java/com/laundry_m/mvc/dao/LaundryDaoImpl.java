@@ -396,13 +396,13 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public List<Fee> selectAllFee(Long laundryId) throws SQLException, NotExistException, NotLoginException {
+	public Laundry selectAllFee(Long laundryId) throws SQLException, NotExistException, NotLoginException {
 		SqlSession session = null;
-		List<Fee> feeList = new ArrayList<Fee>();
+		Laundry feeList = null;
 		
 		try {
 			session = DbUtil.getSession();
-			feeList = session.selectList("laundryMapper.selectAllFee", laundryId);
+			feeList = session.selectOne("laundryMapper.selectAllFee", laundryId);
 		} finally {
 			DbUtil.sessionClose(session);
 		}
@@ -412,13 +412,13 @@ public class LaundryDaoImpl implements LaundryDao {
 	}
 
 	@Override
-	public List<ExtraFee> selectAllExtraFees(Long laundryId) throws SQLException, NotExistException, NotLoginException {
+	public Laundry selectAllExtraFees(Long laundryId) throws SQLException, NotExistException, NotLoginException {
 		SqlSession session = null;
-		List<ExtraFee> extraFeeList = new ArrayList<ExtraFee>();
+		Laundry extraFeeList = null;
 		
 		try {
 			session = DbUtil.getSession();
-			extraFeeList = session.selectList("laundryMapper.selectAllExtraFees", laundryId);
+			extraFeeList = session.selectOne("laundryMapper.selectAllExtraFees", laundryId);
 		} finally {
 			DbUtil.sessionClose(session);
 		}

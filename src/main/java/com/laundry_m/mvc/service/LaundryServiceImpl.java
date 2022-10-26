@@ -141,12 +141,12 @@ public class LaundryServiceImpl implements LaundryService {
 	}
 
 	@Override
-	public List<Fee> selectAllFee(Long laundryId) throws SQLException, NotExistException, NotLoginException {
+	public Laundry selectAllFee(Long laundryId) throws SQLException, NotExistException, NotLoginException {
 		return laundryDao.selectAllFee(laundryId);
 	}
 
 	@Override
-	public List<ExtraFee> selectAllExtraFees(Long laundryId) throws SQLException, NotExistException, NotLoginException {
+	public Laundry selectAllExtraFees(Long laundryId) throws SQLException, NotExistException, NotLoginException {
 		return laundryDao.selectAllExtraFees(laundryId);
 	}
 

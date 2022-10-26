@@ -6,13 +6,9 @@
 	
 	<resultMap type="laundry" id="laundryMap">
 		<id column="laundry_id" property="laundryId"/>
-		<result column="fee_id" property="feeId"/>
-		<result column="extra_fee_id" property="extraFeeId"/>
 		
 		<collection property="fee" resultMap="feeMap"/>
-		<collection property="clothes" resultMap="clothesMap"/>
 		<collection property="extraFee" resultMap="extraFeeMap"/>
-		<collection property="fabric" resultMap="fabricMap"/>
 	</resultMap>
 	
 	<resultMap type="fee" id="feeMap">
@@ -24,10 +20,10 @@
 		
 	</resultMap>
 	
-	<!-- <resultMap type="clothes" id="clothesMap">
-		<id column="clothes_id" property="clothesId"/>\
+	<resultMap type="clothes" id="clothesMap">
+		<id column="clothes_id" property="clothesId"/>
 		<result column="clothes_name" property="clothesName"/>
-	</resultMap> -->
+	</resultMap>
 	
 	<resultMap type="extraFee" id="extraFeeMap">
 		<id column="extra_Fee_id" property="extraFeeId"/>
