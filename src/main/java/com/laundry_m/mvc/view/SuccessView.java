@@ -96,6 +96,7 @@ public class SuccessView {
 		}
 	}
 	
+	
 	public static void printLaundry(Laundry laundry, double distance) {
 		System.out.println("   나와의 거리 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" +" | " +  "세탁소 고유번호" );
 		System.out.println( distance + " | " + laundry.getLaundryName() + " | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원" +  " | "  + laundry.getLaundryId());
@@ -156,7 +157,29 @@ public class SuccessView {
 		}
 		
 	}
-
+	
+	public static void printUserInfo(Users users) {
+		System.out.println();
+		System.out.println("[이름] " + users.getUserName());
+		System.out.println("[아이디] " + users.getUserId());
+		System.out.println("[전화번호] " + users.getUserPhone());
+		System.out.println("[주소] " + users.getUserAddress());
+		System.out.println("[회원타입] " + users.getUserType());
+		System.out.println("[삭제여부] " + users.getUserState());
+	}
+	
+	public static void printUserInfoList(List<Users> userList) {
+		for(Users user : userList) {
+			System.out.println();
+			System.out.println("[이름] " + user.getUserName());
+			System.out.println("[아이디] " + user.getUserId());
+			System.out.println("[전화번호] " + user.getUserPhone());
+			System.out.println("[주소] " + user.getUserAddress());
+			System.out.println("[회원타입] " + user.getUserType());
+			System.out.println("[삭제여부] " + user.getUserState());
+		}
+	}
+	
 	public static void printAdminReview(List<Review> reviews) {
 		System.out.print("리뷰번호 | ID | 예약번호 | 별점 | 수정날짜 | 리뷰내용");
 		System.out.println("");

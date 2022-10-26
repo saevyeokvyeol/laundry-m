@@ -162,6 +162,7 @@ public class laundryUpdateView {
 		boolean run = true;
 		while (run) {
 			try {
+			System.out.println("\n");
 			System.out.println("변경하실 정보를 선택해주세요.");
 			System.out.println("[ 1. 세탁소 이름 | 2. 세탁소 전화번호 | 3. 세탁소 주소 | 4. 점주 계좌 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 			System.out.print("▶ ");
@@ -172,7 +173,9 @@ public class laundryUpdateView {
 				case 1 : 
 					String name = null;
 					while (true) {
-						System.out.print("변경할 이름을 입력해주세요. > ");
+						System.out.println();
+						System.out.println("변경할 이름을 입력해주세요.");
+						System.out.print("▶ ");
 						name = sc.nextLine();
 						break;
 					}
@@ -183,7 +186,9 @@ public class laundryUpdateView {
 				case 2 :
 					String tel = null;
 					while (true) {
-						System.out.print("변경할 전화번호를 입력해주세요. > ");
+						System.out.println();
+						System.out.println("변경할 전화번호를 입력해주세요.");
+						System.out.print("▶ ");
 						tel = sc.nextLine();
 						if (!tel.matches(PHONE) || tel.length() < 12 == false) {
 							System.out.println("전화번호는 -없이 숫자 11자리 이하로 입력해주세요.\n");
@@ -200,8 +205,9 @@ public class laundryUpdateView {
 					double latitude = 0f;
 					double longtitude = 0f;
 					while (true) {
-						System.out.println("변경할 세탁소 주소를 입력해주세요. ");
-						System.out.println("세탁소를 운영중인 구를 입력해주세요 > ");
+						System.out.println();
+						System.out.println("변경할 세탁소 주소의 시/군/구 정보를 입력해주세요. (ex 송파구)");
+						System.out.print("▶ ");
 						StringBuffer buffer = new StringBuffer();
 						buffer.append("서울특별시 ");
 						String gu = sc.nextLine();
@@ -213,7 +219,8 @@ public class laundryUpdateView {
 							System.out.println("구 정보를 정확히 입력해주세요. \n");
 						} else {
 							buffer.append(gu + " ");
-							System.out.println("그 외 상세주소를 입력해주세요(도로명주소) > ");
+							System.out.println("그 외 상세주소를 입력해주세요.");
+							System.out.print("▶ ");
 							buffer.append(sc.nextLine());
 							address = buffer.toString();
 							
@@ -233,7 +240,9 @@ public class laundryUpdateView {
 				case 4 :
 					String account = null;
 					while (true) {
-						System.out.print("변경할 계좌를 입력해주세요. > ");
+						System.out.println();
+						System.out.println("변경할 계좌를 입력해주세요.");
+						System.out.print("▶ ");
 						account = sc.nextLine();
 						if (!account.matches(PHONE) || account.length() == 13 == false) {
 							System.out.println("계좌번호는 -없이 숫자 13자리로 입력해주세요.\n");

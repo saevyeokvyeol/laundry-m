@@ -36,7 +36,7 @@ public class UserMenuView {
 		boolean run1 = true;
 		while (run) {
 			try {
-				Users loginUserInfo = usersController.selectByUserId();
+				Users loginUserInfo = usersController.selectByLoginUserId();
 				System.out.println();
 				System.out.println("이름 : " + loginUserInfo.getUserName());
 				System.out.println("아이디 : " + loginUserInfo.getUserId());
