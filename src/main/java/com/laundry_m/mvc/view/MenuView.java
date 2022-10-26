@@ -307,7 +307,7 @@ public class MenuView {
 					laundryManageMenu();
 					break;
 				case 2 :
-					laundryManageMenu();
+					laundryBookManageMenu();
 					break;
 				case 3 :
 					reviewController.searchReviewByLaundryId();
