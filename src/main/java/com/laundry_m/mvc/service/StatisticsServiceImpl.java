@@ -19,7 +19,11 @@ public class StatisticsServiceImpl implements StatisticsService {
 	 * */
 	@Override
 	public StatisticsTotal searchTotalStatistics(Map<String, Object> map) throws SQLException {
-		return statisticsDao.searchTotalStatistics(map);
+		StatisticsTotal statisticsTotal = statisticsDao.searchTotalStatistics(map);
+		
+		if (statisticsTotal == null) throw new SQLException("검색한 범위에 대한 통계 정보가 존재하지 않습니다.");
+		
+		return statisticsTotal;
 	}
 
 	/**
@@ -29,7 +33,10 @@ public class StatisticsServiceImpl implements StatisticsService {
 	 * */
 	@Override
 	public List<StatisticsDetail> searchDetailStatistics(Map<String, Object> map) throws SQLException {
-		return statisticsDao.searchDetailStatistics(map);
+		List<StatisticsDetail> statisticsDetails = statisticsDao.searchDetailStatistics(map);
+		
+		if (statisticsDetails == null) throw new SQLException("검색한 범위에 대한 통계 정보가 존재하지 않습니다.");
+		return statisticsDetails;
 	}
 
 }

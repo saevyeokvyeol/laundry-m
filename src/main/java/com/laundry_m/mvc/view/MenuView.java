@@ -131,7 +131,7 @@ public class MenuView {
 	/**
 	 * 알아서 써주세요><
 	 * */
-	public static void laundryDetail() {
+	public static void laundryDetail(String keyword) {
 		System.out.println();
 	}
 	
@@ -271,7 +271,7 @@ public class MenuView {
 					favoriteMenuView.searchFavoriteByLaundryAddress();
 					break;
 				case 3 :
-					favoriteMenuView.searchFavoriteByLaundryName();
+//					favoriteMenuView.searchFavoriteByLaundryName();
 					break;
 				case 4 :
 					favoriteMenuView.deleteFavorite();
@@ -567,18 +567,31 @@ public class MenuView {
 				System.out.println("\n" + "[ 1. 총 매출 통계 | 2. 일별 매출 통계 | 3. 세탁소별 매출 통계 | 4. 회원별 매출 통계 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
+				Map<String, Object> map = new HashMap<String, Object>();
 				switch(menu) {
 				case 1 :
-					
+					statisticsController.searchStatistics(map);
 					break;
 				case 2 :
-					
+					System.out.println("\n" + "날짜를 입력해주세요.");
+					System.out.print("▶ ");
+					String date = sc.nextLine();
+					map.put("date", date);
+					statisticsController.searchStatistics(map);
 					break;
 				case 3 :
-					
+					System.out.println("\n" + "세탁소 아이디를 입력해주세요.");
+					System.out.print("▶ ");
+					Long laundryId = (long) Integer.parseInt(sc.nextLine());
+					map.put("laundryId", laundryId);
+					statisticsController.searchStatistics(map);
 					break;
 				case 4 :
-					
+					System.out.println("\n" + "유저 아이디를 입력해주세요.");
+					System.out.print("▶ ");
+					String userId = sc.nextLine();
+					map.put("userId", userId);
+					statisticsController.searchStatistics(map);
 					break;
 				case 8 :
 					run = false;
