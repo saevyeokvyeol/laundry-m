@@ -59,7 +59,7 @@
 
 	<insert id="payMetapay" parameterType="payLog">
 		insert into pay_log
-		values(pay_log_id_seq.nextval, #{metapayId}, #{payCategoryId}, null, #{payLogAmount}, systimestamp, #{laundryId})
+		values(pay_log_seq.nextval, #{metapayId}, #{payCategoryId}, null, #{payLogAmount}, systimestamp, #{laundryId})
 	</insert>
 	
 	<insert id="addMetapayAccount" parameterType="payAccount">
@@ -67,7 +67,7 @@
 		values(pay_account_seq.nextval, 
 		<choose>
 			<when test="metapayId != null">
-			#{metapay_id}
+			#{metapayId}
 			</when>
 			<otherwise>
 				metapay_seq.currval
@@ -79,7 +79,7 @@
 	<update id="deleteMetapayAccount" parameterType="payAccount">
 		update pay_account
 		set pay_account_quit_state = 'T'
-		where metapay_id = #{metapayId} and pay_account_id = #{payAccountId}
+		where metapay_id = #{metapayId}
 	</update>
 	
 	<select id="selectMetapayByUserId" parameterType="string" resultMap="metapayMap">

@@ -70,7 +70,8 @@ public class MetapayController {
 			Users users = (Users)session.getAttribute("loginUser");
 			Metapay metapay = metapayService.searchMetapayByUserId(users.getUserId());
 			payAccount.setMetapayId(metapay.getMetapayId());
-			SuccessView.printPayAccount(metapay.getPayAccount());
+			metapayService.addMetapayAccount(payAccount);
+			SuccessView.printMessage("메타페이 연동 계좌가 정상적으로 변경되었습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

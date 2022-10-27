@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.laundry_m.mvc.vo.Adjust;
 import com.laundry_m.mvc.vo.Book;
 import com.laundry_m.mvc.vo.BookLine;
+import com.laundry_m.mvc.vo.Metapay;
 import com.laundry_m.mvc.vo.PayLog;
 
 import util.DbUtil;
@@ -47,7 +48,8 @@ public class BookDaoImpl implements BookDao {
 			}
 			
 			if (book.getBookMethodId() == 2) {
-				PayLog payLog = PayLog.builder().laundryId(book.getLaundryId()).build();
+				Metapay metapay = metapayDao.selectMetapayByUserId(book.getUserId());
+				PayLog payLog = PayLog.builder().laundryId(book.getLaundryId()).payCategoryId(book.getBookMethodId()).payLogAmount(book.getBookTotalFee()).metapayId(metapay.getMetapayId()).build();
 				int re = metapayDao.payMetapay(session, book.getUserId(), payLog);
 				if (re != 1 || !state) {
 					state = false;

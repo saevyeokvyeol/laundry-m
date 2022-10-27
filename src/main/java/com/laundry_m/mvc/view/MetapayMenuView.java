@@ -91,6 +91,7 @@ public class MetapayMenuView {
 		try {
 			System.out.println("\n결제 계좌 은행을 선택해주세요.");
 			System.out.println("[ 1. 농협 | 2. 국민 | 3. 우리 | 4. 하나 ]");
+			System.out.print("▶ ");
 			Long bankId = (long) Integer.parseInt(sc.nextLine());
 
 			System.out.println("\n결제 계좌 번호를 입력해주세요.");

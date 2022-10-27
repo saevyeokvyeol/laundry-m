@@ -50,7 +50,7 @@ public class MetapayDaoImpl implements MetapayDao {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
 		map.put("amount", amount);
-		result = session.insert("metapayMapper.insertBook", amount);
+		result = session.insert("metapayMapper.updateMetapayBalance", map);
 		
 		return result;
 	}

@@ -242,7 +242,7 @@ public class SuccessView {
 				} else {
 					System.out.print(getAccountNumber(log.getPayAccount().getPayAccountNumber()) + " | ");
 				}
-				System.out.println(getDate(log.getPayLogInsertDate()));
+				System.out.println(won.format(log.getPayLogAmount().intValue()) + " | " + getDate(log.getPayLogInsertDate()));
 			}
 		}
 	}
