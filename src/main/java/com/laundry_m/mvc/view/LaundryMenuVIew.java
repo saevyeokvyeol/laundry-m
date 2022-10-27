@@ -198,10 +198,10 @@ public class LaundryMenuVIew {
 	public static void selectByLaundryNameForAdmin() {
 		
 		try {
-			System.out.println("검색할 사장님 아이디를 입력해주세요");
+			System.out.println("검색할 세탁소 이름을 입력해주세요");
 			System.out.print("▶ ");
-			String userId = sc.nextLine();
-			laundryController.selectByNameLaundry(userId);
+			String laundryName = sc.nextLine();
+			laundryController.selectByNameLaundry(laundryName);
 			
 		} catch (Exception e) {
 			FailView.errorMessage("에러가 발생했어요 :( ");
