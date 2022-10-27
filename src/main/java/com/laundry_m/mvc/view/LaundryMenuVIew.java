@@ -288,7 +288,7 @@ public class LaundryMenuVIew {
 			System.out.println("검색할 사장님 아이디를 입력해주세요");
 			System.out.print("▶ ");
 			String userId = sc.nextLine();
-			laundryController.selectByUserId(userId);
+			laundryController.selectByLaundryOwnerId(userId);
 			
 		} catch (Exception e) {
 			FailView.errorMessage("에러가 발생했어요 :( ");
@@ -297,5 +297,37 @@ public class LaundryMenuVIew {
 		
 	}
 	
+	
+	/**
+	 * 관리자 -세탁소 이름으로 검색
+	 * */
+	public static void selectByLaundryNameForAdmin() {
+		
+		try {
+			System.out.println("검색할 사장님 아이디를 입력해주세요");
+			System.out.print("▶ ");
+			String userId = sc.nextLine();
+			laundryController.selectByNameLaundry(userId);
+			
+		} catch (Exception e) {
+			FailView.errorMessage("에러가 발생했어요 :( ");
+		}
+	}
+	
+	/**
+	 * 관리자 -세탁소 주소로 검색
+	 * */
+	public static void selectByLaundryLocationForAdmin() {
+		
+		try {
+			System.out.println("검색할 구를 입력해주세요");
+			System.out.print("▶ ");
+			String laundryLocation= sc.nextLine();
+			laundryController.selectByAddressLaundry(laundryLocation);
+			
+		} catch (Exception e) {
+			FailView.errorMessage("에러가 발생했어요 :( ");
+		}
+	}
 	
 }

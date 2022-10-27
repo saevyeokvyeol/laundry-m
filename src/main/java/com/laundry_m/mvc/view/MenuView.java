@@ -449,10 +449,10 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					LaundryMenuVIew.selectByLaundryName();
+					LaundryMenuVIew.selectByLaundryNameForAdmin();
 					break;
 				case 2 :
-					LaundryMenuVIew.selectByLaundryLocation();
+					LaundryMenuVIew.selectByLaundryLocationForAdmin();
 					break;
 				case 3 :
 					LaundryMenuVIew.selectByLaundryUserId();
