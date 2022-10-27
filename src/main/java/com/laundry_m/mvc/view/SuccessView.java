@@ -219,7 +219,7 @@ public class SuccessView {
 	
 	public static void printAdminReview(List<Review> reviews) {
 		if(reviews == null || reviews.size()==0) {
-			System.out.println("작성하신 리뷰가 없습니다");
+			System.out.println("작성된 리뷰가 없습니다");
 			System.out.println("");		
 		}else {
 			System.out.print("리뷰번호 | ID | 예약번호 | 별점 | 수정날짜 | 리뷰내용");
