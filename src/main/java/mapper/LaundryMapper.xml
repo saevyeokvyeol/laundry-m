@@ -38,7 +38,7 @@
 	<!-- 세탁소 등록 -->
 	<insert id="insertLaundry" parameterType="laundry">
 		insert into laundry
-		values(laundry_Seq.nextval, #{userId}, #{laundryName}, #{laundryTel}, #{laundryAddress},#{laundryLatitude} , #{laundryAccountNumber}, 3000, #{laundryLongtitude})
+		values(laundry_Seq.nextval, #{userId}, #{laundryName}, #{laundryTel}, #{laundryAddress},#{laundryLatitude}, #{laundryAccountNumber}, 3000, #{laundryLongtitude})
 		<!-- sysdate 대신 systimestamp! -->
 	</insert>
 	
@@ -51,7 +51,8 @@
 		laundry_tel = #{laundryTel},
 		laundry_address = #{laundryAddress},
 		laundry_latitude = #{laundryLatitude},
-		laundry_longtitude = #{laundryLongtitude}
+		laundry_longtitude = #{laundryLongtitude},
+		laundry_account_number = #{laundryAccountNumber}
 		where user_id = #{userId}
 	</update>
 	

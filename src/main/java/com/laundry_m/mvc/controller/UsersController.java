@@ -3,6 +3,7 @@ package com.laundry_m.mvc.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.laundry_m.mvc.exception.DuplicationException;
 import com.laundry_m.mvc.exception.NotExistException;
 import com.laundry_m.mvc.exception.NotFilledInException;
 import com.laundry_m.mvc.exception.NotLoginException;
@@ -34,21 +35,45 @@ public class UsersController {
 				new MenuView().customerMenu();
 			}
 		} catch (Exception e) {
-			FailView.errorMessage(e.getMessage());
+			FailView.errorMessage("입력한 정보가 정확하지 않습니다. 다시 시도해주세요.");
+			//FailView.errorMessage(e.getMessage());
 		}
 		
 	}
-
+	
+	/*
 	public void insertUser(Users users) {
 		try {
 			usersService.makeUser(users);
 			SuccessView.printMessage("\n" + users.getUserName() + "님, 가입이 완료되었습니다.\n로그인 후 서비스를 이용해주세요.");
 		} catch (Exception e) {
 			e.printStackTrace();
+			FailView.errorMessage("\n 가입 실패하였습니다. 다시 시도해주세요.");
+			//FailView.errorMessage(e.getMessage());
+		}
+	}
+	*/
+	
+	public void insertUser(Users users) {
+		try {
+			usersService.makeUser(users);
+			SuccessView.printMessage("\n" + users.getUserName() + "님, 가입이 완료되었습니다.\n로그인 후 서비스를 이용해주세요.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (DuplicationException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotFilledInException e) {
+			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-
+	
+	
 	public void logout() {
 		session.removeAll();
 		MenuView.menuView();

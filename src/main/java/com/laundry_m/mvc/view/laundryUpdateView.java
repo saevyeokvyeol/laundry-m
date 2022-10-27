@@ -27,7 +27,7 @@ public class laundryUpdateView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 세탁소 정보 수정 | 2. 세탁소 기본 가격 정보 수정 | 3. 소재별 추가 가격 정보 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 세탁소 점포 정보 수정 | 2. 세탁소 기본 가격 정보 수정 | 3. 소재별 추가 가격 정보 수정 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -65,6 +65,7 @@ public class laundryUpdateView {
 	private static void updateFee() {
 		boolean run = true;
 		while (run) {
+			System.out.println();
 			System.out.println("변경하실 정보를 선택해주세요.");
 			System.out.println("[ 1. 상의/자켓     | 2. 하의        | 3. 스커트       | 4. 와이셔츠/남방      | 5. 티셔츠          ]");
 			System.out.println("[ 6. 블라우스      | 7. 원피스       | 8. 스웨터/가디건  | 9. 봄가을점퍼/아웃도어  | 10. 코트          ]");
@@ -77,7 +78,9 @@ public class laundryUpdateView {
 				run = false;
 				break;
 			}
+			System.out.println();
 			System.out.println("가격을 입력해주세요.");
+			System.out.print("▶ ");
 			int inputFee = Integer.parseInt(sc.nextLine());
 			
 			Fee fee = Fee.builder().clothesId(clothesId).clothesFee(inputFee).build();
@@ -99,6 +102,7 @@ public class laundryUpdateView {
 		
 		while (run) {
 			while (true) {
+				System.out.println();
 				System.out.println("변경하실 정보를 선택해주세요.");
 				System.out.println("[ 1. 면   | 2. 니트  | 3. 레이온  | 4. 데님  | 5. 실크/쉬폰 ]");
 				System.out.println("[ 5. 린넨  | 6. 퍼   | 7. 앙고라  | 8. 가죽  | 0. 뒤로 가기 ]");
@@ -116,9 +120,10 @@ public class laundryUpdateView {
 				break;
 			}
 			while(run1) {
+				System.out.println();
 				System.out.println("운영 여부를 입력해주세요.");
 				System.out.println("[ 1. 운영  | 2. 미운영  ]");
-				System.out.print("> ");
+				System.out.print("▶ ");
 				int op = Integer.parseInt(sc.nextLine());
 				if (op!=1 && op!=2) {
 					System.out.print("정확한 번호를 선택해주세요. >");
@@ -162,7 +167,7 @@ public class laundryUpdateView {
 		boolean run = true;
 		while (run) {
 			try {
-			System.out.println("\n");
+			System.out.println();
 			System.out.println("변경하실 정보를 선택해주세요.");
 			System.out.println("[ 1. 세탁소 이름 | 2. 세탁소 전화번호 | 3. 세탁소 주소 | 4. 점주 계좌 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 			System.out.print("▶ ");
@@ -233,7 +238,7 @@ public class laundryUpdateView {
 					}
 					loginLaundry.setLaundryAddress(address);
 					loginLaundry.setLaundryLatitude(latitude);
-					loginLaundry.setLaundryLongtitude(latitude);
+					loginLaundry.setLaundryLongtitude(longtitude);
 					laundryController.updateLaundry(loginLaundry);
 					break;
 						
@@ -241,7 +246,7 @@ public class laundryUpdateView {
 					String account = null;
 					while (true) {
 						System.out.println();
-						System.out.println("변경할 계좌를 입력해주세요.");
+						System.out.println("변경할 계좌번호를 입력해주세요.");
 						System.out.print("▶ ");
 						account = sc.nextLine();
 						if (!account.matches(PHONE) || account.length() == 13 == false) {
