@@ -189,5 +189,12 @@
 	
 	</select>
 
-
+	<select id="selectFeeByLaundryId" parameterType="map" resultType="int">
+		select f.clothes_fee + e.fabric_fee
+		from laundry l join fee f
+		on l.laundry_id = f.laundry_id
+		join extra_fee e
+		on l.laundry_id = e.laundry_id
+		where l.laundry_id = #{laundryId} and f.clothes_id = #{clothesId} and e.fabric_Id = #{fabricId}
+	</select>
 </mapper>

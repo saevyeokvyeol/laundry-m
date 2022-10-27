@@ -43,7 +43,7 @@ public class FavoriteController {
 		 try {
 				//로그인 세션
 				favoriteService.deleteFavorite(favoriteId);
-				SuccessView.printMessage("리뷰가 삭제되었습니다.");
+				SuccessView.printMessage("즐겨찾기가 삭제되었습니다.");
 			} catch (Exception e) {
 				e.printStackTrace();
 				FailView.errorMessage(e.getMessage());
@@ -60,7 +60,7 @@ public class FavoriteController {
 		try {
 			  Users users = (Users)session.getAttribute("loginUser");
 			  List<Favorite> favorites = favoriteService.searchFavoriteByUserId(users.getUserId());
-			  if(favorites != null) {
+			  if(favorites == null) {
 				 System.out.println("즐겨찾기 목록이 없습니다.");
 				 return;
 			  }else {
@@ -97,22 +97,6 @@ public class FavoriteController {
 		try {
 			Users users = (Users)session.getAttribute("loginUser");
 			Favorite favorite = Favorite.builder().userId(users.getUserId()).laundryId(laundryId).build();
-			resultFavorite = favoriteService.existFavoriteByLaundryId(favorite);
-		  }catch(Exception e) {
-			  return null;
-		  }
-		 return resultFavorite;
-	}
-	
-	/**
-	 * 유저 아이디 즐겨찾기 유무
-	 * @param: Long laundryId
-	 * */
-	public Favorite existFavoriteByUserId(){
-		Favorite resultFavorite = null;
-		try {
-			Users users = (Users)session.getAttribute("loginUser");
-			Favorite favorite = Favorite.builder().userId(users.getUserId()).build();
 			resultFavorite = favoriteService.existFavoriteByLaundryId(favorite);
 		  }catch(Exception e) {
 			  return null;

@@ -2,14 +2,17 @@ package com.laundry_m.mvc.view;
 
 import java.util.Scanner;
 
+import com.laundry_m.mvc.controller.FavoriteController;
 import com.laundry_m.mvc.controller.LaundryController;
 import com.laundry_m.mvc.session.Session;
 import com.laundry_m.mvc.vo.Fabric;
+import com.laundry_m.mvc.vo.Favorite;
 import com.laundry_m.mvc.vo.Laundry;
 
 public class LaundryMenuVIew {
 	private static Scanner sc = new Scanner(System.in);
 	private static LaundryController laundryController = new LaundryController();
+	private static FavoriteController favoriteController = new FavoriteController();
 	private static Session session = Session.getInstance();
 
 	
@@ -120,27 +123,28 @@ public class LaundryMenuVIew {
 				switch (menu) {
 				case 1:
 					System.out.println();
-					System.out.println("☞ 예약하실 세탁소 고유번호를 입력해주세요");
+					System.out.println("예약하실 세탁소 번호를 입력해주세요.");
 					System.out.print("▶ ");
-					laundryId = Long.parseLong(sc.nextLine());
-					
-					System.out.println("☞ 해당 세탁소로 바로 예약하시겠어요? (Y/N)");
-					System.out.print("▶ ");
-					String answer = sc.nextLine();
-					if(answer == "Y") {
-						//예약하기로 이동
-						break;
-					}
-					//취소
-					
+					laundryId = (long)Integer.parseInt(sc.nextLine());
+					BookMenuView.bookForm(laundryId);
+					run = false;
 					break;
 				case 2:
-					System.out.println();
-					System.out.println("☞ 단골으로 등록하실 세탁소 고유번호를 입력해주세요");
-					System.out.print("▶ ");
-					laundryId = Long.parseLong(sc.nextLine());
-					//단골 등록으로 이
-					
+					try {
+						System.out.println("즐겨찾기 추가할 세탁소 번호를 입력해주세요");
+						System.out.print("▶ ");
+						Long laundryid = Long.parseLong(sc.nextLine());
+						Favorite favorite = favoriteController.existFavoriteByLaundryId(laundryid);
+						if(favorite == null) {
+							Favorite favorites = Favorite.builder().laundryId(laundryid).build();
+							favoriteController.addFavorite(favorites);
+							break;
+						}else {
+							FailView.errorMessage("이미 즐겨찾기 목록에 있습니다");
+						}
+					} catch (Exception e) {
+						FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+					}
 					break;
 				case 3:	
 					run = false;
@@ -192,12 +196,21 @@ public class LaundryMenuVIew {
 					
 					break;
 				case 2:
-					System.out.println();
-					System.out.println("☞ 단골으로 등록하실 세탁소 고유번호를 입력해주세요");
-					System.out.print("▶ ");
-					laundryId = Long.parseLong(sc.nextLine());
-					//단골 등록으로 이
-					
+					try {
+						System.out.println("즐겨찾기 추가할 세탁소 번호를 입력해주세요");
+						System.out.print("▶ ");
+						Long laundryid = Long.parseLong(sc.nextLine());
+						Favorite favorite = favoriteController.existFavoriteByLaundryId(laundryid);
+						if(favorite == null) {
+							Favorite favorites = Favorite.builder().laundryId(laundryid).build();
+							favoriteController.addFavorite(favorites);
+							break;
+						}else {
+							FailView.errorMessage("이미 즐겨찾기 목록에 있습니다");
+						}
+					} catch (Exception e) {
+						FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+					}
 					break;
 				case 3:	
 					run = false;
@@ -275,7 +288,7 @@ public class LaundryMenuVIew {
 			System.out.println("검색할 사장님 아이디를 입력해주세요");
 			System.out.print("▶ ");
 			String userId = sc.nextLine();
-			laundryController.selectByUserId(userId);
+			laundryController.selectByLaundryOwnerId(userId);
 			
 		} catch (Exception e) {
 			FailView.errorMessage("에러가 발생했어요 :( ");
@@ -284,5 +297,37 @@ public class LaundryMenuVIew {
 		
 	}
 	
+	
+	/**
+	 * 관리자 -세탁소 이름으로 검색
+	 * */
+	public static void selectByLaundryNameForAdmin() {
+		
+		try {
+			System.out.println("검색할 사장님 아이디를 입력해주세요");
+			System.out.print("▶ ");
+			String userId = sc.nextLine();
+			laundryController.selectByNameLaundry(userId);
+			
+		} catch (Exception e) {
+			FailView.errorMessage("에러가 발생했어요 :( ");
+		}
+	}
+	
+	/**
+	 * 관리자 -세탁소 주소로 검색
+	 * */
+	public static void selectByLaundryLocationForAdmin() {
+		
+		try {
+			System.out.println("검색할 구를 입력해주세요");
+			System.out.print("▶ ");
+			String laundryLocation= sc.nextLine();
+			laundryController.selectByAddressLaundry(laundryLocation);
+			
+		} catch (Exception e) {
+			FailView.errorMessage("에러가 발생했어요 :( ");
+		}
+	}
 	
 }

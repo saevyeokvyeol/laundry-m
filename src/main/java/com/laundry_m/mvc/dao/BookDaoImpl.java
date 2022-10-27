@@ -34,7 +34,7 @@ public class BookDaoImpl implements BookDao {
 			session = DbUtil.getSession();
 			
 			// 세션으로 DB와 연결되어 매퍼 쿼리문을 실행합니다.
-			result = session.insert("bookMapper.insertBook");
+			result = session.insert("bookMapper.insertBook", book);
 			if (result == 1) state = true;
 			
 			// 트랜잭션이 필요한 경우 트랜잭션 메소드를 호출합니다.
@@ -71,7 +71,7 @@ public class BookDaoImpl implements BookDao {
 	 * */
 	@Override
 	public int insertBookLine(SqlSession session, BookLine bookLine) throws SQLException {
-		int result = session.insert("bookMapper.insertBook", bookLine);
+		int result = session.insert("bookMapper.insertBookLine", bookLine);
 		return result;
 	}
 	

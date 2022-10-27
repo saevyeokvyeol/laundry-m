@@ -225,6 +225,23 @@ public class LaundryController {
 	}
 	
 	/**
+	 * 세탁소 사장님 아이디로 찾기
+	 * */
+	public void selectByLaundryOwnerId(String userId) {
+		try {
+			
+			Laundry laundry = laundryService.selectByUserId(userId);
+			
+			SuccessView.printOnlyLaundry(laundry);
+			
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+		
+	}
+	
+	/**
 	 * 세탁소 로그인된 아이디로 찾기
 	 * return : laundry
 	 * */
