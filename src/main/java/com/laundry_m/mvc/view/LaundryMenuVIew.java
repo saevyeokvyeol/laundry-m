@@ -86,11 +86,11 @@ public class LaundryMenuVIew {
 				System.out.println();
 				System.out.println("위 세탁소로 바로 예약하시겠어요?");
 				System.out.println("[ Y | N ]");
-				Laundry laundry = (Laundry) session.getAttribute("laundry");
+				Laundry laundry = (Laundry) session.getAttribute("lowestLaundry");
 				
 				System.out.print("▶");
 				String answer = sc.nextLine();
-				if(answer == "Y") {
+				if(answer.equals("Y")) {
 					BookMenuView.bookForm(laundry.getLaundryId());
 					break;
 				}
