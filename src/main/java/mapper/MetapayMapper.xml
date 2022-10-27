@@ -59,7 +59,7 @@
 
 	<insert id="payMetapay" parameterType="payLog">
 		insert into pay_log
-		values(pay_log_id_seq.nextval, #{metapayId}, #{payCategoryId}, null, #{payLogAmount}, systimestamp)
+		values(pay_log_id_seq.nextval, #{metapayId}, #{payCategoryId}, null, #{payLogAmount}, systimestamp, #{laundryId})
 	</insert>
 	
 	<insert id="addMetapayAccount" parameterType="payAccount">
