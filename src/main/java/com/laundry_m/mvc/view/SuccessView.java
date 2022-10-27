@@ -235,4 +235,11 @@ public class SuccessView {
 		}
 	}
 	
+	public static void printOnlyLaundry(Laundry laundry) {
+		System.out.println( "  "+"고유번호 " + " | " + "    상호명    " + " | " + "     주소     " + " | " + "    연락처    " +  " | "  + "  배달비" );
+		System.out.println("  "+ laundry.getLaundryId() + "     |    " + laundry.getLaundryName() + "    | " + laundry.getLaundryAddress() + " | " + getLaunTel(laundry.getLaundryTel()) +  " | "  + won.format(laundry.getLaundryDeliveryFee()) + "원");
+
+	}
+	
+	
 }
