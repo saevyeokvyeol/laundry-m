@@ -84,14 +84,14 @@ public class LaundryMenuVIew {
 				laundryController.selectByLowestByLaundry(clothesId, fabricId);
 				
 				System.out.println();
-				System.out.println("위 세탁소로 바로 예약하시겠어요? (Y/N)");
-				session.getAttribute("laundry");
-				session.getAttribute("distance");
+				System.out.println("위 세탁소로 바로 예약하시겠어요?");
+				System.out.println("[ Y | N ]");
+				Laundry laundry = (Laundry) session.getAttribute("laundry");
 				
 				System.out.print("▶");
 				String answer = sc.nextLine();
 				if(answer == "Y") {
-					//예약하기로 이동
+					BookMenuView.bookForm(laundry.getLaundryId());
 					break;
 				}
 				//취소
