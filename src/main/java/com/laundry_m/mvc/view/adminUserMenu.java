@@ -28,7 +28,7 @@ public class adminUserMenu {
 			}
 		}
 		Users user = Users.builder().userId(id).build();
-		usersController.selectByUserId(user);		
+		usersController.selectByUserIdToPrint(user);		
 	}
 
 	public static void selectByUserName() {

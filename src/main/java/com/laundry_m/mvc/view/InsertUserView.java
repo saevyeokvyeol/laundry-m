@@ -58,12 +58,21 @@ public class InsertUserView {
 	public static void insertUserForm() {
 		String id = null;
 		while (true) {
-			System.out.print("\n아이디 입력 > ");
-			id = sc.nextLine();
-			if (id.length() > 6) {
-				System.out.println("아이디는 6글자 이내로 입력해주세요.");
-			} else if (!id.matches(ID)) {
-				System.out.println("아이디는 알파벳 소문자와 숫자만 입력해주세요.");
+			while (true) {
+				System.out.print("\n아이디 입력 > ");
+				id = sc.nextLine();
+				if (id.length() > 6) {
+					System.out.println("아이디는 6글자 이내로 입력해주세요.");
+				} else if (!id.matches(ID)) {
+					System.out.println("아이디는 알파벳 소문자와 숫자만 입력해주세요.");
+				} else {
+					break;
+				}
+			}
+			Users user = Users.builder().userId(id).build();
+			int result = usersController.selectByUserId(user);
+			if (result == 1) {
+				System.out.println("이미 가입된 아이디입니다. 다시 입력해주세요.");
 			} else {
 				break;
 			}

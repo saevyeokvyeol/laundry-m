@@ -41,19 +41,6 @@ public class UsersController {
 		
 	}
 	
-	/*
-	public void insertUser(Users users) {
-		try {
-			usersService.makeUser(users);
-			SuccessView.printMessage("\n" + users.getUserName() + "님, 가입이 완료되었습니다.\n로그인 후 서비스를 이용해주세요.");
-		} catch (Exception e) {
-			e.printStackTrace();
-			FailView.errorMessage("\n 가입 실패하였습니다. 다시 시도해주세요.");
-			//FailView.errorMessage(e.getMessage());
-		}
-	}
-	*/
-	
 	public void insertUser(Users users) {
 		try {
 			usersService.makeUser(users);
@@ -98,7 +85,7 @@ public class UsersController {
 	}
 
 	
-	public void selectByUserId(Users user) {
+	public void selectByUserIdToPrint(Users user) {
 		try {
 			Users findUser = usersService.selectByUserId(user);
 			SuccessView.printUserInfo(findUser);
@@ -112,6 +99,26 @@ public class UsersController {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
+	}
+	
+	public int selectByUserId(Users user) {
+		int duplicationCheck = 0;
+		try {
+			Users findUser = usersService.selectByUserId(user);
+			if(findUser != null) {
+				duplicationCheck = 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} catch (NotLoginException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		return duplicationCheck;
 	}
 	
 	public void selectByUserName(Users user) {
