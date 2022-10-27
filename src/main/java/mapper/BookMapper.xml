@@ -42,13 +42,13 @@
 	<insert id="insertBook" parameterType="book">
 		insert
 		into book
-		values(book_id_seq.nextval, #{laundryId}, #{userId}, systimestamp, #{bookMemo}, #{bookMethodId}, #{bookTotalFee}, systimestamp)
+		values(book_seq.nextval, #{laundryId}, #{userId}, 1, #{bookCount}, systimestamp, #{bookMemo}, #{bookMethodId}, #{bookTotalFee}, systimestamp)
 	</insert>
 	
 	<insert id="insertBookLine" parameterType="bookLine">
 		insert
 		into book_line
-		values(book_line_id_seq.nextval, book_id_seq.currval, #{clothesId}, #{fabricId}, #{bookLineFee})
+		values(book_line_seq.nextval, book_seq.currval, #{clothesId}, #{fabricId}, #{bookLineFee})
 	</insert>
 	
 	<update id="updateBookState" parameterType="book">

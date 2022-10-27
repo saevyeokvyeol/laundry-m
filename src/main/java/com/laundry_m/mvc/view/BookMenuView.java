@@ -24,6 +24,7 @@ public class BookMenuView {
 		boolean run = true;
 		while (run) {
 			try {
+				
 				System.out.println("\n" + "세탁할 옷 갯수를 입력해주세요.");
 				System.out.print("▶ ");
 				int bookCount = Integer.parseInt(sc.nextLine());
@@ -49,7 +50,7 @@ public class BookMenuView {
 					// 총 가격에 위에서 구해온 가격 계산
 					bookTotalFee += bookLineFee;
 				}
-				System.out.println("\n" + bookCount + "벌 세탁 가격: " + bookCount + "원");
+				System.out.println("\n" + bookCount + "벌 세탁 가격: " + bookTotalFee + "원");
 				boolean pay = true;
 				int bookMethodId = 0;
 				while (pay) {
@@ -77,6 +78,7 @@ public class BookMenuView {
 						.bookLine(bookLines).build();
 				
 				bookController.makeBook(book);
+				break;
 			} catch (Exception e) {
 				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 			}
