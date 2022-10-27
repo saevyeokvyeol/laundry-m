@@ -109,7 +109,6 @@ public class LaundryMenuVIew {
 	 * */
 	public static void findLaundry() {
 		
-		Long laundryId = null;
 		
 		boolean run = true;
 		while(run) {
@@ -117,40 +116,7 @@ public class LaundryMenuVIew {
 			try {
 				laundryController.selectByMyLaundry();
 				
-				System.out.println("\n" + "[ 1. 예약하기 | 2. 단골 세탁소 등록 | 3. 뒤로가기 ]");
-				int menu = Integer.parseInt(sc.nextLine());
-				
-				switch (menu) {
-				case 1:
-					System.out.println();
-					System.out.println("예약하실 세탁소 번호를 입력해주세요.");
-					System.out.print("▶ ");
-					laundryId = (long)Integer.parseInt(sc.nextLine());
-					BookMenuView.bookForm(laundryId);
-					run = false;
-					break;
-				case 2:
-					try {
-						System.out.println("즐겨찾기 추가할 세탁소 번호를 입력해주세요");
-						System.out.print("▶ ");
-						Long laundryid = Long.parseLong(sc.nextLine());
-						Favorite favorite = favoriteController.existFavoriteByLaundryId(laundryid);
-						if(favorite == null) {
-							Favorite favorites = Favorite.builder().laundryId(laundryid).build();
-							favoriteController.addFavorite(favorites);
-							break;
-						}else {
-							FailView.errorMessage("이미 즐겨찾기 목록에 있습니다");
-						}
-					} catch (Exception e) {
-						FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
-					}
-					break;
-				case 3:	
-					run = false;
-					break;
-				
-				}
+				addBookandLike(run);
 				
 			} catch (Exception e) {
 				FailView.errorMessage("주변 세탁소를 찾지 못했어요 :( ");
@@ -165,7 +131,6 @@ public class LaundryMenuVIew {
 	 * */
 	public static void selectByLaundryName() {
 		
-		Long laundryId = null;
 		boolean run = true;
 		while(run) {
 		
@@ -175,48 +140,8 @@ public class LaundryMenuVIew {
 				String laundryName = sc.nextLine();
 				laundryController.selectByNameLaundry(laundryName);
 				
-				System.out.println("\n" + "[ 1. 예약하기 | 2. 단골 세탁소 등록 | 3. 뒤로가기 ]");
-				int menu = Integer.parseInt(sc.nextLine());
+				addBookandLike(run);
 				
-				switch (menu) {
-				case 1:
-					System.out.println();
-					System.out.println("☞ 예약하실 세탁소 고유번호를 입력해주세요");
-					System.out.print("▶ ");
-					laundryId = Long.parseLong(sc.nextLine());
-					
-					System.out.println("☞ 해당 세탁소로 바로 예약하시겠어요? (Y/N)");
-					System.out.print("▶ ");
-					String answer = sc.nextLine();
-					if(answer == "Y") {
-						//예약하기로 이동
-						break;
-					}
-					//취소
-					
-					break;
-				case 2:
-					try {
-						System.out.println("즐겨찾기 추가할 세탁소 번호를 입력해주세요");
-						System.out.print("▶ ");
-						Long laundryid = Long.parseLong(sc.nextLine());
-						Favorite favorite = favoriteController.existFavoriteByLaundryId(laundryid);
-						if(favorite == null) {
-							Favorite favorites = Favorite.builder().laundryId(laundryid).build();
-							favoriteController.addFavorite(favorites);
-							break;
-						}else {
-							FailView.errorMessage("이미 즐겨찾기 목록에 있습니다");
-						}
-					} catch (Exception e) {
-						FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
-					}
-					break;
-				case 3:	
-					run = false;
-					break;
-				
-				}
 			} catch (Exception e) {
 				FailView.errorMessage("에러가 발생했어요 :( ");
 			}
@@ -238,40 +163,9 @@ public class LaundryMenuVIew {
 				System.out.print("▶ ");
 				String laundryLocation= sc.nextLine();
 				laundryController.selectByAddressLaundry(laundryLocation);
+
+				addBookandLike(run);
 				
-				System.out.println("\n" + "[ 1. 예약하기 | 2. 단골 세탁소 등록 | 3. 뒤로가기 ]");
-				int menu = Integer.parseInt(sc.nextLine());
-				
-				switch (menu) {
-				case 1:
-					System.out.println();
-					System.out.println("☞ 예약하실 세탁소 고유번호를 입력해주세요");
-					System.out.print("▶ ");
-					laundryId = Long.parseLong(sc.nextLine());
-					
-					System.out.println("☞ 해당 세탁소로 바로 예약하시겠어요? (Y/N)");
-					System.out.print("▶ ");
-					String answer = sc.nextLine();
-					if(answer == "Y") {
-						//예약하기로 이동
-						break;
-					}
-					//취소
-					break;
-					
-				case 2:
-					System.out.println();
-					System.out.println("☞ 단골으로 등록하실 세탁소 고유번호를 입력해주세요");
-					System.out.print("▶ ");
-					laundryId = Long.parseLong(sc.nextLine());
-					//단골 등록으로 이
-					
-					break;
-				case 3:	
-					run = false;
-					break;
-				
-				}
 			} catch (Exception e) {
 				FailView.errorMessage("에러가 발생했어요 :( ");
 			}
@@ -328,6 +222,56 @@ public class LaundryMenuVIew {
 		} catch (Exception e) {
 			FailView.errorMessage("에러가 발생했어요 :( ");
 		}
+	}
+	
+	/**
+	 * 예약 - 즐겨찾기 추가 메뉴
+	 * */
+	public static void addBookandLike(boolean run) {
+		
+		System.out.println("\n" + "[ 1. 예약하기 | 2. 단골 세탁소 등록 | 3. 뒤로가기 ]");
+		int menu = Integer.parseInt(sc.nextLine());
+		
+		switch (menu) {
+		case 1:
+			System.out.println();
+			System.out.println("☞ 예약하실 세탁소 고유번호를 입력해주세요");
+			System.out.print("▶ ");
+			Long laundryId = Long.parseLong(sc.nextLine());
+			
+			System.out.println("☞ 해당 세탁소로 바로 예약하시겠어요? (Y/N)");
+			System.out.print("▶ ");
+			String answer = sc.nextLine();
+			if(answer == "Y") {
+				//예약하기로 이동
+				break;
+			}
+			//취소
+			break;
+			
+		case 2:
+			try {
+				System.out.println("즐겨찾기 추가할 세탁소 번호를 입력해주세요");
+				System.out.print("▶ ");
+				Long laundryid = Long.parseLong(sc.nextLine());
+				Favorite favorite = favoriteController.existFavoriteByLaundryId(laundryid);
+				if(favorite == null) {
+					Favorite favorites = Favorite.builder().laundryId(laundryid).build();
+					favoriteController.addFavorite(favorites);
+					break;
+				}else {
+					FailView.errorMessage("이미 즐겨찾기 목록에 있습니다");
+				}
+			} catch (Exception e) {
+				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+			}
+			break;
+		case 3:	
+			run = false;
+			break;
+		
+		}
+		
 	}
 	
 }
