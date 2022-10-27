@@ -100,7 +100,7 @@ public class MenuView {
 		boolean run = true;
 		while (run) {
 			try {
-				System.out.println("\n" + "[ 1. 내 근처 세탁소 찾기 | 2. 이름으로 찾기 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
+				System.out.println("\n" + "[ 1. 내 근처 세탁소 찾기 | 2. 이름으로 찾기 | 3. 지역으로 찾기 | 8. 뒤로 가기 | 9. 로그아웃 | 0. 종료 ]");
 				System.out.print("▶ ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch(menu) {
@@ -110,6 +110,8 @@ public class MenuView {
 				case 2 :
 					LaundryMenuVIew.selectByLaundryName();
 					break;
+				case 3 :	
+					LaundryMenuVIew.selectByLaundryLocation();
 				case 8 :
 					run = false;
 					break;
