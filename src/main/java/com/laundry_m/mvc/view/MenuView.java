@@ -70,7 +70,7 @@ public class MenuView {
 					laundrySearchMenu();
 					break;
 				case 2 :
-					favoriteMenuView.searchFavoriteList();
+					favoriteController.searchFavoriteByUserId();
 					break;
 				case 3 :
 					LaundryMenuVIew.recomWashMethod();

@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
+import com.laundry_m.mvc.controller.FavoriteController;
 import com.laundry_m.mvc.vo.Book;
 import com.laundry_m.mvc.vo.BookLine;
 import com.laundry_m.mvc.vo.ExtraFee;
@@ -21,6 +23,8 @@ import com.laundry_m.mvc.vo.Users;
 
 public class SuccessView {
 	private static DecimalFormat won = new DecimalFormat("#,###");
+	private static Scanner sc = new Scanner(System.in);
+	private static FavoriteController favoriteController = new FavoriteController();
 	
 	private static String getTel(String tel) {
 		StringBuffer sb = new StringBuffer();
@@ -111,16 +115,14 @@ public class SuccessView {
 
 	}
 	public static void printUserReview(List<Review> reviews) {
-		System.out.print("리뷰번호   |   ID   |  세탁소ID  |  예약 번호  | 별점 | 리뷰내용 ");
-		System.out.println("");
-		for(Review review : reviews) {
-			if(review.getReviewContent() != null) {
+		if(reviews == null || reviews.size()==0) {
+			System.out.println("작성하신 리뷰가 없습니다");
+			System.out.println("");		
+		}else {System.out.print("리뷰번호   |   ID   |  세탁소ID  |  예약 번호  | 별점 | 리뷰내용 ");
+				System.out.println("");
+			for(Review review : reviews) 
 				System.out.println("" +review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId() + " | " + review.getReviewRate() + " | " + review.getReviewContent());
 				System.out.println("");
-			}else {
-				System.out.println("작성하신 리뷰가 없습니다");
-				System.out.println("");
-			}
 		}
 	}
 	
@@ -156,16 +158,39 @@ public class SuccessView {
 	}
 
 	public static void printFavorite(List<Favorite> favorites) {
-		System.out.print("   사용자아이디    |    세탁소이름    |    세탁소ID    |    예약 번호  |   즐겨찾기 번호");
-		System.out.println("");
-		for(Favorite favorite : favorites) {
-			if(favorite.getFavoriteId() != null) {
-				System.out.println("" + favorite.getUserId() + " | " + favorite.getLaundry().getLaundryName() + " | " + favorite.getLaundryId() + " | " + favorite.getFavoriteId() );
-				System.out.println("");
-			}else {
+		try {
+			if(favorites == null || favorites.size()==0) {
 				System.out.println("즐겨찾기 한 세탁소가 없습니다");
 				System.out.println("");
+			}else {
+				System.out.print("   사용자아이디    |    세탁소이름    |    세탁소ID    |   즐겨찾기 번호");
+				System.out.println("");
+				for(Favorite favorite : favorites) {
+					System.out.println("" + favorite.getUserId() + " | " + favorite.getLaundry().getLaundryName() + " | " + favorite.getLaundryId() + " | " + favorite.getFavoriteId() );
+					System.out.println("");
+				}
+				System.out.println("1. 예약하기 |  2. 즐겨찾기 삭제하기 | 3. 뒤로가기");
+				System.out.print("▶ ");
+				int menu = Integer.parseInt(sc.nextLine());
+				switch (menu) {
+				case 1:
+					System.out.println("예약으로 이동할 세탁소 번호를 입력해주세요.");
+					System.out.print("▶ ");
+					Long laundryId = (long)Integer.parseInt(sc.nextLine());
+					BookMenuView.bookForm(laundryId);
+					break;
+				case 2:
+					System.out.println("삭제할 즐겨찾기 번호를 입력해주세요.");
+					System.out.print("▶ ");
+					Long favoriteId = (long)Integer.parseInt(sc.nextLine());
+					favoriteController.deleteFavorite(favoriteId);
+					break;
+				case 3:
+					break;
+				}
 			}
+		} catch (Exception e) {
+			FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
 		}
 		
 	}
@@ -193,16 +218,15 @@ public class SuccessView {
 	}
 	
 	public static void printAdminReview(List<Review> reviews) {
-		System.out.print("리뷰번호 | ID | 예약번호 | 별점 | 수정날짜 | 리뷰내용");
-		System.out.println("");
-		for(Review review : reviews) {
-			if(review.getReviewContent() != null) {
-				System.out.println("" +review.getReviewId() + " | " + review.getUserId() + " | " + review.getBookId() + " | " + review.getReviewRate() + " | " + getDate(review.getReviewUpdateDate()) + " | " + review.getReviewContent());
+		if(reviews == null || reviews.size()==0) {
+			System.out.println("작성하신 리뷰가 없습니다");
+			System.out.println("");		
+		}else {
+			System.out.print("리뷰번호 | ID | 예약번호 | 별점 | 수정날짜 | 리뷰내용");
+			System.out.println("");
+			for(Review review : reviews) 
+				System.out.println("" +review.getReviewId() + " | " + review.getUserId() + " | " + review.getLaundryId() + " | " + review.getBookId() + " | " + review.getReviewRate() + " | " + review.getReviewContent());
 				System.out.println("");
-			}else {
-				System.out.println("작성된 리뷰가 없습니다");
-				System.out.println("");
-			}
 		}
 	}
 	

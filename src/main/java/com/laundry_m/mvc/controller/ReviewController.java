@@ -96,7 +96,7 @@ public class ReviewController {
 			  FailView.errorMessage(e.getMessage());
 		  }
 	  }
-	  
+	  	  
 	 /**
 	 * 점포 아이디로 리뷰 검색
 	 * @param: Long laundryId

@@ -60,13 +60,10 @@ public class FavoriteController {
 		try {
 			  Users users = (Users)session.getAttribute("loginUser");
 			  List<Favorite> favorites = favoriteService.searchFavoriteByUserId(users.getUserId());
-			  if(favorites == null) {
-				 System.out.println("즐겨찾기 목록이 없습니다.");
-				 return;
-			  }else {
-				  SuccessView.printFavorite(favorites);
-			  }
-			 
+			 if(favorites==null || favorites.size()==0) {
+			 }
+			  SuccessView.printFavorite(favorites);
+			  
 		  }catch(Exception e) {
 			  e.printStackTrace();
 			  FailView.errorMessage(e.getMessage());

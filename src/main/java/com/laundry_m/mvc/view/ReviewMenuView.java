@@ -96,18 +96,22 @@ public class ReviewMenuView {
 
 	public static void deleteForm() {
 		boolean run = true;
-		Long starRate;
 		while (run) {
-		try {
-			System.out.println("삭제할 리뷰 번호를 입력해주세요.");
-			reviewController.searchReviewByUserId(); //수정 요청
-			System.out.print("▶ ");
-			Long reviewId = (long)Integer.parseInt(sc.nextLine());
-
-				reviewController.deleteReview(reviewId);
+			List<Review> existReview = reviewController.existReviewByUserId();
+			if(existReview==null || existReview.size()==0) {
+				System.out.println("작성한 리뷰가 없습니다.");
 				break;
-			} catch (Exception e) {
-				FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+			}else {
+				try {
+					reviewController.searchReviewByUserId();
+					System.out.println("삭제할 리뷰 번호를 입력해주세요.");
+					System.out.print("▶ ");
+					Long reviewId = (long)Integer.parseInt(sc.nextLine());
+					reviewController.deleteReview(reviewId);
+					break;
+				} catch (Exception e) {
+					FailView.errorMessage("오류가 발생했습니다.\n다시 한 번 시도해주세요.");
+				}
 			}
 		}
 	}
