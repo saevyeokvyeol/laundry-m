@@ -235,20 +235,11 @@ public class LaundryMenuVIew {
 		switch (menu) {
 		case 1:
 			System.out.println();
-			System.out.println("☞ 예약하실 세탁소 고유번호를 입력해주세요");
+			System.out.println("예약하실 세탁소 번호를 입력해주세요");
 			System.out.print("▶ ");
 			Long laundryId = Long.parseLong(sc.nextLine());
-			
-			System.out.println("☞ 해당 세탁소로 바로 예약하시겠어요? (Y/N)");
-			System.out.print("▶ ");
-			String answer = sc.nextLine();
-			if(answer == "Y") {
-				//예약하기로 이동
-				break;
-			}
-			//취소
+			BookMenuView.bookForm(laundryId);
 			break;
-			
 		case 2:
 			try {
 				System.out.println("즐겨찾기 추가할 세탁소 번호를 입력해주세요");
