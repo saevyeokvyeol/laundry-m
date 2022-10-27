@@ -278,7 +278,7 @@ public class LaundryDaoImpl implements LaundryDao {
 		
 		try {
 			session = DbUtil.getSession();
-			Map<String, Object> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("laundryId", laundryId);
 			map.put("clothesId", clothesId);
 			map.put("fabricId", fabricId);
