@@ -195,8 +195,8 @@ public class laundryUpdateView {
 						System.out.println("변경할 전화번호를 입력해주세요.");
 						System.out.print("▶ ");
 						tel = sc.nextLine();
-						if (!tel.matches(PHONE) || tel.length() < 12 == false) {
-							System.out.println("전화번호는 -없이 숫자 11자리 이하로 입력해주세요.\n");
+						if (!tel.matches(PHONE) || tel.length() == 9 == false) {
+							System.out.println("전화번호는 -없이 숫자 9자리로 입력해주세요. (ex/024047777)\n");
 						} else {
 							break;
 						}
